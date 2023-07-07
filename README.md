@@ -46,7 +46,7 @@ The following experiments that either have been proposed or are currently runnin
 * SPS
   - SHiP, SHADOWS, HIKE-dump, NA62-dump
 * LHC
-  - FACET, FASER, FASER2, FASERν, FASERν2, SND@LHC, advSND<sub>near</sub>, advSND<sub>far</sub>, ANUBIS, MATHUSLA, CODEX-b 
+  - FACET, FASER, FASER2, FASERν, FASERν2, SND@LHC, advSND<sub>near</sub>, advSND<sub>far</sub>, ANUBIS-shaft, MATHUSLA, CODEX-b, LHCb (beyond VELO)
 * FCC-hh 
   - MATHUSLA-FCC, FACET-FCC
 
@@ -54,8 +54,9 @@ The following FIPs are implemented:
 
 * Heavy Neutral Leptons (HNLs) with arbitrary mixing pattern
 * Dark photons
-* U<sub>B-L</sub>(1) mediator
+* Mediators coupled to anomaly-free combinations of the baryon and lepton currents: U<sub>B-L</sub>(1), U<sub>B-3Lmu</sub>(1), U<sub>B-Le-3Lmu+Ltau</sub>(1), U<sub>B-3Le-Lmu+Ltau</sub>(1)
 * Dark scalars with mixing and quartic couplings
 * ALPs coupled to photons, fermions, or gluons
+* Millicharged particles (only the production in the public version)
 
 
