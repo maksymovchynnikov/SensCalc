@@ -44,11 +44,11 @@ The following experiments that either have been proposed or are currently runnin
 * Fermilab (beam dump facilities)
   - DUNE-NDLAr, DUNE-PRISM, DarkQuest
 * SPS
-  - SHiP, SHADOWS, HIKE-dump, NA62-dump
+  - SHiP, SHADOWS, HIKE-dump, NA62-dump, CHARM, BEBC
 * LHC
-  - FACET, FASER, FASER2, FASERν, FASERν2, SND@LHC, advSND<sub>near</sub>, advSND<sub>far</sub>, ANUBIS-shaft, MATHUSLA, CODEX-b, LHCb (beyond VELO)
+  - FACET, FASER, FASER2, FASER2-FPF, FASERν, FASERν2, SND@LHC, advSND<sub>near</sub>, advSND<sub>far</sub>, ANUBIS-shaft, ANUBIS-ceiling, MATHUSLA, CODEX-b, LHCb (beyond VELO)
 * FCC-hh 
-  - MATHUSLA-FCC, FACET-FCC
+  - MATHUSLA-FCC, FACET-FCC, FOREHUNT
 
 The following FIPs are implemented:
 
