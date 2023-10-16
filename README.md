@@ -1,6 +1,6 @@
 # SensCalc
 
-## What it is?
+## What is it?
 
 SensCalc is a Mathematica-based code allowing to calculate sensitivities of lifetime frontier experiments to Feebly Interacting Particles (FIPs). The method of the calculation is based on the semi-analytic approach described in [2305.13383](https://arxiv.org/abs/2305.13383) and successfully many times in older publications. The main purposes of the code are:
 
