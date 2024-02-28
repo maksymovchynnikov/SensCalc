@@ -80,4 +80,6 @@ The following LLPs are implemented:
 
 ## To be added soon
 
-HNL dipole portal, inelastic dark matter
+* New models to be included: HNL dipole portal, inelastic dark matter (decay and scattering signatures), elastic dark matter (scattering signatures).
+* A SensCalc based simulator producing detailed HEPMC-output for events.  
+* New facilities and experiments: ESS, MicroBooNE/MiniBooNE. 
