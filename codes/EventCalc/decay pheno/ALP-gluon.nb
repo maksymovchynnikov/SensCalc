@@ -1,0 +1,355 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12589,        345]
+NotebookOptionsPosition[     11520,        317]
+NotebookOutlinePosition[     11927,        333]
+CellTagsIndexPosition[     11884,        330]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ALP-gluon", "Section",
+ CellChangeTimes->{{3.931067915727479*^9, 
+  3.9310679357083435`*^9}},ExpressionUUID->"280bd5bc-30fb-407c-85f8-\
+2936fd6a8134"],
+
+Cell[CellGroupData[{
+
+Cell["Decay width", "Subsection",
+ CellChangeTimes->{{3.9311579540147038`*^9, 
+  3.931157984259229*^9}},ExpressionUUID->"c193eeff-0669-4cf2-bc1f-\
+8fcce16fc4b6"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"LLPdirName", "==", "\"\<ALP-gluon\>\""}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "List", " ", "of", " ", "widths", " ", "of", " ", "the", " ", "ALP", " ", 
+     "into", " ", "various", " ", "final", " ", "states"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DecayWidthsDataTemp", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "dirpheno", ",", "LLPdirName", ",", "\"\<decay widths\>\"", ",", 
+          "\"\<Widths-model-Gluon-scale-1000.-GeV.m\>\""}], "}"}], "]"}], 
+       ",", "\"\<MX\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"DecayWidthsDataTemp2", "=", 
+     RowBox[{"DecayWidthsDataTemp", "[", 
+      RowBox[{"[", "4", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"DecayWidthsData", "=", 
+     RowBox[{"Drop", "[", 
+      RowBox[{"DecayWidthsDataTemp2", ",", "3"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Total", " ", "decay", " ", "width", " ", "and", " ", "lifetime"}], 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"\[CapitalGamma]LLP", "[", 
+      RowBox[{"mLLP_", ",", "finv_"}], "]"}], "=", 
+     RowBox[{
+      SuperscriptBox["finv", "2"], "*", 
+      RowBox[{
+       RowBox[{"Interpolation", "[", 
+        RowBox[{
+         RowBox[{"DecayWidthsData", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", 
+              RowBox[{"-", "1"}]}], "}"}]}], "]"}], "]"}], ",", 
+         RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", "mLLP", 
+       "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"c\[Tau]LLP", "[", 
+      RowBox[{"mLLP_", ",", "finv_"}], "]"}], "=", 
+     FractionBox["chbarval", 
+      RowBox[{"\[CapitalGamma]LLP", "[", 
+       RowBox[{"mLLP", ",", "finv"}], "]"}]]}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.931158414441272*^9, 3.931158463067769*^9}},
+ CellLabel->
+  "In[285]:=",ExpressionUUID->"97c1af4d-6cbc-4089-8968-d117ef523c3f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Branching ratios", "Subsection",
+ CellChangeTimes->{{3.9311579540147038`*^9, 
+  3.931157982261983*^9}},ExpressionUUID->"4032c7f7-f7b5-4f72-8140-\
+8f5820cb6f12"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"LLPdirName", "==", "\"\<ALP-gluon\>\""}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"LLPsel", "=", "\"\<ALP-gluon\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"BrRatiosALPgluonData", "[", "ma_", "]"}], "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "dirpheno", ",", "LLPsel", ",", 
+          "\"\<decay \
+widths/Br-ratios-SensCalc-model-Gluon-scale-1000.-GeV.m\>\""}], "}"}], "]"}], 
+       ",", "\"\<MX\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "List", " ", "of", " ", "all", " ", "representative", " ", "processes"}],
+      "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ProcessesList", "[", 
+      RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"BrRatiosALPgluonData", "[", "ma", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Jets\>\"", "->", "\"\<Jets-GG\>\""}], "}"}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "The", " ", "mass", " ", "above", " ", "which", " ", "all", " ", 
+      "hadronic", " ", "decays", " ", "are", " ", "approximated", " ", "by", 
+      " ", "decays", " ", "into", " ", "jets"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Do", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"procsel", "=", 
+        RowBox[{
+         RowBox[{"ProcessesList", "[", 
+          RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ListBrRatiosTemp", "[", 
+         RowBox[{"LLPsel", ",", "mLLP_", ",", "procsel"}], "]"}], "=", 
+        RowBox[{
+         RowBox[{"ListBrRatios", "[", 
+          RowBox[{"LLPsel", ",", "mLLP_", ",", "procsel"}], "]"}], "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"BrRatiosALPgluonData", "[", "mLLP", "]"}], "[", 
+           RowBox[{"[", "3", "]"}], "]"}], "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ListDecayProducts", "[", 
+         RowBox[{"LLPsel", ",", "procsel"}], "]"}], "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"BrRatiosALPgluonData", "[", "ma", "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"JetsPresence", "[", 
+         RowBox[{"LLPsel", ",", "procsel"}], "]"}], "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"MemberQ", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+              "\"\<Jets-ss\>\"", ",", "\"\<Jets-cc\>\"", ",", 
+               "\"\<Jets-GG\>\""}], "}"}], ",", "procsel"}], "]"}], "==", 
+           "True"}], ",", "\"\<Yes\>\"", ",", "\"\<No\>\""}], "]"}]}]}], 
+      "\[IndentingNewLine]", ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", 
+         RowBox[{
+          RowBox[{"BrRatiosALPgluonData", "[", "mLLP", "]"}], "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "]"}], ",", "1"}], "}"}]}], "]"}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ProcessesList", "[", 
+      RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], "=", 
+     RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"ProcessesList", "[", 
+            RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", 
+          RowBox[{"ListDecayProducts", "[", 
+           RowBox[{"LLPsel", ",", 
+            RowBox[{
+             RowBox[{"ProcessesList", "[", 
+              RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", 
+           RowBox[{"ProcessesList", "[", 
+            RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "]"}], ",", "1"}],
+          "}"}]}], "]"}], "//", "Transpose"}], "//", "TableForm"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<All processes with at least two charged/neutral particles:\>\"", 
+     "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"ProcessesList", "[", 
+     RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<All processes with at least two charged particles:\>\"", "]"}], ";",
+     "\[IndentingNewLine]", 
+    RowBox[{"ProcessesList", "[", 
+     RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", "\"\<Processes with jets:\>\"", "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"ProcessesList", "[", 
+       RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"JetsPresence", "[", 
+         RowBox[{"LLPsel", ",", "#"}], "]"}], "==", "\"\<Yes\>\""}], "&"}]}], 
+     "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"LogLogPlot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Evaluate", "[", 
+        RowBox[{"Sum", "[", 
+         RowBox[{
+          RowBox[{"ListBrRatiosTemp", "[", 
+           RowBox[{"LLPsel", ",", "mN", ",", "pr"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"pr", ",", 
+            RowBox[{"ProcessesList", "[", 
+             RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], "]"}],
+         "]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"mN", ",", "0.05", ",", "4.5"}], "}"}], ",", 
+      RowBox[{"PlotRange", "->", "All"}]}], "]"}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.9310701341529956`*^9, 3.931070196209152*^9}, 
+   3.9310705943370333`*^9},
+ CellLabel->
+  "In[286]:=",ExpressionUUID->"39c1f10e-eaa7-4a95-bc8d-1cf41bd9f0e7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Matrix elements", "Subsection",
+ CellChangeTimes->{{3.9310702077654505`*^9, 
+  3.9310702095263357`*^9}},ExpressionUUID->"32688c8a-71ab-4245-ae30-\
+bc3cba837979"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"LLPdirName", "==", "\"\<ALP-gluon\>\""}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"LLPsel", "=", "\"\<ALP-gluon\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"MatrixElementsALPgluonList", "[", "ma_", "]"}], "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "dirpheno", ",", "LLPsel", ",", 
+          "\"\<decay \
+widths/Matrix-elements-squared-model-Gluon-scale-1000.-GeV.m\>\""}], "}"}], 
+        "]"}], ",", "\"\<MX\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Msquared3BodyLLP", "[", 
+        RowBox[{"LLPsel", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"MatrixElementsALPgluonList", "[", "ma", "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", "E1_", ",", "E3_", ",", 
+         "mLLP_"}], "]"}], "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"MatrixElementsALPgluonList", "[", "mLLP", "]"}], "[", 
+         RowBox[{"[", "3", "]"}], "]"}], "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], "\[IndentingNewLine]", ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", 
+         RowBox[{
+          RowBox[{"MatrixElementsALPgluonList", "[", "ma", "]"}], "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "]"}], ",", "1"}], "}"}]}], "]"}], 
+    ";"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.9310702117290554`*^9, 3.9310702316760798`*^9}, 
+   3.9310705984943085`*^9},
+ CellLabel->
+  "In[287]:=",ExpressionUUID->"7505bc74-f050-49ec-b72a-032df3ba9e20"]
+}, Open  ]]
+}, Closed]]
+},
+WindowSize->{582, 594},
+WindowMargins->{{267.5, Automatic}, {Automatic, 39.5}},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9673cdef-c162-4638-a92e-2bc24306c5d2"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 156, 3, 67, "Section",ExpressionUUID->"280bd5bc-30fb-407c-85f8-2936fd6a8134"],
+Cell[CellGroupData[{
+Cell[761, 29, 161, 3, 59, "Subsection",ExpressionUUID->"c193eeff-0669-4cf2-bc1f-8fcce16fc4b6"],
+Cell[925, 34, 2175, 56, 263, "Input",ExpressionUUID->"97c1af4d-6cbc-4089-8968-d117ef523c3f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3137, 95, 166, 3, 59, "Subsection",ExpressionUUID->"4032c7f7-f7b5-4f72-8140-8f5820cb6f12"],
+Cell[3306, 100, 6234, 159, 535, "Input",ExpressionUUID->"39c1f10e-eaa7-4a95-bc8d-1cf41bd9f0e7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9577, 264, 167, 3, 59, "Subsection",ExpressionUUID->"32688c8a-71ab-4245-ae30-bc3cba837979"],
+Cell[9747, 269, 1745, 44, 158, "Input",ExpressionUUID->"7505bc74-f050-49ec-b72a-032df3ba9e20"]
+}, Open  ]]
+}, Closed]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

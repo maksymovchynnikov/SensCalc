@@ -1,1 +1,520 @@
-Notebook[{}]
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     19274,        512]
+NotebookOptionsPosition[     18239,        487]
+NotebookOutlinePosition[     18684,        504]
+CellTagsIndexPosition[     18641,        501]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lorentz boosts", "Chapter",
+ CellChangeTimes->{{3.9341347716542516`*^9, 
+  3.9341347745245075`*^9}},ExpressionUUID->"198bcc9e-1875-4b98-996e-\
+78ab8c9d3f6c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Position", " ", "of", " ", "the", " ", "point", " ", "in", " ", 
+    "coordinate", " ", "space", " ", "in", " ", "terms", " ", "of", " ", 
+    "spherical", " ", "coordinates"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Phi]Val", "[", 
+      RowBox[{"px_", ",", "py_"}], "]"}], "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"py", ">", "0"}], ",", 
+       RowBox[{"ArcCos", "[", 
+        FractionBox["px", 
+         SqrtBox[
+          RowBox[{
+           SuperscriptBox["px", "2"], "+", 
+           SuperscriptBox["py", "2"]}]]], "]"}], ",", 
+       RowBox[{"-", 
+        RowBox[{"ArcCos", "[", 
+         FractionBox["px", 
+          SqrtBox[
+           RowBox[{
+            SuperscriptBox["px", "2"], "+", 
+            SuperscriptBox["py", "2"]}]]], "]"}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Theta]Val", "[", 
+      RowBox[{"px_", ",", "py_", ",", "pz_"}], "]"}], "=", 
+     RowBox[{"ArcCos", "[", 
+      RowBox[{"pz", "/", 
+       RowBox[{"(", 
+        RowBox[{"\[Sqrt]", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["px", "2"], "+", 
+           SuperscriptBox["py", "2"], "+", 
+           SuperscriptBox["pz", "2"]}], ")"}]}], ")"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Decaying", " ", "particle", " ", "momentum", " ", "and", " ", 
+      "velocity", " ", "at", " ", "its", " ", "lab", " ", 
+      RowBox[{"frame", ".", " ", "Since"}], " ", "the", " ", "experiment", 
+      " ", "geometry", " ", "is", " ", "convenient", " ", "to", " ", 
+      "characterize", " ", "in", " ", "terms", " ", "of", " ", "spherical", 
+      " ", "coordinates"}], ",", " ", 
+     RowBox[{
+     "it", " ", "is", " ", "given", " ", "here", " ", "in", " ", "both", " ", 
+      "spherical", " ", "and", " ", "cartesian", " ", "coordinates"}]}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"pMotherVecCart", "[", 
+      RowBox[{"px_", ",", "py_", ",", "pz_"}], "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{"px", ",", "py", ",", "pz"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"vMotherVecCart", "[", 
+      RowBox[{"Ev_", ",", "px_", ",", "py_", ",", "pz_"}], "]"}], "=", 
+     RowBox[{"+", 
+      FractionBox[
+       RowBox[{"pMotherVecCart", "[", 
+        RowBox[{"px", ",", "py", ",", "pz"}], "]"}], "Ev"]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"\[Gamma]", ",", 
+     RowBox[{"\[CapitalGamma]", " ", "factors"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Gamma]Factor", "[", 
+      RowBox[{"ELLP_", ",", "mLLP_"}], "]"}], "=", 
+     FractionBox["ELLP", "mLLP"]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[CapitalGamma]factor", "[", 
+      RowBox[{"ELLP_", ",", "mLLP_"}], "]"}], "=", 
+     RowBox[{"Simplify", "[", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"\[Gamma]Factor", "[", 
+         RowBox[{"ELLP", ",", "mLLP"}], "]"}], "-", "1"}], 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"v", "/.", 
+           RowBox[{"Solve", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"\[Gamma]Factor", "[", 
+               RowBox[{"ELLP", ",", "mLLP"}], "]"}], "\[Equal]", 
+              FractionBox["1", 
+               SqrtBox[
+                RowBox[{"1", "-", 
+                 SuperscriptBox["v", "2"]}]]]}], ",", "v"}], "]"}]}], ")"}], 
+         "2"], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"pprod", "=", 
+     RowBox[{"{", 
+      RowBox[{"pxd", ",", "pyd", ",", "pzd"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vmotherlab", "=", 
+     RowBox[{"vMotherVecCart", "[", 
+      RowBox[{"Em", ",", "pxm", ",", "pym", ",", "pzm"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"pproductLabVecCart", "[", 
+      RowBox[{
+      "pxm_", ",", "pym_", ",", "pzm_", ",", "Em_", ",", "mm_", ",", "pxd_", 
+       ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], "=", 
+     RowBox[{"Simplify", "[", 
+      RowBox[{"pprod", "+", 
+       RowBox[{
+        RowBox[{"\[Gamma]Factor", "[", 
+         RowBox[{"Em", ",", "mm"}], "]"}], "*", "vmotherlab", "*", "Ed"}], 
+       "+", 
+       RowBox[{
+        RowBox[{"\[CapitalGamma]factor", "[", 
+         RowBox[{"Em", ",", "mm"}], "]"}], "*", "vmotherlab", 
+        RowBox[{"(", 
+         RowBox[{"vmotherlab", ".", "pprod"}], ")"}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"EproductLabCart", "[", 
+      RowBox[{
+      "pxm_", ",", "pym_", ",", "pzm_", ",", "Em_", ",", "mm_", ",", "pxd_", 
+       ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], "=", 
+     RowBox[{"Simplify", "[", 
+      RowBox[{
+       RowBox[{"\[Gamma]Factor", "[", 
+        RowBox[{"Em", ",", "mm"}], "]"}], 
+       RowBox[{"(", 
+        RowBox[{"Ed", "+", 
+         RowBox[{"vmotherlab", ".", "pprod"}]}], ")"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"pproductLab1Cart", "[", 
+        RowBox[{
+        "pxm_", ",", "pym_", ",", "pzm_", ",", "Em_", ",", "mm_", ",", "pxd_",
+          ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], ",", 
+       RowBox[{"pproductLab2Cart", "[", 
+        RowBox[{
+        "pxm_", ",", "pym_", ",", "pzm_", ",", "Em_", ",", "mm_", ",", "pxd_",
+          ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], ",", 
+       RowBox[{"pproductLab3Cart", "[", 
+        RowBox[{
+        "pxm_", ",", "pym_", ",", "pzm_", ",", "Em_", ",", "mm_", ",", "pxd_",
+          ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}]}], "}"}], "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Simplify", "[", 
+        RowBox[{
+         RowBox[{"pproductLabVecCart", "[", 
+          RowBox[{
+          "pxm", ",", "pym", ",", "pzm", ",", "Em", ",", "mm", ",", "pxd", 
+           ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "[", 
+         RowBox[{"[", "#", "]"}], "]"}], "]"}], "&"}], "/@", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2", ",", "3"}], "}"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<Check that \!\(\*SubscriptBox[SuperscriptBox[\(E\), \(2\)], \
+\(boosted\)]\) - \!\(\*SubscriptBox[SuperscriptBox[OverscriptBox[\(p\), \
+\(_\)], \(2\)], \(boosted\)]\) = \!\(\*SuperscriptBox[\(m\), \(2\)]\):\>\"", 
+    "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"testExpr", "[", 
+      RowBox[{
+      "pxm_", ",", "pym_", ",", "pzm_", ",", "Em_", ",", "mm_", ",", "pxd_", 
+       ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"EproductLabCart", "[", 
+                RowBox[{
+                "pxm", ",", "pym", ",", "pzm", ",", "Em", ",", "mm", ",", 
+                 "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "2"], "-", 
+              SuperscriptBox[
+               RowBox[{"pproductLab1Cart", "[", 
+                RowBox[{
+                "pxm", ",", "pym", ",", "pzm", ",", "Em", ",", "mm", ",", 
+                 "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "2"], "-", 
+              SuperscriptBox[
+               RowBox[{"pproductLab2Cart", "[", 
+                RowBox[{
+                "pxm", ",", "pym", ",", "pzm", ",", "Em", ",", "mm", ",", 
+                 "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "2"], "-", 
+              SuperscriptBox[
+               RowBox[{"pproductLab3Cart", "[", 
+                RowBox[{
+                "pxm", ",", "pym", ",", "pzm", ",", "Em", ",", "mm", ",", 
+                 "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "2"]}], "//",
+              "Expand"}], "//", "Simplify"}], ")"}], "/.", 
+          RowBox[{"{", 
+           RowBox[{
+            SuperscriptBox["pxm", "2"], "\[Rule]", 
+            RowBox[{
+             SuperscriptBox["Em", "2"], "-", 
+             SuperscriptBox["pym", "2"], "-", 
+             SuperscriptBox["pzm", "2"], "-", 
+             SuperscriptBox["mm", "2"]}]}], "}"}]}], "//", "Expand"}], "//", 
+        "Simplify"}], ")"}], "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        SuperscriptBox["Em", "2"], "\[Rule]", 
+        RowBox[{
+         SuperscriptBox["pxm", "2"], "+", 
+         SuperscriptBox["pym", "2"], "+", 
+         SuperscriptBox["pzm", "2"], "+", 
+         SuperscriptBox["mm", "2"]}]}], "}"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"testExpr", "[", 
+     RowBox[{"pxm", ",", "pym", ",", "pzm", ",", 
+      SqrtBox[
+       RowBox[{
+        SuperscriptBox["pxm", "2"], "+", 
+        SuperscriptBox["pym", "2"], "+", 
+        SuperscriptBox["pzm", "2"], "+", 
+        SuperscriptBox["mm", "2"]}]], ",", "mm", ",", 
+      SqrtBox[
+       RowBox[{
+        SuperscriptBox["Ed", "2"], "-", 
+        SuperscriptBox["pyd", "2"], "-", 
+        SuperscriptBox["pzd", "2"], "-", 
+        SuperscriptBox["m", "2"]}]], ",", "pyd", ",", "pzd", ",", "Ed"}], 
+     "]"}], "//", "Simplify"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "The", " ", "same", " ", "but", " ", "assuming", " ", "that", " ", "the",
+       " ", "mother", " ", "3"}], "-", 
+     RowBox[{
+     "momentum", " ", "is", " ", "given", " ", "in", " ", "terms", " ", "of", 
+      " ", "spherical", " ", "coordinates"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"pMotherVecSpher", "[", 
+      RowBox[{"ELLP_", ",", "mLLP_", ",", "\[Theta]LLP_", ",", "\[Phi]LLP_"}],
+       "]"}], "=", 
+     RowBox[{
+      SqrtBox[
+       RowBox[{
+        SuperscriptBox["ELLP", "2"], "-", 
+        SuperscriptBox["mLLP", "2"]}]], 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Theta]LLP", "]"}], "*", 
+         RowBox[{"Cos", "[", "\[Phi]LLP", "]"}]}], ",", 
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Theta]LLP", "]"}], "*", 
+         RowBox[{"Sin", "[", "\[Phi]LLP", "]"}]}], ",", 
+        RowBox[{"Cos", "[", "\[Theta]LLP", "]"}]}], "}"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"vMotherVecSpher", "[", 
+      RowBox[{"ELLP_", ",", "mLLP_", ",", "\[Theta]LLP_", ",", "\[Phi]LLP_"}],
+       "]"}], "=", 
+     RowBox[{"+", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"pMotherVecSpher", "[", 
+         RowBox[{"ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP"}], 
+         "]"}], "/", "ELLP"}], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"pproductLabVecSpher", "[", 
+      RowBox[{
+      "ELLP_", ",", "mLLP_", ",", "\[Theta]LLP_", ",", "\[Phi]LLP_", ",", 
+       "pxd_", ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], "=", 
+     RowBox[{"Simplify", "[", 
+      RowBox[{"pprod", "+", 
+       RowBox[{
+        RowBox[{"\[Gamma]Factor", "[", 
+         RowBox[{"ELLP", ",", "mLLP"}], "]"}], "*", 
+        RowBox[{"vMotherVecSpher", "[", 
+         RowBox[{"ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP"}], 
+         "]"}], "*", "Ed"}], "+", 
+       RowBox[{
+        RowBox[{"\[CapitalGamma]factor", "[", 
+         RowBox[{"ELLP", ",", "mLLP"}], "]"}], "*", 
+        RowBox[{"vMotherVecSpher", "[", 
+         RowBox[{"ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP"}], 
+         "]"}], 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"vMotherVecSpher", "[", 
+           RowBox[{
+           "ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP"}], "]"}],
+           ".", "pprod"}], ")"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"EproductLabSpher", "[", 
+      RowBox[{
+      "ELLP_", ",", "mLLP_", ",", "\[Theta]LLP_", ",", "\[Phi]LLP_", ",", 
+       "pxd_", ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], "=", 
+     RowBox[{"Simplify", "[", 
+      RowBox[{
+       RowBox[{"\[Gamma]Factor", "[", 
+        RowBox[{"ELLP", ",", "mLLP"}], "]"}], 
+       RowBox[{"(", 
+        RowBox[{"Ed", "+", 
+         RowBox[{
+          RowBox[{"vMotherVecSpher", "[", 
+           RowBox[{
+           "ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP"}], "]"}],
+           ".", "pprod"}]}], ")"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"pproductLab1Spher", "[", 
+        RowBox[{
+        "ELLP_", ",", "mLLP_", ",", "\[Theta]LLP_", ",", "\[Phi]LLP_", ",", 
+         "pxd_", ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], ",", 
+       RowBox[{"pproductLab2Spher", "[", 
+        RowBox[{
+        "ELLP_", ",", "mLLP_", ",", "\[Theta]LLP_", ",", "\[Phi]LLP_", ",", 
+         "pxd_", ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], ",", 
+       RowBox[{"pproductLab3Spher", "[", 
+        RowBox[{
+        "ELLP_", ",", "mLLP_", ",", "\[Theta]LLP_", ",", "\[Phi]LLP_", ",", 
+         "pxd_", ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}]}], "}"}], "=", 
+     RowBox[{"Simplify", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"pproductLabVecSpher", "[", 
+          RowBox[{
+          "ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP", ",", 
+           "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "[", 
+         RowBox[{"[", "#", "]"}], "]"}], "&"}], "/@", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<Check that \!\(\*SubscriptBox[SuperscriptBox[\(E\), \(2\)], \
+\(boosted\)]\) - \!\(\*SubscriptBox[SuperscriptBox[OverscriptBox[\(p\), \
+\(_\)], \(2\)], \(boosted\)]\) = \!\(\*SuperscriptBox[\(m\), \(2\)]\) - for \
+the formulas expressed in spherical LLP coordinates:\>\"", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"testExpr2", "[", 
+     RowBox[{
+     "ELLP_", ",", "mLLP_", ",", "\[Theta]LLP_", ",", "\[Phi]LLP_", ",", 
+      "pxd_", ",", "pyd_", ",", "pzd_", ",", "Ed_"}], "]"}], "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{"EproductLabSpher", "[", 
+         RowBox[{
+         "ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP", ",", 
+          "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "2"], "-", 
+       SuperscriptBox[
+        RowBox[{"pproductLab1Spher", "[", 
+         RowBox[{
+         "ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP", ",", 
+          "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "2"], "-", 
+       SuperscriptBox[
+        RowBox[{"pproductLab2Spher", "[", 
+         RowBox[{
+         "ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP", ",", 
+          "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "2"], "-", 
+       SuperscriptBox[
+        RowBox[{"pproductLab3Spher", "[", 
+         RowBox[{
+         "ELLP", ",", "mLLP", ",", "\[Theta]LLP", ",", "\[Phi]LLP", ",", 
+          "pxd", ",", "pyd", ",", "pzd", ",", "Ed"}], "]"}], "2"]}], "//", 
+      "Expand"}], "//", "Simplify"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.9341349715996647`*^9, 3.934134987120278*^9}, 
+   3.9341353321947465`*^9},
+ CellLabel->
+  "In[365]:=",ExpressionUUID->"51eb07f8-2fcc-4739-9f94-5f94c244248f"],
+
+Cell[BoxData[
+ FormBox[
+  TemplateBox[{
+   "Solve", "nongen", 
+    "\"There may be values of the parameters for which some or all solutions \
+are not valid.\"", 2, 370, 16, 25747778441570487213, "Local"},
+   "MessageTemplate"], TraditionalForm]], "Message", "MSG",
+ CellChangeTimes->{3.9341349475492992`*^9, 3.934135335881407*^9},
+ CellLabel->
+  "During evaluation of \
+In[365]:=",ExpressionUUID->"b17c3ab6-2813-4e70-a56a-97a7572ba521"],
+
+Cell[BoxData[
+ FormBox["\<\"Check that \\!\\(\\*SubscriptBox[SuperscriptBox[\\(E\\), \
+\\(2\\)], \\(boosted\\)]\\) - \
+\\!\\(\\*SubscriptBox[SuperscriptBox[OverscriptBox[\\(p\\), \\(_\\)], \
+\\(2\\)], \\(boosted\\)]\\) = \\!\\(\\*SuperscriptBox[\\(m\\), \\(2\\)]\\):\"\
+\>", TraditionalForm]], "Print",
+ CellChangeTimes->{3.934134947564771*^9, 3.9341353358999863`*^9},
+ CellLabel->
+  "During evaluation of \
+In[365]:=",ExpressionUUID->"33191c3e-0f0b-47c1-9ad8-18f7f0ad2a92"],
+
+Cell[BoxData[
+ FormBox[
+  SuperscriptBox["m", "2"], TraditionalForm]], "Output",
+ CellChangeTimes->{3.9341349476488485`*^9, 3.934135335960271*^9},
+ CellLabel->
+  "Out[378]=",ExpressionUUID->"696c3c2b-0058-419c-893f-2dd6f4a11104"],
+
+Cell[BoxData[
+ FormBox["\<\"Check that \\!\\(\\*SubscriptBox[SuperscriptBox[\\(E\\), \
+\\(2\\)], \\(boosted\\)]\\) - \
+\\!\\(\\*SubscriptBox[SuperscriptBox[OverscriptBox[\\(p\\), \\(_\\)], \
+\\(2\\)], \\(boosted\\)]\\) = \\!\\(\\*SuperscriptBox[\\(m\\), \\(2\\)]\\) - \
+for the formulas expressed in spherical LLP coordinates:\"\>", 
+  TraditionalForm]], "Print",
+ CellChangeTimes->{3.934134947564771*^9, 3.934135336349834*^9},
+ CellLabel->
+  "During evaluation of \
+In[365]:=",ExpressionUUID->"7e3e904a-3bba-4a4c-94c7-a02bb556aa55"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SuperscriptBox["Ed", "2"], "-", 
+   SuperscriptBox["pxd", "2"], "-", 
+   SuperscriptBox["pyd", "2"], "-", 
+   SuperscriptBox["pzd", "2"]}], TraditionalForm]], "Output",
+ CellChangeTimes->{3.9341349476488485`*^9, 3.934135336369532*^9},
+ CellLabel->
+  "Out[385]=",ExpressionUUID->"b6a2bb2b-b69e-4b19-9096-70d3dc19b26d"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1152., 652.5},
+WindowMargins->{{
+  Automatic, -4.7999999999999545`}, {-4.7999999999999545`, Automatic}},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"fc010998-63d0-4d56-8e58-7c353291c23f"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 163, 3, 69, "Chapter",ExpressionUUID->"198bcc9e-1875-4b98-996e-78ab8c9d3f6c"],
+Cell[CellGroupData[{
+Cell[768, 29, 15401, 401, 889, "Input",ExpressionUUID->"51eb07f8-2fcc-4739-9f94-5f94c244248f"],
+Cell[16172, 432, 436, 10, 28, "Message",ExpressionUUID->"b17c3ab6-2813-4e70-a56a-97a7572ba521"],
+Cell[16611, 444, 474, 9, 24, "Print",ExpressionUUID->"33191c3e-0f0b-47c1-9ad8-18f7f0ad2a92"],
+Cell[17088, 455, 229, 5, 33, "Output",ExpressionUUID->"696c3c2b-0058-419c-893f-2dd6f4a11104"],
+Cell[17320, 462, 533, 10, 24, "Print",ExpressionUUID->"7e3e904a-3bba-4a4c-94c7-a02bb556aa55"],
+Cell[17856, 474, 355, 9, 57, "Output",ExpressionUUID->"b6a2bb2b-b69e-4b19-9096-70d3dc19b26d"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

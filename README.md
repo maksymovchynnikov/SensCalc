@@ -48,6 +48,8 @@ SensCalc has a modular structure. The sensitivity calculation is performed with 
 
 4. <dt><code>Plots.nb</code></dt>, which makes figures with the sensitivities.
 
+5. <dt><code>EventCalc.nb</code>, which uses the output of LLP distribution.nb and the information about decays and samples events with LLPs a-la traditional Monte-Carlo approaches.
+
 Details are described in *Manual.pdf*.
 
 For the LLPs and experiments that are already implemented, the user just needs to launch the very first section located at the top of each notebook. The relevant sections will then be launched automatically, and the notebook will prompt the user to specify the required inputs via dialog windows. If, however, the user wants to modify the model, geometry, or assumptions, they may change the code and inputs as described in the following sections.
@@ -81,5 +83,4 @@ The following LLPs are implemented:
 ## To be added soon
 
 * New models to be included: HNL dipole portal, inelastic dark matter (decay and scattering signatures), elastic dark matter (scattering signatures).
-* A SensCalc based simulator producing detailed HEPMC-output for events.  
 * New facilities and experiments: ESS, MicroBooNE/MiniBooNE. 

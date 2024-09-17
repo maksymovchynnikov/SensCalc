@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     93774,       2330]
-NotebookOptionsPosition[     91524,       2280]
-NotebookOutlinePosition[     91931,       2296]
-CellTagsIndexPosition[     91888,       2293]
+NotebookDataLength[     97321,       2407]
+NotebookOptionsPosition[     95077,       2357]
+NotebookOutlinePosition[     95478,       2373]
+CellTagsIndexPosition[     95435,       2370]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -222,8 +222,7 @@ Cell[BoxData[{
   3.916503013746434*^9, {3.916503186636981*^9, 3.9165032192453995`*^9}, {
    3.9165046307680783`*^9, 3.916504631020593*^9}, {3.9165047376905947`*^9, 
    3.91650473800181*^9}, {3.9165053723152533`*^9, 3.9165053724977045`*^9}},
- CellLabel->
-  "In[311]:=",ExpressionUUID->"b337585c-3512-441e-8a70-114a06acdd91"]
+ CellLabel->"In[1]:=",ExpressionUUID->"b337585c-3512-441e-8a70-114a06acdd91"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -514,8 +513,7 @@ Cell[BoxData[{
   3.9165053136823673`*^9}, {3.9165054980275297`*^9, 3.9165055135095315`*^9}, {
   3.9165065121943645`*^9, 3.9165065237369576`*^9}, {3.9165107962592745`*^9, 
   3.9165107966081724`*^9}},
- CellLabel->
-  "In[316]:=",ExpressionUUID->"2c816f2a-65e7-49dc-b365-05d6536957fe"]
+ CellLabel->"In[6]:=",ExpressionUUID->"2c816f2a-65e7-49dc-b365-05d6536957fe"]
 }, Open  ]]
 }, Open  ]],
 
@@ -533,8 +531,7 @@ Cell[TextData[{
  Cell[BoxData[
   FormBox[
    SubscriptBox["E", 
-    RowBox[{"min", "/", "max"}]], TraditionalForm]],
-  FormatType->TraditionalForm,ExpressionUUID->
+    RowBox[{"min", "/", "max"}]], TraditionalForm]],ExpressionUUID->
   "346167ca-4142-4f94-b18e-10a68615010e"]
 }], "Section",
  CellChangeTimes->{{3.9165048355590873`*^9, 
@@ -1133,8 +1130,7 @@ Cell[BoxData[
   3.9191386478199306`*^9}, {3.9191387361233797`*^9, 3.9191387878228703`*^9}, {
   3.91913903102792*^9, 3.91913905024539*^9}, {3.919140603036472*^9, 
   3.919140603178522*^9}},
- CellLabel->
-  "In[120]:=",ExpressionUUID->"7ffc3e1c-c02a-43c0-8d0c-01d5855b44dd"]
+ CellLabel->"In[8]:=",ExpressionUUID->"7ffc3e1c-c02a-43c0-8d0c-01d5855b44dd"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1234,7 +1230,8 @@ Cell[BoxData[{
      RowBox[{"\[Theta]max", "=", 
       RowBox[{"If", "[", 
        RowBox[{
-        RowBox[{"Prod", "==", "\"\<Bremsstrahlung\>\""}], ",", 
+        RowBox[{"StringContainsQ", "[", 
+         RowBox[{"Prod", ",", "\"\<Bremsstrahlung\>\""}], "]"}], ",", 
         RowBox[{"Min", "[", 
          RowBox[{"\[Theta]maxExp", ",", "\[Theta]maxBrem"}], "]"}], ",", 
         "\[Theta]maxExp"}], "]"}]}], ";", "\[IndentingNewLine]", 
@@ -1669,7 +1666,8 @@ Cell[BoxData[{
    3.916906515340022*^9, 3.916906598608732*^9}, {3.9169066368561425`*^9, 
    3.916906660462638*^9}, {3.916906823168135*^9, 3.9169068297996244`*^9}, {
    3.91690688998528*^9, 3.916906916160797*^9}, 3.9169069533995624`*^9, {
-   3.9169161088358407`*^9, 3.916916123429276*^9}},
+   3.9169161088358407`*^9, 3.916916123429276*^9}, {3.9304937102194133`*^9, 
+   3.9304937158641405`*^9}},
  CellLabel->"In[12]:=",ExpressionUUID->"763f1e1e-3c45-484a-a7f6-f4b5ba7eb978"]
 }, Open  ]],
 
@@ -1706,8 +1704,8 @@ Cell[BoxData[
       ",", "InGridm\[Epsilon]_", ",", "InGrid\[Theta]\[Epsilon]_", ",", 
       "InGridE\[Epsilon]_", ",", "InGridz\[Epsilon]_", ",", 
       "\[CapitalDelta]\[Theta]vals_", ",", "\[CapitalDelta]zvals_", ",", 
-      "zminExp_", ",", "GridInFinal_", ",", "DistrVals_", ",", "Facility_"}], 
-     "]"}], ":=", 
+      "zminExp_", ",", "GridInFinal_", ",", "DistrVals_", ",", "Facility_", 
+      ",", "ELLPmax_", ",", "\[Theta]minExp_"}], "]"}], ":=", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", 
@@ -1802,112 +1800,192 @@ Cell[BoxData[
               RowBox[{"#", "[", 
                RowBox[{"[", "4", "]"}], "]"}]}], "}"}], "&"}], "/@", 
            "OutGridFinal"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"g\[Epsilon]", "=", 
-        RowBox[{"{", 
-         RowBox[{
-         "InGridm\[Epsilon]", ",", "InGrid\[Theta]\[Epsilon]", ",", 
-          "InGridE\[Epsilon]", ",", "InGridz\[Epsilon]"}], "}"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xg\[Epsilon]", "=", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"Log10", "[", 
-            RowBox[{"N", "[", "m", "]"}], "]"}], "}"}], ",", 
-          "OutGrid\[Theta]final", ",", "OutGridEfinal", ",", 
-          "OutGridzfinal"}], "}"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"xig\[Epsilon]", "=", 
-        RowBox[{"MapThread", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{
-            RowBox[{"Interpolation", "[", 
-             RowBox[{
-              RowBox[{"Transpose", "@", 
-               RowBox[{"{", 
-                RowBox[{"#", ",", 
-                 RowBox[{"Range", "@", 
-                  RowBox[{"Length", "@", "#"}]}]}], "}"}]}], ",", 
-              RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
-            "#2", "]"}], "&"}], ",", 
-          RowBox[{"{", 
-           RowBox[{"g\[Epsilon]", ",", "xg\[Epsilon]"}], "}"}]}], "]"}]}], 
-       ";", "\[IndentingNewLine]", 
-       RowBox[{"\[Epsilon]Result", "=", 
-        RowBox[{"10", "^", 
-         RowBox[{"Flatten", "@", 
-          RowBox[{"cf4", "[", 
-           RowBox[{
-            RowBox[{"Sequence", "@@", "xig\[Epsilon]"}], ",", 
-            RowBox[{"If", "[", 
-             RowBox[{
-              RowBox[{"\[Epsilon]DecOp", "==", "\"\<True\>\""}], ",", 
-              "\[Epsilon]vals", ",", "\[Epsilon]azvals"}], "]"}]}], 
-           "]"}]}]}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"gDistr", "=", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"GridInFinal", "[", "ProdChannel", "]"}], "[", 
-           RowBox[{"[", "1", "]"}], "]"}], ",", 
-          RowBox[{
-           RowBox[{"GridInFinal", "[", "ProdChannel", "]"}], "[", 
-           RowBox[{"[", "2", "]"}], "]"}], ",", 
-          RowBox[{
-           RowBox[{"GridInFinal", "[", "ProdChannel", "]"}], "[", 
-           RowBox[{"[", "3", "]"}], "]"}]}], "}"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xgDistr", "=", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"Log10", "[", 
-            RowBox[{"N", "[", "m", "]"}], "]"}], "}"}], ",", 
-          "OutGrid\[Theta]final", ",", "OutGridEfinal"}], "}"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"xigDistr", "=", 
-        RowBox[{"MapThread", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{
-            RowBox[{"Interpolation", "[", 
-             RowBox[{
-              RowBox[{"Transpose", "@", 
-               RowBox[{"{", 
-                RowBox[{"#", ",", 
-                 RowBox[{"Range", "@", 
-                  RowBox[{"Length", "@", "#"}]}]}], "}"}]}], ",", 
-              RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
-            "#2", "]"}], "&"}], ",", 
-          RowBox[{"{", 
-           RowBox[{"gDistr", ",", "xgDistr"}], "}"}]}], "]"}]}], ";", "\n", 
-       RowBox[{"DistrResult", "=", 
-        RowBox[{"10", "^", 
-         RowBox[{"Flatten", "@", 
-          RowBox[{"cf3", "[", 
-           RowBox[{
-            RowBox[{"Sequence", "@@", "xigDistr"}], ",", 
-            RowBox[{"DistrVals", "[", "ProdChannel", "]"}]}], "]"}]}]}]}], 
-       ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
         RowBox[{
-         RowBox[{"ProdChannel", "==", "\"\<Bremsstrahlung\>\""}], ",", 
-         RowBox[{"DistrResult", "=", 
-          RowBox[{"BremCut", "[", 
+         RowBox[{
+          RowBox[{"ELLPmax", "[", 
+           RowBox[{"m", ",", "\[Theta]minExp", ",", "ProdChannel"}], "]"}], 
+          ">", 
+          SuperscriptBox["10", 
+           RowBox[{"OutGridEfinalTemp", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]]}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"g\[Epsilon]", "=", 
+           RowBox[{"{", 
+            RowBox[{
+            "InGridm\[Epsilon]", ",", "InGrid\[Theta]\[Epsilon]", ",", 
+             "InGridE\[Epsilon]", ",", "InGridz\[Epsilon]"}], "}"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"xg\[Epsilon]", "=", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Log10", "[", 
+               RowBox[{"N", "[", "m", "]"}], "]"}], "}"}], ",", 
+             "OutGrid\[Theta]final", ",", "OutGridEfinal", ",", 
+             "OutGridzfinal"}], "}"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"xig\[Epsilon]", "=", 
+           RowBox[{"MapThread", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Module", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"interp", "=", 
+                  RowBox[{
+                   RowBox[{"Interpolation", "[", 
+                    RowBox[{
+                    RowBox[{"Transpose", "@", 
+                    RowBox[{"{", 
+                    RowBox[{"#", ",", 
+                    RowBox[{"Range", "@", 
+                    RowBox[{"Length", "@", "#"}]}]}], "}"}]}], ",", 
+                    RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", 
+                   "#2", "]"}]}], "}"}], ",", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"ListQ", "[", "interp", "]"}], ",", "interp", ",", 
+                  RowBox[{"{", "interp", "}"}]}], "]"}]}], "]"}], "&"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"g\[Epsilon]", ",", "xg\[Epsilon]"}], "}"}]}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
            RowBox[{
-           "OutGrid\[Theta]final", ",", "OutGridEfinal", ",", "DistrResult", 
-            ",", "m"}], "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
-       RowBox[{"TabTemp0", "=", 
-        RowBox[{"Join", "[", 
-         RowBox[{"OutGridFinal1", ",", 
-          RowBox[{"List", "/@", 
-           RowBox[{"Flatten", "[", 
-            RowBox[{"DistrResult", " ", 
-             RowBox[{"Partition", "[", 
-              RowBox[{"\[Epsilon]Result", ",", 
-               RowBox[{"Length", "[", "OutGridzfinal", "]"}]}], "]"}]}], 
-            "]"}]}], ",", "\[CapitalDelta]xValsTot", ",", "2"}], "]"}]}]}]}], 
-     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+            RowBox[{"xig\[Epsilon]", "=", 
+             RowBox[{"MapThread", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Interpolation", "[", 
+                  RowBox[{
+                   RowBox[{"Transpose", "@", 
+                    RowBox[{"{", 
+                    RowBox[{"#", ",", 
+                    RowBox[{"Range", "@", 
+                    RowBox[{"Length", "@", "#"}]}]}], "}"}]}], ",", 
+                   RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], 
+                 "[", "#2", "]"}], "&"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"g\[Epsilon]", ",", "xg\[Epsilon]"}], "}"}]}], 
+              "]"}]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"\[Epsilon]Result", "=", 
+           RowBox[{"10", "^", 
+            RowBox[{"Flatten", "@", 
+             RowBox[{"cf4", "[", 
+              RowBox[{
+               RowBox[{"Sequence", "@@", "xig\[Epsilon]"}], ",", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"\[Epsilon]DecOp", "==", "\"\<True\>\""}], ",", 
+                 "\[Epsilon]vals", ",", "\[Epsilon]azvals"}], "]"}]}], 
+              "]"}]}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"gDistr", "=", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"GridInFinal", "[", "ProdChannel", "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", 
+             RowBox[{
+              RowBox[{"GridInFinal", "[", "ProdChannel", "]"}], "[", 
+              RowBox[{"[", "2", "]"}], "]"}], ",", 
+             RowBox[{
+              RowBox[{"GridInFinal", "[", "ProdChannel", "]"}], "[", 
+              RowBox[{"[", "3", "]"}], "]"}]}], "}"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"xgDistr", "=", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Log10", "[", 
+               RowBox[{"N", "[", "m", "]"}], "]"}], "}"}], ",", 
+             "OutGrid\[Theta]final", ",", "OutGridEfinal"}], "}"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"xigDistr", "=", 
+           RowBox[{"MapThread", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Module", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"interp", "=", 
+                  RowBox[{
+                   RowBox[{"Interpolation", "[", 
+                    RowBox[{
+                    RowBox[{"Transpose", "@", 
+                    RowBox[{"{", 
+                    RowBox[{"#", ",", 
+                    RowBox[{"Range", "@", 
+                    RowBox[{"Length", "@", "#"}]}]}], "}"}]}], ",", 
+                    RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", 
+                   "#2", "]"}]}], "}"}], ",", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"ListQ", "[", "interp", "]"}], ",", "interp", ",", 
+                  RowBox[{"{", "interp", "}"}]}], "]"}]}], "]"}], "&"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"gDistr", ",", "xgDistr"}], "}"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"xigDistr", "=", 
+             RowBox[{"MapThread", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Interpolation", "[", 
+                  RowBox[{
+                   RowBox[{"Transpose", "@", 
+                    RowBox[{"{", 
+                    RowBox[{"#", ",", 
+                    RowBox[{"Range", "@", 
+                    RowBox[{"Length", "@", "#"}]}]}], "}"}]}], ",", 
+                   RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], 
+                 "[", "#2", "]"}], "&"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"gDistr", ",", "xgDistr"}], "}"}]}], "]"}]}], ";"}], 
+           "*)"}], "\n", 
+          RowBox[{"DistrResult", "=", 
+           RowBox[{"10", "^", 
+            RowBox[{"Flatten", "@", 
+             RowBox[{"cf3", "[", 
+              RowBox[{
+               RowBox[{"Sequence", "@@", "xigDistr"}], ",", 
+               RowBox[{"DistrVals", "[", "ProdChannel", "]"}]}], "]"}]}]}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"StringContainsQ", "[", 
+             RowBox[{"ProdChannel", ",", "\"\<Bremsstrahlung\>\""}], "]"}], 
+            ",", 
+            RowBox[{"DistrResult", "=", 
+             RowBox[{"BremCut", "[", 
+              RowBox[{
+              "OutGrid\[Theta]final", ",", "OutGridEfinal", ",", 
+               "DistrResult", ",", "m", ",", "ProdChannel"}], "]"}]}]}], 
+           "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"TabTemp0", "=", 
+           RowBox[{"Join", "[", 
+            RowBox[{"OutGridFinal1", ",", 
+             RowBox[{"List", "/@", 
+              RowBox[{"Flatten", "[", 
+               RowBox[{"DistrResult", " ", 
+                RowBox[{"Partition", "[", 
+                 RowBox[{"\[Epsilon]Result", ",", 
+                  RowBox[{"Length", "[", "OutGridzfinal", "]"}]}], "]"}]}], 
+               "]"}]}], ",", "\[CapitalDelta]xValsTot", ",", "2"}], "]"}]}]}],
+          "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+         RowBox[{"TabTemp0", "=", 
+          RowBox[{"Join", "[", 
+           RowBox[{"OutGridFinal1", ",", 
+            RowBox[{"ConstantArray", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               SuperscriptBox["10", 
+                RowBox[{"-", "90."}]], "}"}], ",", 
+              RowBox[{"Length", "[", "OutGridFinal1", "]"}]}], "]"}], ",", 
+            "\[CapitalDelta]xValsTot", ",", "2"}], "]"}]}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Values", " ", 
@@ -2117,16 +2195,15 @@ Cell[BoxData[
          RowBox[{"accdiscret", "=", "0."}]}], "]"}], ";", 
        "\[IndentingNewLine]", "accdiscret"}]}], "\[IndentingNewLine]", 
      "]"}]}]}]}]], "Input",
- CellChangeTimes->{{3.916506207401204*^9, 3.9165062824222703`*^9}, {
-  3.916506458645639*^9, 3.9165064589502983`*^9}, {3.91650665663125*^9, 
-  3.916506749666892*^9}, {3.9165068822311893`*^9, 3.9165070103636837`*^9}, {
-  3.9166708872672048`*^9, 3.916670955131792*^9}, {3.9166777743680525`*^9, 
-  3.916677776664891*^9}, {3.9166778188284693`*^9, 3.916677829467427*^9}, {
-  3.9166804474219456`*^9, 3.91668044765785*^9}, {3.9167644266493645`*^9, 
-  3.9167644296630616`*^9}, {3.916764592962504*^9, 3.916764593214036*^9}, {
-  3.9167649650103207`*^9, 3.916764966912043*^9}, {3.916942639442255*^9, 
-  3.9169426407571993`*^9}},
- CellLabel->"In[16]:=",ExpressionUUID->"0f0cb8a1-5835-446c-9274-af26fa0c4171"],
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGCQAGIQveram24VvbeOts2+U0G08MqQ1SD6RkYcmDY2FjkC
+ovXCt54H0c9T3R+AaJ/F3h9A9MeeF19KgPQS85S/IFrs+OnACiB90k00CERf
+aooKB9GaX9dFgOgpDW/nVwJpad6vYHrG8ZCFi4D0WfOtYPrqGbltIDrpphqY
+7glZ8AREl+rfBdNf1N4t/Qmkf1lJLAPRbf8Sky95vHVU2K+TAqLF823nvPN/
+6/g0yh1M8/+LeXoz4K3jP5EtYNpZuO8ziDa5dgJM79YMUnsNpJ9sU9MH0QbJ
+vsYguqZjpimI5r23NBBEf6hjDQLRGSKbokH0ql18sSA68cX6bwmBbx3nT/nz
+A0T3TJsskgika6zegmkNSyZdEL3j810wrSCw1xRE28wOMAfRAMbzxAc=
+  "],ExpressionUUID->"0f0cb8a1-5835-446c-9274-af26fa0c4171"],
 
 Cell[CellGroupData[{
 
@@ -2278,9 +2355,9 @@ Cell[BoxData[
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1016.25, 606.75},
+WindowSize->{1142.1, 642.9},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"b80fe242-2e0b-4b6d-9f22-0e7e863c4672"
 ]
@@ -2296,39 +2373,39 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 179, 3, 69, "Chapter",ExpressionUUID->"05a98b28-37d9-40ad-b6cf-c839b2660652"],
+Cell[580, 22, 179, 3, 67, "Chapter",ExpressionUUID->"05a98b28-37d9-40ad-b6cf-c839b2660652"],
 Cell[CellGroupData[{
-Cell[784, 29, 159, 3, 67, "Section",ExpressionUUID->"c924093c-0747-464b-8528-4b0b2876fdb3"],
-Cell[946, 34, 7654, 191, 398, "Input",ExpressionUUID->"b337585c-3512-441e-8a70-114a06acdd91"]
+Cell[784, 29, 159, 3, 66, "Section",ExpressionUUID->"c924093c-0747-464b-8528-4b0b2876fdb3"],
+Cell[946, 34, 7649, 190, 378, "Input",ExpressionUUID->"b337585c-3512-441e-8a70-114a06acdd91"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8637, 230, 238, 4, 67, "Section",ExpressionUUID->"01ff7a23-17fb-4aec-8021-8de69c35a9f9"],
-Cell[8878, 236, 11672, 281, 733, "Input",ExpressionUUID->"2c816f2a-65e7-49dc-b365-05d6536957fe"]
+Cell[8632, 229, 238, 4, 66, "Section",ExpressionUUID->"01ff7a23-17fb-4aec-8021-8de69c35a9f9"],
+Cell[8873, 235, 11667, 280, 618, "Input",ExpressionUUID->"2c816f2a-65e7-49dc-b365-05d6536957fe"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[20599, 523, 179, 3, 69, "Chapter",ExpressionUUID->"b68fac94-d9ff-48da-a480-d7ecdba75c66"],
+Cell[20589, 521, 179, 3, 67, "Chapter",ExpressionUUID->"b68fac94-d9ff-48da-a480-d7ecdba75c66"],
 Cell[CellGroupData[{
-Cell[20803, 530, 363, 11, 67, "Section",ExpressionUUID->"730f60ef-e6a1-419e-88c0-d3f7a4e80c29"],
-Cell[21169, 543, 23920, 593, 1455, "Input",ExpressionUUID->"7ffc3e1c-c02a-43c0-8d0c-01d5855b44dd"]
+Cell[20793, 528, 332, 10, 66, "Section",ExpressionUUID->"730f60ef-e6a1-419e-88c0-d3f7a4e80c29"],
+Cell[21128, 540, 23915, 592, 1392, "Input",ExpressionUUID->"7ffc3e1c-c02a-43c0-8d0c-01d5855b44dd"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[45126, 1141, 161, 3, 67, "Section",ExpressionUUID->"df5e5b3e-78ba-4789-9eb0-2117dff7a5b1"],
-Cell[45290, 1146, 1672, 44, 105, "Input",ExpressionUUID->"b4622ebe-4be4-4e1f-85f9-2d15bfea9243"]
+Cell[45080, 1137, 161, 3, 66, "Section",ExpressionUUID->"df5e5b3e-78ba-4789-9eb0-2117dff7a5b1"],
+Cell[45244, 1142, 1672, 44, 104, "Input",ExpressionUUID->"b4622ebe-4be4-4e1f-85f9-2d15bfea9243"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[47011, 1196, 190, 3, 69, "Chapter",ExpressionUUID->"5d59251b-aa4b-4a7f-a2cd-f117c4b05795"],
+Cell[46965, 1192, 190, 3, 67, "Chapter",ExpressionUUID->"5d59251b-aa4b-4a7f-a2cd-f117c4b05795"],
 Cell[CellGroupData[{
-Cell[47226, 1203, 158, 3, 67, "Section",ExpressionUUID->"fd4474b9-930f-408e-b52b-66d00778ce67"],
-Cell[47387, 1208, 18728, 464, 1433, "Input",ExpressionUUID->"763f1e1e-3c45-484a-a7f6-f4b5ba7eb978"]
+Cell[47180, 1199, 158, 3, 66, "Section",ExpressionUUID->"fd4474b9-930f-408e-b52b-66d00778ce67"],
+Cell[47341, 1204, 18830, 466, 1242, "Input",ExpressionUUID->"763f1e1e-3c45-484a-a7f6-f4b5ba7eb978"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[66152, 1677, 238, 4, 67, "Section",ExpressionUUID->"fe5d9d7e-9130-4188-8449-603615d2480b"],
-Cell[66393, 1683, 19048, 445, 1460, "Input",ExpressionUUID->"0f0cb8a1-5835-446c-9274-af26fa0c4171"],
+Cell[66208, 1675, 238, 4, 66, "Section",ExpressionUUID->"fe5d9d7e-9130-4188-8449-603615d2480b"],
+Cell[66449, 1681, 22545, 524, 1543, "Input",ExpressionUUID->"0f0cb8a1-5835-446c-9274-af26fa0c4171"],
 Cell[CellGroupData[{
-Cell[85466, 2132, 179, 3, 54, "Subsection",ExpressionUUID->"c6afbbc1-a6db-48c4-a5a6-ddb81120814b"],
-Cell[85648, 2137, 5836, 138, 417, "Input",ExpressionUUID->"aedf8517-dbbd-47bb-8a9d-96efd5513147"]
+Cell[89019, 2209, 179, 3, 53, "Subsection",ExpressionUUID->"c6afbbc1-a6db-48c4-a5a6-ddb81120814b"],
+Cell[89201, 2214, 5836, 138, 379, "Input",ExpressionUUID->"aedf8517-dbbd-47bb-8a9d-96efd5513147"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

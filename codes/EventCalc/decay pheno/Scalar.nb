@@ -1,0 +1,610 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23222,        602]
+NotebookOptionsPosition[     22287,        577]
+NotebookOutlinePosition[     22694,        593]
+CellTagsIndexPosition[     22651,        590]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9312281147071686`*^9, 
+  3.9312281283513184`*^9}},ExpressionUUID->"ff4f42da-8190-4c1b-ab4a-\
+9deb87cc7496"],
+
+Cell[CellGroupData[{
+
+Cell["Scalar", "Section",
+ CellChangeTimes->{{3.931067915727479*^9, 
+  3.9310679220995035`*^9}},ExpressionUUID->"2965288e-bb21-44c5-8248-\
+f7be0a8eefe7"],
+
+Cell[CellGroupData[{
+
+Cell["Decay width", "Subsection",
+ CellChangeTimes->{{3.9311579540147038`*^9, 3.931157955533224*^9}, 
+   3.9311580022690454`*^9},ExpressionUUID->"4eda875d-f107-4328-ac1f-\
+ecae63a29d98"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"LLPdirName", "==", "\"\<Scalar\>\""}], ",", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Decay", " ", "length", " ", "of", " ", "the", " ", "scalar"}], 
+     " ", "-", " ", 
+     RowBox[{"following", " ", "Winkler"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"c\[Tau]LLP", "[", 
+      RowBox[{"mLLP_", ",", "\[Theta]2_"}], "]"}], "=", 
+     RowBox[{
+      FractionBox["1", "\[Theta]2"], 
+      RowBox[{
+       RowBox[{"Interpolation", "[", 
+        RowBox[{
+         RowBox[{"Select", "[", 
+          RowBox[{
+           RowBox[{"Import", "[", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{
+               "dirpheno", ",", "LLPdirName", ",", "\"\<decay widths\>\"", 
+                ",", "\"\<ctaus.dat\>\""}], "}"}], "]"}], ",", 
+             "\"\<Table\>\""}], "]"}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "\[NotEqual]", "2."}], "&"}]}], 
+          "]"}], ",", 
+         RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", "mLLP",
+        "]"}]}]}], ";"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.93115800829099*^9, 3.9311580084754267`*^9}, {
+  3.9311580573206177`*^9, 3.9311581044206047`*^9}},
+ CellLabel->
+  "In[338]:=",ExpressionUUID->"93eba5ee-16b4-4b06-a020-1e8f71c0e18d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Br ratios", "Subsection",
+ CellChangeTimes->{{3.9310695412712126`*^9, 
+  3.9310695423651114`*^9}},ExpressionUUID->"3fa29425-0616-4f6d-b9ce-\
+67d10904dfbf"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"LLPdirName", "==", "\"\<Scalar\>\""}], ",", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Branching", " ", "ratios"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"LLPsel", "=", "\"\<Scalar\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{"BrRatiosTableTemp", "=", 
+     RowBox[{"Select", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{
+           "dirpheno", ",", "LLPsel", ",", 
+            "\"\<decay widths/BrRatios.m\>\""}], "}"}], "]"}], ",", 
+         "\"\<MX\>\""}], "]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "\[NotEqual]", "2"}], "&"}]}], 
+      "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"BrRatiosTable", "=", 
+     RowBox[{"Drop", "[", 
+      RowBox[{"BrRatiosTableTemp", ",", "1"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"BrRatioScalar", "[", 
+      RowBox[{"mLLP_", ",", "i_"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"Interpolation", "[", 
+       RowBox[{
+        RowBox[{"BrRatiosTable", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "i"}], "}"}]}], "]"}], "]"}], ",", 
+        RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", "mLLP", 
+      "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<e-pair\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"BrRatioScalar", "[", 
+        RowBox[{"mLLP", ",", "2"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SuperscriptBox[\(e\), \(+\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(e\), \(-\)]\)\>\"", ",", "\"\<Null\>\"", 
+         ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], "}"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<\[Mu]-pair\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"BrRatioScalar", "[", 
+        RowBox[{"mLLP", ",", "3"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SuperscriptBox[\(\[Mu]\), \(+\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Mu]\), \(-\)]\)\>\"", ",", 
+         "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], 
+      "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<\[Tau]-pair\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"BrRatioScalar", "[", 
+        RowBox[{"mLLP", ",", "8"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SuperscriptBox[\(\[Tau]\), \(+\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Tau]\), \(-\)]\)\>\"", ",", 
+         "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], 
+      "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Uncomment", " ", "the", " ", "pieces", " ", "of", " ", "code", " ", 
+      "below", " ", "if", " ", "you", " ", "want", " ", "to", " ", "compare", 
+      " ", "with", " ", "SensMC"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+    "proc", "=", "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)-pair\>\""}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        FractionBox["1", "3"], 
+        RowBox[{"BrRatioScalar", "[", 
+         RowBox[{"mLLP", ",", "4"}], "]"}]}], 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"+", 
+          FractionBox["1", "3"]}], 
+         RowBox[{"BrRatioScalar", "[", 
+          RowBox[{"mLLP", ",", "6"}], "]"}]}], "*)"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)\>\"", ",", 
+         "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], 
+      "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+    "proc", "=", 
+     "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(charged\)]\)-pair\>\""}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        FractionBox["2", "3"], 
+        RowBox[{"BrRatioScalar", "[", 
+         RowBox[{"mLLP", ",", "4"}], "]"}]}], 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"+", 
+          FractionBox["2", "3"]}], 
+         RowBox[{"BrRatioScalar", "[", 
+          RowBox[{"mLLP", ",", "6"}], "]"}]}], "*)"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\>\"", ",", 
+         "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], 
+      "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Comment", " ", "the", " ", "two", " ", "strings", " ", "below", " ", 
+      "if", " ", "you", " ", "want", " ", "to", " ", "compare", " ", "with", 
+      " ", "SensMC"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<4\[Pi]\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"BrRatioScalar", "[", 
+        RowBox[{"mLLP", ",", "6"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\>\""}], "}"}], ",", 
+       "\"\<No\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+    "proc", "=", "\"\<\!\(\*SuperscriptBox[\(K\), \(charged\)]\)-pair\>\""}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"mLLP", "<=", "2"}], ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           FractionBox["1", "2"], 
+           RowBox[{"BrRatioScalar", "[", 
+            RowBox[{"mLLP", ",", "5"}], "]"}]}], "]"}], ",", "0"}], "]"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SuperscriptBox[\(K\), \(+\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(K\), \(-\)]\)\>\"", ",", "\"\<Null\>\"", 
+         ",", "\"\<Null\>\""}], "}"}], " ", ",", "\"\<No\>\""}], "}"}]}], ";",
+     "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<KS-pair\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"mLLP", "<=", "2"}], ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           FractionBox["1", "8"], 
+           RowBox[{"BrRatioScalar", "[", 
+            RowBox[{"mLLP", ",", "5"}], "]"}]}], "]"}], ",", "0"}], "]"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SubscriptBox[\(K\), \(S\)]\)\>\"", ",", 
+         "\"\<\!\(\*SubscriptBox[\(K\), \(S\)]\)\>\"", ",", "\"\<Null\>\"", 
+         ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], "}"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<KL-pair\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"mLLP", "<=", "2"}], ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           FractionBox["1", "8"], 
+           RowBox[{"BrRatioScalar", "[", 
+            RowBox[{"mLLP", ",", "5"}], "]"}]}], "]"}], ",", "0"}], "]"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SubscriptBox[\(K\), \(L\)]\)\>\"", ",", 
+         "\"\<\!\(\*SubscriptBox[\(K\), \(L\)]\)\>\"", ",", "\"\<Null\>\"", 
+         ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], "}"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<KLKS-pair\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"mLLP", "<=", "2"}], ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           FractionBox["1", "4"], 
+           RowBox[{"BrRatioScalar", "[", 
+            RowBox[{"mLLP", ",", "5"}], "]"}]}], "]"}], ",", "0"}], "]"}], 
+       ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SubscriptBox[\(K\), \(L\)]\)\>\"", ",", 
+         "\"\<\!\(\*SubscriptBox[\(K\), \(S\)]\)\>\"", ",", "\"\<Null\>\"", 
+         ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], "}"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<Jets-ss\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"2", "<", "mLLP", "<=", "3.8"}], ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{"BrRatioScalar", "[", 
+           RowBox[{"mLLP", ",", "5"}], "]"}], "]"}], ",", "0"}], "]"}], ",", 
+       " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<s\>\"", ",", "\"\<\!\(\*OverscriptBox[\(s\), \(_\)]\)\>\"", ",", 
+         "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], ",", "\"\<Yes\>\""}], 
+      "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<Jets-cc\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"mLLP", "<", "17"}], ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{"BrRatioScalar", "[", 
+           RowBox[{"mLLP", ",", "9"}], "]"}], "]"}], ",", "0"}], "]"}], ",", 
+       " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<c\>\"", ",", "\"\<\!\(\*OverscriptBox[\(c\), \(_\)]\)\>\"", ",", 
+         "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], ",", "\"\<Yes\>\""}], 
+      "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<Jets-GG\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"mLLP", "<", "5"}], ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{"BrRatioScalar", "[", 
+           RowBox[{"mLLP", ",", "7"}], "]"}], "]"}], ",", "0"}], "]"}], ",", 
+       " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<g\>\"", ",", "\"\<\!\(\*OverscriptBox[\(g\), \(_\)]\)\>\"", ",", 
+         "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], ",", "\"\<Yes\>\""}], 
+      "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"proc", "=", "\"\<Jets-bb\>\""}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], ",", 
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Evaluate", "[", 
+        RowBox[{"BrRatioScalar", "[", 
+         RowBox[{"mLLP", ",", "10"}], "]"}], "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<b\>\"", ",", "\"\<\!\(\*OverscriptBox[\(b\), \(_\)]\)\>\"", ",", 
+         "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], ",", "\"\<Yes\>\""}], 
+      "}"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<All processes with at least two charged/neutral particles:\>\"", 
+     "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ProcessesList", "[", 
+      RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "=", 
+     RowBox[{"procList", "[", "LLPsel", "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"ProcessesList", "[", 
+            RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", 
+          RowBox[{"ListDecayProducts", "[", 
+           RowBox[{"LLPsel", ",", 
+            RowBox[{
+             RowBox[{"ProcessesList", "[", 
+              RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", 
+           RowBox[{"ProcessesList", "[", 
+            RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "]"}], ",", "1"}],
+          "}"}]}], "]"}], "//", "Transpose"}], "//", "TableForm"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "The", " ", "total", " ", "br", " ", "ratio", " ", "must", " ", "be", 
+       " ", 
+       RowBox[{"one", ".", " ", "However"}]}], ",", " ", 
+      RowBox[{
+      "due", " ", "to", " ", "some", " ", "missing", " ", "unimportant", " ", 
+       "channels", " ", "and", " ", "some", " ", "approximations"}], ",", " ", 
+      RowBox[{"it", " ", "is", " ", "typically", " ", "slightly", " ", 
+       RowBox[{"smaller", ".", " ", "Therefore"}]}], ",", " ", 
+      RowBox[{
+      "the", " ", "br", " ", "ratios", " ", "are", " ", "refined", " ", "to", 
+       " ", "be", " ", "normalized", " ", "by", " ", "1"}]}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Do", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ListBrRatios", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc"}], "]"}], "=", 
+       RowBox[{
+        RowBox[{"ListBrRatiosTemp", "[", 
+         RowBox[{"LLPsel", ",", "mLLP", ",", "proc"}], "]"}], "/", 
+        RowBox[{"Sum", "[", 
+         RowBox[{
+          RowBox[{"ListBrRatiosTemp", "[", 
+           RowBox[{"LLPsel", ",", "mLLP", ",", "pr"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"pr", ",", 
+            RowBox[{"ProcessesList", "[", 
+             RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], 
+         "]"}]}]}], "\[IndentingNewLine]", ",", 
+      RowBox[{"{", 
+       RowBox[{"proc", ",", 
+        RowBox[{"ProcessesList", "[", 
+         RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], "]"}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<All processes with at least two charged particles:\>\"", "]"}], ";",
+     "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ProcessesList", "[", 
+      RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], "=", 
+     RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", "\"\<Processes with jets:\>\"", "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"ProcessesList", "[", 
+       RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"JetsPresence", "[", 
+         RowBox[{"LLPsel", ",", "#"}], "]"}], "==", "\"\<Yes\>\""}], "&"}]}], 
+     "]"}], ";"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.931069445259421*^9, 3.9310694950305443`*^9}, {
+   3.93106961034059*^9, 3.93106961943919*^9}, 3.931070573586976*^9},
+ CellLabel->
+  "In[278]:=",ExpressionUUID->"0ce3aade-cdec-4977-b8f8-6167774a4484"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1128, 684},
+WindowMargins->{{-5.5, Automatic}, {Automatic, -5.5}},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d6e4bb9e-d4f9-4695-b6f9-c08982a64e09"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 156, 3, 28, "Input",ExpressionUUID->"ff4f42da-8190-4c1b-ab4a-9deb87cc7496"],
+Cell[CellGroupData[{
+Cell[739, 27, 153, 3, 67, "Section",ExpressionUUID->"2965288e-bb21-44c5-8248-f7be0a8eefe7"],
+Cell[CellGroupData[{
+Cell[917, 34, 186, 3, 54, "Subsection",ExpressionUUID->"4eda875d-f107-4328-ac1f-ecae63a29d98"],
+Cell[1106, 39, 1483, 38, 161, "Input",ExpressionUUID->"93eba5ee-16b4-4b06-a020-1e8f71c0e18d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2626, 82, 161, 3, 54, "Subsection",ExpressionUUID->"3fa29425-0616-4f6d-b9ce-67d10904dfbf"],
+Cell[2790, 87, 19469, 486, 1384, "Input",ExpressionUUID->"0ce3aade-cdec-4977-b8f8-6167774a4484"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
