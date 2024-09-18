@@ -2,7 +2,7 @@
 
 ## What is it?
 
-SensCalc is a Mathematica-based code allowing to calculate sensitivities of lifetime frontier experiments to Long-Lived Particles (LLPs). The method of the calculation is based on the semi-analytic approach described in [2305.13383](https://arxiv.org/abs/2305.13383) and successfully used many times in past publications. The main purposes of the code are:
+SensCalc is a Mathematica-based code allowing to calculate sensitivities of lifetime frontier experiments to Long-Lived Particles (LLPs). The method of the calculation is based on the semi-analytic approach described in [2305.13383](https://arxiv.org/abs/2305.13383) and [2409.11096](https://arxiv.org/abs/2409.11096) and successfully used many times in past publications. The main purposes of the code are:
 
 1. Comparison of the sensitivities of various experiments obtained under the same assumptions about the LLP phenomenology (such as production and decay),
 2. Possibility of studying how the sensitivity would change under varying the experimental setup, such as dimensions of the experiment and the selection of the events with LLPs,
