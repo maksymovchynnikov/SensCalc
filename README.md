@@ -10,7 +10,7 @@ SensCalc is a Mathematica-based code allowing to calculate sensitivities of life
 
 You are allowed to flexibly choose many inputs, including (but not restricting to): what mother particles distributions to use; which production and decay channels of LLPs to consider when calculating the number of events, what selection should be imposed on decay products. You may easily change the setup of the experiment by adjusting several simple parameters. Making all these changes, you may recalculate the sensitivities very fast - the feature which is unavailable with long simulations. Finally, the code allows qualitative understanding of why some setup would provide higher event rate than another one: you may analyze the impact of the angular placement, decay probability, and decay products acceptance between different experiments. 
 
-SensCalc has been tested with many various full simulations (such as SHiP and LHCb simulation frameworks) and other lightweight codes (ALPINIST, FORESEE). 
+SensCalc has been tested with many various full simulations (such as SHiP and LHCb simulation frameworks) and lightweight codes (ALPINIST, FORESEE). 
 
 ## Why Mathematica?
 
@@ -34,23 +34,22 @@ In short, you should provide:
 * The tabulated distributions of mother particles that may produce LLPs, 
 * The experimental setup -- geometry and selection criteria for the LLP decay products. 
 
-More details are given in *Manual.pdf*. 
+More details are given in *SensCalc_Manual.pdf*. 
 
 ### Code structure
 
 SensCalc has a modular structure. The sensitivity calculation is performed with the help of four notebooks:
 
-1. <dt><code>Acceptances.nb</code></dt>, which evaluates the tabulated geometric probabilities for the given LLP to decay inside decay volume and for its decay products to satisfy the decay acceptance criteria, such as crossing the detector and satisfying various cuts (energy, angular, impact parameter, etc.).
+1. <dt><code>1. Acceptances.nb</code></dt>, which evaluates the tabulated geometric probabilities for the given LLP to decay inside decay volume and for its decay products to satisfy the decay acceptance criteria, such as crossing the detector and satisfying various cuts (energy, angular, impact parameter, etc.).
 
-2. <dt><code>LLP distribution.nb</code></dt>, which evaluates the angle-energy distribution of LLPs at the facility housing the given experiment.
+2. <dt><code>2. LLP distribution.nb</code></dt>, which evaluates the angle-energy distribution of LLPs at the facility housing the given experiment.
 
-3. <dt><code>LLP sensitivity.nb</code></dt>, which calculates the tabulated number of events with decays of LLPs at the given experiment, and then the sensitivity based on the input (such as expected background and the number of proton collisions).
+3. <dt><code>3. LLP sensitivity.nb</code></dt>, which calculates the tabulated number of events with decays of LLPs at the given experiment, and then the sensitivity based on the input (such as expected background and the number of proton collisions).
 
-4. <dt><code>Plots.nb</code></dt>, which makes figures with the sensitivities.
+4. <dt><code>4. Plots.nb</code></dt>, which makes figures with the sensitivities.
 
 5. <dt><code>EventCalc.nb</code>, which uses the output of LLP distribution.nb and the information about decays and samples events with LLPs a-la traditional Monte-Carlo approaches.
 
-Details are described in *Manual.pdf*.
 
 For the LLPs and experiments that are already implemented, the user just needs to launch the very first section located at the top of each notebook. The relevant sections will then be launched automatically, and the notebook will prompt the user to specify the required inputs via dialog windows. If, however, the user wants to modify the model, geometry, or assumptions, they may change the code and inputs as described in the following sections.
 
@@ -66,9 +65,11 @@ The following experiments that either have been proposed or are currently runnin
 * SPS
   - SHiP, SHADOWS, HIKE-dump, NA62-dump, CHARM, BEBC
 * LHC
-  - FACET, FASER, FASER2, FASER2-FPF, FASERν, FASERν2, SND@LHC, advSND<sub>near</sub>, advSND<sub>far</sub>, ANUBIS-shaft, ANUBIS-ceiling, MATHUSLA, CODEX-B, LHCb-downstream
+  - FACET, PREFACE, FASER, FASER2, FASER2-FPF, FASERν, FASERν2, SND@LHC, advSND<sub>near</sub>, advSND<sub>far</sub>, ANUBIS-shaft, ANUBIS-ceiling, MATHUSLA, CODEX-b, Downstream@LHCb, muon chambers@LHCb.
 * FCC-hh 
   - MATHUSLA-FCC, FACET-FCC, FOREHUNT
+* SLAC
+  - E137
 
 The following LLPs are implemented:
 
@@ -78,9 +79,10 @@ The following LLPs are implemented:
 * Dark scalars with mixing and quartic couplings
 * ALPs coupled to photons, fermions, or gluons
 * Millicharged particles (only the production in the public version)
+* Inelastic dark matter coupled via dipole portal
 
 
-## To be added soon
+## To be added soon/exiting in private repository.
 
 * New models to be included: HNL dipole portal, inelastic dark matter (decay and scattering signatures), elastic dark matter (scattering signatures).
-* New facilities and experiments: ESS, MicroBooNE/MiniBooNE. 
+* New facilities and experiments: ESS, MicroBooNE/MiniBooNE, MATHUSLA40.

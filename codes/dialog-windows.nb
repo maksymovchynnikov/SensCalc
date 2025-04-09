@@ -1,0 +1,590 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     23552,        582]
+NotebookOptionsPosition[     23059,        565]
+NotebookOutlinePosition[     23466,        581]
+CellTagsIndexPosition[     23423,        578]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Various dialog windows", "Chapter",
+ CellChangeTimes->{{3.948256881169224*^9, 
+  3.9482568838269234`*^9}},ExpressionUUID->"497cc35c-55cb-0f4c-9d49-\
+6308ea28447f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"dropdownDialog", "[", 
+   RowBox[{"list_", ",", "phrase_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"EmitSound", "[", 
+      RowBox[{"Sound", "[", 
+       RowBox[{"Play", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", " ", "\[Pi]", " ", "220", " ", "t"}], "]"}], " ", 
+          RowBox[{"Exp", "[", 
+           RowBox[{
+            RowBox[{"-", "3"}], " ", "t"}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}], "]"}], "]"}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"DialogInput", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"choice", "=", "\"\<\>\""}], "}"}], ",", 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"TextCell", "[", "phrase", "]"}], ",", 
+          RowBox[{"PopupMenu", "[", 
+           RowBox[{
+            RowBox[{"Dynamic", "[", "choice", "]"}], ",", "list"}], "]"}], ",", 
+          RowBox[{"Button", "[", 
+           RowBox[{"\"\<OK\>\"", ",", 
+            RowBox[{"DialogReturn", "[", "choice", "]"}]}], "]"}]}], "}"}], 
+        "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"choicesDialog", "[", 
+   RowBox[{"LLP_", ",", "spec_List"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"EmitSound", "[", 
+       RowBox[{"Sound", "[", 
+        RowBox[{"Play", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Sin", "[", 
+            RowBox[{"2", " ", "\[Pi]", " ", "220", " ", "t"}], "]"}], " ", 
+           RowBox[{"Exp", "[", 
+            RowBox[{
+             RowBox[{"-", "3"}], " ", "t"}], "]"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}], "]"}], "]"}], 
+      ";"}], "\[IndentingNewLine]", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"choice", "=", 
+        RowBox[{"spec", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "2", ",", "1"}], "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"Column", "[", 
+       RowBox[{"Flatten", "@", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", "LLP", "}"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"With", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"i", "=", "i"}], "}"}], ",", 
+              RowBox[{"Column", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"TextCell", "[", 
+                  RowBox[{"spec", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}], ",", 
+                 RowBox[{"PopupMenu", "[", 
+                  RowBox[{
+                   RowBox[{"Dynamic", "[", 
+                    RowBox[{"choice", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                   RowBox[{"spec", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "]"}]}], "]"}]}], "}"}], 
+               "]"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", 
+              RowBox[{"Length", "@", "spec"}]}], "}"}]}], "]"}], ",", 
+          RowBox[{"Button", "[", 
+           RowBox[{"\"\<OK\>\"", ",", 
+            RowBox[{"DialogReturn", "[", "choice", "]"}]}], "]"}]}], "}"}]}], 
+       "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"selectionDialog", "[", 
+   RowBox[{"list_", ",", "phrase_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"EmitSound", "[", 
+      RowBox[{"Sound", "[", 
+       RowBox[{"Play", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", " ", "\[Pi]", " ", "220", " ", "t"}], "]"}], " ", 
+          RowBox[{"Exp", "[", 
+           RowBox[{
+            RowBox[{"-", "3"}], " ", "t"}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}], "]"}], "]"}], ";", 
+     RowBox[{"DialogInput", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"choice", "=", 
+         RowBox[{"{", "}"}]}], "}"}], ",", 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{"{", "phrase", "}"}], "]"}], ",", 
+          RowBox[{"Pane", "[", 
+           RowBox[{
+            RowBox[{"TogglerBar", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "choice", "]"}], ",", "list", ",", 
+              RowBox[{"Appearance", "->", 
+               RowBox[{"\"\<Vertical\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"Automatic", ",", "5"}], "}"}]}]}]}], "]"}], ",", 
+            RowBox[{"ImageSize", "->", 
+             RowBox[{"{", 
+              RowBox[{"500", ",", "Automatic"}], "}"}]}], ",", 
+            RowBox[{"Scrollbars", "->", 
+             RowBox[{"{", 
+              RowBox[{"False", ",", "True"}], "}"}]}]}], "]"}], ",", 
+          RowBox[{"Button", "[", 
+           RowBox[{"\"\<OK\>\"", ",", 
+            RowBox[{"DialogReturn", "[", "choice", "]"}]}], "]"}]}], "}"}], 
+        "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"selectionDialogn", "[", 
+   RowBox[{"list_", ",", "phrase_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"EmitSound", "[", 
+      RowBox[{"Sound", "[", 
+       RowBox[{"Play", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", " ", "\[Pi]", " ", "220", " ", "t"}], "]"}], " ", 
+          RowBox[{"Exp", "[", 
+           RowBox[{
+            RowBox[{"-", "3"}], " ", "t"}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}], "]"}], "]"}], ";", 
+     RowBox[{"DialogInput", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"choice", "=", 
+         RowBox[{"{", "}"}]}], "}"}], ",", 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{"{", "phrase", "}"}], "]"}], ",", 
+          RowBox[{"Pane", "[", 
+           RowBox[{
+            RowBox[{"TogglerBar", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "choice", "]"}], ",", "list", ",", 
+              RowBox[{"Appearance", "->", 
+               RowBox[{"\"\<Vertical\>\"", "->", 
+                RowBox[{"{", 
+                 RowBox[{"Automatic", ",", "n"}], "}"}]}]}]}], "]"}], ",", 
+            RowBox[{"ImageSize", "->", 
+             RowBox[{"{", 
+              RowBox[{"600", ",", "Automatic"}], "}"}]}], ",", 
+            RowBox[{"Scrollbars", "->", 
+             RowBox[{"{", 
+              RowBox[{"False", ",", "True"}], "}"}]}]}], "]"}], ",", 
+          RowBox[{"Button", "[", 
+           RowBox[{"\"\<OK\>\"", ",", 
+            RowBox[{"DialogReturn", "[", "choice", "]"}]}], "]"}]}], "}"}], 
+        "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"infoDialog", "[", "phrase_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"EmitSound", "[", 
+      RowBox[{"Sound", "[", 
+       RowBox[{"Play", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", " ", "\[Pi]", " ", "220", " ", "t"}], "]"}], " ", 
+          RowBox[{"Exp", "[", 
+           RowBox[{
+            RowBox[{"-", "3"}], " ", "t"}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}], "]"}], "]"}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"DialogInput", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"choice", "=", "\"\<\>\""}], "}"}], ",", 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"TextCell", "[", "phrase", "]"}], ",", 
+          RowBox[{"Button", "[", 
+           RowBox[{"\"\<Proceed\>\"", ",", 
+            RowBox[{"DialogReturn", "[", "choice", "]"}]}], "]"}]}], "}"}], 
+        "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"selectionDialogExplanation", "[", 
+    RowBox[{"list_", ",", "descriptions_", ",", "phrase_", ",", "width_"}], 
+    "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"EmitSound", "[", 
+       RowBox[{"Sound", "[", 
+        RowBox[{"Play", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Sin", "[", 
+            RowBox[{"2", " ", "\[Pi]", " ", "220", " ", "t"}], "]"}], " ", 
+           RowBox[{"Exp", "[", 
+            RowBox[{
+             RowBox[{"-", "3"}], " ", "t"}], "]"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}], "]"}], "]"}], ";", 
+      RowBox[{"DialogInput", "[", 
+       RowBox[{"DynamicModule", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"choice", "=", 
+            RowBox[{"{", "}"}]}], ",", 
+           RowBox[{"lastClicked", "=", "Null"}], ",", "optsAssoc"}], "}"}], ",", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Compute", " ", "the", " ", "association", " ", "once", " ", "so", " ",
+            "that", " ", "Dynamic", " ", "sees", " ", "it", " ", "properly"}],
+           "*)"}], 
+         RowBox[{
+          RowBox[{"optsAssoc", "=", 
+           RowBox[{"AssociationThread", "[", 
+            RowBox[{"list", "->", "descriptions"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Column", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"(*", "Prompt", "*)"}], 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"phrase", ",", "Bold", ",", "16"}], "]"}], ",", 
+              RowBox[{"Spacer", "[", "10", "]"}], ",", 
+              RowBox[{"(*", 
+               RowBox[{
+               "Panels", " ", "for", " ", "selection", " ", "and", " ", 
+                "description"}], "*)"}], 
+              RowBox[{"Grid", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"{", 
+                  RowBox[{"(*", 
+                   RowBox[{"Selection", " ", 
+                    RowBox[{"Panel", ":", 
+                    RowBox[{
+                    "a", " ", "scrollable", " ", "pane", " ", "of", " ", 
+                    "checkboxes", " ", "with", " ", "labels"}]}]}], "*)"}], 
+                  RowBox[{
+                   RowBox[{"Pane", "[", 
+                    RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"With", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"item", "=", 
+                    RowBox[{"list", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"EventHandler", "[", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"Labeled", "[", 
+                    RowBox[{
+                    RowBox[{"Checkbox", "[", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{"choice", ",", "item"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"If", "[", 
+                    RowBox[{"#", ",", 
+                    RowBox[{"choice", "=", 
+                    RowBox[{"Union", "[", 
+                    RowBox[{"choice", ",", 
+                    RowBox[{"{", "item", "}"}]}], "]"}]}], ",", 
+                    RowBox[{"choice", "=", 
+                    RowBox[{"DeleteCases", "[", 
+                    RowBox[{"choice", ",", "item"}], "]"}]}]}], "]"}], ")"}], 
+                    "&"}]}], "]"}], "]"}], ",", "item", ",", "Right"}], "]"}],
+                     "}"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<MouseClicked\>\"", ":>", 
+                    RowBox[{"(", 
+                    RowBox[{"lastClicked", "=", "item"}], ")"}]}], "}"}], ",", 
+                    RowBox[{"PassEventsDown", "->", "True"}]}], "]"}]}], 
+                    "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"Length", "[", "list", "]"}]}], "}"}]}], "]"}], 
+                    "]"}], ",", 
+                    RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"width", ",", "200"}], "}"}]}], ",", 
+                    RowBox[{"Scrollbars", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"False", ",", "True"}], "}"}]}], ",", 
+                    RowBox[{"Frame", "->", "True"}]}], "]"}], ",", 
+                   RowBox[{"(*", 
+                    RowBox[{"Description", " ", 
+                    RowBox[{"Panel", ":", 
+                    RowBox[{
+                    "shows", " ", "explanation", " ", "for", " ", "the", " ", 
+                    "last", " ", "clicked", " ", "item"}]}]}], "*)"}], 
+                   RowBox[{"Pane", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"lastClicked", "===", "Null"}], 
+                    ",", "\"\<Please select an option to see its description.\
+\>\"", ",", 
+                    RowBox[{"optsAssoc", "[", "lastClicked", "]"}]}], "]"}], 
+                    "]"}], ",", 
+                    RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"200", ",", "200"}], "}"}]}], ",", 
+                    RowBox[{"Scrollbars", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"True", ",", "False"}], "}"}]}], ",", 
+                    RowBox[{"Frame", "->", "True"}], ",", 
+                    RowBox[{"Background", "->", "LightYellow"}], ",", 
+                    RowBox[{"Alignment", "->", "Left"}]}], "]"}]}], "}"}], 
+                 "}"}], ",", 
+                RowBox[{"Spacings", "->", 
+                 RowBox[{"{", 
+                  RowBox[{"2", ",", "2"}], "}"}]}]}], "]"}], ",", 
+              RowBox[{"Spacer", "[", "10", "]"}], ",", 
+              RowBox[{"(*", 
+               RowBox[{"Action", " ", "Buttons"}], "*)"}], 
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Button", "[", 
+                  RowBox[{"\"\<OK\>\"", ",", 
+                   RowBox[{"DialogReturn", "[", "choice", "]"}], ",", 
+                   RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"80", ",", "30"}], "}"}]}]}], "]"}], ",", 
+                 RowBox[{"Spacer", "[", "20", "]"}], ",", 
+                 RowBox[{"Button", "[", 
+                  RowBox[{"\"\<Cancel\>\"", ",", 
+                   RowBox[{"DialogReturn", "[", "None", "]"}], ",", 
+                   RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"80", ",", "30"}], "}"}]}]}], "]"}]}], "}"}], 
+               "]"}], ",", 
+              RowBox[{"Spacer", "[", "5", "]"}]}], "}"}], ",", 
+            RowBox[{"Alignment", "->", "Center"}], ",", 
+            RowBox[{"Spacings", "->", "2"}]}], "]"}]}]}], "]"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Selection", " ", "dialog", " ", "with", " ", "explanations"}], ";",
+     " ", 
+    RowBox[{
+    "only", " ", "one", " ", "option", " ", "is", " ", "available"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"selectionDialogExplanationOneOption", "[", 
+   RowBox[{"list_", ",", "descriptions_", ",", "phrase_", ",", "width_"}], 
+   "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"EmitSound", "[", 
+      RowBox[{"Sound", "[", 
+       RowBox[{"Play", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", " ", "\[Pi]", " ", "220", " ", "t"}], "]"}], " ", 
+          RowBox[{"Exp", "[", 
+           RowBox[{
+            RowBox[{"-", "3"}], " ", "t"}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}], "]"}], "]"}], ";", 
+     RowBox[{"DialogInput", "[", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"choice", "=", "Null"}], "}"}], ",", 
+        RowBox[{"(*", 
+         RowBox[{
+         "Create", " ", "an", " ", "association", " ", "for", " ", "easy", " ",
+           "lookup", " ", "of", " ", "descriptions"}], "*)"}], 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"optsAssoc", "=", 
+            RowBox[{"AssociationThread", "[", 
+             RowBox[{"list", "->", "descriptions"}], "]"}]}], "}"}], ",", 
+          RowBox[{"Column", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"(*", 
+              RowBox[{"Display", " ", "the", " ", "prompt", " ", "phrase"}], 
+              "*)"}], 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"phrase", ",", "Bold", ",", "16"}], "]"}], ",", 
+              RowBox[{"(*", 
+               RowBox[{
+               "Create", " ", "a", " ", "grid", " ", "with", " ", "the", " ", 
+                "selection", " ", "panel", " ", "and", " ", "description", " ",
+                 "panel"}], "*)"}], 
+              RowBox[{"Grid", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"{", 
+                  RowBox[{"(*", 
+                   RowBox[{"Selection", " ", 
+                    RowBox[{"Panel", ":", 
+                    RowBox[{
+                    "Allows", " ", "only", " ", "one", " ", "selection"}]}]}],
+                    "*)"}], 
+                  RowBox[{
+                   RowBox[{"Pane", "[", 
+                    RowBox[{
+                    RowBox[{"RadioButtonBar", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "choice", "]"}], ",", "list", ",", 
+                    RowBox[{"Appearance", "->", "\"\<Vertical\>\""}]}], "]"}],
+                     ",", 
+                    RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"width", ",", "200"}], "}"}]}], ",", 
+                    RowBox[{"Scrollbars", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"False", ",", "True"}], "}"}]}], ",", 
+                    RowBox[{"Frame", "->", "True"}]}], "]"}], ",", 
+                   RowBox[{"(*", 
+                    RowBox[{"Description", " ", 
+                    RowBox[{"Panel", ":", 
+                    RowBox[{
+                    "Displays", " ", "description", " ", "of", " ", "the", " ",
+                     "selected", " ", "option"}]}]}], "*)"}], 
+                   RowBox[{"Pane", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"choice", "===", "Null"}], 
+                    ",", "\"\<Please select an option to see its description.\
+\>\"", ",", 
+                    RowBox[{"optsAssoc", "[", "choice", "]"}]}], "]"}], "]"}],
+                     ",", 
+                    RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"200", ",", "200"}], "}"}]}], ",", 
+                    RowBox[{"Scrollbars", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"True", ",", "False"}], "}"}]}], ",", 
+                    RowBox[{"Frame", "->", "True"}], ",", 
+                    RowBox[{"Background", "->", "LightYellow"}], ",", 
+                    RowBox[{"Alignment", "->", "Left"}]}], "]"}]}], "}"}], 
+                 "}"}], ",", 
+                RowBox[{"Spacings", "->", 
+                 RowBox[{"{", 
+                  RowBox[{"2", ",", "2"}], "}"}]}]}], "]"}], ",", 
+              RowBox[{"(*", 
+               RowBox[{"Action", " ", "Buttons"}], "*)"}], 
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Button", "[", 
+                  RowBox[{"\"\<OK\>\"", ",", 
+                   RowBox[{"DialogReturn", "[", "choice", "]"}], ",", 
+                   RowBox[{"Enabled", "->", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{"choice", "=!=", "Null"}], "]"}]}], ",", 
+                   RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"80", ",", "30"}], "}"}]}]}], "]"}], ",", 
+                 RowBox[{"Spacer", "[", "20", "]"}], ",", 
+                 RowBox[{"Button", "[", 
+                  RowBox[{"\"\<Cancel\>\"", ",", 
+                   RowBox[{"DialogReturn", "[", "None", "]"}], ",", 
+                   RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"80", ",", "30"}], "}"}]}]}], "]"}]}], "}"}], 
+               "]"}], ",", 
+              RowBox[{"Spacer", "[", "5", "]"}]}], "}"}], ",", 
+            RowBox[{"Alignment", "->", "Center"}], ",", 
+            RowBox[{"Spacings", "->", "2"}]}], "]"}]}], "]"}]}], "]"}], 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.948257011602024*^9, 3.9482570120941277`*^9}, 
+   3.948257613934431*^9, {3.9506018568847904`*^9, 3.9506018676476784`*^9}, 
+   3.9506959579550743`*^9, {3.950695997224987*^9, 3.950695997525757*^9}, {
+   3.950764149872181*^9, 3.950764149928774*^9}, 3.9507642870220966`*^9, {
+   3.9525871268833675`*^9, 3.9525871605589542`*^9}, {3.9525878807017994`*^9, 
+   3.952587890859047*^9}, {3.9527071513026257`*^9, 
+   3.952707151655142*^9}},ExpressionUUID->"bfae6eed-a991-6643-81b0-\
+7287c215cc2e"]
+}, Open  ]]
+},
+WindowSize->{1430.25, 822.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (December 26, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"6b84a844-8b49-4249-9146-2460cef0d8d9"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 169, 3, 67, "Chapter",ExpressionUUID->"497cc35c-55cb-0f4c-9d49-6308ea28447f"],
+Cell[748, 27, 22295, 535, 1036, "Input",ExpressionUUID->"bfae6eed-a991-6643-81b0-7287c215cc2e"]
+}, Open  ]]
+}
+]
+*)
+

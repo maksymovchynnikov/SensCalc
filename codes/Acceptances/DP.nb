@@ -1,0 +1,802 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     32663,        794]
+NotebookOptionsPosition[     30846,        755]
+NotebookOutlinePosition[     31253,        771]
+CellTagsIndexPosition[     31210,        768]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DP", "Section",
+ CellChangeTimes->{{3.892869864534724*^9, 3.892869865777609*^9}, {
+  3.9149998943225365`*^9, 
+  3.91499989446436*^9}},ExpressionUUID->"4298f627-698f-3543-ad9e-\
+b058438b34c6"],
+
+Cell[CellGroupData[{
+
+Cell["Model description", "Subsection",
+ CellChangeTimes->{{3.9506926867608128`*^9, 
+  3.9506926926469193`*^9}},ExpressionUUID->"360473b3-2ae2-1f43-9c69-\
+e56b26fafa52"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LLPsel", "=", "\"\<DP\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ModelDescription", "[", "LLPsel", "]"}], "=", 
+   RowBox[{"Row", "[", 
+    RowBox[{
+    "{", "\"\<Dark photon V - a vector boson with the phenomenological \
+Lagrangian L = \!\(\*FractionBox[OverscriptBox[\(\[Epsilon]\), \(~\)], \(2\)]\
+\) \!\(\*SubscriptBox[\(V\), \(\[Mu]\[Nu]\)]\)\!\(\*SuperscriptBox[\(B\), \(\
+\[Mu]\[Nu]\)]\), where \!\(\*SubscriptBox[\(V\), \(\[Mu]\[Nu]\)]\) is the V's \
+field strength, \!\(\*SuperscriptBox[\(B\), \(\[Mu]\[Nu]\)]\) is the \
+U(1\!\(\*SubscriptBox[\()\), \(Y\)]\) field strength, and \
+\!\(\*OverscriptBox[\(\[Epsilon]\), \(~\)]\) is a coupling. Below the \
+electroweak scale, \!\(\*SuperscriptBox[\(B\), \(\[Mu]\[Nu]\)]\) may be \
+replaced with \!\(\*SubscriptBox[\(F\), \(\[Mu]\[Nu]\)]\), and \
+\!\(\*OverscriptBox[\(\[Epsilon]\), \(~\)]\) with \[Epsilon]. The model is \
+known as BC1 within PBC benchmarking (1901.09966). Details on the \
+phenomenology may be found in 1801.04847 and 2409.11096\>\"", "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"filepheno", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], "//",
+        "ParentDirectory"}], ",", "\"\<phenomenology\>\"", ",", 
+      "\"\<ModelDescriptors.mx\>\""}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rowtoadd", "=", 
+   RowBox[{"{", 
+    RowBox[{"LLPsel", ",", 
+     RowBox[{"ModelDescription", "[", "LLPsel", "]"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"!", 
+    RowBox[{"FileExistsQ", "[", "filepheno", "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"file", "=", 
+     RowBox[{"{", "rowtoadd", "}"}]}], ";"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"file", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"filepheno", ",", "\"\<MX\>\""}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"file", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"Select", "[", 
+        RowBox[{"file", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "!=", "LLPsel"}], "&"}]}], "]"}], 
+       ",", 
+       RowBox[{"{", "rowtoadd", "}"}]}], "]"}]}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"filepheno", ",", 
+    RowBox[{"SortBy", "[", 
+     RowBox[{"file", ",", 
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "&"}]}], "]"}], ",", "\"\<MX\>\""}], 
+   "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"file", ";"}]}], "Input",
+ CellChangeTimes->{{3.950692693496708*^9, 3.9506927822852573`*^9}, {
+   3.9506928195256615`*^9, 3.9506928222656727`*^9}, {3.950692990855385*^9, 
+   3.950693547593548*^9}, {3.950693648005453*^9, 3.9506938832662315`*^9}, {
+   3.950693944146406*^9, 3.950693947395216*^9}, 3.950694010287035*^9, {
+   3.9506942073003483`*^9, 3.950694298666424*^9}, {3.950694441403061*^9, 
+   3.95069446546673*^9}, {3.950694501437031*^9, 3.9506949737225113`*^9}, {
+   3.9506957657360573`*^9, 3.9506958067161446`*^9}, {3.950695837206768*^9, 
+   3.9506958476932487`*^9}},
+ CellLabel->
+  "In[324]:=",ExpressionUUID->"9f387e2e-d758-2147-b9ed-82eba761353d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Importing lifetime", "Subsection",
+ CellChangeTimes->{{3.9476446258515453`*^9, 
+  3.9476446277015495`*^9}},ExpressionUUID->"a1fc6512-554b-3d4a-bf32-\
+7f8bcae03c0a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LLPsel", "=", "\"\<DP\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[CapitalGamma]LLP", "[", 
+     RowBox[{"mLLP_", ",", "\[Epsilon]2_"}], "]"}], "=", 
+    RowBox[{"\[Epsilon]2", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Interpolation", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Log10", "[", 
+               RowBox[{"#", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+              RowBox[{"Log10", "[", 
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}], "&"}], "/@", 
+           RowBox[{"Import", "[", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"NotebookDirectory", "[", "]"}], "//", 
+                  "ParentDirectory"}], "//", "ParentDirectory"}], ",", 
+                "\"\<phenomenology\>\"", ",", "LLPsel", ",", 
+                "\"\<decay widths\>\"", ",", "\"\<GammaDarkPhoton.txt\>\""}], 
+               "}"}], "]"}], ",", "\"\<Table\>\""}], "]"}]}], ",", 
+          RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
+        RowBox[{"Log10", "[", "mLLP", "]"}], "]"}], ")"}]}]}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Decay", " ", "length"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"c\[Tau]LLP", "[", 
+    RowBox[{
+    "LLPsel", ",", "\"\<Default\>\"", ",", "mLLP_", ",", "\[Epsilon]2_"}], 
+    "]"}], "=", 
+   FractionBox["chbar", 
+    RowBox[{"\[CapitalGamma]LLP", "[", 
+     RowBox[{"mLLP", ",", "\[Epsilon]2"}], "]"}]]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"couplingSymbol", "[", "LLPsel", "]"}], "=", "\[Epsilon]2"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DecayDescriptionExplanation", "[", 
+    RowBox[{"LLPsel", ",", "\"\<Default\>\""}], "]"}], "=", 
+   "\"\<Description following 1801.04847\>\""}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.9476447315330257`*^9, 3.947644820501894*^9}, {
+  3.9493784299574146`*^9, 
+  3.949378431494377*^9}},ExpressionUUID->"61bda3fb-f63e-9949-9837-\
+91764642d02c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+List of decay processes, sets of decay products for them, squared matrix \
+elements, branching ratios\
+\>", "Subsection",
+ CellChangeTimes->{{3.8905482184733267`*^9, 3.890548219964122*^9}, 
+   3.903889051795726*^9, 3.9047977278997974`*^9, {3.935677408271469*^9, 
+   3.9356774150408363`*^9}},ExpressionUUID->"25774a20-6994-f548-b863-\
+a093d1ef80ce"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LLPsel", "=", "\"\<DP\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"BrRatiosDPdata", "[", 
+     RowBox[{"mLLP_", ",", "E1_", ",", "E3_"}], "]"}], "=", 
+    RowBox[{"Import", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}],
+           "//", "ParentDirectory"}], ",", "\"\<phenomenology\>\"", ",", 
+         "LLPsel", ",", "\"\<decay widths/BrRatios.mx\>\""}], "}"}], "]"}], 
+      ",", "\"\<MX\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "List", " ", "of", " ", "all", " ", "representative", " ", "processes"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ProcessesList", "[", 
+   RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "=", 
+  RowBox[{
+   RowBox[{"BrRatiosDPdata", "[", 
+    RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "proc", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"proc", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"BrRatiosDPdata", "[", 
+          RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"BrRatiosDPdata", "[", 
+          RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"StringContainsQ", "[", 
+          RowBox[{"proc", ",", "\"\<Jets\>\""}], "]"}], ",", "\"\<Yes\>\"", 
+         ",", "\"\<No\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ListBrRatios", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"\<Default\>\""}],
+         "]"}], "=", 
+       RowBox[{
+        RowBox[{"ListBrRatiosTemp", "[", 
+         RowBox[{
+         "LLPsel", ",", "mLLP_", ",", "proc", ",", "\"\<Default\>\""}], "]"}],
+         "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"BrRatiosDPdata", "[", 
+           RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "3", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", 
+          RowBox[{"Select", "[", 
+           RowBox[{
+            RowBox[{"ListDecayProducts", "[", 
+             RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{"#", "!=", "\"\<Null\>\""}], "&"}]}], "]"}], "]"}], "==",
+          "3"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Msquared3BodyLLP", "[", 
+           RowBox[{
+           "LLPsel", ",", "proc", ",", "E1_", ",", "E3_", ",", "mLLP_", 
+            ",", "\"\<Default\>\""}], "]"}], "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"BrRatiosDPdata", "[", 
+             RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "[", 
+           RowBox[{"[", "4", "]"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+       "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "1", ",", 
+     RowBox[{"Length", "[", 
+      RowBox[{"BrRatiosDPdata", "[", 
+       RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "]"}], ",", "1"}], 
+    "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ListBrRatios", "[", 
+     RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"\<Default\>\""}], 
+     "]"}], "=", 
+    RowBox[{
+     RowBox[{"ListBrRatiosTemp", "[", 
+      RowBox[{"LLPsel", ",", "mLLP", ",", "proc", ",", "\"\<Default\>\""}], 
+      "]"}], "/", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{"ListBrRatiosTemp", "[", 
+        RowBox[{"LLPsel", ",", "mLLP", ",", "pr", ",", "\"\<Default\>\""}], 
+        "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"pr", ",", 
+         RowBox[{"ProcessesList", "[", 
+          RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], 
+      "]"}]}]}], "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"proc", ",", 
+     RowBox[{"ProcessesList", "[", 
+      RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", 
+  "[", "\"\<All processes with at least two charged particles:\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ProcessesList", "[", 
+   RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], "=", 
+  RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", "\"\<Processes with jets:\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Select", "[", 
+  RowBox[{
+   RowBox[{"ProcessesList", "[", 
+    RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"JetsPresence", "[", 
+      RowBox[{"LLPsel", ",", "#"}], "]"}], "==", "\"\<Yes\>\""}], "&"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"listDecayDescriptions", "[", "LLPsel", "]"}], "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"Keys", "[", 
+           RowBox[{"DownValues", "@", "ListBrRatios"}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "1", ",", "#"}], "]"}], "]"}], "&"}], "/@", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]}], "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "==", "LLPsel"}], "&"}]}], "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2"}], "]"}], "]"}], "//", 
+   "DeleteDuplicates"}]}]}], "Input",
+ CellChangeTimes->{{3.8928698695146074`*^9, 3.8928699093413143`*^9}, {
+   3.892869967056516*^9, 3.892870045863139*^9}, {3.892870084834973*^9, 
+   3.8928701425044723`*^9}, {3.8928706138148975`*^9, 3.892870629455335*^9}, {
+   3.8928706820345755`*^9, 3.8928707051111665`*^9}, {3.892871374100378*^9, 
+   3.892871383854616*^9}, {3.903889945343773*^9, 3.903889955610688*^9}, {
+   3.903890021429636*^9, 3.903890258798191*^9}, {3.903890324909803*^9, 
+   3.9038903895503206`*^9}, {3.9038973571631775`*^9, 3.90389736052628*^9}, {
+   3.904056980390107*^9, 3.9040571501705356`*^9}, {3.9047985343274117`*^9, 
+   3.9047985450384064`*^9}, {3.9048054807738094`*^9, 
+   3.9048055232739906`*^9}, {3.9048097954671974`*^9, 3.90480979933045*^9}, {
+   3.9139781678546076`*^9, 3.913978181238665*^9}, {3.915437185866849*^9, 
+   3.915437185937766*^9}, {3.9161554090490775`*^9, 3.9161554090520697`*^9}, {
+   3.9161554416776037`*^9, 3.916155467940677*^9}, {3.9315940441624513`*^9, 
+   3.931594060748107*^9}, {3.9315940938457727`*^9, 3.931594271479307*^9}, {
+   3.931594356138976*^9, 3.931594364199339*^9}, {3.9339177336760902`*^9, 
+   3.9339177336760902`*^9}, {3.935677345554552*^9, 3.9356773508145695`*^9}, {
+   3.942292384898182*^9, 3.942292384951626*^9}, {3.9476089128306923`*^9, 
+   3.9476089291295033`*^9}, {3.947644620418995*^9, 3.947644621690668*^9}, 
+   3.9493784381664085`*^9, {3.95232690486298*^9, 
+   3.95232691273938*^9}},ExpressionUUID->"7bd5d227-6eeb-f841-85d4-\
+58fd66feb083"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"e-pair\"\>", ",", "\<\"Jets-cc\"\>", ",", "\<\"Jets-dd\"\>", 
+   ",", "\<\"Jets-ss\"\>", ",", "\<\"Jets-uu\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(K\\), \\(L\\)]\\)\\!\\(\\*SubscriptBox[\
+\\(K\\), \\(S\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(K\\), \
+\\(S\\)]\\)\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(+\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(K\\), \
+\\(S\\)]\\)\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(-\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(\[Phi]\\), \\(other, 1\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(\[Phi]\\), \\(other, 2\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(\[Omega]\\), \\(other\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(K\\), \\(-\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(0\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(0\\)]\\)\[Gamma]\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(-\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(0\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(0\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(0\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(-\\)]\\)\"\>", 
+   ",", "\<\"(\\!\\(\\*SuperscriptBox[\\(\[Rho]\\), \
+\\(0\\)]\\)\\!\\(\\*SubscriptBox[\\()\\), \\(other\\)]\\)\"\>", 
+   ",", "\<\"\[Mu]-pair\"\>", ",", "\<\"\[Tau]-pair\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{3.934279427577034*^9, 3.9356773583513145`*^9, 
+  3.9422922928016186`*^9, 3.9422923854724693`*^9, 3.9422924228928814`*^9, 
+  3.9476089353941574`*^9},
+ CellLabel->"Out[58]=",ExpressionUUID->"c41de652-4437-8148-a502-3138d7d204f7"],
+
+Cell[BoxData["\<\"All processes with at least two charged particles:\"\>"], \
+"Print",
+ CellChangeTimes->{3.9342794276207895`*^9, 3.9356773583813725`*^9, 
+  3.9422922928379173`*^9, 3.9422923855013256`*^9, 3.9422924229444294`*^9, 
+  3.94760893543985*^9},
+ CellLabel->
+  "During evaluation of \
+In[56]:=",ExpressionUUID->"9f7a49e0-8a24-b64e-9363-6b34db66aca5"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"e-pair\"\>", ",", "\<\"Jets-cc\"\>", ",", "\<\"Jets-dd\"\>", 
+   ",", "\<\"Jets-ss\"\>", ",", "\<\"Jets-uu\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(K\\), \\(L\\)]\\)\\!\\(\\*SubscriptBox[\
+\\(K\\), \\(S\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(K\\), \
+\\(S\\)]\\)\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(+\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(K\\), \
+\\(S\\)]\\)\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(-\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(\[Phi]\\), \\(other, 1\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(\[Phi]\\), \\(other, 2\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SubscriptBox[\\(\[Omega]\\), \\(other\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(K\\), \\(-\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(K\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(0\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(-\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(0\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(0\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(0\\)]\\)\"\>", 
+   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(-\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \
+\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Pi]\\), \\(-\\)]\\)\"\>", 
+   ",", "\<\"(\\!\\(\\*SuperscriptBox[\\(\[Rho]\\), \
+\\(0\\)]\\)\\!\\(\\*SubscriptBox[\\()\\), \\(other\\)]\\)\"\>", 
+   ",", "\<\"\[Mu]-pair\"\>", ",", "\<\"\[Tau]-pair\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{3.934279427577034*^9, 3.9356773583513145`*^9, 
+  3.9422922928016186`*^9, 3.9422923854724693`*^9, 3.9422924228928814`*^9, 
+  3.947608935441923*^9},
+ CellLabel->"Out[62]=",ExpressionUUID->"ab0edd70-b2b9-794b-8770-fabb98c29e81"],
+
+Cell[BoxData["\<\"Processes with jets:\"\>"], "Print",
+ CellChangeTimes->{3.9342794276207895`*^9, 3.9356773583813725`*^9, 
+  3.9422922928379173`*^9, 3.9422923855013256`*^9, 3.9422924229444294`*^9, 
+  3.947608935446911*^9},
+ CellLabel->
+  "During evaluation of \
+In[56]:=",ExpressionUUID->"37ca9609-e431-7f4d-918b-803f26a723d2"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Jets-cc\"\>", ",", "\<\"Jets-dd\"\>", ",", "\<\"Jets-ss\"\>", 
+   ",", "\<\"Jets-uu\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{3.934279427577034*^9, 3.9356773583513145`*^9, 
+  3.9422922928016186`*^9, 3.9422923854724693`*^9, 3.9422924228928814`*^9, 
+  3.947608935448906*^9},
+ CellLabel->"Out[64]=",ExpressionUUID->"e5a7a539-d7de-c243-a6f8-92df9febb105"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Plot", "Subsubsection",
+ CellChangeTimes->{{3.930580728166601*^9, 
+  3.93058072856115*^9}},ExpressionUUID->"3266c503-5002-674e-8b00-\
+390929516260"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ProcessesListRefined", "[", 
+     RowBox[{"\"\<DP\>\"", ",", "\"\<True\>\""}], "]"}], "=", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<2K\>\"", ",", "\"\<KK\[Pi]\>\"", ",", 
+      "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\
+\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)\>\"", ",", 
+      "\"\<4\[Pi]\>\"", ",", 
+      "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\
+\[Pi]\), \(-\)]\)\>\"", ",", 
+      "\"\<\!\(\*SubscriptBox[\(Other\), \(excl\)]\)\>\"", ",", 
+      "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)\[Gamma]\>\"", ",", 
+      "\"\<e-pair\>\"", ",", "\"\<\[Mu]-pair\>\"", ",", "\"\<\[Tau]-pair\>\"",
+       ",", "\"\<Jets\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ListBrRatiosRefined", "[", 
+       RowBox[{
+       "\"\<DP\>\"", ",", "mLLP_", ",", "proc", ",", "\"\<Default\>\""}], 
+       "]"}], "=", 
+      RowBox[{"ListBrRatios", "[", 
+       RowBox[{
+       "\"\<DP\>\"", ",", "mLLP", ",", "proc", ",", "\"\<Default\>\""}], 
+       "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"proc", ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\
+\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\(\
+\[Pi]\), \(-\)]\)\>\"", ",", 
+         "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)\[Gamma]\>\"", ",", 
+         "\"\<e-pair\>\"", ",", "\"\<\[Mu]-pair\>\"", ",", 
+         "\"\<\[Tau]-pair\>\"", ",", "\"\<Jets\>\""}], "}"}]}], "}"}]}], 
+    "]"}], ";", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"BrRefining", "[", 
+     RowBox[{"procref_", ",", "procslist_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"ListBrRatiosRefined", "[", 
+      RowBox[{
+      "\"\<DP\>\"", ",", "mLLP_", ",", "procref", ",", "\"\<Default\>\""}], 
+      "]"}], "=", 
+     RowBox[{
+      RowBox[{"Sum", "[", 
+       RowBox[{
+        RowBox[{"ListBrRatios", "[", 
+         RowBox[{
+         "\"\<DP\>\"", ",", "mLLP", ",", "proc", ",", "\"\<Default\>\""}], 
+         "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"proc", ",", "procslist"}], "}"}]}], "]"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"BrRefining", "[", 
+         RowBox[{"\"\<2K\>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<\!\(\*SuperscriptBox[\(K\), \
+\(+\)]\)\!\(\*SuperscriptBox[\(K\), \(-\)]\)\>\"", ",", 
+            "\"\<\!\(\*SubscriptBox[\(K\), \(L\)]\)\!\(\*SubscriptBox[\(K\), \
+\(S\)]\)\>\""}], "}"}]}], "]"}], ",", 
+        RowBox[{"BrRefining", "[", 
+         RowBox[{"\"\<KK\[Pi]\>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<\!\(\*SuperscriptBox[\(K\), \
+\(+\)]\)\!\(\*SuperscriptBox[\(K\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \
+\(0\)]\)\>\"", ",", 
+            "\"\<\!\(\*SubscriptBox[\(K\), \
+\(S\)]\)\!\(\*SuperscriptBox[\(K\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \
+\(+\)]\)\>\"", ",", 
+            "\"\<\!\(\*SubscriptBox[\(K\), \
+\(S\)]\)\!\(\*SuperscriptBox[\(K\), \(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \
+\(-\)]\)\>\""}], "}"}]}], "]"}], ",", 
+        RowBox[{"BrRefining", "[", 
+         RowBox[{"\"\<4\[Pi]\>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \(+\)]\)\!\(\*SuperscriptBox[\
+\(\[Pi]\), \(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \
+\(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(-\)]\)\>\"", ",", 
+            "\"\<\!\(\*SuperscriptBox[\(\[Pi]\), \
+\(+\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \
+\(-\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \
+\(0\)]\)\!\(\*SuperscriptBox[\(\[Pi]\), \(0\)]\)\>\""}], "}"}]}], "]"}], ",", 
+        RowBox[{"BrRefining", "[", 
+         RowBox[{"\"\<\!\(\*SubscriptBox[\(Other\), \(excl\)]\)\>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<\!\(\*SubscriptBox[\(\[Omega]\), \(other\)]\)\>\"", ",", 
+            "\"\<\!\(\*SubscriptBox[\(\[Phi]\), \(other\)]\)\>\"", ",", 
+            "\"\<(\!\(\*SuperscriptBox[\(\[Rho]\), \
+\(0\)]\)\!\(\*SubscriptBox[\()\), \(other\)]\)\>\""}], "}"}]}], "]"}], ",", 
+        RowBox[{"BrRefining", "[", 
+         RowBox[{"\"\<Jets\>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<Jets-uu\>\"", ",", "\"\<Jets-dd\>\"", ",", "\"\<Jets-ss\>\"", 
+            ",", "\"\<Jets-cc\>\""}], "}"}]}], "]"}]}], "}"}]}]}]}], ";", 
+   "\[IndentingNewLine]", 
+   RowBox[{"LogLogPlot", "[", 
+    RowBox[{
+     RowBox[{"Evaluate", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"ListBrRatiosRefined", "[", 
+         RowBox[{
+         "\"\<DP\>\"", ",", "mLLP", ",", "#", ",", "\"\<Default\>\""}], "]"}],
+         "&"}], "/@", 
+       RowBox[{"ProcessesListRefined", "[", 
+        RowBox[{"\"\<DP\>\"", ",", "\"\<True\>\""}], "]"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mLLP", ",", "0.05", ",", "4"}], "}"}], ",", 
+     RowBox[{"Frame", "->", "True"}], ",", 
+     RowBox[{"ImageSize", "->", "Large"}], ",", 
+     RowBox[{"PlotLegends", "\[Rule]", 
+      RowBox[{"Placed", "[", 
+       RowBox[{
+        RowBox[{"LineLegend", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{"#", ",", "14"}], "]"}], "&"}], "/@", 
+           RowBox[{"(", 
+            RowBox[{"ProcessesListRefined", "[", 
+             RowBox[{"\"\<DP\>\"", ",", "\"\<True\>\""}], "]"}], ")"}]}], ",", 
+          RowBox[{"LegendLayout", "->", 
+           RowBox[{"{", 
+            RowBox[{"\"\<Column\>\"", ",", "1"}], "}"}]}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0.15", ",", "0.44"}], "}"}]}], "]"}]}], ",", " ", 
+     RowBox[{"FrameStyle", "\[Rule]", 
+      RowBox[{"Directive", "[", 
+       RowBox[{"Black", ",", " ", "22"}], "]"}]}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0.05", ",", "4"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["10", 
+           RowBox[{"-", "2"}]], ",", "2"}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", "Blue"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", "Red"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", "Black", ",", 
+          RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", "Cyan"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", "Magenta"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", 
+          RowBox[{"Lighter", "@", "Brown"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", 
+          RowBox[{"Lighter", "@", 
+           RowBox[{"Lighter", "@", "Blue"}]}], ",", 
+          RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", "Red", ",", 
+          RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", 
+          RowBox[{"Darker", "@", 
+           RowBox[{"Darker", "@", "Green"}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", 
+          RowBox[{"Darker", "@", "Cyan"}], ",", 
+          RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", "Magenta", ",", 
+          RowBox[{"Dashing", "[", "0.015", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Thick", ",", 
+          RowBox[{"Lighter", "@", "Brown"}], ",", 
+          RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"AspectRatio", "\[Rule]", "0.66"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+     RowBox[{"FrameLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<\!\(\*SubscriptBox[\(m\), \(V\)]\) [GeV]\>\"", ",", 
+        "\"\<Br(V\[Rule]X)\>\""}], "}"}]}], 
+     RowBox[{"(*", 
+      RowBox[{",", 
+       RowBox[{"PlotLabel", "\[Rule]", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{
+           "{", "\"\<Decay branching ratios of dark photons\>\"", "}"}], 
+           "]"}], ",", "18", ",", "Black"}], "]"}]}]}], "*)"}], ",", 
+     RowBox[{"PlotPoints", "->", "100"}], ",", 
+     RowBox[{"Epilog", "->", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"Thick", ",", 
+         RowBox[{"Lighter", "@", "Gray"}], ",", "Dashed", ",", 
+         RowBox[{"Line", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Log", "[", "1.94", "]"}], ",", 
+              RowBox[{"Log", "[", 
+               RowBox[{"10", "^", 
+                RowBox[{"-", "2"}]}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Log", "[", "1.94", "]"}], ",", 
+              RowBox[{"Log", "[", "2", "]"}]}], "}"}]}], "}"}], "]"}]}], 
+        "}"}], "}"}]}]}], "]"}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.9342794665563164`*^9, 3.9342795049693317`*^9}, {
+  3.9342795593777857`*^9, 3.9342798405300894`*^9}, {3.934279899850311*^9, 
+  3.9342800627263155`*^9}, {3.934280256978223*^9, 3.934280257470687*^9}, {
+  3.94057220545216*^9, 3.940572206131607*^9}, {3.940582528340702*^9, 
+  3.9405825306264553`*^9}, {3.947608939352007*^9, 3.947608978344837*^9}},
+ CellLabel->"In[70]:=",ExpressionUUID->"544dda19-adca-9d4a-bbd9-f5a660d1853e"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1430.25, 822.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (December 26, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2eb6aa5f-ed06-f847-81a6-d8e5cfbeb613"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 197, 4, 66, "Section",ExpressionUUID->"4298f627-698f-3543-ad9e-b058438b34c6"],
+Cell[CellGroupData[{
+Cell[798, 30, 169, 3, 53, "Subsection",ExpressionUUID->"360473b3-2ae2-1f43-9c69-e56b26fafa52"],
+Cell[970, 35, 3460, 83, 351, "Input",ExpressionUUID->"9f387e2e-d758-2147-b9ed-82eba761353d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4467, 123, 170, 3, 53, "Subsection",ExpressionUUID->"a1fc6512-554b-3d4a-bf32-7f8bcae03c0a"],
+Cell[4640, 128, 2395, 64, 259, "Input",ExpressionUUID->"61bda3fb-f63e-9949-9837-91764642d02c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7072, 197, 358, 7, 53, "Subsection",ExpressionUUID->"25774a20-6994-f548-b863-a093d1ef80ce"],
+Cell[CellGroupData[{
+Cell[7455, 208, 7892, 190, 446, "Input",ExpressionUUID->"7bd5d227-6eeb-f841-85d4-58fd66feb083"],
+Cell[15350, 400, 2325, 40, 34, "Output",ExpressionUUID->"c41de652-4437-8148-a502-3138d7d204f7"],
+Cell[17678, 442, 358, 7, 22, "Print",ExpressionUUID->"9f7a49e0-8a24-b64e-9363-6b34db66aca5"],
+Cell[18039, 451, 2246, 39, 34, "Output",ExpressionUUID->"ab0edd70-b2b9-794b-8770-fabb98c29e81"],
+Cell[20288, 492, 327, 6, 22, "Print",ExpressionUUID->"37ca9609-e431-7f4d-918b-803f26a723d2"],
+Cell[20618, 500, 398, 7, 32, "Output",ExpressionUUID->"e5a7a539-d7de-c243-a6f8-92df9febb105"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21053, 512, 154, 3, 43, "Subsubsection",ExpressionUUID->"3266c503-5002-674e-8b00-390929516260"],
+Cell[21210, 517, 9596, 233, 254, "Input",ExpressionUUID->"544dda19-adca-9d4a-bbd9-f5a660d1853e"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

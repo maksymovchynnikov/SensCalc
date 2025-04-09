@@ -1,0 +1,936 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     39276,        928]
+NotebookOptionsPosition[     38389,        903]
+NotebookOutlinePosition[     38819,        920]
+CellTagsIndexPosition[     38776,        917]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Available processes producing LLPs at the given facility", "Subsection",
+ CellChangeTimes->{{3.949381199357403*^9, 3.949381212188055*^9}, {
+  3.949994055511547*^9, 
+  3.9499940636788025`*^9}},ExpressionUUID->"eacea9e0-8a32-de4e-a13d-\
+346abbada3ec"],
+
+Cell[CellGroupData[{
+
+Cell["Threshold mass", "Subsubsection",
+ CellChangeTimes->{{3.9493812200073833`*^9, 
+  3.9493812217257214`*^9}},ExpressionUUID->"0f65040b-16f8-6140-84f5-\
+71d30b90844f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "The", " ", "list", " ", "with", " ", "all", " ", "particular", " ", 
+    "LLPs"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"LLPlist", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Keys", "[", 
+        RowBox[{"DownValues", "@", "ProcessesListAll"}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1", ",", "1"}], "]"}], "]"}], "//", "Sort"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"The", " ", "list", " ", "where", " ", "HNL"}], "-", "mixing", 
+      "-", "e"}], ",", " ", 
+     RowBox[{"HNL", "-", "mixing", "-", "mu"}], ",", " ", 
+     RowBox[{"HNL", "-", "mixing", "-", 
+      RowBox[{
+      "tau", " ", "is", " ", "replaced", " ", "with", " ", "single", " ", 
+       "HNL"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"LLPlistEffective", "=", 
+     RowBox[{
+      RowBox[{"Join", "[", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{"LLPlist", ",", 
+          RowBox[{
+           RowBox[{"!", 
+            RowBox[{"StringContainsQ", "[", 
+             RowBox[{"#", ",", "\"\<HNL\>\""}], "]"}]}], "&"}]}], "]"}], ",", 
+        RowBox[{"{", "\"\<HNL\>\"", "}"}]}], "]"}], "//", "Sort"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Maximal", " ", "LLP", " ", "mass", " ", "for", " ", "the", " ", 
+     "implemented", " ", "production", " ", "channels"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"Facility", "==", "\"\<SLAC-E137\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"mode", "==", "\"\<Bremsstrahlung-e\>\""}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"MaxMass", "[", 
+              RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], "=", 
+             "0.5"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"MaxMass", "[", 
+              RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], "=", 
+             "0."}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+         "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+         RowBox[{"Module", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"partlist", ",", "mother", ",", "nfips", ",", "nXs"}], 
+            "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"partlist", "=", 
+             RowBox[{"ReactionProductsList", "[", 
+              RowBox[{"LLP", ",", "mode"}], "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"mother", "=", 
+             RowBox[{"partlist", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{
+              "If", " ", "the", " ", "production", " ", "is", " ", "via", " ",
+                "mixing", " ", "or", " ", "the", " ", "mother", " ", 
+               "particle", " ", "is", " ", "proton"}], ",", " ", 
+              RowBox[{
+              "no", " ", "robust", " ", "estimate", " ", "of", " ", "the", 
+               " ", "threshold", " ", "exists"}]}], "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"Length", "[", "partlist", "]"}], "==", "2"}], "||", 
+               RowBox[{"MemberQ", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"\"\<p\>\"", ",", "\"\<e\>\""}], "}"}], ",", 
+                 "mother"}], "]"}]}], ",", 
+              RowBox[{
+               RowBox[{"MaxMass", "[", 
+                RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], "=", 
+               RowBox[{"Min", "[", 
+                RowBox[{"4.", ",", 
+                 RowBox[{
+                  RowBox[{"EcmFacility", "[", "Facility", "]"}], "-", 
+                  RowBox[{"2", "*", 
+                   RowBox[{"mSM", "[", "mother", "]"}]}]}]}], "]"}]}], 
+              "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+                RowBox[{
+                "If", " ", "the", " ", "mother", " ", "particle", " ", 
+                 "cannot", " ", "be", " ", "produced", " ", "at", " ", "the", 
+                 " ", "given", " ", "facility"}], ",", " ", 
+                RowBox[{
+                 RowBox[{"then", " ", "MaxMass"}], " ", "=", " ", "0"}]}], 
+               "*)"}], "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"IfSMatFacility", "[", 
+                   RowBox[{"mother", ",", "Facility"}], "]"}], "==", "0"}], 
+                 ",", 
+                 RowBox[{
+                  RowBox[{"MaxMass", "[", 
+                   RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], "=", 
+                  "0."}]}], "]"}], ";", "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{
+                 RowBox[{
+                 "If", " ", "it", " ", "may", " ", "be", " ", "produced"}], 
+                 ",", " ", 
+                 RowBox[{
+                 "then", " ", "calculating", " ", "the", " ", "max", " ", 
+                  "mass", " ", "as", " ", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{
+                    SubscriptBox["m", "mother"], "-", 
+                    RowBox[{"\[Sum]", 
+                    SubscriptBox["m", 
+                    RowBox[{"SM", " ", "products"}]]}]}], ")"}], "/", 
+                   SubscriptBox["n", 
+                    RowBox[{"LLPs", ",", 
+                    RowBox[{"per", " ", "decay"}]}]]}]}]}], "*)"}], 
+               "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"IfSMatFacility", "[", 
+                   RowBox[{"mother", ",", "Facility"}], "]"}], "!=", "0"}], 
+                 ",", "\[IndentingNewLine]", 
+                 RowBox[{"(*", 
+                  RowBox[{
+                   RowBox[{
+                   "Calculate", " ", "the", " ", "number", " ", "of", " ", 
+                    "target", " ", "LLPs", " ", "per", " ", "decay"}], ",", 
+                   " ", 
+                   RowBox[{
+                   "may", " ", "be", " ", "1", " ", "or", " ", "2"}]}], 
+                  "*)"}], "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"nfips", "=", 
+                   RowBox[{
+                    RowBox[{"Select", "[", 
+                    RowBox[{"partlist", ",", 
+                    RowBox[{
+                    RowBox[{"#", "==", "LLP"}], "&"}]}], "]"}], "//", 
+                    "Length"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{"(*", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "Calculate", " ", "the", " ", "number", " ", "of", " ", 
+                    "non"}], "-", "target", "-", 
+                    RowBox[{"LLPs", " ", "per", " ", 
+                    RowBox[{"decay", ".", " ", "Examples"}], " ", "of", " ", 
+                    "such", " ", 
+                    RowBox[{"decays", ":", " ", "\[CapitalUpsilon]"}]}]}], 
+                    " ", "->", " ", 
+                    RowBox[{
+                    RowBox[{
+                    SubscriptBox["\[Chi]", "1"], " ", 
+                    RowBox[{"(", "target", ")"}]}], "+", 
+                    RowBox[{
+                    SubscriptBox["\[Chi]", "0"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"non", "-", "target"}], ")"}]}]}]}], " ", "*)"}], 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"nXs", "=", 
+                   RowBox[{
+                    RowBox[{"Select", "[", 
+                    RowBox[{"partlist", ",", 
+                    RowBox[{
+                    RowBox[{"#", "==", "\"\<X\>\""}], "&"}]}], "]"}], "//", 
+                    "Length"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"MaxMass", "[", 
+                    RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], "=", 
+                   RowBox[{
+                    RowBox[{"mSM", "[", 
+                    RowBox[{"partlist", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "]"}], "-", 
+                    RowBox[{"Sum", "[", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"partlist", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "==", "\"\<X\>\""}], ",", 
+                    RowBox[{"mXval", "[", 
+                    RowBox[{"LLP", ",", "0."}], "]"}], ",", 
+                    RowBox[{"mSM", "[", 
+                    RowBox[{"partlist", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "2", ",", 
+                    RowBox[{
+                    RowBox[{"Length", "[", "partlist", "]"}], "-", 
+                    "nfips"}]}], "}"}]}], "]"}]}]}], ";", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"nfips", ">", "1"}], ",", 
+                    RowBox[{
+                    RowBox[{"MaxMass", "[", 
+                    RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], "=", 
+                    FractionBox[
+                    RowBox[{"MaxMass", "[", 
+                    RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], 
+                    "nfips"]}]}], "]"}], ";", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"MaxMass", "[", 
+                    RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], "=", 
+                   FractionBox[
+                    RowBox[{"MaxMass", "[", 
+                    RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}], 
+                    RowBox[{"(", 
+                    RowBox[{"1", "+", 
+                    RowBox[{"nXs", "*", 
+                    FractionBox[
+                    RowBox[{"mXval", "[", 
+                    RowBox[{"LLP", ",", 
+                    RowBox[{"MaxMass", "[", 
+                    RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}]}], 
+                    "]"}], 
+                    RowBox[{"MaxMass", "[", 
+                    RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}]]}]}],
+                     ")"}]]}]}]}], "\[IndentingNewLine]", "]"}]}]}], "]"}], 
+            ";"}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+        "]"}], "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"mode", ",", 
+         RowBox[{"ProcessesListAll", "[", "LLP", "]"}]}], "}"}]}], "]"}], 
+     "\[IndentingNewLine]", ",", 
+     RowBox[{"{", 
+      RowBox[{"Facility", ",", "FacilitiesList"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"LLP", ",", "LLPlist"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"___", "___", "___", "___", "___"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"For", " ", "averaged", " ", "HNL", " ", "production"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"___", "___", "___", "___", "___"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Max", " ", "mass", " ", "for", " ", "averaged", " ", "production", " ", 
+     "from", " ", "B"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"MaxMass", "[", 
+       RowBox[{"HNL", ",", "Facility", ",", "\"\<B\>\""}], "]"}], "=", 
+      RowBox[{"Max", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"MaxMass", "[", 
+          RowBox[{"HNL", ",", "Facility", ",", "#"}], "]"}], "&"}], "/@", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<B-3-body\>\"", ",", "\"\<Bc\>\"", ",", "\"\<B-2-body\>\""}], 
+         "}"}]}], "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"HNL", ",", "ListHNLs"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Facility", ",", "FacilitiesList"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Max", " ", "mass", " ", "for", " ", "averaged", " ", "production", " ", 
+     "from", " ", "D"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"prl", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<D-3-body\>\"", ",", "\"\<D-2-body\>\"", ",", 
+           "\"\<\[Tau]-2-body\>\"", ",", "\"\<\[Tau]-3-body\>\""}], "}"}], 
+         ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"MemberQ", "[", 
+            RowBox[{
+             RowBox[{"ProcessesListAll", "[", "HNL", "]"}], ",", "#"}], "]"}],
+            "==", "True"}], "&"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"MaxMass", "[", 
+        RowBox[{"HNL", ",", "Facility", ",", "\"\<D\>\""}], "]"}], "=", 
+       RowBox[{"Max", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"MaxMass", "[", 
+           RowBox[{"HNL", ",", "Facility", ",", "#"}], "]"}], "&"}], "/@", 
+         "prl"}], "]"}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"HNL", ",", "ListHNLs"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Facility", ",", "FacilitiesList"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"___", "___", "___", "___", "___"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"For", " ", "averaged", " ", "ALP", " ", "production"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"___", "___", "___", "___", "___"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Max", " ", "mass", " ", "for", " ", "averaged", " ", "production", " ", 
+     "from", " ", "B"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"subprocs", "=", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Select", "[", 
+              RowBox[{
+               RowBox[{"mergedDecayProcessesNames", "[", "ALP", "]"}], ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "==", "proc"}], "&"}]}], 
+              "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "[", 
+            RowBox[{"[", "3", "]"}], "]"}]}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"MaxMass", "[", 
+           RowBox[{"ALP", ",", "Facility", ",", "proc"}], "]"}], "=", 
+          RowBox[{"Max", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"MaxMass", "[", 
+              RowBox[{"ALP", ",", "Facility", ",", "#"}], "]"}], "&"}], "/@", 
+            "subprocs"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"proc", ",", 
+         RowBox[{
+          RowBox[{"mergedDecayProcessesNames", "[", "ALP", "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"Facility", ",", "FacilitiesList"}], "}"}]}], "]"}], 
+     "\[IndentingNewLine]", ",", 
+     RowBox[{"{", 
+      RowBox[{"ALP", ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<ALP-fermion\>\"", ",", "\"\<ALP-gluon\>\""}], "}"}]}], 
+      "}"}]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Max", " ", "mass", " ", "for", " ", "averaged", " ", "production", " ", 
+     "from", " ", "D"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"prl", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<D-3-body\>\"", ",", "\"\<D-2-body\>\"", ",", 
+           "\"\<\[Tau]-2-body\>\"", ",", "\"\<\[Tau]-3-body\>\""}], "}"}], 
+         ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"MemberQ", "[", 
+            RowBox[{
+             RowBox[{"ProcessesListAll", "[", "HNL", "]"}], ",", "#"}], "]"}],
+            "==", "True"}], "&"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"MaxMass", "[", 
+        RowBox[{"HNL", ",", "Facility", ",", "\"\<D\>\""}], "]"}], "=", 
+       RowBox[{"Max", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"MaxMass", "[", 
+           RowBox[{"HNL", ",", "Facility", ",", "#"}], "]"}], "&"}], "/@", 
+         "prl"}], "]"}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"HNL", ",", "ListHNLs"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Facility", ",", "FacilitiesList"}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.94999404762228*^9, 3.9499940515165367`*^9}, {
+  3.950465274411356*^9, 3.9504654517980766`*^9}, {3.9512067384460716`*^9, 
+  3.951206881639168*^9}, {3.9512071401707134`*^9, 3.951207304747547*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"56a5b75e-5448-8f4c-a811-a212662c1233"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Available processes", "Subsubsection",
+ CellChangeTimes->{{3.9493812200073833`*^9, 
+  3.9493812356314907`*^9}},ExpressionUUID->"8845728a-babf-b94d-939d-\
+67bae60f5242"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Selecting", " ", "only", " ", "those", " ", "channels", " ", "for", " ", 
+    RowBox[{"which", ":"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "1.", " ", "Is", " ", "kinematically", " ", "possible", " ", "to", " ", 
+    "produce", " ", "LLP", " ", "at", " ", "the", " ", "given", " ", 
+    "facility", " ", 
+    RowBox[{"(", 
+     RowBox[{"==", 
+      RowBox[{
+      "max", " ", "LLP", " ", "mass", " ", "at", " ", "the", " ", "given", 
+       " ", "facility", " ", "is"}], " ", ">", " ", "0"}], ")"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "2.", " ", "There", " ", "is", " ", "available", " ", "mother", " ", 
+    "particle", " ", "distribution"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Do", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"proc", ",", "mother"}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{
+          "The", " ", "case", " ", "when", " ", "the", " ", "given", " ", 
+           "mother", " ", "particle", " ", "may", " ", "produce", " ", "the", 
+           " ", "given", " ", "LLP", " ", "only", " ", "by", " ", "one", " ", 
+           "process", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"e", ".", "g", "."}], ",", " ", 
+             RowBox[{"dark", " ", "photons"}]}], ")"}]}], ",", " ", 
+          RowBox[{
+          "or", " ", "when", " ", "there", " ", "are", " ", "multiple", " ", 
+           "production", " ", "modes", " ", "by", " ", "the", " ", "same", 
+           " ", "mother", " ", "particle"}], ",", " ", 
+          RowBox[{
+          "but", " ", "they", " ", "cannot", " ", "be", " ", "merged", " ", 
+           "as", " ", "are", " ", "controlled", " ", "by", " ", "different", 
+           " ", "couplings", " ", 
+           RowBox[{"(", 
+            RowBox[{"Higgs", "-", 
+             RowBox[{"like", " ", "scalars"}]}], ")"}]}]}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"!", 
+            RowBox[{"StringContainsQ", "[", 
+             RowBox[{"LLP", ",", 
+              RowBox[{"{", 
+               RowBox[{
+               "\"\<HNL\>\"", ",", "\"\<ALP-fermion\>\"", ",", 
+                "\"\<ALP-gluon\>\""}], "}"}]}], "]"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{"First", ",", " ", 
+             RowBox[{
+             "filtering", " ", "to", " ", "processes", " ", "which", " ", 
+              "are", " ", "kinematically", " ", "possible"}]}], "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"ProcessesListFacilityTemp", "[", 
+              RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+             RowBox[{"Select", "[", 
+              RowBox[{
+               RowBox[{"ProcessesListAll", "[", "LLP", "]"}], ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"MaxMass", "[", 
+                  RowBox[{"LLP", ",", "Facility", ",", "#"}], "]"}], ">", 
+                 "0"}], "&"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"Second", ",", " ", 
+              RowBox[{
+              "checking", " ", "if", " ", "the", " ", "mother", " ", 
+               "distribution", " ", "is", " ", "present"}]}], "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"ProcessesListFacility", "[", 
+              RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+             RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"Do", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"proc", "=", 
+                RowBox[{
+                 RowBox[{"ProcessesListFacilityTemp", "[", 
+                  RowBox[{"LLP", ",", "Facility"}], "]"}], "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"mother", "=", 
+                RowBox[{
+                 RowBox[{"ReactionProductsList", "[", 
+                  RowBox[{"LLP", ",", "proc"}], "]"}], "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{"Specific", " ", "condition", " ", "is", " ", "to"}], 
+                " ", "*)"}], "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Select", "[", 
+                   RowBox[{"sortedDataPairs", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "==", "Facility"}], "&&", 
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"mother", ",", 
+                    RowBox[{"SimilarParticle", "[", 
+                    RowBox[{"Facility", ",", "mother"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "&"}]}], "]"}],
+                   "!=", 
+                  RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"ProcessesListFacility", "[", 
+                   RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+                  RowBox[{"Join", "[", 
+                   RowBox[{
+                    RowBox[{"ProcessesListFacility", "[", 
+                    RowBox[{"LLP", ",", "Facility"}], "]"}], ",", 
+                    RowBox[{"{", "proc", "}"}]}], "]"}]}]}], 
+                "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+              ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", 
+                RowBox[{"Length", "[", 
+                 RowBox[{"ProcessesListFacilityTemp", "[", 
+                  RowBox[{"LLP", ",", "Facility"}], "]"}], "]"}], ",", "1"}], 
+               "}"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"The", " ", "HNL", " ", 
+           RowBox[{"case", ":", " ", 
+            RowBox[{
+             RowBox[{
+             "multiple", " ", "production", " ", "modes", " ", "from", " ", 
+              "the", " ", "same", " ", "particle"}], "+", 
+             RowBox[{
+             "production", " ", "from", " ", "\"\<similar\>\"", " ", 
+              "particles", " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"i", ".", "e", "."}], ",", " ", 
+                RowBox[{"from", " ", 
+                 SuperscriptBox["D", "+"]}], ",", 
+                SuperscriptBox["D", "0"], ",", 
+                SubscriptBox["D", "s"], ",", 
+                RowBox[{"\[Tau]", " ", "or", " ", 
+                 SuperscriptBox["B", "+"]}], ",", 
+                SuperscriptBox["B", "0"], ",", 
+                SubscriptBox["B", "s"], ",", 
+                SubscriptBox["B", "c"]}], ")"}]}], " ", "-", " ", 
+             RowBox[{
+             "makes", " ", "sense", " ", "to", " ", "merge", " ", "them", " ",
+               "all"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"StringContainsQ", "[", 
+            RowBox[{"LLP", ",", "\"\<HNL\>\""}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"ProcessesListFacilityTemp", "[", 
+              RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+             RowBox[{"Select", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                "\"\<W\>\"", ",", "\"\<K\>\"", ",", "\"\<D\>\"", ",", 
+                 "\"\<B\>\"", ",", "\"\<mu\>\"", ",", "\"\<PiCharged\>\""}], 
+                "}"}], ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"MaxMass", "[", 
+                  RowBox[{"LLP", ",", "Facility", ",", "#"}], "]"}], ">", 
+                 "0"}], "&"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"ProcessesListFacility", "[", 
+              RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+             RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"Do", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"proc", "=", 
+                RowBox[{
+                 RowBox[{"ProcessesListFacilityTemp", "[", 
+                  RowBox[{"LLP", ",", "Facility"}], "]"}], "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"mother", "=", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"proc", "==", "\"\<D\>\""}], ",", "\"\<tau\>\"", 
+                  ",", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"proc", "==", "\"\<B\>\""}], ",", 
+                    "\"\<Bcharged\>\"", ",", 
+                    RowBox[{
+                    RowBox[{"ReactionProductsList", "[", 
+                    RowBox[{"LLP", ",", "proc"}], "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "]"}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{
+                 RowBox[{
+                 "Checking", " ", "if", " ", "for", " ", "the", " ", "given", 
+                  " ", "mother", " ", "particle", " ", "the", " ", 
+                  "tabulated", " ", "distribution", " ", "is", " ", 
+                  RowBox[{"available", "/", "if"}], " ", "the", " ", "given", 
+                  " ", "mother", " ", "exists", " ", "at", " ", "the", " ", 
+                  RowBox[{"facility", ".", " ", "If"}], " ", "yes"}], ",", 
+                 " ", 
+                 RowBox[{
+                 "then", " ", "add", " ", "the", " ", "given", " ", "process",
+                   " ", "to", " ", "the", " ", "list", " ", "of", " ", 
+                  "available", " ", "production", " ", "processes"}]}], 
+                "*)"}], "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Select", "[", 
+                   RowBox[{"sortedDataPairs", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "==", "Facility"}], "&&", 
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"mother", ",", 
+                    RowBox[{"SimilarParticle", "[", 
+                    RowBox[{"Facility", ",", "mother"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "&"}]}], "]"}],
+                   "!=", 
+                  RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"ProcessesListFacility", "[", 
+                   RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+                  RowBox[{"Join", "[", 
+                   RowBox[{
+                    RowBox[{"ProcessesListFacility", "[", 
+                    RowBox[{"LLP", ",", "Facility"}], "]"}], ",", 
+                    RowBox[{"{", "proc", "}"}]}], "]"}]}]}], 
+                "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+              ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", 
+                RowBox[{"Length", "[", 
+                 RowBox[{"ProcessesListFacilityTemp", "[", 
+                  RowBox[{"LLP", ",", "Facility"}], "]"}], "]"}], ",", "1"}], 
+               "}"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"The", " ", "ALP", " ", 
+           RowBox[{"case", ":", " ", 
+            RowBox[{
+             RowBox[{
+             "multiple", " ", "production", " ", "modes", " ", "from", " ", 
+              "the", " ", "same", " ", "particle"}], " ", "-", " ", 
+             RowBox[{
+             "makes", " ", "sense", " ", "to", " ", "merge", " ", "these", 
+              " ", "production", " ", "modess"}]}]}]}], "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"StringContainsQ", "[", 
+            RowBox[{"LLP", ",", 
+             RowBox[{"{", 
+              RowBox[{"\"\<ALP-fermion\>\"", ",", "\"\<ALP-gluon\>\""}], 
+              "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{
+            "Processes", " ", "producing", " ", "ALPs", " ", "by", " ", 
+             "decays", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"may", " ", "contain", " ", "several", " ", "sub"}], 
+               "-", "processes"}], ")"}]}], "*)"}], "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"procsmergeddecays", "=", 
+             RowBox[{
+              RowBox[{"mergedDecayProcessesNames", "[", "LLP", "]"}], "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{"Merging", " ", "them", " ", "with", " ", "non"}], "-", 
+              "decays"}], "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"ProcessesListFacilityTemp", "[", 
+              RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+             RowBox[{"Join", "[", 
+              RowBox[{"procsmergeddecays", ",", 
+               RowBox[{"Select", "[", 
+                RowBox[{
+                 RowBox[{"ProcessesListAll", "[", "LLP", "]"}], ",", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"ProductionType", "[", 
+                    RowBox[{"LLP", ",", "#"}], "]"}], "!=", "\"\<Decay\>\""}],
+                   "&"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"ProcessesListFacility", "[", 
+              RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+             RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"Do", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"proc", "=", 
+                RowBox[{
+                 RowBox[{"ProcessesListFacilityTemp", "[", 
+                  RowBox[{"LLP", ",", "Facility"}], "]"}], "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"mother", "=", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"MemberQ", "[", 
+                   RowBox[{"procsmergeddecays", ",", "proc"}], "]"}], ",", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"mergedDecayProcessesNames", "[", "LLP", "]"}], 
+                    ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "==", "proc"}], "&"}]}], 
+                    "]"}], "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"ReactionProductsList", "[", 
+                    RowBox[{"LLP", ",", "proc"}], "]"}], "[", 
+                   RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{
+                 RowBox[{
+                 "Checking", " ", "if", " ", "for", " ", "the", " ", "given", 
+                  " ", "mother", " ", "particle", " ", "the", " ", 
+                  "tabulated", " ", "distribution", " ", "is", " ", 
+                  RowBox[{"available", "/", "if"}], " ", "the", " ", "given", 
+                  " ", "mother", " ", "exists", " ", "at", " ", "the", " ", 
+                  RowBox[{"facility", ".", " ", "If"}], " ", "yes"}], ",", 
+                 " ", 
+                 RowBox[{
+                 "then", " ", "add", " ", "the", " ", "given", " ", "process",
+                   " ", "to", " ", "the", " ", "list", " ", "of", " ", 
+                  "available", " ", "production", " ", "processes"}]}], 
+                "*)"}], "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Select", "[", 
+                   RowBox[{"sortedDataPairs", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "==", "Facility"}], "&&", 
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"mother", ",", 
+                    RowBox[{"SimilarParticle", "[", 
+                    RowBox[{"Facility", ",", "mother"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "&"}]}], "]"}],
+                   "!=", 
+                  RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"ProcessesListFacility", "[", 
+                   RowBox[{"LLP", ",", "Facility"}], "]"}], "=", 
+                  RowBox[{"Join", "[", 
+                   RowBox[{
+                    RowBox[{"ProcessesListFacility", "[", 
+                    RowBox[{"LLP", ",", "Facility"}], "]"}], ",", 
+                    RowBox[{"{", "proc", "}"}]}], "]"}]}]}], 
+                "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+              ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", 
+                RowBox[{"Length", "[", 
+                 RowBox[{"ProcessesListFacilityTemp", "[", 
+                  RowBox[{"LLP", ",", "Facility"}], "]"}], "]"}], ",", "1"}], 
+               "}"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", ",", 
+     RowBox[{"{", 
+      RowBox[{"LLP", ",", "LLPlist"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Facility", ",", "FacilitiesList"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ProcessesListFacility", "[", 
+       RowBox[{"\"\<HNL\>\"", ",", "Facility"}], "]"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"ProcessesListFacility", "[", 
+           RowBox[{"LLP", ",", "Facility"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"LLP", ",", "ListHNLs"}], "}"}]}], "]"}], "//", 
+        "Flatten"}], "//", "DeleteDuplicates"}]}], "\[IndentingNewLine]", ",", 
+     RowBox[{"{", 
+      RowBox[{"Facility", ",", "FacilitiesList"}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{
+  3.9499966453159904`*^9, {3.9504655116015396`*^9, 3.9504657102577305`*^9}, {
+   3.9504658160032845`*^9, 3.9504662119597435`*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"f3ef6dd5-8290-1b46-bfa5-d80f68a03cd1"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1908, 1005.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1. Inherited,
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"8a6dfae4-d356-1e46-b157-67c33d0b1f87"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 255, 4, 53, "Subsection",ExpressionUUID->"eacea9e0-8a32-de4e-a13d-346abbada3ec"],
+Cell[CellGroupData[{
+Cell[856, 30, 169, 3, 43, "Subsubsection",ExpressionUUID->"0f65040b-16f8-6140-84f5-71d30b90844f"],
+Cell[1028, 35, 17530, 424, 1304, "Input",ExpressionUUID->"56a5b75e-5448-8f4c-a811-a212662c1233"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18595, 464, 174, 3, 43, "Subsubsection",ExpressionUUID->"8845728a-babf-b94d-939d-67bae60f5242"],
+Cell[18772, 469, 19589, 430, 1069, "Input",ExpressionUUID->"f3ef6dd5-8290-1b46-bfa5-d80f68a03cd1"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

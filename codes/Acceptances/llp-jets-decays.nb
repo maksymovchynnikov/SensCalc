@@ -1,0 +1,553 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     20808,        545]
+NotebookOptionsPosition[     20093,        524]
+NotebookOutlinePosition[     20500,        540]
+CellTagsIndexPosition[     20457,        537]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Phase space of decay products - pre-simulated in pythia (for decays into jets)\
+\>", "Section",
+ CellChangeTimes->{{3.8896808751910667`*^9, 3.8896808925929117`*^9}, {
+  3.8896810405865717`*^9, 3.889681040711938*^9}, {3.8928219291767955`*^9, 
+  3.8928219311819687`*^9}, {3.9017176077887716`*^9, 
+  3.9017176348990297`*^9}},ExpressionUUID->"b22d4485-0678-42cb-8f07-\
+a8b51d796029"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"filespathsPS", "=", 
+   RowBox[{"FileNames", "[", 
+    RowBox[{"\"\<*.m\>\"", ",", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], 
+         "//", "ParentDirectory"}], ",", "\"\<simulated phase space\>\""}], 
+       "}"}], "]"}], ",", 
+     RowBox[{"If", "[", 
+      RowBox[{"AccSensCalc", ",", "1", ",", "Infinity"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"filenamesPS", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Last", "@", 
+      RowBox[{"FileNameSplit", "@", 
+       RowBox[{"filespathsPS", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "filespathsPS", "]"}], ",", "1"}], "}"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"filenameparametersPS", "[", "i_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"StringCases", "[", 
+    RowBox[{
+     RowBox[{"filenamesPS", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], ",", 
+     RowBox[{
+      RowBox[{
+      "fip__", "~~", "\"\<_\>\"", "~~", "process__", "~~", "\"\<_\>\"", "~~", 
+       "mass__", "~~", "\"\<.m\>\""}], ":>", 
+      RowBox[{"{", 
+       RowBox[{"fip", ",", "process", ",", "mass"}], "}"}]}]}], "]"}], "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"filenamesparametersPS", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"filenameparametersPS", "[", "i", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", "filenamesPS", "]"}], ",", "1"}], "}"}]}], 
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Phase", " ", 
+     RowBox[{"space", ".", " ", "It"}], " ", "has", " ", "the", " ", "form", " ",
+      "of", " ", 
+     RowBox[{"rows", ".", " ", "Each"}], " ", 
+     RowBox[{"row", ":", " ", 
+      RowBox[{
+      "the", " ", "occurrence", " ", "rate", " ", "of", " ", "the", " ", 
+       "given", " ", "final", " ", "state"}]}]}], ",", " ", 
+    RowBox[{"the", " ", "final", " ", "state", " ", "phase", " ", "space"}]}],
+    "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Do", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PhaseSpaceDecaysRestJets", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"filenamesparametersPS", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"filenamesparametersPS", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"filenamesparametersPS", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "//", "ToExpression"}], "//", 
+        "N"}]}], "]"}], "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{
+       RowBox[{"filespathsPS", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "filenamesPS", "]"}], ",", "1"}], "}"}]}], "]"}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ParsBL", "=", 
+    RowBox[{"Select", "[", 
+     RowBox[{"filenamesparametersPS", ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "==", "\"\<B-L\>\""}], "&"}]}], 
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"For", " ", "the", " ", "moment"}], ",", " ", 
+    RowBox[{
+     RowBox[{"for", " ", "B"}], " ", "-", " ", 
+     RowBox[{"XX", " ", "mediators"}]}], ",", " ", 
+    RowBox[{
+    "the", " ", "decay", " ", "products", " ", "sets", " ", "are", " ", "the",
+      " ", "same", " ", "as", " ", "for", " ", "dark", " ", "photons"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Do", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"PhaseSpaceDecaysRestJets", "[", 
+       RowBox[{"fip", ",", 
+        RowBox[{
+         RowBox[{"ParsBL", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"ParsBL", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "[", 
+           RowBox[{"[", "3", "]"}], "]"}], "//", "ToExpression"}], "//", 
+         "N"}]}], "]"}], "=", 
+      RowBox[{"PhaseSpaceDecaysRestJets", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"ParsBL", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"ParsBL", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"ParsBL", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "[", 
+           RowBox[{"[", "3", "]"}], "]"}], "//", "ToExpression"}], "//", 
+         "N"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", ",", 
+    RowBox[{"{", 
+     RowBox[{"fip", ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<B\>\"", ",", "\"\<B-3Lmu\>\"", 
+        ",", "\"\<B-3Le-Lmu+Ltau\>\"", ",", "\"\<B-Le-3Lmu+Ltau\>\""}], 
+       "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "ParsBL", "]"}], ",", "1"}], "}"}]}], "]"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Jet", " ", "decays", " ", "of", " ", "ALPs", " ", "coupled", " ", "to", " ",
+      "fermions", " ", "and", " ", "gluons", " ", "are", " ", "the", " ", 
+     "same"}], " ", "-", " ", 
+    RowBox[{"into", " ", "two", " ", 
+     RowBox[{"gluons", ".", " ", "So"}], " ", "the", " ", "phase", " ", 
+     "space", " ", "is", " ", "the", " ", "same"}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ParsALPg", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{"filenamesparametersPS", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "==", "\"\<ALP-gluon\>\""}], "&"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Do", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"PhaseSpaceDecaysRestJets", "[", 
+        RowBox[{"\"\<ALP-fermion\>\"", ",", 
+         RowBox[{
+          RowBox[{"ParsALPg", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"ParsALPg", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "//", "ToExpression"}], "//", 
+          "N"}]}], "]"}], "=", 
+       RowBox[{"PhaseSpaceDecaysRestJets", "[", 
+        RowBox[{"\"\<ALP-gluon\>\"", ",", 
+         RowBox[{
+          RowBox[{"ParsALPg", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"ParsALPg", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "//", "ToExpression"}], "//", 
+          "N"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", ",", 
+     RowBox[{"{", 
+      RowBox[{"fip", ",", 
+       RowBox[{"{", "\"\<ALP-fermion\>\"", "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "ParsALPg", "]"}], ",", "1"}], "}"}]}], "]"}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Range", " ", "of", " ", "masses", " ", "for", " ", "which", " ", "the", " ",
+     "phase", " ", "space", " ", "of", " ", "decays", " ", "into", " ", 
+    "jets", " ", "has", " ", "been", " ", "simulated"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"mjetsrange", "[", "LLP", "]"}], "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"Select", "[", 
+          RowBox[{"filenamesparametersPS", ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "==", "LLP"}], "&"}]}], "]"}], "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "3"}], "]"}], "]"}], "//", "ToExpression"}], "//",
+        "N"}], "//", "Sort"}], "//", "DeleteDuplicates"}]}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"LLP", ",", "LLPlist"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"mjetsrange", "[", "\"\<HNL-mixing-mu\>\"", "]"}], "=", 
+   RowBox[{
+    RowBox[{"mjetsrange", "[", "\"\<HNL-mixing-tau\>\"", "]"}], "=", 
+    RowBox[{"mjetsrange", "[", "\"\<HNL-mixing-e\>\"", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"mjetsrange", "[", "\"\<ALP-fermion\>\"", "]"}], "=", 
+   RowBox[{"mjetsrange", "[", "\"\<ALP-gluon\>\"", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"mjetsrange", "[", "\"\<B\>\"", "]"}], "=", 
+   RowBox[{
+    RowBox[{"mjetsrange", "[", "\"\<B-3Lmu\>\"", "]"}], "=", 
+    RowBox[{
+     RowBox[{"mjetsrange", "[", "\"\<B-3Le-Lmu+Ltau\>\"", "]"}], "=", 
+     RowBox[{
+      RowBox[{"mjetsrange", "[", "\"\<B-Le-3Lmu+Ltau\>\"", "]"}], "=", 
+      RowBox[{"mjetsrange", "[", "\"\<B-L\>\"", "]"}]}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ParsHNLe", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{"filenamesparametersPS", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "==", "\"\<HNL-mixing-e\>\""}], "&&", 
+       RowBox[{"StringContainsQ", "[", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<Jets\>\""}], "]"}], "&&", 
+       RowBox[{"StringContainsQ", "[", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<v\>\""}], "]"}]}], 
+      "&"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Do", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"PhaseSpaceDecaysRestJets", "[", 
+       RowBox[{"fip", ",", 
+        RowBox[{
+         RowBox[{"ParsHNLe", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"ParsHNLe", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "[", 
+           RowBox[{"[", "3", "]"}], "]"}], "//", "ToExpression"}], "//", 
+         "N"}]}], "]"}], "=", 
+      RowBox[{"PhaseSpaceDecaysRestJets", "[", 
+       RowBox[{"\"\<HNL-mixing-e\>\"", ",", 
+        RowBox[{
+         RowBox[{"ParsHNLe", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"ParsHNLe", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "[", 
+           RowBox[{"[", "3", "]"}], "]"}], "//", "ToExpression"}], "//", 
+         "N"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", ",", 
+    RowBox[{"{", 
+     RowBox[{"fip", ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<HNL-mixing-mu\>\"", ",", "\"\<HNL-mixing-tau\>\""}], 
+       "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "ParsHNLe", "]"}], ",", "1"}], "}"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", 
+  "[", "\"\<Checking if the pre-simulated phase space is available for all \
+`Jets` channels\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tabmod", "=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"\"\<LLP\>\"", ",", "\"\<List of processes with jets\>\"", 
+      ",", "\"\<Whether the pre-simulated data is available\>\""}], "}"}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fulljetslist", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Keys", "[", 
+         RowBox[{"DownValues", "@", "PhaseSpaceDecaysRestJets"}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "1", ",", "#"}], "]"}], "]"}], "&"}], "/@", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2"}], "}"}]}], "//", "Transpose"}], "//", 
+    "DeleteDuplicates"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"procsjets", "[", "model", "]"}], "=", 
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{
+        RowBox[{"ProcessesList", "[", 
+         RowBox[{"model", ",", "\"\<True\>\""}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"StringContainsQ", "[", 
+          RowBox[{"#", ",", "\"\<Jets\>\""}], "]"}], "&"}]}], "]"}], "//", 
+      "Sort"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"parsmodel", "[", "model", "]"}], "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{"fulljetslist", ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "==", "model"}], "&&", 
+            RowBox[{"!", 
+             RowBox[{"StringContainsQ", "[", 
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<bar\>\""}], 
+              "]"}]}]}], "&"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "2"}], "]"}], "]"}], "//", "DeleteDuplicates"}], 
+      "//", "Sort"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"tabmod", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{"tabmod", ",", 
+       RowBox[{"{", 
+        RowBox[{"{", 
+         RowBox[{"model", ",", 
+          RowBox[{"procsjets", "[", "model", "]"}], ",", 
+          RowBox[{
+           RowBox[{"procsjets", "[", "model", "]"}], "==", 
+           RowBox[{"parsmodel", "[", "model", "]"}]}]}], "}"}], "}"}]}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"model", ",", "LLPlist"}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", "tabmod", "\[IndentingNewLine]", 
+ RowBox[{"hadronizedPhaseSpaceData", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Keys", "[", 
+       RowBox[{"DownValues", "@", "PhaseSpaceDecaysRestJets"}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "1", ",", "#"}], "]"}], "]"}], "&"}], "/@", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], "//", "Transpose"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ifHadronizedPhaseSpaceIsPresent", "[", 
+   RowBox[{"LLP_", ",", "mLLP_", ",", "SpecificDecay_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Select", "[", 
+    RowBox[{"hadronizedPhaseSpaceData", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "==", "LLP"}], "&&", 
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "==", "mLLP"}], "&&", 
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "3", "]"}], "]"}], "==", "SpecificDecay"}]}], "&"}]}], 
+    "]"}], "!=", 
+   RowBox[{"{", "}"}]}]}]}], "Input",
+ CellChangeTimes->{{3.9017176486347523`*^9, 3.901717703758829*^9}, {
+   3.9017177592455387`*^9, 3.9017178756278844`*^9}, {3.9017179156004972`*^9, 
+   3.901717945662857*^9}, {3.901718848335392*^9, 3.901719048923184*^9}, {
+   3.901719095805599*^9, 3.901719099117838*^9}, {3.901719164029812*^9, 
+   3.9017191891106105`*^9}, {3.901719221702965*^9, 3.9017192571933155`*^9}, {
+   3.9017193162248125`*^9, 3.9017193285221925`*^9}, {3.90171936612361*^9, 
+   3.9017193872887883`*^9}, {3.901719870319647*^9, 3.90171991141413*^9}, {
+   3.9017206146064463`*^9, 3.9017206196800056`*^9}, {3.9017229841487923`*^9, 
+   3.901722985768695*^9}, {3.901723023831119*^9, 3.901723026481138*^9}, {
+   3.9017256303389874`*^9, 3.901725634485656*^9}, {3.9017261005653973`*^9, 
+   3.9017261054686174`*^9}, 3.9017301956217823`*^9, {3.9017302484813375`*^9, 
+   3.9017302520193014`*^9}, {3.902906969666185*^9, 3.9029069775969477`*^9}, {
+   3.902907009246908*^9, 3.9029070096441965`*^9}, {3.902907049765814*^9, 
+   3.902907088284941*^9}, {3.903716595966509*^9, 3.9037167686510525`*^9}, {
+   3.904058177570426*^9, 3.9040584120686383`*^9}, {3.9040586761071887`*^9, 
+   3.904058680802782*^9}, {3.904060538230318*^9, 3.904060538416854*^9}, {
+   3.9040688954630585`*^9, 3.904069021070495*^9}, {3.9048999997478495`*^9, 
+   3.9049000148965316`*^9}, {3.9119857831288757`*^9, 
+   3.9119857927644434`*^9}, {3.9119858555866613`*^9, 
+   3.9119858602139053`*^9}, {3.912622886361326*^9, 3.9126228911222963`*^9}, {
+   3.915125802493534*^9, 3.915125804991832*^9}, {3.9154355190121994`*^9, 
+   3.915435519032879*^9}, {3.91543718722563*^9, 3.9154371872356205`*^9}, {
+   3.916156453934334*^9, 3.916156453960458*^9}, {3.9314555154165297`*^9, 
+   3.9314555330126085`*^9}, {3.932178902120722*^9, 3.932178906285803*^9}, {
+   3.932178944032939*^9, 3.9321790270988503`*^9}, {3.932179070886421*^9, 
+   3.932179090250779*^9}, {3.932179142269088*^9, 3.932179157501577*^9}, {
+   3.932179199915196*^9, 3.93217933350392*^9}, {3.932179374984351*^9, 
+   3.932179449556034*^9}, {3.9321799362757587`*^9, 3.932179937114086*^9}, {
+   3.9321801073660583`*^9, 3.932180180888477*^9}, {3.933904784005764*^9, 
+   3.933904785071129*^9}, {3.933917733740629*^9, 3.933917733740629*^9}, {
+   3.940526475069927*^9, 3.9405264791109486`*^9}, {3.9405265098760796`*^9, 
+   3.940526538419384*^9}, 3.9476095852714596`*^9, {3.9493789461798134`*^9, 
+   3.9493789558601913`*^9}, {3.949470774041628*^9, 3.9494708104405727`*^9}, {
+   3.94947323393688*^9, 3.9494732473359547`*^9}, {3.953191969246027*^9, 
+   3.953192013772934*^9}},ExpressionUUID->"052a958e-5006-4f0f-8832-\
+c79046af2a1b"],
+
+Cell[BoxData[
+ FormBox["\<\"Checking if the pre-simulated phase space is available for all \
+`Jets` channels\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.949473235893738*^9, 3.9494732506622467`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[243]:=",ExpressionUUID->"973bb1aa-7cb5-ca4b-ac55-e6c9f461c1fc"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"\<\"LLP\"\>", "\<\"List of processes with jets\"\>", "\<\"Whether the \
+pre-simulated data is available\"\>"},
+     {"\<\"Scalar\"\>", 
+      RowBox[{"{", 
+       RowBox[{"\<\"Jets-bb\"\>", ",", "\<\"Jets-cc\"\>", 
+        ",", "\<\"Jets-GG\"\>", ",", "\<\"Jets-ss\"\>"}], "}"}], "True"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.9494732359094887`*^9, 3.949473250670946*^9}},
+ CellLabel->
+  "Out[262]=",ExpressionUUID->"73cafadd-cf48-8f49-ab5e-50ca86bb0958"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1430.25, 828.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (December 26, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"145e9167-a352-114d-a930-bb5ec3771253"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 389, 7, 66, "Section",ExpressionUUID->"b22d4485-0678-42cb-8f07-a8b51d796029"],
+Cell[CellGroupData[{
+Cell[990, 33, 17892, 457, 770, "Input",ExpressionUUID->"052a958e-5006-4f0f-8832-c79046af2a1b"],
+Cell[18885, 492, 316, 6, 21, "Print",ExpressionUUID->"973bb1aa-7cb5-ca4b-ac55-e6c9f461c1fc"],
+Cell[19204, 500, 861, 20, 45, "Output",ExpressionUUID->"73cafadd-cf48-8f49-ab5e-50ca86bb0958"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

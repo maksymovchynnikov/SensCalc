@@ -1,0 +1,290 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     11102,        282]
+NotebookOptionsPosition[     10481,        262]
+NotebookOutlinePosition[     10888,        278]
+CellTagsIndexPosition[     10845,        275]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Inelastic-dipole-DM", "Section",
+ CellChangeTimes->{{3.8896886292454453`*^9, 3.889688637118582*^9}, {
+   3.8905481817730513`*^9, 3.8905481835847673`*^9}, {3.914999896750478*^9, 
+   3.9149998975251455`*^9}, 
+   3.951198390762089*^9},ExpressionUUID->"d1dd46fc-7dc6-ab46-9cfb-\
+6a1c1a18adf4"],
+
+Cell[CellGroupData[{
+
+Cell["Model description and all the definitions", "Subsection",
+ CellChangeTimes->{{3.9506926867608128`*^9, 3.9506926926469193`*^9}, {
+  3.9511983917763844`*^9, 
+  3.9511983985657444`*^9}},ExpressionUUID->"d936cfb6-99a0-a248-ac15-\
+51c71457d4ca"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"modelInfo", "[", "mLLP_", "]"}], "=", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], 
+         "//", "ParentDirectory"}], ",", "\"\<phenomenology\>\"", 
+        ",", "\"\<Inelastic-dipole-DM\>\"", ",", "\"\<decay widths\>\"", 
+        ",", "\"\<ctau.mx\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"LLPsel", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"modelInfo", "[", "mLLP", "]"}], "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+       RowBox[{
+       "proc", "=", "\"\<\!\(\*SubscriptBox[\(\[Chi]\), \
+\(0\)]\)\[Gamma]\>\""}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"decdescr", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"modelInfo", "[", "mLLP", "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "3", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"\[CapitalDelta]val", "[", "LLPsel", "]"}], "=", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"modelInfo", "[", "mLLP", "]"}], "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"c\[Tau]LLP", "[", 
+        RowBox[{"LLPsel", ",", "decdescr", ",", "mLLP_", ",", "\[Mu]_"}], 
+        "]"}], "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"modelInfo", "[", "mLLP", "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "4", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ModelDescription", "[", "LLPsel", "]"}], "=", 
+       RowBox[{"Row", "[", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Two fermions \[Chi], \[Chi]' with tiny mass splitting \
+\[CapitalDelta] = (\!\(\*SubscriptBox[\(m\), \(\[Chi]'\)]\) - \
+\!\(\*SubscriptBox[\(m\), \(\[Chi]\)]\))/\!\(\*SubscriptBox[\(m\), \(\[Chi]\(\
+\\\ \)\)]\)<< 1, coupled to the EM operator via L = \!\(\*FractionBox[\(\[Mu]\
+\), \(2\)]\)\!\(\*SuperscriptBox[\(F\), \(\[Mu]\[Nu]\)]\)\!\(\*OverscriptBox[\
+\(\[Chi]\), \(_\)]\)'\!\(\*SubscriptBox[\(\[Sigma]\), \
+\(\[Mu]\[Nu]\)]\)\[Chi]. The value of \[CapitalDelta] is fixed by \
+\[CapitalDelta] = \>\"", "<>", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"\[CapitalDelta]val", "[", "LLPsel", "]"}], "]"}], 
+          "<>", "\"\<. See 2301.05252 for the model details\>\""}], "}"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ProcessesList", "[", 
+        RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "=", 
+       RowBox[{"{", "proc", "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ListDecayProducts", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", 
+       RowBox[{"{", 
+        RowBox[{"\"\<\[Gamma]\>\"", ",", "\"\<X\>\"", ",", "\"\<Null\>\"", 
+         ",", "\"\<Null\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"couplingSymbol", "[", "LLPsel", "]"}], "=", "\[Mu]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ListBrRatios", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "decdescr"}], "]"}],
+        "=", "1."}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"JetsPresence", "[", 
+        RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"StringContainsQ", "[", 
+          RowBox[{"proc", ",", "\"\<Jets\>\""}], "]"}], ",", "\"\<Yes\>\"", 
+         ",", "\"\<No\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"DecayDescriptionExplanation", "[", 
+        RowBox[{"LLPsel", ",", "decdescr"}], "]"}], 
+       "=", "\"\<Simple calculation of the width of the dominant decay \
+\!\(\*SubscriptBox[\(\[Chi]\), \(1\)]\)\[Rule]\!\(\*SubscriptBox[\(\[Chi]\), \
+\(0\)]\)\[Gamma]\>\""}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ProcessesList", "[", 
+        RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], "=", 
+       RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"mXval", "[", 
+        RowBox[{"LLPsel", ",", "mLLP_"}], "]"}], "=", 
+       RowBox[{"mLLP", "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          RowBox[{"\[CapitalDelta]val", "[", "LLPsel", "]"}]}], ")"}]}]}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"filepheno", "=", 
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"NotebookDirectory", "[", "]"}], "//", 
+            "ParentDirectory"}], "//", "ParentDirectory"}], 
+          ",", "\"\<phenomenology\>\"", ",", "\"\<ModelDescriptors.mx\>\""}], 
+         "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"rowtoadd", "=", 
+       RowBox[{"{", 
+        RowBox[{"LLPsel", ",", 
+         RowBox[{"ModelDescription", "[", "LLPsel", "]"}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"!", 
+         RowBox[{"FileExistsQ", "[", "filepheno", "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"file", "=", 
+          RowBox[{"{", "rowtoadd", "}"}]}], ";"}], "\[IndentingNewLine]", ",",
+         "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"file", "=", 
+          RowBox[{"Import", "[", 
+           RowBox[{"filepheno", ",", "\"\<MX\>\""}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"file", "=", 
+          RowBox[{"Join", "[", 
+           RowBox[{
+            RowBox[{"Select", "[", 
+             RowBox[{"file", ",", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], "!=", "LLPsel"}], "&"}]}], 
+             "]"}], ",", 
+            RowBox[{"{", "rowtoadd", "}"}]}], "]"}]}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Export", "[", 
+       RowBox[{"filepheno", ",", 
+        RowBox[{"SortBy", "[", 
+         RowBox[{"file", ",", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "&"}]}], "]"}], 
+        ",", "\"\<MX\>\""}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "1", ",", 
+     RowBox[{"Length", "[", 
+      RowBox[{"modelInfo", "[", "mLLP", "]"}], "]"}], ",", "1"}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"InelasticDipoleModelList", "=", 
+   RowBox[{
+    RowBox[{"modelInfo", "[", "mLLP_", "]"}], "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"listDecayDescriptions", "[", "LLP", "]"}], "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{
+        RowBox[{"Transpose", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"Keys", "[", 
+             RowBox[{"DownValues", "@", "ListBrRatios"}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "1", ",", "#"}], "]"}], "]"}], "&"}], "/@", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", 
+            RowBox[{"-", "1"}]}], "}"}]}], "]"}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "==", "LLP"}], "&"}]}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], "//", "DeleteDuplicates"}]}], 
+   "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{"LLP", ",", "InelasticDipoleModelList"}], "}"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.950692693496708*^9, 3.9506927822852573`*^9}, {
+   3.9506928195256615`*^9, 3.9506928222656727`*^9}, {3.950692990855385*^9, 
+   3.950693547593548*^9}, {3.9506939530254307`*^9, 3.95069395566675*^9}, 
+   3.9506943436457043`*^9, 3.9506944355856705`*^9, {3.9511868705997944`*^9, 
+   3.951186873036724*^9}, {3.951187539829483*^9, 3.951187643817236*^9}, {
+   3.9511877189695606`*^9, 3.95118772052606*^9}, {3.9511915261057568`*^9, 
+   3.9511915566129913`*^9}, {3.951197702759104*^9, 3.951197793894148*^9}, {
+   3.951197833508106*^9, 3.951197937577095*^9}, {3.951197984127123*^9, 
+   3.9511980360603886`*^9}, {3.95119810948077*^9, 3.951198327982334*^9}, {
+   3.951198404843525*^9, 3.9511984629247723`*^9}, {3.9511993077564754`*^9, 
+   3.9511993257233906`*^9}, {3.951200194576456*^9, 3.951200237318104*^9}, 
+   3.9512021997808056`*^9, {3.951216065988863*^9, 3.9512160682901897`*^9}, {
+   3.9514912961976175`*^9, 3.951491315906982*^9}, {3.9514914592543736`*^9, 
+   3.951491500147523*^9}, {3.952072407996107*^9, 3.9520724087549267`*^9}, {
+   3.9520739018613796`*^9, 3.952073920100397*^9}, {3.952326764819193*^9, 
+   3.952326785641346*^9}},ExpressionUUID->"dbb8b26d-70c6-9b44-a5b2-\
+9f7b53974b51"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1430.25, 822.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (December 26, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"4bd37cbd-0d53-7a46-b1da-71fd83714311"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 295, 5, 66, "Section",ExpressionUUID->"d1dd46fc-7dc6-ab46-9cfb-6a1c1a18adf4"],
+Cell[CellGroupData[{
+Cell[896, 31, 246, 4, 53, "Subsection",ExpressionUUID->"d936cfb6-99a0-a248-ac15-51c71457d4ca"],
+Cell[1145, 37, 9308, 221, 675, "Input",ExpressionUUID->"dbb8b26d-70c6-9b44-a5b2-9f7b53974b51"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,548 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     20270,        540]
+NotebookOptionsPosition[     18849,        505]
+NotebookOutlinePosition[     19250,        521]
+CellTagsIndexPosition[     19207,        518]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["MCPs", "Chapter",
+ CellChangeTimes->{{3.9133677446759024`*^9, 
+  3.9133678076549654`*^9}},ExpressionUUID->"6abe80dc-cac1-4951-a70c-\
+ab85c8903212"],
+
+Cell[CellGroupData[{
+
+Cell["Defining the model", "Section",
+ CellChangeTimes->{{3.9506967748057976`*^9, 
+  3.9506967766106167`*^9}},ExpressionUUID->"4a7f2f2d-f0b6-f54c-a93a-\
+26db5dab8ee2"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LLPname", "=", "\"\<MCP\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ModelDescription", "[", "LLPname", "]"}], "=", 
+   RowBox[{"Row", "[", 
+    RowBox[{
+    "{", "\"\<Fermionic particles \[Psi] with the phenomenological Lagrangian \
+L = e\!\(\*OverscriptBox[\(\[Epsilon]\), \(~\)]\) \!\(\*SubscriptBox[\(B\), \
+\(\[Mu]\(\\\ \)\)]\)\!\(\*OverscriptBox[\(\[Psi]\), \
+\(_\)]\)\!\(\*SuperscriptBox[\(\[Gamma]\), \(\[Mu]\)]\)\[Psi], where \
+\!\(\*SubscriptBox[\(B\), \(\[Mu]\)]\) is the U(1\!\(\*SubscriptBox[\()\), \
+\(Y\)]\) field and \!\(\*OverscriptBox[\(\[Epsilon]\), \(~\)]\) is the \
+coupling. Below the electroweak scale, the Lagrangian may be reduced to the \
+interactions with photons, with the replacement \!\(\*OverscriptBox[\(\
+\[Epsilon]\), \(~\)]\)\[Rule]\[Epsilon]. The model is known as BC3 within PBC \
+benchmarking (1901.09966)\>\"", "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"filepheno", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], "//",
+        "ParentDirectory"}], ",", "\"\<phenomenology\>\"", ",", 
+      "\"\<ModelDescriptors.mx\>\""}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rowtoadd", "=", 
+   RowBox[{"{", 
+    RowBox[{"LLPname", ",", 
+     RowBox[{"ModelDescription", "[", "LLPname", "]"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"!", 
+    RowBox[{"FileExistsQ", "[", "filepheno", "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"file", "=", 
+     RowBox[{"{", "rowtoadd", "}"}]}], ";"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"file", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"filepheno", ",", "\"\<MX\>\""}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"file", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"Select", "[", 
+        RowBox[{"file", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "!=", "LLPname"}], "&"}]}], "]"}],
+        ",", 
+       RowBox[{"{", "rowtoadd", "}"}]}], "]"}]}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"filepheno", ",", 
+    RowBox[{"SortBy", "[", 
+     RowBox[{"file", ",", 
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "&"}]}], "]"}], ",", "\"\<MX\>\""}], 
+   "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"file", ";"}]}], "Input",
+ CellChangeTimes->{{3.950696791745903*^9, 3.9506969010564423`*^9}, {
+  3.9506969312641315`*^9, 3.950696951214752*^9}, {3.951202108768757*^9, 
+  3.951202112186056*^9}},
+ CellLabel->
+  "In[459]:=",ExpressionUUID->"d0122b21-0044-5943-b162-6e2bda508611"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Relevant processes", "Section",
+ CellChangeTimes->{{3.913268643168833*^9, 
+  3.9132686454263844`*^9}},ExpressionUUID->"4f876c3d-1254-4870-97d6-\
+e76e6b07ff3f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Only", " ", "decays", " ", "are", " ", 
+     RowBox[{"listed", ".", " ", "Drell"}]}], "-", 
+    RowBox[{"Yan", " ", "is", " ", "computed", " ", "externally", " ", 
+     RowBox[{"(", 
+      RowBox[{"MadGraph", "+", "pythia"}], ")"}]}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"ProcessesListAll", "[", "LLPname", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<Pi0\>\"", ",", "\"\<Eta\>\"", ",", "\"\<Phi\>\"", ",", 
+       "\"\<JPsi\>\"", ",", "\"\<Rho0\>\"", ",", "\"\<Omega\>\"", ",", 
+       "\"\<Upsilon\>\""}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Topology", " ", "of", " ", "the", " ", "process"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MapThread", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"ProductionType", "[", 
+          RowBox[{"LLPname", ",", "#1"}], "]"}], "=", "#2"}], ")"}], "&"}], 
+      ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ProcessesListAll", "[", "LLPname", "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{"\"\<Decay\>\"", ",", 
+          RowBox[{"Length", "[", 
+           RowBox[{"ProcessesListAll", "[", "LLPname", "]"}], "]"}]}], 
+         "]"}]}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Particle", " ", 
+      RowBox[{"content", ":", " ", 
+       RowBox[{"mother", " ", "particle"}]}]}], ",", " ", 
+     RowBox[{"decay", " ", "products"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MapThread", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"ReactionProductsList", "[", 
+          RowBox[{"LLPname", ",", "#1"}], "]"}], "=", "#2"}], ")"}], "&"}], 
+      ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ProcessesListAll", "[", "LLPname", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<Pi0\>\"", ",", "\"\<photon\>\"", ",", "LLPname", ",", 
+            "LLPname"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<Eta\>\"", ",", "\"\<photon\>\"", ",", "LLPname", ",", 
+            "LLPname"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Phi\>\"", ",", "LLPname", ",", "LLPname"}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"\"\<JPsi\>\"", ",", "LLPname", ",", "LLPname"}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Rho0\>\"", ",", "LLPname", ",", "LLPname"}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Omega\>\"", ",", "LLPname", ",", "LLPname"}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Upsilon\>\"", ",", "LLPname", ",", "LLPname"}], 
+           "}"}]}], "}"}]}], "}"}]}], "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.9133726724764333`*^9, 3.913372673613281*^9}, {
+   3.9133727579791737`*^9, 3.913372809675759*^9}, {3.9133728733081093`*^9, 
+   3.913372878452074*^9}, {3.9133729416336412`*^9, 3.913373013823183*^9}, {
+   3.913373826131261*^9, 3.913373868451662*^9}, {3.9133739066363993`*^9, 
+   3.9133739456578016`*^9}, {3.913374002546357*^9, 3.913374005206761*^9}, 
+   3.913394583225469*^9, {3.913395240305252*^9, 3.9133952403096704`*^9}, {
+   3.915438811281021*^9, 3.915438811332352*^9}, 3.915440189959916*^9, {
+   3.915440798120658*^9, 3.91544085478469*^9}, 3.915440966116959*^9, {
+   3.9506967807321606`*^9, 
+   3.9506967828148556`*^9}},ExpressionUUID->"6daf334b-bcc0-4439-b3da-\
+8dbd64e4d545"],
+
+Cell[CellGroupData[{
+
+Cell["Their descriptions", "Subsection",
+ CellChangeTimes->{{3.9505808008253574`*^9, 
+  3.9505808033833046`*^9}},ExpressionUUID->"5bf8d557-9325-0645-8861-\
+0ff8c78b1431"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"DescriptionProcess", "[", 
+    RowBox[{"LLPname", ",", "\"\<Pi0\>\""}], "]"}], "=", 
+   "\"\<Production of the MCPs \[Psi] via decays \!\(\*SuperscriptBox[\(\[Pi]\
+\), \(0\)]\)\[Rule]2\[Psi]. See, e.g., 2312.14868\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DescriptionProcess", "[", 
+    RowBox[{"LLPname", ",", "\"\<Eta\>\""}], "]"}], "=", 
+   "\"\<Production of the MCPs \[Psi] via decays \[Eta]\[Rule]2\[Psi]. See, \
+e.g., 2312.14868\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DescriptionProcess", "[", 
+    RowBox[{"LLPname", ",", "\"\<Phi\>\""}], "]"}], "=", 
+   "\"\<Production of the MCPs \[Psi] via decays \[Phi]\[Rule]2\[Psi]. See, \
+e.g., 2312.14868\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DescriptionProcess", "[", 
+    RowBox[{"LLPname", ",", "\"\<JPsi\>\""}], "]"}], "=", 
+   "\"\<Production of the MCPs \[Psi] via decays J/\[Psi]\[Rule]2\[Psi]. See, \
+e.g., 2312.14868\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DescriptionProcess", "[", 
+    RowBox[{"LLPname", ",", "\"\<Rho0\>\""}], "]"}], "=", 
+   "\"\<Production of the MCPs \[Psi] via decays \
+\!\(\*SuperscriptBox[\(\[Rho]\), \(0\)]\)\[Rule]2\[Psi]. See, e.g., \
+2312.14868\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DescriptionProcess", "[", 
+    RowBox[{"LLPname", ",", "\"\<Omega\>\""}], "]"}], "=", 
+   "\"\<Production of the MCPs \[Psi] via decays \[Omega]\[Rule]2\[Psi]. See, \
+e.g., 2312.14868\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DescriptionProcess", "[", 
+    RowBox[{"LLPname", ",", "\"\<Upsilon\>\""}], "]"}], "=", 
+   "\"\<Production of the MCPs \[Psi] via decays \[CapitalUpsilon]\[Rule]2\
+\[Psi]. See, e.g., 2312.14868\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DescriptionProcess", "[", 
+    RowBox[{"LLPname", ",", "\"\<All channels\>\""}], "]"}], "=", 
+   "\"\<All processes from the list\>\""}], ";"}]}], "Input",
+ CellChangeTimes->{{3.9505808140063744`*^9, 3.950580926587164*^9}, {
+  3.9505809592090473`*^9, 3.9505810732193623`*^9}, {3.9505812053112946`*^9, 
+  3.950581225636116*^9}, {3.9505813747513504`*^9, 
+  3.9505815223561516`*^9}},ExpressionUUID->"e5e8de51-8913-5040-993b-\
+e00e21d7f74f"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Matrix elements of 3-body decays", "Section",
+ CellChangeTimes->{{3.9133717120129457`*^9, 
+  3.9133717155033083`*^9}},ExpressionUUID->"4564a7c0-aa3b-445e-81ec-\
+851b73c8ebfb"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Decay of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["\[Pi]", "0"], "/", "\[Eta]"}], TraditionalForm]],
+  ExpressionUUID->"2e837a88-5049-314a-b6bd-05296248f70d"]
+}], "Subsection",
+ CellChangeTimes->{{3.8921984480094795`*^9, 
+  3.8921984526568637`*^9}},ExpressionUUID->"eeca7a08-c73f-42d8-a8cd-\
+007897690c92"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LLPname", "=", "\"\<MCP\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FileM2MCPprod", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], "//",
+        "ParentDirectory"}], ",", 
+      RowBox[{
+      "\"\<phenomenology/\>\"", "<>", "LLPname", "<>", 
+       "\"\</Production probabilities/M2Pi0Eta.mx\>\""}]}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"!", 
+    RowBox[{"FileExistsQ", "[", "FileM2MCPprod", "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MmesonDecayMCP3Body", "=", 
+     RowBox[{
+      RowBox[{
+       FractionBox[
+        RowBox[{"LeviCivita", "[", 
+         RowBox[{"\[Mu]", ",", "\[Nu]", ",", "\[Alpha]", ",", "\[Beta]"}], 
+         "]"}], 
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{
+          RowBox[{"k2", "+", "k3"}], ",", 
+          RowBox[{"k2", "+", "k3"}]}], "]"}]], 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"FV", "[", 
+           RowBox[{"k1", ",", "\[Mu]"}], "]"}], "*", 
+          RowBox[{"PolarizationVector", "[", 
+           RowBox[{"k1", ",", "\[Nu]"}], "]"}]}], "-", 
+         RowBox[{
+          RowBox[{"FV", "[", 
+           RowBox[{"k1", ",", "\[Nu]"}], "]"}], "*", 
+          RowBox[{"PolarizationVector", "[", 
+           RowBox[{"k1", ",", "\[Mu]"}], "]"}]}]}], ")"}], 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"FV", "[", 
+            RowBox[{
+             RowBox[{"k2", "+", "k3"}], ",", "\[Alpha]"}], "]"}]}], "*", 
+          RowBox[{"MT", "[", 
+           RowBox[{"\[Beta]", ",", "\[Delta]"}], "]"}]}], "+", 
+         RowBox[{
+          RowBox[{"FV", "[", 
+           RowBox[{
+            RowBox[{"k2", "+", "k3"}], ",", "\[Beta]"}], "]"}], "*", 
+          RowBox[{"MT", "[", 
+           RowBox[{"\[Alpha]", ",", "\[Delta]"}], "]"}]}]}], ")"}], 
+       RowBox[{
+        RowBox[{"SpinorVBar", "[", 
+         RowBox[{"k2", ",", "m2"}], "]"}], ".", 
+        RowBox[{"GA", "[", "\[Delta]", "]"}], ".", 
+        RowBox[{"SpinorU", "[", 
+         RowBox[{"k3", ",", "m3"}], "]"}]}]}], "//", "Contract"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"MmesonDecayMCP3BodyStar", "=", 
+     RowBox[{"MmesonDecayMCP3Body", "//", "ComplexConjugate"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"MmesonDecayMCP3BodySquaredTemp", "=", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Simplify", "[", 
+         RowBox[{"Expand", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"DoPolarizationSums", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"FermionSpinSum", "[", 
+                RowBox[{
+                "MmesonDecayMCP3Body", "*", "MmesonDecayMCP3BodyStar"}], 
+                "]"}], "/.", 
+               RowBox[{"DiracTrace", "\[Rule]", "TR"}]}], ",", "k1"}], "]"}], 
+            "//", "Contract"}], "//", "Simplify"}], "]"}], "]"}], "/.", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"ScalarProduct", "[", 
+            RowBox[{"k", ",", "k"}], "]"}], "\[Rule]", "ProductKK"}], ",", 
+          RowBox[{
+           RowBox[{"ScalarProduct", "[", 
+            RowBox[{"k1", ",", "k1"}], "]"}], "\[Rule]", "ProductK1K1"}], ",", 
+          RowBox[{
+           RowBox[{"ScalarProduct", "[", 
+            RowBox[{"k2", ",", "k2"}], "]"}], "\[Rule]", "ProductK2K2"}], ",", 
+          RowBox[{
+           RowBox[{"ScalarProduct", "[", 
+            RowBox[{"k3", ",", "k3"}], "]"}], "\[Rule]", "ProductK3K3"}]}], 
+         "}"}]}], "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"ScalarProduct", "[", 
+           RowBox[{"k", ",", "k1"}], "]"}], "\[Rule]", " ", 
+          "ProductKK1energy"}], ",", 
+         RowBox[{
+          RowBox[{"ScalarProduct", "[", 
+           RowBox[{"k2", ",", "k3"}], "]"}], "\[Rule]", "ProductK2K3energy"}],
+          ",", 
+         RowBox[{
+          RowBox[{"ScalarProduct", "[", 
+           RowBox[{"k1", ",", "k3"}], "]"}], "\[Rule]", "ProductK1K3energy"}],
+          ",", 
+         RowBox[{
+          RowBox[{"ScalarProduct", "[", 
+           RowBox[{"k", ",", "k3"}], "]"}], "\[Rule]", "ProductKK3energy"}], 
+         ",", 
+         RowBox[{
+          RowBox[{"ScalarProduct", "[", 
+           RowBox[{"k1", ",", "k2"}], "]"}], "\[Rule]", "ProductK1K2energy"}],
+          ",", 
+         RowBox[{
+          RowBox[{"ScalarProduct", "[", 
+           RowBox[{"k", ",", "k2"}], "]"}], "\[Rule]", "ProductKK2energy"}]}],
+         "}"}]}], ")"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Msquared3Body", "[", 
+      RowBox[{
+      "LLPname", ",", "\"\<Pi0\>\"", ",", "mLLP_", ",", "E1_", ",", "E3_"}], 
+      "]"}], "=", 
+     RowBox[{
+      RowBox[{"MmesonDecayMCP3BodySquaredTemp", "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"m", "\[Rule]", 
+          RowBox[{"mSM", "[", "\"\<Pi0\>\"", "]"}]}], ",", 
+         RowBox[{"m1", "\[Rule]", "0"}], ",", 
+         RowBox[{"m2", "\[Rule]", "mLLP"}], ",", 
+         RowBox[{"m3", "\[Rule]", "mLLP"}]}], "}"}]}], "//", "Simplify"}]}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Msquared3Body", "[", 
+      RowBox[{
+      "LLPname", ",", "\"\<Eta\>\"", ",", "mLLP_", ",", "E1_", ",", "E3_"}], 
+      "]"}], "=", 
+     RowBox[{
+      RowBox[{"MmesonDecayMCP3BodySquaredTemp", "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"m", "\[Rule]", 
+          RowBox[{"mSM", "[", "\"\<Eta\>\"", "]"}]}], ",", 
+         RowBox[{"m1", "\[Rule]", "0"}], ",", 
+         RowBox[{"m2", "\[Rule]", "mLLP"}], ",", 
+         RowBox[{"m3", "\[Rule]", "mLLP"}]}], "}"}]}], "//", "Simplify"}]}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{"Export", "[", 
+     RowBox[{"FileM2MCPprod", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Msquared3Body", "[", 
+         RowBox[{
+         "LLPname", ",", "\"\<Pi0\>\"", ",", "mLLP", ",", "E1", ",", "E3"}], 
+         "]"}], ",", 
+        RowBox[{"Msquared3Body", "[", 
+         RowBox[{
+         "LLPname", ",", "\"\<Eta\>\"", ",", "mLLP", ",", "E1", ",", "E3"}], 
+         "]"}]}], "}"}], ",", "\"\<MX\>\""}], "]"}]}], "\[IndentingNewLine]", 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Msquared3Body", "[", 
+        RowBox[{
+        "LLPname", ",", "\"\<Pi0\>\"", ",", "mLLP_", ",", "E1_", ",", "E3_"}],
+         "]"}], ",", 
+       RowBox[{"Msquared3Body", "[", 
+        RowBox[{
+        "LLPname", ",", "\"\<Eta\>\"", ",", "mLLP_", ",", "E1_", ",", "E3_"}],
+         "]"}]}], "}"}], "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"FileM2MCPprod", ",", "\"\<MX\>\""}], "]"}]}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"LLPname", "//", "Clear"}]}], "Input",
+ CellChangeTimes->{{3.89219927515915*^9, 3.8921992855451384`*^9}, {
+   3.8921995485015635`*^9, 3.8921996963442516`*^9}, {3.892199751414859*^9, 
+   3.8921998484653425`*^9}, {3.8921998892385187`*^9, 3.89220038025453*^9}, {
+   3.8922199580041428`*^9, 3.8922199585793204`*^9}, {3.892220871236271*^9, 
+   3.892220883878686*^9}, {3.892268785788042*^9, 3.892268790620195*^9}, {
+   3.9133717523578267`*^9, 3.9133718261333055`*^9}, {3.913371892367079*^9, 
+   3.913371892506214*^9}, {3.91337265221241*^9, 3.9133726633691483`*^9}, {
+   3.9133727141987715`*^9, 3.913372755847519*^9}, {3.9133945944532747`*^9, 
+   3.9133945960463085`*^9}, {3.9154388113424835`*^9, 
+   3.9154388113618507`*^9}, {3.9341224192834816`*^9, 
+   3.9341225680678186`*^9}, {3.934130746468069*^9, 3.9341307610598736`*^9}, 
+   3.9341308303967395`*^9, {3.9341333144846044`*^9, 3.934133315084751*^9}, {
+   3.9356009449208775`*^9, 3.935600945306692*^9}, {3.9493725313399143`*^9, 
+   3.9493725365142365`*^9}},ExpressionUUID->"6c06cb31-19e9-4bf7-8220-\
+6ba1b3081bb2"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1908, 1005.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d0f21e3c-efd8-584e-b69f-6aecba0ee806"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 153, 3, 67, "Chapter",ExpressionUUID->"6abe80dc-cac1-4951-a70c-ab85c8903212"],
+Cell[CellGroupData[{
+Cell[754, 29, 167, 3, 66, "Section",ExpressionUUID->"4a7f2f2d-f0b6-f54c-a93a-26db5dab8ee2"],
+Cell[924, 34, 2920, 75, 302, "Input",ExpressionUUID->"d0122b21-0044-5943-b162-6e2bda508611"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3881, 114, 165, 3, 66, "Section",ExpressionUUID->"4f876c3d-1254-4870-97d6-e76e6b07ff3f"],
+Cell[4049, 119, 3636, 92, 142, "Input",ExpressionUUID->"6daf334b-bcc0-4439-b3da-8dbd64e4d545"],
+Cell[CellGroupData[{
+Cell[7710, 215, 170, 3, 53, "Subsection",ExpressionUUID->"5bf8d557-9325-0645-8861-0ff8c78b1431"],
+Cell[7883, 220, 2346, 54, 161, "Input",ExpressionUUID->"e5e8de51-8913-5040-993b-e00e21d7f74f"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10278, 280, 181, 3, 66, "Section",ExpressionUUID->"4564a7c0-aa3b-445e-81ec-851b73c8ebfb"],
+Cell[CellGroupData[{
+Cell[10484, 287, 343, 10, 54, "Subsection",ExpressionUUID->"eeca7a08-c73f-42d8-a8cd-007897690c92"],
+Cell[10830, 299, 7979, 201, 372, "Input",ExpressionUUID->"6c06cb31-19e9-4bf7-8220-6ba1b3081bb2"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

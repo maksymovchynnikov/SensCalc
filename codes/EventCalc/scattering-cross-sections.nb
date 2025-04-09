@@ -1,0 +1,1347 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     49446,       1339]
+NotebookOptionsPosition[     47367,       1299]
+NotebookOutlinePosition[     47787,       1315]
+CellTagsIndexPosition[     47744,       1312]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Elastic scatterings", "Section",
+ CellChangeTimes->{{3.93910753860557*^9, 
+  3.939107541092495*^9}},ExpressionUUID->"e7cbdb02-57ea-cd47-a040-\
+bcfef26ddc46"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"<<", "FeynCalc`"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  "\"\<CM momentum of f \[Chi] pair in terms of \[Chi] lab energy:\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"vframe", "[", 
+    RowBox[{"p\[Chi]_", ",", "E\[Chi]_", ",", "mf_"}], "]"}], "=", 
+   RowBox[{"v", "/.", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"p\[Chi]", "-", 
+         RowBox[{"v", "*", "E\[Chi]"}]}], "\[Equal]", 
+        RowBox[{"mf", "*", "v"}]}], ",", "v"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PCM", "[", 
+   RowBox[{"E\[Chi]_", ",", "mf_", ",", "m\[Chi]_"}], "]"}], "=", 
+  RowBox[{"Assuming", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"E\[Chi]", ">", "m\[Chi]", ">", "0"}], " ", "&&", " ", 
+     RowBox[{"mf", " ", ">", "0"}]}], ",", 
+    RowBox[{"Simplify", "[", 
+     RowBox[{"Together", "[", 
+      RowBox[{
+       FractionBox[
+        RowBox[{"mf", "*", 
+         RowBox[{"vframe", "[", 
+          RowBox[{"p\[Chi]", ",", "E\[Chi]", ",", "mf"}], "]"}]}], 
+        RowBox[{"Sqrt", "[", 
+         RowBox[{"1", "-", 
+          SuperscriptBox[
+           RowBox[{"vframe", "[", 
+            RowBox[{"p\[Chi]", ",", "E\[Chi]", ",", "mf"}], "]"}], "2"]}], 
+         "]"}]], "/.", 
+       RowBox[{"p\[Chi]", "\[Rule]", 
+        RowBox[{"Sqrt", "[", 
+         RowBox[{
+          SuperscriptBox["E\[Chi]", "2"], "-", 
+          SuperscriptBox["m\[Chi]", "2"]}], "]"}]}]}], "]"}], "]"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Ecm", "[", 
+    RowBox[{"p_", ",", "mf_", ",", "m\[Chi]_"}], "]"}], "=", 
+   RowBox[{
+    RowBox[{"Sqrt", "[", 
+     RowBox[{
+      SuperscriptBox["p", "2"], "+", 
+      SuperscriptBox["mf", "2"]}], "]"}], "+", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{
+      SuperscriptBox["p", "2"], "+", 
+      SuperscriptBox["m\[Chi]", "2"]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MScatteringScalar", "=", 
+   RowBox[{"e", "*", "\[Epsilon]", "*", "g", "*", 
+    RowBox[{
+     RowBox[{"SpinorUBar", "[", 
+      RowBox[{"k2", ",", "mf"}], "]"}], ".", 
+     RowBox[{"GA", "[", "\[Mu]", "]"}], ".", 
+     RowBox[{"SpinorU", "[", 
+      RowBox[{"p2", ",", "mf"}], "]"}]}], 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", 
+        RowBox[{"MetricTensor", "[", 
+         RowBox[{"\[Mu]", ",", "\[Nu]"}], "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"FV", "[", 
+         RowBox[{
+          RowBox[{"p1", "-", "k1"}], ",", "\[Mu]"}], "]"}], "*", 
+        RowBox[{
+         RowBox[{"FV", "[", 
+          RowBox[{
+           RowBox[{"p1", "-", "k1"}], ",", "\[Nu]"}], "]"}], "/", 
+         SuperscriptBox["mV", "2"]}]}]}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"ScalarProduct", "[", 
+        RowBox[{
+         RowBox[{"p1", "-", "k1"}], ",", 
+         RowBox[{"p1", "-", "k1"}]}], "]"}], "-", 
+       SuperscriptBox["mV", "2"]}], ")"}]}], 
+    RowBox[{"FV", "[", 
+     RowBox[{
+      RowBox[{"k1", "+", "p1"}], ",", "\[Nu]"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MScatteringScalarStar", "=", 
+   RowBox[{
+    RowBox[{"ComplexConjugate", "[", "MScatteringScalar", "]"}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\[Mu]", "\[Rule]", " ", "\[Mu]C"}], ",", 
+      RowBox[{"\[Nu]", "\[Rule]", "\[Nu]C"}], ",", 
+      RowBox[{"\[Beta]", "\[Rule]", "\[Beta]C"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", "\"\<Maximal recoil fermion energy:\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Q2", "[", 
+    RowBox[{"Ef_", ",", "mf_"}], "]"}], "=", 
+   RowBox[{"2", "*", "mf", "*", 
+    RowBox[{"(", 
+     RowBox[{"Ef", "-", "mf"}], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Efmax", "[", 
+   RowBox[{"E\[Chi]_", ",", "m\[Chi]_", ",", "mf_"}], "]"}], "=", 
+  RowBox[{"Assuming", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"E\[Chi]", ">", "me", ">", "0"}], " ", "&&", " ", 
+     RowBox[{"mf", " ", ">", "0"}]}], ",", 
+    RowBox[{"Ee", "/.", 
+     RowBox[{
+      RowBox[{"Simplify", "[", 
+       RowBox[{"Solve", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Q2", "[", 
+           RowBox[{"Ee", ",", "mf"}], "]"}], "\[Equal]", 
+          RowBox[{"4", "*", 
+           SuperscriptBox[
+            RowBox[{"PCM", "[", 
+             RowBox[{"E\[Chi]", ",", "mf", ",", "m\[Chi]"}], "]"}], "2"]}]}], 
+         ",", "Ee"}], "]"}], "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  "\"\<cos(\!\(\*SubscriptBox[\(\[Theta]\), \(\[Chi]f\)]\)) in terms of \
+\!\(\*SubscriptBox[\(E\), \(f\)]\):\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cos\[Theta]\[Chi]f", "[", 
+   RowBox[{"E\[Chi]_", ",", "m\[Chi]_", ",", "Ef_", ",", "mf_"}], "]"}], "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"cos", "/.", 
+       RowBox[{"Simplify", "[", 
+        RowBox[{"Solve", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            SuperscriptBox["m\[Chi]", "2"], "+", 
+            SuperscriptBox["mf", "2"], "-", 
+            RowBox[{"2", "*", "E\[Chi]", "*", "Ef"}], "+", 
+            RowBox[{"2", 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox["E\[Chi]", "2"], "-", 
+               SuperscriptBox["m\[Chi]", "2"]}]], 
+             SqrtBox[
+              RowBox[{
+               SuperscriptBox["Ef", "2"], "-", 
+               SuperscriptBox["mf", "2"]}]], "cos"}]}], "==", 
+           RowBox[{
+            RowBox[{"2", "*", 
+             SuperscriptBox["mf", "2"]}], "+", 
+            RowBox[{"2", 
+             SuperscriptBox["m\[Chi]", "2"]}], "-", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{"Ecm", "[", 
+                 RowBox[{
+                  RowBox[{"PCM", "[", 
+                   RowBox[{"E\[Chi]", ",", "mf", ",", "m\[Chi]"}], "]"}], ",",
+                   "mf", ",", "m\[Chi]"}], "]"}], "2"], "/.", 
+               RowBox[{"{", 
+                RowBox[{
+                 SqrtBox[
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["mf", "2"], " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"E\[Chi]", "+", "mf"}], ")"}], "2"]}], 
+                   RowBox[{
+                    RowBox[{"2", " ", "E\[Chi]", " ", "mf"}], "+", 
+                    SuperscriptBox["mf", "2"], "+", 
+                    SuperscriptBox["m\[Chi]", "2"]}]]], "->", 
+                 FractionBox[
+                  RowBox[{"mf", 
+                   RowBox[{"(", 
+                    RowBox[{"E\[Chi]", "+", "mf"}], ")"}]}], 
+                  SqrtBox[
+                   RowBox[{
+                    RowBox[{"2", " ", "E\[Chi]", " ", "mf"}], "+", 
+                    SuperscriptBox["mf", "2"], "+", 
+                    SuperscriptBox["m\[Chi]", "2"]}]]]}], "}"}]}], "//", 
+              "Expand"}], ")"}], "-", 
+            RowBox[{"Q2", "[", 
+             RowBox[{"Ef", ",", "mf"}], "]"}]}]}], ",", "cos"}], "]"}], 
+        "]"}]}], "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         SqrtBox[
+          FractionBox[
+           RowBox[{
+            SuperscriptBox["mf", "2"], " ", 
+            SuperscriptBox[
+             RowBox[{"(", 
+              RowBox[{"E\[Chi]", "+", "mf"}], ")"}], "2"]}], 
+           RowBox[{
+            RowBox[{"2", " ", "E\[Chi]", " ", "mf"}], "+", 
+            SuperscriptBox["mf", "2"], "+", 
+            SuperscriptBox["m\[Chi]", "2"]}]]], " ", 
+         SqrtBox[
+          FractionBox[
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"E\[Chi]", " ", "mf"}], "+", 
+              SuperscriptBox["m\[Chi]", "2"]}], ")"}], "2"], 
+           RowBox[{
+            RowBox[{"2", " ", "E\[Chi]", " ", "mf"}], "+", 
+            SuperscriptBox["mf", "2"], "+", 
+            SuperscriptBox["m\[Chi]", "2"]}]]]}], "->", 
+        FractionBox[
+         RowBox[{"(", 
+          RowBox[{"mf", "*", 
+           RowBox[{"(", 
+            RowBox[{"E\[Chi]", "+", "mf"}], ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"E\[Chi]", "*", "mf"}], "+", 
+             SuperscriptBox["m\[Chi]", "2"]}], ")"}]}], ")"}], 
+         RowBox[{
+          RowBox[{"2", " ", "E\[Chi]", " ", "mf"}], "+", 
+          SuperscriptBox["mf", "2"], "+", 
+          SuperscriptBox["m\[Chi]", "2"]}]]}], "}"}]}], "//", "Simplify"}], 
+    ")"}], "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Theta]\[Chi]f", "[", 
+    RowBox[{"E\[Chi]_", ",", "m\[Chi]_", ",", "Ef_", ",", "mf_"}], "]"}], "=", 
+   RowBox[{"ArcCos", "[", 
+    RowBox[{"cos\[Theta]\[Chi]f", "[", 
+     RowBox[{"E\[Chi]", ",", "m\[Chi]", ",", "Ef", ",", "mf"}], "]"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Theta]Sol", "[", 
+    RowBox[{"q2_", ",", "p_"}], "]"}], "=", 
+   RowBox[{"2", "*", 
+    RowBox[{"ArcSin", "[", 
+     FractionBox[
+      RowBox[{"Sqrt", "[", "q2", "]"}], 
+      RowBox[{"2", "*", "p"}]], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Cos\[Theta]", "[", 
+    RowBox[{"q2_", ",", "p_"}], "]"}], "=", 
+   RowBox[{"1", "-", 
+    RowBox[{"2", "*", 
+     RowBox[{"q2", "/", 
+      RowBox[{"(", 
+       RowBox[{"4", "*", 
+        SuperscriptBox["p", "2"]}], ")"}]}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Cos2\[Theta]", "[", 
+    RowBox[{"q2_", ",", "p_"}], "]"}], "=", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"2", "*", 
+        FractionBox["q2", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"2", "*", "p"}], ")"}], "2"]]}]}], ")"}], "2"], "-", 
+    "1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Sin\[Theta]", "[", 
+    RowBox[{"q2_", ",", "p_"}], "]"}], "=", 
+   RowBox[{"2", "*", 
+    FractionBox[
+     RowBox[{"Sqrt", "[", "q2", "]"}], 
+     RowBox[{"2", "*", "p"}]], "*", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{"1", "-", 
+      FractionBox["q2", 
+       RowBox[{"4", "*", 
+        SuperscriptBox["p", "2"]}]]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Jacobian\[Theta]Toq2", "[", 
+    RowBox[{"q2_", ",", "p_"}], "]"}], "=", 
+   RowBox[{"D", "[", 
+    RowBox[{
+     RowBox[{"\[Theta]Sol", "[", 
+      RowBox[{"q2", ",", "p"}], "]"}], ",", "q2"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Jacobianq2toEf", "[", 
+     RowBox[{"Ef_", ",", "mf_"}], "]"}], "=", 
+    RowBox[{"D", "[", 
+     RowBox[{
+      RowBox[{"Q2", "[", 
+       RowBox[{"Ef", ",", "mf"}], "]"}], ",", "Ef"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Squared", " ", "matrix", " ", "element"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MScatteringScalarSquared", "[", 
+     RowBox[{
+     "\[Theta]_", ",", "p_", ",", "m\[Chi]_", ",", "mf_", ",", "mV_", ",", 
+      "\[Epsilon]_"}], "]"}], "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          FractionBox["1", "2"], 
+          RowBox[{"FermionSpinSum", "[", 
+           RowBox[{"MScatteringScalar", " ", "MScatteringScalarStar"}], 
+           "]"}]}], "/.", 
+         RowBox[{"DiracTrace", "\[Rule]", "TR"}]}], "//", "Contract"}], "//", 
+       "Simplify"}], ")"}], "/.", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"p1", ",", "p2"}], "]"}], "->", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["m\[Chi]", "2"]}], "]"}], "*", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["mf", "2"]}], "]"}]}], "+", 
+         SuperscriptBox["p", "2"]}]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"p1", ",", "k1"}], "]"}], "->", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["m\[Chi]", "2"]}], "]"}], "*", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["m\[Chi]", "2"]}], "]"}]}], "-", 
+         RowBox[{
+          SuperscriptBox["p", "2"], "*", 
+          RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"p1", ",", "k2"}], "]"}], "->", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["m\[Chi]", "2"]}], "]"}], "*", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["mf", "2"]}], "]"}]}], "+", 
+         RowBox[{"p", "*", "p", "*", 
+          RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"p2", ",", "k1"}], "]"}], "->", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["mf", "2"]}], "]"}], "*", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["m\[Chi]", "2"]}], "]"}]}], "+", 
+         RowBox[{"p", "*", "p", "*", 
+          RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"p2", ",", "k2"}], "]"}], "->", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["mf", "2"]}], "]"}], "*", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["mf", "2"]}], "]"}]}], "-", 
+         RowBox[{"p", "*", "p", "*", 
+          RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"k1", ",", "k2"}], "]"}], "->", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["mf", "2"]}], "]"}], "*", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            SuperscriptBox["p", "2"], "+", 
+            SuperscriptBox["m\[Chi]", "2"]}], "]"}]}], "+", 
+         SuperscriptBox["p", "2"]}]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"p1", ",", "p1"}], "]"}], "->", 
+        SuperscriptBox["m\[Chi]", "2"]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"p2", ",", "p2"}], "]"}], "->", 
+        SuperscriptBox["mf", "2"]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"k1", ",", "k1"}], "]"}], "->", 
+        SuperscriptBox["m\[Chi]", "2"]}], ",", 
+       RowBox[{
+        RowBox[{"ScalarProduct", "[", 
+         RowBox[{"k2", ",", "k2"}], "]"}], "->", 
+        SuperscriptBox["mf", "2"]}]}], "}"}]}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Differential", " ", "cross"}], "-", 
+    RowBox[{"section", " ", 
+     RowBox[{"d\[Sigma]", "/", 
+      RowBox[{"dcos", "[", "\[Theta]", "]"}]}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dsigmaScalard\[Theta]", "[", 
+    RowBox[{
+    "\[Theta]_", ",", "p_", ",", "m\[Chi]_", ",", "mf_", ",", "mV_", ",", 
+     "\[Epsilon]_", ",", "F_"}], "]"}], " ", "=", " ", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"Sin", "[", "\[Theta]", "]"}], 
+     RowBox[{"64", "*", 
+      SuperscriptBox["Pi", "2"], "*", 
+      SuperscriptBox[
+       RowBox[{"Ecm", "[", 
+        RowBox[{"p", ",", "mf", ",", "m\[Chi]"}], "]"}], "2"]}]], "2", "*", 
+    "Pi", "*", 
+    RowBox[{"MScatteringScalarSquared", "[", 
+     RowBox[{
+     "\[Theta]", ",", "p", ",", "m\[Chi]", ",", "mf", ",", "mV", ",", 
+      "\[Epsilon]"}], "]"}], "*", 
+    SuperscriptBox["F", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  "\"\<d\[Sigma]/\!\(\*SubscriptBox[\(dE\), \(f\)]\):\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"d\[Sigma]dEfTemp", "[", 
+    RowBox[{
+    "Ef_", ",", "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "mf_", ",", 
+     "\[Epsilon]2_", ",", "F_", ",", "\[Alpha]D_"}], "]"}], "=", 
+   RowBox[{"Assuming", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"E\[Chi]", ">", "m\[Chi]", ">", "0"}], "&&", 
+      RowBox[{"mf", ">", "0"}], "&&", 
+      RowBox[{"E\[Chi]", ">", "mf"}]}], ",", 
+     RowBox[{"Simplify", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"dsigmaScalard\[Theta]", "[", 
+          RowBox[{"\[Theta]", ",", 
+           RowBox[{"PCM", "[", 
+            RowBox[{"E\[Chi]", ",", "mf", ",", "m\[Chi]"}], "]"}], ",", 
+           "m\[Chi]", ",", "mf", ",", "mV", ",", 
+           SqrtBox["\[Epsilon]2"], ",", "F"}], "]"}], "*", 
+         RowBox[{"Jacobian\[Theta]Toq2", "[", 
+          RowBox[{
+           RowBox[{"Q2", "[", 
+            RowBox[{"Ef", ",", "mf"}], "]"}], ",", 
+           RowBox[{"PCM", "[", 
+            RowBox[{"E\[Chi]", ",", "mf", ",", "m\[Chi]"}], "]"}]}], "]"}], 
+         "*", 
+         RowBox[{"Jacobianq2toEf", "[", 
+          RowBox[{"Ef", ",", "mf"}], "]"}]}], "/.", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"e", "\[Rule]", 
+           SqrtBox[
+            RowBox[{"4", "*", "Pi", "*", "\[Alpha]EM"}]]}], ",", 
+          RowBox[{"g", "\[Rule]", 
+           SqrtBox[
+            RowBox[{"4", "*", "Pi", "*", "\[Alpha]D"}]]}]}], "}"}]}], "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Cos", "[", "\[Theta]", "]"}], "\[Rule]", 
+          RowBox[{"Cos\[Theta]", "[", 
+           RowBox[{
+            RowBox[{"Q2", "[", 
+             RowBox[{"Ef", ",", "mf"}], "]"}], ",", 
+            RowBox[{"PCM", "[", 
+             RowBox[{"E\[Chi]", ",", "mf", ",", "m\[Chi]"}], "]"}]}], "]"}]}],
+          ",", 
+         RowBox[{
+          RowBox[{"Sin", "[", "\[Theta]", "]"}], "\[Rule]", 
+          RowBox[{"Sin\[Theta]", "[", 
+           RowBox[{
+            RowBox[{"Q2", "[", 
+             RowBox[{"Ef", ",", "mf"}], "]"}], ",", 
+            RowBox[{"PCM", "[", 
+             RowBox[{"E\[Chi]", ",", "mf", ",", "m\[Chi]"}], "]"}]}], 
+           "]"}]}]}], "}"}]}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  "\"\<cos(\!\(\*SubscriptBox[\(\[Theta]\), \(\*SubscriptBox[\(f\), \(out\)] \
+\*SubscriptBox[\(\[Chi]\), \(in\)]\)]\)):\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cos\[Theta]scatt", "[", 
+   RowBox[{"E\[Chi]_", ",", "m\[Chi]_", ",", "Ef_", ",", "mf_"}], "]"}], "=", 
+  RowBox[{"(*", 
+   RowBox[{"Cos\[Theta]", "[", 
+    RowBox[{
+     RowBox[{"Q2", "[", 
+      RowBox[{"Ef", ",", "mf"}], "]"}], ",", 
+     RowBox[{"PCM", "[", 
+      RowBox[{"E\[Chi]", ",", "mf", ",", "m\[Chi]"}], "]"}]}], "]"}], "*)"}], 
+  RowBox[{"cos\[Theta]f", "/.", 
+   RowBox[{
+    RowBox[{"Solve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        SuperscriptBox["m\[Chi]", "2"], "+", 
+        SuperscriptBox["mf", "2"], "-", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", "E\[Chi]", "*", "Ef"}], "-", 
+          RowBox[{"2", 
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox["E\[Chi]", "2"], "-", 
+             SuperscriptBox["m\[Chi]", "2"]}]], "*", 
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox["Ef", "2"], "-", 
+             SuperscriptBox["mf", "2"]}]], "cos\[Theta]f"}]}], ")"}]}], "==", 
+       RowBox[{
+        SuperscriptBox["m\[Chi]", "2"], "+", 
+        SuperscriptBox["mf", "2"], "-", 
+        RowBox[{"2", "*", 
+         RowBox[{"(", 
+          RowBox[{"E\[Chi]", "+", "mf", "-", "Ef"}], ")"}], "*", "mf"}]}]}], 
+      ",", "cos\[Theta]f"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.939107508681732*^9, 3.9391075105137672`*^9}, {
+  3.9391177537657185`*^9, 3.9391177891460304`*^9}, {3.9391181615412292`*^9, 
+  3.9391181628098164`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"757d4c3e-3a6a-a344-a21e-b30247c9516c"],
+
+Cell[BoxData[
+ FormBox[
+  StyleBox["\<\"FeynCalc is already loaded! If you are trying to reload \
+FeynCalc or load FeynArts, TARCER, PHI, FeynHelpers or any other add-on, \
+please restart the kernel.\"\>", "Text",
+   StripOnInput->False,
+   LineColor->RGBColor[1, 0, 0],
+   FrontFaceColor->RGBColor[1, 0, 0],
+   BackFaceColor->RGBColor[1, 0, 0],
+   GraphicsColor->RGBColor[1, 0, 0],
+   FontWeight->Bold,
+   FontColor->RGBColor[1, 0, 0]], TraditionalForm]], "Print",
+ CellChangeTimes->{3.939109415484211*^9, 3.9391139267533417`*^9, 
+  3.939118925350504*^9},
+ CellLabel->
+  "During evaluation of \
+In[114]:=",ExpressionUUID->"f02e3d6a-dfda-414f-864e-49119528ed97"],
+
+Cell[BoxData[
+ FormBox["$Aborted", TraditionalForm]], "Output",
+ CellChangeTimes->{3.939109415502304*^9, 3.9391139267931843`*^9, 
+  3.9391189253671474`*^9},
+ CellLabel->
+  "Out[114]=",ExpressionUUID->"35d60417-8d1d-ee40-93b8-c1c7c0b581c3"],
+
+Cell[BoxData[
+ FormBox["\<\"CM momentum of f \[Chi] pair in terms of \[Chi] lab \
+energy:\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{3.939109415484211*^9, 3.9391139267533417`*^9, 
+  3.9391189253671474`*^9},
+ CellLabel->
+  "During evaluation of \
+In[114]:=",ExpressionUUID->"039434cb-f412-4f42-ab6f-36034ef781b1"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"mf", " ", 
+   SqrtBox[
+    FractionBox[
+     RowBox[{
+      SuperscriptBox["E\[Chi]", "2"], "-", 
+      SuperscriptBox["m\[Chi]", "2"]}], 
+     RowBox[{
+      RowBox[{"2", " ", "E\[Chi]", " ", "mf"}], "+", 
+      SuperscriptBox["mf", "2"], "+", 
+      SuperscriptBox["m\[Chi]", "2"]}]]]}], TraditionalForm]], "Output",
+ CellChangeTimes->{3.939109415502304*^9, 3.9391139267931843`*^9, 
+  3.9391189253671474`*^9},
+ CellLabel->
+  "Out[117]=",ExpressionUUID->"9afc0cf0-14ed-9e4c-8b41-7262732dfc8f"],
+
+Cell[BoxData[
+ FormBox["\<\"Maximal recoil fermion energy:\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{3.939109415484211*^9, 3.9391139267533417`*^9, 
+  3.9391189253875294`*^9},
+ CellLabel->
+  "During evaluation of \
+In[114]:=",ExpressionUUID->"cb8d2fc1-6666-5541-bd9d-ee81a2c4be7c"],
+
+Cell[BoxData[
+ FormBox[
+  FractionBox[
+   RowBox[{"mf", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", 
+       SuperscriptBox["E\[Chi]", "2"]}], "+", 
+      RowBox[{"2", " ", "E\[Chi]", " ", "mf"}], "+", 
+      SuperscriptBox["mf", "2"], "-", 
+      SuperscriptBox["m\[Chi]", "2"]}], ")"}]}], 
+   RowBox[{
+    RowBox[{"2", " ", "E\[Chi]", " ", "mf"}], "+", 
+    SuperscriptBox["mf", "2"], "+", 
+    SuperscriptBox["m\[Chi]", "2"]}]], TraditionalForm]], "Output",
+ CellChangeTimes->{3.939109415502304*^9, 3.9391139267931843`*^9, 
+  3.939118925400633*^9},
+ CellLabel->
+  "Out[123]=",ExpressionUUID->"6f7d7a70-bc8c-a046-9075-60c9d942f288"],
+
+Cell[BoxData[
+ FormBox["\<\"cos(\\!\\(\\*SubscriptBox[\\(\[Theta]\\), \\(\[Chi]f\\)]\\)) in \
+terms of \\!\\(\\*SubscriptBox[\\(E\\), \\(f\\)]\\):\"\>", 
+  TraditionalForm]], "Print",
+ CellChangeTimes->{3.939109415484211*^9, 3.9391139267533417`*^9, 
+  3.939118925400633*^9},
+ CellLabel->
+  "During evaluation of \
+In[114]:=",ExpressionUUID->"8d267f73-806d-fd42-b8c5-8b5dc840a75b"],
+
+Cell[BoxData[
+ FormBox[
+  FractionBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"Ef", "-", "mf"}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"E\[Chi]", "-", "mf"}], ")"}]}], 
+   RowBox[{
+    SqrtBox[
+     RowBox[{
+      SuperscriptBox["Ef", "2"], "-", 
+      SuperscriptBox["mf", "2"]}]], " ", 
+    SqrtBox[
+     RowBox[{
+      SuperscriptBox["E\[Chi]", "2"], "-", 
+      SuperscriptBox["m\[Chi]", "2"]}]]}]], TraditionalForm]], "Output",
+ CellChangeTimes->{3.939109415502304*^9, 3.9391139267931843`*^9, 
+  3.939118925634039*^9},
+ CellLabel->
+  "Out[125]=",ExpressionUUID->"97a032d1-c64b-1d4e-8fe8-e09db7e0b3c1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox["\<\"d\[Sigma]/\\!\\(\\*SubscriptBox[\\(dE\\), \\(f\\)]\\):\"\>", 
+  TraditionalForm]], "Print",
+ CellChangeTimes->{3.939109415484211*^9, 3.9391139267533417`*^9, 
+  3.939118925800577*^9},
+ CellLabel->
+  "During evaluation of \
+In[114]:=",ExpressionUUID->"bc2c10b9-6bbc-fa44-9931-1e480d1a07e5"],
+
+Cell[BoxData[
+ FormBox["\<\"cos(\\!\\(\\*SubscriptBox[\\(\[Theta]\\), \
+\\(\\*SubscriptBox[\\(f\\), \\(out\\)] \\*SubscriptBox[\\(\[Chi]\\), \
+\\(in\\)]\\)]\\)):\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{3.939109415484211*^9, 3.9391139267533417`*^9, 
+  3.9391189259408264`*^9},
+ CellLabel->
+  "During evaluation of \
+In[114]:=",ExpressionUUID->"010f15c6-6bb0-a344-9de9-e85da45abc27"]
+}, Open  ]],
+
+Cell[BoxData[
+ FormBox[
+  FractionBox[
+   RowBox[{
+    RowBox[{"Ef", " ", "E\[Chi]"}], "+", 
+    RowBox[{"Ef", " ", "mf"}], "-", 
+    RowBox[{"E\[Chi]", " ", "mf"}], "-", 
+    SuperscriptBox["mf", "2"]}], 
+   RowBox[{
+    SqrtBox[
+     RowBox[{
+      SuperscriptBox["Ef", "2"], "-", 
+      SuperscriptBox["mf", "2"]}]], " ", 
+    SqrtBox[
+     RowBox[{
+      SuperscriptBox["E\[Chi]", "2"], "-", 
+      SuperscriptBox["m\[Chi]", "2"]}]]}]], TraditionalForm]], "Output",
+ CellChangeTimes->{3.939109415502304*^9, 3.9391139267931843`*^9, 
+  3.939118925950777*^9},
+ CellLabel->
+  "Out[138]=",ExpressionUUID->"53e39dc5-7703-f448-9c2e-7100cb3d078e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Off electrons", "Subsection",
+ CellChangeTimes->{{3.9391075204076157`*^9, 
+  3.9391075219596577`*^9}},ExpressionUUID->"1d60a4aa-1da9-d640-a910-\
+635d0177556f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"d\[Sigma]dEfTempElectrons", "[", 
+    RowBox[{
+    "Ee_", ",", "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "me_", ",", 
+     "\[Epsilon]2_", ",", "\[Alpha]D_"}], "]"}], "=", 
+   RowBox[{
+    RowBox[{"d\[Sigma]dEfTemp", "[", 
+     RowBox[{
+     "Ee", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "me", ",", 
+      "\[Epsilon]2", ",", "1", ",", "\[Alpha]D"}], "]"}], "//", 
+    "Simplify"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Sigma]Total", "[", 
+    RowBox[{
+    "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "\[Epsilon]2_", ",", 
+     "\[Alpha]D_", ",", "\"\<Electrons\>\""}], "]"}], "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Integrate", "[", 
+              RowBox[{
+               RowBox[{"d\[Sigma]dEfTempElectrons", "[", 
+                RowBox[{
+                "Ee", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "me", 
+                 ",", "\[Epsilon]2", ",", "\[Alpha]D"}], "]"}], ",", "Ee"}], 
+              "]"}], "/.", 
+             RowBox[{"{", 
+              RowBox[{"Ee", "->", 
+               RowBox[{"Efmax", "[", 
+                RowBox[{"E\[Chi]", ",", "m\[Chi]", ",", "me"}], "]"}]}], " ", 
+              "}"}]}], ")"}], "-", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Integrate", "[", 
+              RowBox[{
+               RowBox[{"d\[Sigma]dEfTempElectrons", "[", 
+                RowBox[{
+                "Ee", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "me", 
+                 ",", "\[Epsilon]2", ",", "\[Alpha]D"}], "]"}], ",", "Ee"}], 
+              "]"}], "/.", 
+             RowBox[{"{", 
+              RowBox[{"Ee", "->", "me"}], "}"}]}], ")"}]}], "//", "Expand"}], 
+         "//", "Simplify"}], ")"}], "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          FractionBox[
+           RowBox[{
+            RowBox[{"Log", "[", 
+             SuperscriptBox["mV", "2"], "]"}], " ", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+              SuperscriptBox["m\[Chi]", "2"]}], ")"}]}], 
+           RowBox[{
+            SuperscriptBox["me", "2"], " ", 
+            RowBox[{"(", 
+             RowBox[{
+              SuperscriptBox["E\[Chi]", "2"], "-", 
+              SuperscriptBox["m\[Chi]", "2"]}], ")"}]}]], "->", 
+          RowBox[{
+           RowBox[{"-", " ", 
+            RowBox[{"Log", "[", 
+             FractionBox[
+              RowBox[{
+               FractionBox[
+                RowBox[{"2", " ", 
+                 SuperscriptBox["me", "2"], " ", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"2", " ", 
+                    SuperscriptBox["E\[Chi]", "2"]}], "+", 
+                   RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                   SuperscriptBox["me", "2"], "-", 
+                   SuperscriptBox["m\[Chi]", "2"]}], ")"}]}], 
+                RowBox[{
+                 RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                 SuperscriptBox["me", "2"], "+", 
+                 SuperscriptBox["m\[Chi]", "2"]}]], "-", 
+               RowBox[{"2", " ", 
+                SuperscriptBox["me", "2"]}], "+", 
+               SuperscriptBox["mV", "2"]}], 
+              SuperscriptBox["mV", "2"]], "]"}]}], 
+           FractionBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+              SuperscriptBox["m\[Chi]", "2"]}], ")"}], 
+            RowBox[{
+             SuperscriptBox["me", "2"], " ", 
+             RowBox[{"(", 
+              RowBox[{
+               SuperscriptBox["E\[Chi]", "2"], "-", 
+               SuperscriptBox["m\[Chi]", "2"]}], ")"}]}]]}]}], ",", 
+         RowBox[{
+          FractionBox[
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+              SuperscriptBox["m\[Chi]", "2"]}], ")"}], " ", 
+            RowBox[{"Log", "[", 
+             RowBox[{
+              FractionBox[
+               RowBox[{"2", " ", 
+                SuperscriptBox["me", "2"], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"2", " ", 
+                   SuperscriptBox["E\[Chi]", "2"]}], "+", 
+                  RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                  SuperscriptBox["me", "2"], "-", 
+                  SuperscriptBox["m\[Chi]", "2"]}], ")"}]}], 
+               RowBox[{
+                RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                SuperscriptBox["me", "2"], "+", 
+                SuperscriptBox["m\[Chi]", "2"]}]], "-", 
+              RowBox[{"2", " ", 
+               SuperscriptBox["me", "2"]}], "+", 
+              SuperscriptBox["mV", "2"]}], "]"}]}], 
+           RowBox[{
+            SuperscriptBox["me", "2"], " ", 
+            RowBox[{"(", 
+             RowBox[{
+              SuperscriptBox["E\[Chi]", "2"], "-", 
+              SuperscriptBox["m\[Chi]", "2"]}], ")"}]}]], "->", "0"}]}], 
+        "}"}]}], "//", "Simplify"}], ")"}], "/.", 
+    RowBox[{"{", 
+     RowBox[{"me", "->", "ME"}], "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Sigma]TotalEmin", "[", 
+    RowBox[{
+    "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "\[Epsilon]2_", ",", 
+     "\[Alpha]D_", ",", "Emin_", ",", "\"\<Electrons\>\""}], "]"}], "=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"ME", "<=", "Emin", "<", 
+      RowBox[{"Efmax", "[", 
+       RowBox[{"E\[Chi]", ",", "m\[Chi]", ",", "ME"}], "]"}]}], ",", 
+     RowBox[{"Evaluate", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"Integrate", "[", 
+                 RowBox[{
+                  RowBox[{"d\[Sigma]dEfTempElectrons", "[", 
+                   RowBox[{
+                   "Ee", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "me",
+                     ",", "\[Epsilon]2", ",", "\[Alpha]D"}], "]"}], ",", 
+                  "Ee"}], "]"}], "/.", 
+                RowBox[{"{", 
+                 RowBox[{"Ee", "->", 
+                  RowBox[{"Efmax", "[", 
+                   RowBox[{"E\[Chi]", ",", "m\[Chi]", ",", "me"}], "]"}]}], 
+                 " ", "}"}]}], ")"}], "-", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"Integrate", "[", 
+                 RowBox[{
+                  RowBox[{"d\[Sigma]dEfTempElectrons", "[", 
+                   RowBox[{
+                   "Ee", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "me",
+                     ",", "\[Epsilon]2", ",", "\[Alpha]D"}], "]"}], ",", 
+                  "Ee"}], "]"}], "/.", 
+                RowBox[{"{", 
+                 RowBox[{"Ee", "->", "Emin"}], "}"}]}], ")"}]}], "//", 
+             "Expand"}], "//", "Simplify"}], ")"}], "/.", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             FractionBox[
+              RowBox[{
+               RowBox[{"Log", "[", 
+                SuperscriptBox["mV", "2"], "]"}], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                 SuperscriptBox["m\[Chi]", "2"]}], ")"}]}], 
+              RowBox[{
+               SuperscriptBox["me", "2"], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 SuperscriptBox["E\[Chi]", "2"], "-", 
+                 SuperscriptBox["m\[Chi]", "2"]}], ")"}]}]], "->", 
+             RowBox[{
+              RowBox[{"-", " ", 
+               RowBox[{"Log", "[", 
+                FractionBox[
+                 RowBox[{
+                  FractionBox[
+                   RowBox[{"2", " ", 
+                    SuperscriptBox["me", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"2", " ", 
+                    SuperscriptBox["E\[Chi]", "2"]}], "+", 
+                    RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                    SuperscriptBox["me", "2"], "-", 
+                    SuperscriptBox["m\[Chi]", "2"]}], ")"}]}], 
+                   RowBox[{
+                    RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                    SuperscriptBox["me", "2"], "+", 
+                    SuperscriptBox["m\[Chi]", "2"]}]], "-", 
+                  RowBox[{"2", " ", 
+                   SuperscriptBox["me", "2"]}], "+", 
+                  SuperscriptBox["mV", "2"]}], 
+                 SuperscriptBox["mV", "2"]], "]"}]}], 
+              FractionBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                 SuperscriptBox["m\[Chi]", "2"]}], ")"}], 
+               RowBox[{
+                SuperscriptBox["me", "2"], " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  SuperscriptBox["E\[Chi]", "2"], "-", 
+                  SuperscriptBox["m\[Chi]", "2"]}], ")"}]}]]}]}], ",", 
+            RowBox[{
+             FractionBox[
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                 SuperscriptBox["m\[Chi]", "2"]}], ")"}], " ", 
+               RowBox[{"Log", "[", 
+                RowBox[{
+                 FractionBox[
+                  RowBox[{"2", " ", 
+                   SuperscriptBox["me", "2"], " ", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"2", " ", 
+                    SuperscriptBox["E\[Chi]", "2"]}], "+", 
+                    RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                    SuperscriptBox["me", "2"], "-", 
+                    SuperscriptBox["m\[Chi]", "2"]}], ")"}]}], 
+                  RowBox[{
+                   RowBox[{"2", " ", "E\[Chi]", " ", "me"}], "+", 
+                   SuperscriptBox["me", "2"], "+", 
+                   SuperscriptBox["m\[Chi]", "2"]}]], "-", 
+                 RowBox[{"2", " ", 
+                  SuperscriptBox["me", "2"]}], "+", 
+                 SuperscriptBox["mV", "2"]}], "]"}]}], 
+              RowBox[{
+               SuperscriptBox["me", "2"], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 SuperscriptBox["E\[Chi]", "2"], "-", 
+                 SuperscriptBox["m\[Chi]", "2"]}], ")"}]}]], "->", "0"}]}], 
+           "}"}]}], "//", "Simplify"}], ")"}], "/.", 
+       RowBox[{"{", 
+        RowBox[{"me", "->", "ME"}], "}"}]}], "]"}], ",", "0."}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"d\[Sigma]dEfTempElectrons", "[", 
+    RowBox[{
+    "Ee_", ",", "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "\[Epsilon]2_", 
+     ",", "\[Alpha]D_"}], "]"}], "=", 
+   RowBox[{"d\[Sigma]dEfTempElectrons", "[", 
+    RowBox[{
+    "Ee", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "ME", ",", 
+     "\[Epsilon]2", ",", "\[Alpha]D"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dPdEdzElectrons", "[", 
+    RowBox[{
+    "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "\[Epsilon]2_", ",", 
+     "\[Alpha]D_"}], "]"}], "=", 
+   RowBox[{"ZdetVal", "*", "nAtomsMaterialGivenExperiment", 
+    FractionBox["ltargetGivenExperiment", "dzFidGivenExperiment"], "*", 
+    "GeVm2Tom2", "*", 
+    RowBox[{"\[Sigma]Total", "[", 
+     RowBox[{
+     "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "\[Epsilon]2", ",", 
+      "\[Alpha]D", ",", "\"\<Electrons\>\""}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dPdEdzEminElectrons", "[", 
+    RowBox[{
+    "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "Emin_", ",", 
+     "\[Epsilon]2_", ",", "\[Alpha]D_"}], "]"}], "=", 
+   RowBox[{"ZdetVal", "*", "nAtomsMaterialGivenExperiment", 
+    FractionBox["ltargetGivenExperiment", "dzFidGivenExperiment"], "*", 
+    "GeVm2Tom2", "*", 
+    RowBox[{"\[Sigma]TotalEmin", "[", 
+     RowBox[{
+     "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "\[Epsilon]2", ",", 
+      "\[Alpha]D", ",", "Emin", ",", "\"\<Electrons\>\""}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"CDFscattering", "[", 
+    RowBox[{"Ee_", ",", "m\[Chi]_", ",", "mV_", ",", "E\[Chi]_"}], "]"}], "=", 
+   RowBox[{
+    RowBox[{
+     FractionBox["1", 
+      RowBox[{"\[Sigma]Total", "[", 
+       RowBox[{
+       "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "1", ",", "1", ",", 
+        "\"\<Electrons\>\""}], "]"}]], 
+     RowBox[{"Assuming", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"mV", ">", "0"}], "&&", 
+        RowBox[{"m\[Chi]", ">", "0"}], "&&", 
+        RowBox[{"Ee", ">", "me", ">", "0"}]}], ",", 
+       RowBox[{"Integrate", "[", 
+        RowBox[{
+         RowBox[{"d\[Sigma]dEfTemp", "[", 
+          RowBox[{
+          "EE", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "me", ",", 
+           "1", ",", "1", ",", "1"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"EE", ",", "me", ",", "Ee"}], "}"}]}], "]"}]}], "]"}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{"me", "->", "ME"}], "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.939113930246872*^9, 3.9391139310992794`*^9}, {
+  3.9391163061215744`*^9, 3.939116365619261*^9}, {3.939116401114912*^9, 
+  3.9391164720315647`*^9}, {3.9391169173630676`*^9, 3.939116930973543*^9}, {
+  3.9391177938675785`*^9, 3.9391178622909603`*^9}, {3.939117998653824*^9, 
+  3.9391180026264744`*^9}, {3.9391180393223534`*^9, 3.939118058305271*^9}, {
+  3.9391181100148373`*^9, 3.939118135035969*^9}, {3.9391182495814037`*^9, 
+  3.9391182592091312`*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"98372792-9e8c-0946-b21f-cf53da7bfc53"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Off protons", "Subsection",
+ CellChangeTimes->{{3.939107528705578*^9, 
+  3.939107529765415*^9}},ExpressionUUID->"e28ed0af-0354-6843-aeb0-\
+1c8931a21f60"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fdipole", "[", "m_", "]"}], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[CapitalLambda]p", "2"], 
+     RowBox[{"(", 
+      RowBox[{
+       SuperscriptBox["\[CapitalLambda]p", "2"], "+", 
+       RowBox[{"Q2", "[", 
+        RowBox[{"Ep", ",", "mp"}], "]"}]}], ")"}]], "//", "Simplify"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"d\[Sigma]dEfTempProtons", "[", 
+    RowBox[{
+    "Ep_", ",", "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "mp_", ",", 
+     "\[CapitalLambda]p_", ",", "\[Epsilon]2_", ",", "\[Alpha]D_"}], "]"}], 
+   "=", 
+   RowBox[{
+    RowBox[{"d\[Sigma]dEfTemp", "[", 
+     RowBox[{
+     "Ep", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "mp", ",", 
+      "\[Epsilon]2", ",", 
+      RowBox[{"Fdipole", "[", "\[CapitalLambda]p", "]"}], ",", "\[Alpha]D"}], 
+     "]"}], "//", "Simplify"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Sigma]Total", "[", 
+    RowBox[{
+    "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "\[Epsilon]2_", ",", 
+     "\[Alpha]D_", ",", "\"\<Protons\>\""}], "]"}], "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Integrate", "[", 
+           RowBox[{
+            RowBox[{"d\[Sigma]dEfTempProtons", "[", 
+             RowBox[{
+             "Ep", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "mp", ",", 
+              "\[CapitalLambda]p", ",", "\[Epsilon]2", ",", "\[Alpha]D"}], 
+             "]"}], ",", "Ep"}], "]"}], "/.", 
+          RowBox[{"{", 
+           RowBox[{"Ep", "->", 
+            RowBox[{"Efmax", "[", 
+             RowBox[{"E\[Chi]", ",", "m\[Chi]", ",", "mp"}], "]"}]}], " ", 
+           "}"}]}], ")"}], "-", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Integrate", "[", 
+           RowBox[{
+            RowBox[{"d\[Sigma]dEfTempProtons", "[", 
+             RowBox[{
+             "Ep", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "mp", ",", 
+              "\[CapitalLambda]p", ",", "\[Epsilon]2", ",", "\[Alpha]D"}], 
+             "]"}], ",", "Ep"}], "]"}], "/.", 
+          RowBox[{"{", 
+           RowBox[{"Ep", "->", "mp"}], "}"}]}], ")"}]}], ")"}], "//", 
+      "Simplify"}], ")"}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\[CapitalLambda]p", "->", "0.843"}], ",", 
+      RowBox[{"mp", "->", "MP"}]}], "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Sigma]TotalEmin", "[", 
+    RowBox[{
+    "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "\[Epsilon]2_", ",", 
+     "\[Alpha]D_", ",", "Emin_", ",", "\"\<Protons\>\""}], "]"}], "=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"MP", "<=", "Emin", "<", 
+      RowBox[{"Efmax", "[", 
+       RowBox[{"E\[Chi]", ",", "m\[Chi]", ",", "MP"}], "]"}]}], ",", 
+     RowBox[{"Evaluate", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Integrate", "[", 
+              RowBox[{
+               RowBox[{"d\[Sigma]dEfTempProtons", "[", 
+                RowBox[{
+                "Ep", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "mp", 
+                 ",", "\[CapitalLambda]p", ",", "\[Epsilon]2", ",", 
+                 "\[Alpha]D"}], "]"}], ",", "Ep"}], "]"}], "/.", 
+             RowBox[{"{", 
+              RowBox[{"Ep", "->", 
+               RowBox[{"Efmax", "[", 
+                RowBox[{"E\[Chi]", ",", "m\[Chi]", ",", "mp"}], "]"}]}], " ", 
+              "}"}]}], ")"}], "-", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Integrate", "[", 
+              RowBox[{
+               RowBox[{"d\[Sigma]dEfTempProtons", "[", 
+                RowBox[{
+                "Ep", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "mp", 
+                 ",", "\[CapitalLambda]p", ",", "\[Epsilon]2", ",", 
+                 "\[Alpha]D"}], "]"}], ",", "Ep"}], "]"}], "/.", 
+             RowBox[{"{", 
+              RowBox[{"Ep", "->", "mp"}], "}"}]}], ")"}]}], ")"}], "//", 
+         "Simplify"}], ")"}], "/.", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\[CapitalLambda]p", "->", "0.843"}], ",", 
+         RowBox[{"mp", "->", "MP"}]}], "}"}]}], "]"}], ",", "0."}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"d\[Sigma]dEfTempProtons", "[", 
+    RowBox[{
+    "Ep_", ",", "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "\[Epsilon]2_", 
+     ",", "\[Alpha]D_"}], "]"}], "=", 
+   RowBox[{"d\[Sigma]dEfTempProtons", "[", 
+    RowBox[{
+    "Ep", ",", "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "MP", ",", "0.843", 
+     ",", "\[Epsilon]2", ",", "\[Alpha]D"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dPdEdzProtons", "[", 
+    RowBox[{
+    "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "\[Epsilon]2_", ",", 
+     "\[Alpha]D_"}], "]"}], "=", 
+   RowBox[{"ZdetVal", "*", "nAtomsMaterialGivenExperiment", 
+    FractionBox["ltargetGivenExperiment", "dzFidGivenExperiment"], "*", 
+    "GeVm2Tom2", "*", 
+    RowBox[{"\[Sigma]Total", "[", 
+     RowBox[{
+     "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "\[Epsilon]2", ",", 
+      "\[Alpha]D", ",", "\"\<Protons\>\""}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dPdEdzEminProtons", "[", 
+    RowBox[{
+    "E\[Chi]_", ",", "m\[Chi]_", ",", "mV_", ",", "Emin_", ",", 
+     "\[Epsilon]2_", ",", "\[Alpha]D_"}], "]"}], "=", 
+   RowBox[{"ZdetVal", "*", "nAtomsMaterialGivenExperiment", 
+    FractionBox["ltargetGivenExperiment", "dzFidGivenExperiment"], "*", 
+    "GeVm2Tom2", "*", 
+    RowBox[{"\[Sigma]TotalEmin", "[", 
+     RowBox[{
+     "E\[Chi]", ",", "m\[Chi]", ",", "mV", ",", "\[Epsilon]2", ",", 
+      "\[Alpha]D", ",", "Emin", ",", "\"\<Protons\>\""}], "]"}]}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.939109361806244*^9, 3.939109582725651*^9}, {
+   3.939111130788294*^9, 3.9391111537890644`*^9}, {3.9391112210547256`*^9, 
+   3.9391112221750565`*^9}, 3.9391112819066944`*^9, 3.939114277341812*^9, {
+   3.93911433343762*^9, 3.939114344870863*^9}, {3.9391144477655296`*^9, 
+   3.9391144758545513`*^9}, {3.9391159307916603`*^9, 3.939115945520645*^9}, {
+   3.939116757642521*^9, 3.9391167781451607`*^9}, {3.9391168706566277`*^9, 
+   3.9391169502720776`*^9}, 3.9391177684600945`*^9, {3.9391178645236835`*^9, 
+   3.939118086427904*^9}, {3.939118144026943*^9, 3.939118147099558*^9}, {
+   3.9391201525819263`*^9, 3.939120157612015*^9}, {3.939120286281784*^9, 
+   3.9391202958242073`*^9}},
+ CellLabel->
+  "In[374]:=",ExpressionUUID->"27bef0ee-c51a-7a42-864b-876634c9280b"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1141.8, 642.3},
+WindowMargins->{{Automatic, 0}, {-3.8999999999999773`, Automatic}},
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"8a6ed08b-8bc1-854e-a6ec-58acb0583270"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 163, 3, 66, "Section",ExpressionUUID->"e7cbdb02-57ea-cd47-a040-bcfef26ddc46"],
+Cell[CellGroupData[{
+Cell[764, 29, 20568, 581, 1119, "Input",ExpressionUUID->"757d4c3e-3a6a-a344-a21e-b30247c9516c"],
+Cell[21335, 612, 662, 16, 26, "Print",ExpressionUUID->"f02e3d6a-dfda-414f-864e-49119528ed97"],
+Cell[22000, 630, 239, 5, 31, "Output",ExpressionUUID->"35d60417-8d1d-ee40-93b8-c1c7c0b581c3"],
+Cell[22242, 637, 322, 7, 21, "Print",ExpressionUUID->"039434cb-f412-4f42-ab6f-36034ef781b1"],
+Cell[22567, 646, 529, 15, 60, "Output",ExpressionUUID->"9afc0cf0-14ed-9e4c-8b41-7262732dfc8f"],
+Cell[23099, 663, 291, 6, 21, "Print",ExpressionUUID->"cb8d2fc1-6666-5541-bd9d-ee81a2c4be7c"],
+Cell[23393, 671, 651, 18, 52, "Output",ExpressionUUID->"6f7d7a70-bc8c-a046-9075-60c9d942f288"],
+Cell[24047, 691, 380, 8, 22, "Print",ExpressionUUID->"8d267f73-806d-fd42-b8c5-8b5dc840a75b"],
+Cell[24430, 701, 616, 20, 54, "Output",ExpressionUUID->"97a032d1-c64b-1d4e-8fe8-e09db7e0b3c1"],
+Cell[CellGroupData[{
+Cell[25071, 725, 316, 7, 22, "Print",ExpressionUUID->"bc2c10b9-6bbc-fa44-9931-1e480d1a07e5"],
+Cell[25390, 734, 394, 8, 23, "Print",ExpressionUUID->"010f15c6-6bb0-a344-9de9-e85da45abc27"]
+}, Open  ]],
+Cell[25799, 745, 643, 20, 55, "Output",ExpressionUUID->"53e39dc5-7703-f448-9c2e-7100cb3d078e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26479, 770, 165, 3, 53, "Subsection",ExpressionUUID->"1d60a4aa-1da9-d640-a910-635d0177556f"],
+Cell[26647, 775, 13856, 344, 810, "Input",ExpressionUUID->"98372792-9e8c-0946-b21f-cf53da7bfc53"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40540, 1124, 159, 3, 53, "Subsection",ExpressionUUID->"e28ed0af-0354-6843-aeb0-1c8931a21f60"],
+Cell[40702, 1129, 6637, 166, 364, "Input",ExpressionUUID->"27bef0ee-c51a-7a42-864b-876634c9280b"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
