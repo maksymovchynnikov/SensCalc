@@ -1,0 +1,757 @@
+#!/usr/bin/env wolframscript
+(* ::Package:: *)
+
+(* ::Title::Closed:: *)
+(*Just launch the code below to run the notebook (shift+enter)*)
+
+
+(* ::Input:: *)
+(*ClearAll["Global`*"]*)
+(*ParallelEvaluate[ClearAll["Global`*"]];*)
+(*BlockEvaluation[tag_]:=Block[{},*)
+(*nb=EvaluationNotebook[];*)
+(*NotebookFind[nb,tag,All,CellTags];*)
+(*SelectionEvaluate[nb]*)
+(*]*)
+(*CloseKernels[];*)
+(*LaunchKernels[];*)
+(*dropdownDialog[list_,phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],PopupMenu[Dynamic[choice],list],Button["OK",DialogReturn[choice]]}]]*)
+(*infoDialog[phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],Button["Proceed",DialogReturn[choice]]}]]*)
+(*If[(DirectoryQ[FileNameJoin[{NotebookDirectory[],"Auxiliary data"}]]//ToString)=="False",CreateDirectory[FileNameJoin[{NotebookDirectory[],"Auxiliary data"}]]];*)
+(*choiceslist={"Tabulated Nevents+sensitivity","Sensitivity only (tabulated Nevents must be produced before)","Acceptance"};*)
+(*taglist["Acceptance"]="Acceptance";*)
+(*taglist["Tabulated Nevents+sensitivity"]="Number-of-events+sensitivity";*)
+(*taglist["Sensitivity only (tabulated Nevents must be produced before)"]="Sensitivity";*)
+(*computationchoice=dropdownDialog[choiceslist,"Do you want to compute the tabulated number of events and then sensitivity, or just sensitivity (if the tabulated number of events has been already produced)?"];*)
+(*tagselected=taglist[computationchoice]*)
+(*BlockEvaluation[tagselected]*)
+
+
+(* ::Title::Closed:: *)
+(*Preliminary definitions (launch first)*)
+
+
+(* ::Chapter::Closed:: *)
+(*Various directories*)
+
+
+(* ::Input:: *)
+(*LLPdirName="HNL";*)
+(*(*Set the directory for the search where tabulated acceptances are located*)*)
+(*directory["Acceptances"]=FileNameJoin[{NotebookDirectory[],"Acceptances"}];*)
+(*(*Set the directory for the search where tabulated angle-energy distributions are located*)*)
+(*directory["Distribution"]=FileNameJoin[{NotebookDirectory[],"spectra/New physics particles spectra",LLPdirName}]; *)
+(*(*The directory storing production weights of the given LLP*)*)
+(*directory["Production weights"]=FileNameJoin[{NotebookDirectory[],"phenomenology",LLPdirName,"Production probabilities"}]; *)
+(*(*Directory to which various auxillary datasets will be stored*)*)
+(*directory["Auxiliary"]=FileNameJoin[{NotebookDirectory[],"Auxiliary data",LLPdirName}]; *)
+(*If[!DirectoryQ[directory["Auxiliary"]],CreateDirectory[directory["Auxiliary"]]];*)
+(*(*Directory containing decay widths of the LLPs*)*)
+(*directory["Decays"]=FileNameJoin[{NotebookDirectory[],"phenomenology",LLPdirName,"decay widths"}]; *)
+
+
+(* ::Chapter::Closed:: *)
+(*Parameters and various functions*)
+
+
+(* ::Input:: *)
+(*dropdownDialog[list_,phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],PopupMenu[Dynamic[choice],list],Button["OK",DialogReturn[choice]]}]]*)
+(*infoDialog[phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],Button["Proceed",DialogReturn[choice]]}]]*)
+(*(*chbar*)*)
+(*chbar= 6.6*10^-25*3*10^8;*)
+(*(*Masses of various SM particles*)*)
+(*{mSM["e"],mSM["mu"],mSM["tau"]}={0.5*10^-3,0.105,1.77};*)
+(*{mSM["W"],mSM["Z"]} = {80.369,91.1876};*)
+(*{mSM["e"],mSM["mu"],mSM["PiCharged"]}={0.5*10^-3,0.105,0.139};*)
+
+
+(* ::Chapter::Closed:: *)
+(*LLP phenomenology: prodution probabilities, decay widths*)
+
+
+(* ::Section::Closed:: *)
+(*Scanning for tabulated distributions*)
+
+
+(* ::Input:: *)
+(*(*Define the file pattern*)*)
+(*pattern="DoubleDistr_*_*_*.m";*)
+(*(*Search for files matching the pattern in the directory and its subdirectories*)*)
+(*matchingFiles=FileNames[pattern,{directory["Distribution"]},Infinity];*)
+(*(*List of LLPs, production modes, and facilities for which the tabulated distributions have been computed at the previous stage of using SensCalc*)*)
+(*ExtractedProductionParameters=Function[filename,parts=StringSplit[FileNameTake[filename],"_"];*)
+(*{parts[[2]],parts[[3]],StringDrop[parts[[4]],-2]} ];*)
+(*(*Apply the function to each file in the list*)*)
+(*DistrCombinations=(ExtractedProductionParameters/@matchingFiles)//Sort;*)
+(*HNLsList={"HNL-mixing-e","HNL-mixing-mu","HNL-mixing-tau"};*)
+(*(DistrCombinations[[All,1]]//DeleteDuplicates//Sort)==HNLsList*)
+
+
+(* ::Section::Closed:: *)
+(*Production weights*)
+
+
+(* ::Input:: *)
+(*(*For mesons: \!\( *)
+(*\*SubscriptBox[\(\[Sum]\), \(meson\)]\( *)
+(*\*SubscriptBox[\(f\), \(q \[Rule] meson\)]*Br\((meson \[Rule] N)\)\ at\ *)
+(*\*SuperscriptBox[\(U\), \(2\)]\)\) = 1*)*)
+(*(*For X = W/Z: Br(X->N) at U^2 = 1*)*)
+(*ProductionWeightsTemp[mN_]=Import[FileNameJoin[{directory["Production weights"],"ProductionWeightsHNL.m"}],"MX"];*)
+(*Do[*)
+(*Module[{hnl,prod,facility},*)
+(*{hnl,prod,facility}=ProductionWeightsTemp[mLLP][[i]][[#]]&/@{1,2,3};*)
+(*ProdMotherToLLP[mLLP_,U2_,hnl,prod,facility]=U2*ProductionWeightsTemp[mLLP][[i]][[4]];*)
+(*]*)
+(*,{i,1,Length[ProductionWeightsTemp[mLLP]],1}]*)
+(*WeightsCombinations=ProductionWeightsTemp[mLLP][[All,{1,2,3}]]//Sort;*)
+(*WeightsCombinations=Cases[WeightsCombinations,_?(MemberQ[DistrCombinations,#]&)];*)
+(*IfCondDistrToWeights=DistrCombinations==WeightsCombinations;*)
+(*If[!IfCondDistrToWeights,infoDialog["You have not provided the production probabilities PmotherToLLP to all the generated tabulated distributions! Please do this first to avoid problems"];]*)
+
+
+(* ::Section::Closed:: *)
+(*Decay width*)
+
+
+(* ::Input:: *)
+(*\[CapitalGamma]table=Import[FileNameJoin[{directory["Decays"],"HNLdecayWidth.dat"}],"Table"];*)
+(*{DecayWidth[mLLP_,U2_,HNLsList[[1]]],DecayWidth[mLLP_,U2_,HNLsList[[2]]],DecayWidth[mLLP_,U2_,HNLsList[[3]]]}=U2(10^Interpolation[{#[[1]],Log10[#[[2]]+10^-99]}&/@\[CapitalGamma]table[[All,{1,#}]],InterpolationOrder->1][mLLP])&/@{2,3,4};*)
+(*LogLogPlot[Evaluate[DecayWidth[mLLP,1,"HNL-mixing-"<>#]&/@{"e","mu","tau"}],{mLLP,0.1,10},Frame->True,ImageSize->Large]*)
+(**)
+
+
+(* ::Chapter::Closed:: *)
+(*Loading necessary routines*)
+
+
+(* ::Input:: *)
+(*If[Length[inecessary]==0,*)
+(*NotebookEvaluate[FileNameJoin[{NotebookDirectory[],"codes/generic.nb"}]];*)
+(*NotebookEvaluate[FileNameJoin[{NotebookDirectory[],"codes/for-sensitivities.nb"}]];*)
+(*inecessary={1,2,3};*)
+(*]*)
+
+
+(* ::Title::Closed:: *)
+(*Specifying the experiment and HNL*)
+
+
+(* ::Chapter::Closed:: *)
+(*HNL*)
+
+
+(* ::Input:: *)
+(*ListHNLtype={"Dirac","Majorana"};*)
+(*HNLtype=dropdownDialog[ListHNLtype,"Select the HNL type:"];*)
+(*Print["HNL type:"]*)
+(*HNLtype*)
+(*{MixingPatterne,MixingPattern\[Mu],MixingPattern\[Tau]}=DialogInput[{pattern={1.,0.,0.}},Column[{"Enter the mixing pattern \!\(\*SubscriptBox[SuperscriptBox[\(U\), \(2\)], \(e\)]\):\!\(\*SubscriptBox[SuperscriptBox[\(U\), \(2\)], \(\[Mu]\)]\):\!\(\*SubscriptBox[SuperscriptBox[\(U\), \(2\)], \(\[Tau]\)]\) = \!\(\*SuperscriptBox[\(U\), \(2\)]\)(\!\(\*SubscriptBox[\(x\), \(e\)]\):\!\(\*SubscriptBox[\(x\), \(\[Mu]\)]\):\!\(\*SubscriptBox[\(x\), \(\[Tau]\)]\)) (where \!\(\*SubscriptBox[\(\[CapitalSigma]\), \(i\)]\)\!\(\*SubscriptBox[\(x\), \(i\)]\) = 1) in the form {xe,x\[Mu],x\[Tau]}:",InputField[Dynamic[pattern],Expression],Button["Proceed",DialogReturn[pattern],ImageSize->Automatic]}]]//N;*)
+(*Print["Mixing pattern:"]*)
+(*MixingPattern=(MixingPatterne+MixingPattern\[Mu]+MixingPattern\[Tau])^-1 {MixingPatterne,MixingPattern\[Mu],MixingPattern\[Tau]}//N*)
+(*\[CapitalGamma]LLP[mLLP_,U2_]=If[HNLtype=="Dirac",1/2,1](DecayWidth[mLLP,U2,#]&/@HNLsList) . MixingPattern//Chop*)
+(*c\[Tau]LLP[mLLP_,U2_]=chbar/\[CapitalGamma]LLP[mLLP,U2];*)
+(*ldecayLLP[mLLP_,U2_,EN_]=Sqrt[EN^2-mLLP^2]/mLLP*c\[Tau]LLP[mLLP,U2];*)
+
+
+(* ::Chapter::Closed:: *)
+(*Experiments*)
+
+
+(* ::Input:: *)
+(*ExperimentDirectoriesList=Select[FileNames["*",directory["Acceptances"],1],DirectoryQ];*)
+(*(*List of the experiments for which any tabulated acceptance has been produced*)*)
+(*ExperimentsListTemp=Table[FileNameTake[ExperimentDirectoriesList[[i]],-1],{i,1,Length[ExperimentDirectoriesList],1}];*)
+(*IfHNL[exp_]:=Module[{},*)
+(*expf=FileNameJoin[{directory["Acceptances"],exp}];*)
+(*tabEx=FileExistsQ[FileNameJoin[{expf,"Acceptance_"<>exp<>"_for_"<>#<>".m"}]]&/@HNLsList;*)
+(*!MemberQ[tabEx,False]*)
+(*]*)
+(*ExperimentsList=Select[ExperimentsListTemp,IfHNL[#]&]//Sort*)
+(*If[Length[ExperimentsList]==0,Print["No experiment is available, generate first the acceptance for the given experiment using module 1"]]*)
+(*Print["Selected experiments:"]*)
+(*dropdownDialog[list_,phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],PopupMenu[Dynamic[choice],list],Button["OK",DialogReturn[choice]]}]]*)
+(*selectionDialog[list_,phrase_]:=DialogInput[{choice={}},Column[{Row[{"Select the experiments for which the number of events will be computed:"}],Pane[TogglerBar[Dynamic[choice],list,Appearance->"Vertical"->{Automatic,5}],ImageSize->{Automatic,Automatic},Scrollbars->{False,True}],Button["OK",DialogReturn[choice]]}]]*)
+(*SelectedExperimentList=If[Length[ExperimentsList]!=0,selectionDialog[ExperimentsList,"Select the experiments:"]]*)
+(*icounter=1;*)
+(**)
+
+
+(* ::Chapter::Closed:: *)
+(*Running block for next sections*)
+
+
+(* ::Input:: *)
+(*BlockEvaluation[tag_]:=Block[{},*)
+(*nb=EvaluationNotebook[];*)
+(*NotebookFind[nb,tag,All,CellTags];*)
+(*SelectionEvaluate[nb]*)
+(*]*)
+(*If[tagselected=="Number-of-events+sensitivity",*)
+(*Do[*)
+(*BlockEvaluation["Number-of-events-computation+sensitivity"];*)
+(*,{icounter,1,Length[SelectedExperimentList],1}],*)
+(*If[tagselected=="Acceptance",*)
+(*Do[*)
+(*BlockEvaluation["Acceptance-computation"];*)
+(*,{icounter,1,Length[SelectedExperimentList],1}]*)
+(*]*)
+(*]*)
+
+
+(* ::Title::Closed:: *)
+(*Number of events*)
+
+
+(* ::Chapter::Closed:: *)
+(*Particular experiment*)
+
+
+(* ::Input:: *)
+(*SelectedExperiment=SelectedExperimentList[[icounter++]];*)
+
+
+(* ::Chapter::Closed:: *)
+(*Cross-sections, acceptances*)
+
+
+(* ::Section::Closed:: *)
+(*Importing data for separate mixings*)
+
+
+(* ::Input:: *)
+(*Do[*)
+(*ExperimentData[HNLsList[[i]]]=Import[FileNameJoin[{FileNameJoin[{directory["Acceptances"],SelectedExperiment,"Acceptance_"<>SelectedExperiment<>"_for_"<>HNLsList[[i]]<>".m"}]}],"MX"];*)
+(*AcceptanceData[HNLsList[[i]]]=ExperimentData[HNLsList[[i]]][[3]];*)
+(*BrVisMixing[mLLP_,HNLsList[[i]]]=ExperimentData[HNLsList[[i]]][[5]];*)
+(*,{i,1,Length[HNLsList],1}]//AbsoluteTiming*)
+(*{AzimuthalAcceptanceInt[\[Theta]LLP_,zLLP_],\[Theta]minExpAll,\[Theta]maxExpAll,\[Theta]minExp,\[Theta]maxExp,zminExp,zmaxExp,zmin\[Theta][\[Theta]LLP_],zmax\[Theta][\[Theta]LLP_]}=Block\[Epsilon]Azimuthal[AcceptanceData[HNLsList[[1]]]];*)
+(*brtemp[mLLP_]=BrVisMixing[mLLP,HNLsList[[1]]];*)
+(*(*Branching ratio of visible HNL decays averaged over mixings*)*)
+(*BrVis[mLLP_]=BrVisMixing[mLLP,HNLsList[[#]]]&/@{1,2,3} . MixingPattern/(MixingPattern//Total)//Chop;*)
+(*mlistBr=Join[Table[m,{m,0.02,5.1,0.001}],Table[m,{m,5.12,30,0.01}]];*)
+(*LogPlot[Evaluate[{BrVisMixing[mLLP,HNLsList[[1]]],BrVisMixing[mLLP,HNLsList[[2]]],BrVisMixing[mLLP,HNLsList[[3]]],BrVis[mLLP]}],{mLLP,Min[mlistBr],7},FrameStyle->Directive[Black, 22],PlotStyle->{{Thickness[0.003],Blue},{Thickness[0.003],Darker@Red},{Thickness[0.003],Darker@Darker@Green},{Thickness[0.003],Black}},GridLines->Automatic,PlotRange->{{0.02,7},All},Frame->True,ImageSize->Large,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(N\)]\) [GeV]","\!\(\*SubscriptBox[\(Br\), \(vis\)]\)"},PlotLabel-> Style[Row[{"For ",SelectedExperiment,". \!\(\*SuperscriptBox[SubscriptBox[\(U\), \(e\)], \(2\)]\):\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(\[Mu]\)], \(2\)]\):\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(\[Tau]\)], \(2\)]\) = ",MixingPattern}], 20, Black],PlotLegends->Placed[{Style[#, 18]&/@{"Pure e mixing","Pure \[Mu] mixing","Pure \[Tau] mixing","Averaged"}},{0.75,0.2}]]*)
+(*{xxx,yyy,zzz,InGridm\[Epsilon],InGrid\[Theta]\[Epsilon],InGridE\[Epsilon],InGridz\[Epsilon],\[Epsilon]vals,\[Epsilon]azvals,mmin\[Epsilon],mmax\[Epsilon]}=Block\[Epsilon]Decay[AcceptanceData[HNLsList[[1]]],zminExp,brtemp];*)
+(*FacilityGivenExperiment=ExperimentData[HNLsList[[1]]][[1]];*)
+(*CrossSectionData=ExperimentData[HNLsList[[1]]][[4]]//Transpose;*)
+(*NpotGivenExperiment=Select[CrossSectionData,#[[1]]=="Npot"&][[1]][[2]];*)
+(*(*Amounts (per PoT) of c or Overscript[c, _], b or Overscript[b, _], and W^+ or W^- at the given experiment (Subscript[P, c or Overscript[c, _]] = Subscript[P, c]+Subscript[P, Overscript[c, _]] = 2*Subscript[P, cOverscript[c, _]], etc.)*)*)
+(*{ProbMother["D"],ProbMother["B"],ProbMother["W"]}={Select[CrossSectionData,#[[1]]=="Pc"&][[1]][[2]],Select[CrossSectionData,#[[1]]=="Pb"&][[1]][[2]],Select[CrossSectionData,#[[1]]=="PW"&][[1]][[2]]};*)
+(*If[FacilityGivenExperiment=="SPS",*)
+(*ProbMother["K"]=0.36];*)
+(*If[FacilityGivenExperiment=="ESS",*)
+(*ProbMother["PiCharged"]=Select[CrossSectionData,#[[1]]=="PPiCharged"&][[1]][[2]];*)
+(*ProbMother["mu"]=Select[CrossSectionData,#[[1]]=="Pmu"&][[1]][[2]];*)
+(*];*)
+(*(*infoDialog[Row[{"The number of proton collisions is ", NpotGivenExperiment,". You may change it at the stage of computing the sensitivities"}]]*)*)
+(*Row[{"Search for ",HNLtype," HNLs with the mixing pattern {\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(e\)], \(2\)]\),\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(\[Mu]\)], \(2\)]\),\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(\[Tau]\)], \(2\)]\)} = \!\(\*SuperscriptBox[\(U\), \(2\)]\)",MixingPattern," at ", SelectedExperiment, " located at ",FacilityGivenExperiment,". \!\(\*SubscriptBox[\(N\), \(collisions\)]\) = ",NpotGivenExperiment}]*)
+(*{{"Quantity","\!\(\*SubscriptBox[\(\[Theta]\), \(min\)]\), rad","\!\(\*SubscriptBox[\(\[Theta]\), \(max\)]\), rad","\!\(\*SubscriptBox[\(\[Theta]\), \(min\)]\)(\!\(\*SubscriptBox[\(\[Epsilon]\), \(dec\)]\)), rad","\!\(\*SubscriptBox[\(\[Theta]\), \(max\)]\)(\!\(\*SubscriptBox[\(\[Epsilon]\), \(dec\)]\)), rad","\!\(\*SubscriptBox[\(z\), \(min\)]\), m","\!\(\*SubscriptBox[\(z\), \(max\)]\), m"},{"Description","Min angle covered by experiment","Max angle covered by experiment","Min angle where \!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)\[NotEqual]0","Max angle where \!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)\[NotEqual]0","Min long. displacement of the decay volume","Max long. displacement of the decay volume"},{"Value",\[Theta]minExpAll,\[Theta]maxExpAll,\[Theta]minExp,\[Theta]maxExp,zminExp,zmaxExp}}//TableForm*)
+
+
+(* ::Section::Closed:: *)
+(*Gluing the data for separate mixings to the given mixing pattern*)
+
+
+(* ::Input:: *)
+(*(*Computing weights for decays via different mixing. The weights are Subscript[Br, vis,x]*Subscript[U^2, x]/U^2/Subscript[\[CapitalSigma], x]Subscript[Br, vis,x]*Subscript[U^2, x]/U^2*)*)
+(*Weight\[Epsilon]DecayMixing=1/BrVis[#] {BrVisMixing[#,HNLsList[[1]]]*MixingPattern[[1]],BrVisMixing[#,HNLsList[[2]]]*MixingPattern[[2]],BrVisMixing[#,HNLsList[[3]]]*MixingPattern[[3]]}&/@(10^InGridm\[Epsilon]);*)
+(*(*The averaged decay acceptance: the weights for the given mass and flavor are contracted with the lists of the decay acceptances for the same mass and flavor, and then there is a summation over flavors*)*)
+(*FullAcceptanceData0=Join[AcceptanceData[HNLsList[[1]]][[All,Range[1,5]]],(List/@Flatten[Weight\[Epsilon]DecayMixing[[All,#]]* Partition[AcceptanceData[HNLsList[[#]]][[All,-1]],Length[AcceptanceData[HNLsList[[#]]]]/Length[InGridm\[Epsilon]]]]&/@{1,2,3})//Total,2];//AbsoluteTiming*)
+(*{FullAcceptanceData,DecayAcceptanceInt[mLLP_,\[Theta]LLP_,ELLP_,zLLP_],FullAcceptanceInt[mLLP_,\[Theta]LLP_,ELLP_,zLLP_],InGridm\[Epsilon],InGrid\[Theta]\[Epsilon],InGridE\[Epsilon],InGridz\[Epsilon],\[Epsilon]vals,\[Epsilon]azvals,mmin\[Epsilon],mmax\[Epsilon]}=Block\[Epsilon]Decay[FullAcceptanceData0,zminExp,BrVis];*)
+
+
+(* ::Chapter::Closed:: *)
+(*Angle-energy distributions for the given experiment*)
+
+
+(* ::Section::Closed:: *)
+(*Importing for separate mixings*)
+
+
+(* ::Input:: *)
+(*ProductionPatternSelected=Select[DistrCombinations,#[[3]]==FacilityGivenExperiment&];*)
+(*Print["Production list:"]*)
+(*ProductionList=ProductionPatternSelected[[All,2]]//DeleteDuplicates;*)
+(*If[MixingPattern=={0.,0.,1.},ProductionList=Select[ProductionList,#!="K"&]]*)
+(*Do[*)
+(*Module[{hnl,prod},*)
+(*{hnl,prod}=ProductionPatternSelected[[i]][[#]]&/@{1,2};*)
+(*(*Importing the data with distribution*)*)
+(*DistrDataImportTemp[hnl,prod]=Import[FileNameJoin[{directory["Distribution"],"DoubleDistr_"<>hnl<>"_"<>prod<>"_"<>FacilityGivenExperiment<>".m"}],"MX"];*)
+(*ProbLLP[mLLP_,U2_,hnl,prod]=ProbMother[prod]*ProdMotherToLLP[mLLP,U2,hnl,prod,FacilityGivenExperiment];*)
+(*]*)
+(*,{i,1,Length[ProductionPatternSelected],1}]*)
+(*prodsno\[Tau]={"K","PiCharged","mu"};*)
+(*Do[*)
+(*If[MemberQ[prodsno\[Tau],prod],*)
+(*DistrDataImportTemp[HNLsList[[3]],prod]={#[[1]],#[[2]],#[[3]],0.}&/@DistrDataImportTemp[HNLsList[[1]],prod];*)
+(*ProbLLP[mLLP_,U2_,HNLsList[[3]],prod]=0.;*)
+(*]*)
+(*,{prod,ProductionList}]*)
+
+
+(* ::Section::Closed:: *)
+(*Gluing*)
+
+
+(* ::Input:: *)
+(*Do[ProbLLP[mLLP_,U2_,prod]=Sum[ProbLLP[mLLP,U2,HNLsList[[i]],prod]*MixingPattern[[i]],{i,1,3,1}]//Chop,{prod,ProductionList}];*)
+(*(*Code supplementing the data for the distribution up to the given mass with zeros*)*)
+(*DataSupplementedBlock[data_,mmax_]:=Block[{},*)
+(*mdatamax=Max[data[[All,1]]];*)
+(*data\[Theta]Egrid=SortBy[DeleteDuplicatesBy[data,{#[[2]],#[[3]]}&][[All,{2,3}]],{#[[1]],#[[2]]}&]//N;*)
+(*Join[data,Flatten[Table[{mLLP,data\[Theta]Egrid[[i]][[1]],data\[Theta]Egrid[[i]][[2]],0},{mLLP,1.001mdatamax,mmax,(mmax-1.001mdatamax)/3},{i,1,Length[data\[Theta]Egrid],1}],{1,2}]]*)
+(*]*)
+(*DataLogarithmiedComp1=Compile[{{data,_Real,2}},Table[If[data[[i]][[4]]==0,-90.,Log10[data[[i]][[4]]]],{i,1,Length[data],1}],CompilationTarget->"MVM",RuntimeOptions->"Speed"];*)
+(*(*The block that glues the distributions according to the mixing pattern*)*)
+(*BlockDistrGluing[ProdChannel_]:=Block[{},*)
+(*(*Angle-energy distribution data corresponding to the given production channel*)*)
+(*DataList=DistrDataImportTemp[#,ProdChannel]&/@HNLsList;*)
+(*(*List of the production probabilities per mixing for the given production channel: Subscript[P, prod](m,Subscript[U, i]^2/U^2)*)*)
+(*\[Chi]list[mLLP_]=ProbLLP[mLLP,MixingPattern[[#]],HNLsList[[#]],ProdChannel]&/@{1,2,3};*)
+(*\[Chi]weights=\[Chi]list[#]&/@(DataList[[1]][[All,1]]//DeleteDuplicates);*)
+(*\[Chi]weights={#[[1]]/Max[10^-90.,#[[1]]+#[[2]]+#[[3]]],#[[2]]/Max[10^-90.,#[[1]]+#[[2]]+#[[3]]],#[[3]]/Max[10^-90.,#[[1]]+#[[2]]+#[[3]]]}&/@\[Chi]weights;*)
+(*DataListFin=Join[DataList[[1]][[All,{1,2,3}]],(List/@Flatten[\[Chi]weights[[All,#]] Partition[DataList[[#]][[All,-1]],Length[DataList[[#]]]/Length[\[Chi]weights]]]&/@{1,2,3})//Total,2];*)
+(*{#[[1]],#[[2]],#[[3]],Max[#[[4]],10^-90.]}&/@DataListFin*)
+(*]*)
+(*(*Interpolating block*)*)
+(*Do[*)
+(*DistrDataImport[prod]=BlockDistrGluing[prod];*)
+(*DoubleDistrLLPint[mLLP_,\[Theta]LLP_,ELLP_,prod]=10^(Interpolation[distrlogComp[DistrDataImport[prod]],InterpolationOrder->1][Log10[mLLP],Log10[\[Theta]LLP],Log10[ELLP]]);*)
+(*maxvalGluing=DistrDataImport[prod][[All,-1]]//Max;*)
+(*maxMassGluing=Select[DistrDataImport[prod],#[[-1]]>10^-20. maxvalGluing&][[All,1]]//Max;*)
+(*MassListDistr[prod]=DeleteDuplicates[DistrDataImport[prod][[All,1]]];*)
+(*{mLLPmin[prod],mLLPmax[prod]}={Min[MassListDistr[prod]],Min[maxMassGluing,Max[MassListDistr[prod]]]};*)
+(*,{prod,ProductionList}];//AbsoluteTiming*)
+(*directory["Auxiliary-experiment"]=FileNameJoin[{directory["Auxiliary"],SelectedExperiment}];*)
+(*If[!DirectoryQ[directory["Auxiliary-experiment"]],CreateDirectory[directory["Auxiliary-experiment"]]]*)
+(*Export[FileNameJoin[{directory["Auxiliary-experiment"],ToString@StringForm["Double-Distr-Averaged-HNL_mixing-pattern_``-``-``.m",Sequence@@MixingPattern]}],{Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]],0],{prod,ProductionList}],1/Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]],0],{prod,ProductionList}] Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]*DoubleDistrLLPint[mLLP,\[Theta]LLP,ELLP,prod]],0],{prod,ProductionList}]},"MX"];*)
+(*Do[{GridInFinal[prod],DistrVals[prod]}=BlockGridsValsDistr[prod,DistrDataImport],{prod,ProductionList}];//AbsoluteTiming*)
+(*(*____________________________*)*)
+(*(*Finding Subscript[E, max](Subscript[m, LLP],Subscript[\[Theta], LLP]) for the angular range at the given experiment*)*)
+(*(*____________________________*)*)
+(*Do[ELLPmax[mfip_,\[Theta]fip_,prod]=EmaxBlock[prod,11,DistrDataImport,FacilityGivenExperiment],{prod,Select[ProductionList,#!="Bremsstrahlung"&]}]//AbsoluteTiming*)
+(*If[FacilityGivenExperiment=="ESS",*)
+(*(*Subscript[E, max/min] for HNLs from pions at rest (ESS option): the tabulated distribution is non-zero for Subscript[E, LLP] within Subscript[E, LLP,2-body]+/(- Subscript[\[CapitalDelta]E, approx]/2). Determining Subscript[E, min/max] accordingly*)*)
+(*\[CapitalDelta]Eapprox=10^-5.;*)
+(*ELLPmax[mLLP_,\[Theta]LLP_,"PiCharged"]=(*(mSM["PiCharged"]^2+mLLP^2)/(2mSM["PiCharged"])+1/2{\[CapitalDelta]Eapprox,-\[CapitalDelta]Eapprox}*)mSM["PiCharged"];*)
+(*ELLPmax[mLLP_,\[Theta]LLP_,"mu"]=(mSM["mu"]^2+mLLP^2-(0.5*10^-3)^2)/(2mSM["mu"]);*)
+(*]*)
+(*ptenergies=LogLogPlot[Evaluate[Table[ELLPmax[0.1,\[Theta]LLP,prod],{prod,ProductionList}]],{\[Theta]LLP,\[Theta]minExp,\[Theta]maxExp},Frame->True,ImageSize->Large,PlotLegends->Placed[Style[#,15]&/@ProductionList,Right]];*)
+(*ptprodprob=LogLogPlot[Evaluate[Table[ProbLLP[ma,1,prod],{prod,ProductionList}]],{ma,mmin\[Epsilon],mmax\[Epsilon]},Frame->True,ImageSize->Large,PlotLegends->Placed[Style[#,15]&/@ProductionList,Right]];*)
+(*Style[Row[{ptprodprob,ptenergies}],ImageSizeMultipliers->{1, 1}]*)
+
+
+(* ::Chapter::Closed:: *)
+(*Number of events*)
+
+
+(* ::Section::Closed:: *)
+(*Number of events - using the mapping method *)
+
+
+(* ::Subsection::Closed:: *)
+(*Initializing all routines*)
+
+
+(* ::Input:: *)
+(*Do[{OutGrid\[Theta]final[prod],\[CapitalDelta]\[Theta]vals[prod]}=OutGrid\[Theta]Temp[InGrid\[Theta]\[Epsilon],30,prod,\[Theta]maxBrem],{prod,ProductionList}]*)
+(*{OutGridzfinal,\[CapitalDelta]zvals}=OutGridszTemp[InGridz\[Epsilon],30,zminExp];*)
+(*(*Final energy grid. Mass- and production channel-dependent*)*)
+(*If[FacilityGivenExperiment!="ESS",*)
+(*StepEtemp[Efip_]=Piecewise[{{0.3,Efip<=2.5},{0.5,2.5<Efip<35},{2,35<=Efip<=50},{4,50<Efip<160},{5,160<=Efip<=400},{25,400<Efip<600},{50,600<=Efip<2000},{200,2000<=Efip<4000},{400,4000<=Efip<7000},{500,7000<=Efip<=50000}}];*)
+(*OutGridEnergy[m_,ProdChannel_]:=Block[{},*)
+(*emin=If[ProdChannel!="Bremsstrahlung",N[m],ELLPmin["Bremsstrahlung"]];*)
+(*egridtemp=With[{start=emin,end=ELLPmax[m,\[Theta]minExp,ProdChannel]},*)
+(*Log10[NestWhileList[#+StepEtemp[#]&,start,#<=end&,1,\[Infinity],-1]]]//N;*)
+(*If[Length[egridtemp]==1,egridtemp=Join[egridtemp,{Log10[2*emin]}]];*)
+(*egridtemp*)
+(*]*)
+(*,*)
+(*StepEtemp[Efip_]=0.001;*)
+(*OutGridEnergy[m_,ProdChannel_]:=Block[{},*)
+(*tabt=Table[e,{e,1.0001m,ELLPmax[m,\[Theta]minExp,ProdChannel],0.001}];*)
+(*\[CapitalDelta]Eapprox=10^-5.;*)
+(*If[Length[tabt]==1,tabt=Join[tabt,{ELLPmax[m,\[Theta]minExp,ProdChannel]}]//Sort//DeleteDuplicates];*)
+(*Log10[tabt]//N*)
+(*]*)
+(*]*)
+(*If[FacilityGivenExperiment=="ESS",*)
+(*OutGridEnergy[m_,"PiCharged"]:=Select[GridInFinal["PiCharged"][[3]],#>=Log10[m]&];*)
+(*OutGridEnergy[m_,"mu"]:=Log10[Select[10^GridInFinal["mu"][[3]],m<#<=ELLPmax[m,\[Theta]LLP,"mu"]&]];*)
+(*]*)
+(*(*Block that computes the grid Subscript[\[Theta], S],Subscript[E, S],Subscript[z, S], Subscript[\[Epsilon], Full]\[Times]Subscript[f, Subscript[\[Theta], S],Subscript[E, S]]*)*)
+(*TableIntegrandDiscret[m_,ProdChannel_,\[Epsilon]DecOp_]:=TableIntegrandDiscretTemp[m,ProdChannel,\[Epsilon]DecOp,\[Epsilon]vals,\[Epsilon]azvals,OutGrid\[Theta]final[ProdChannel],OutGridzfinal,OutGridEnergy,InGridm\[Epsilon],InGrid\[Theta]\[Epsilon],InGridE\[Epsilon],InGridz\[Epsilon],\[CapitalDelta]\[Theta]vals[ProdChannel],\[CapitalDelta]zvals,zminExp,GridInFinal,DistrVals,FacilityGivenExperiment,ELLPmax,\[Theta]minExp]*)
+
+
+(* ::Subsection::Closed:: *)
+(*Generalized acceptances*)
+
+
+(* ::Input:: *)
+(*(*Tabulated acceptance*)*)
+(*FactorANUBISceiling=If[SelectedExperiment=="ANUBIS-ceiling",2,1];*)
+(*AcceptanceDiscret[m_,ProdChannel_,\[Epsilon]decOp_,decProb_]:=AcceptanceDiscretTemp[m,ProdChannel,\[Epsilon]decOp,decProb,mLLPmin,mmin\[Epsilon],mLLPmax,mmax\[Epsilon],ELLPmax,\[Theta]minExp,TableIntegrandDiscret,BrVis,zmaxExp,zminExp,FactorANUBISceiling,0.]*)
+(*Do[*)
+(*If[!(FacilityGivenExperiment=="ESS"&&MemberQ[{"PiCharged","mu"},prod]),*)
+(*mLLPlistAcceptance[prod]=Join[Table[m,{m,1.01Max[mLLPmin[prod],mmin\[Epsilon]],0.95Min[mLLPmax[prod],mmax\[Epsilon]],Min[(0.95Min[mLLPmax[prod],mmax\[Epsilon]]-1.01Max[mLLPmin[prod],mmin\[Epsilon]])/20,2]}],{0.99Min[mLLPmax[prod],mmax\[Epsilon]]}],*)
+(*mLLPlistAcceptance[prod]=10^GridInFinal[prod][[1]]*)
+(*],{prod,ProductionList}];*)
+(*Do[*)
+(*\[Epsilon]GeomTabs[prod]=ParallelTable[{m,AcceptanceDiscret[m,prod,"False",0],AcceptanceDiscret[m,prod,"True",0],AcceptanceDiscret[m,prod,"False",1],AcceptanceDiscret[m,prod,"True",1]},{m,mLLPlistAcceptance[prod]}];*)
+(*If[!(FacilityGivenExperiment=="ESS"&&MemberQ[{"PiCharged","mu"},prod]),*)
+(*\[Epsilon]GeomTabs[prod]=SortBy[DeleteDuplicatesBy[Join[{Join[{Max[mLLPmin[prod],mmin\[Epsilon]]},Drop[\[Epsilon]GeomTabs[prod][[1]],1]]},\[Epsilon]GeomTabs[prod],{Join[{Min[mLLPmax[prod],mmax\[Epsilon]]},Drop[\[Epsilon]GeomTabs[prod][[-1]],1]]}],#[[1]]&],#[[1]]&];*)
+(*]*)
+(*,{prod,ProductionList}];//AbsoluteTiming*)
+(*PlotAcc[ProdChannel_]:=ListLogPlot[Evaluate[{\[Epsilon]GeomTabs[ProdChannel][[All,{1,2}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,3}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,4}]],\[Epsilon]GeomTabs[ProdChannel][[All,{1,5}]]}],FrameStyle->Directive[Black, 22],PlotStyle->{{Thickness[0.003],Blue},{Thickness[0.003],Darker@Red},{Thickness[0.003],Darker@Darker@Green},{Thickness[0.003],Black}},GridLines->Automatic,PlotRange->{MinMax[\[Epsilon]GeomTabs[ProdChannel][[All,1]]],{Max[0.9Min[Min[\[Epsilon]GeomTabs[ProdChannel][[All,4]]],Min[\[Epsilon]GeomTabs[ProdChannel][[All,3]]]],10^-5],1.1Max[Max[\[Epsilon]GeomTabs[ProdChannel][[All,2]]],Max[\[Epsilon]GeomTabs[ProdChannel][[All,4]]]]}},Joined->True,Frame->True,ImageSize->Large,FrameLabel->{"m [GeV]","Acceptance"},PlotLabel-> Style[Row[{"From ",ProdChannel}], 20, Black],PlotLegends->Placed[{Style[#, 18]&/@{"<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)>","<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)>","c\[Tau]<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(P\), \(decay\)]\)>","c\[Tau]<\!\(\*SubscriptBox[\(\[Epsilon]\), \(LLP\)]\)\!\(\*SubscriptBox[\(P\), \(decay\)]\)\!\(\*SubscriptBox[\(\[Epsilon]\), \(decay\)]\)>"}},{0.75,0.2}]]*)
+(*Style[Row[Evaluate[Table[PlotAcc[prod],{prod,ProductionList}]]],ImageSizeMultipliers->{1,1,1,1}]*)
+(*(*Do[FilenameAcceptance[prod]=ToString@StringForm["Acceptance_ALP-fermion_at_``_From_``.dat",Sequence@@{SelectedExperiment,ExportList[prod]}];*)
+(*Export[FileNameJoin[{NotebookDirectory[],"Auxiliary data/ALPs with fermion coupling",SelectedExperiment,FilenameAcceptance[prod]}],\[Epsilon]GeomTabs[prod][[All,{1,2,4,5}]],"Table"]*)
+(*,{prod,ProductionList}]*)*)
+(*AccAveraged[mLLP_,c\[Tau]_]=NpotGivenExperiment{Sum[If[mLLPmin[prod]<mLLP<mLLPmax[prod],Evaluate[ProbLLP[mLLP,1,prod]],0],{prod,ProductionList}],Sum[If[Max[mLLPmin[prod],mmin\[Epsilon]]<mLLP<Min[mLLPmax[prod],mmax\[Epsilon]],Evaluate[ProbLLP[mLLP,1,prod]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,2}]],InterpolationOrder->1][mLLP]],0],{prod,ProductionList}],Sum[If[Max[mLLPmin[prod],mmin\[Epsilon]]<mLLP<Min[mLLPmax[prod],mmax\[Epsilon]],Evaluate[ProbLLP[mLLP,1,prod]/c\[Tau]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,4}]],InterpolationOrder->1][mLLP]],0],{prod,ProductionList}],Sum[If[Max[mLLPmin[prod],mmin\[Epsilon]]<mLLP<Min[mLLPmax[prod],mmax\[Epsilon]],Evaluate[ProbLLP[mLLP,1,prod]/c\[Tau]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,5}]],InterpolationOrder->1][mLLP]],0],{prod,ProductionList}]};*)
+(*Export[FileNameJoin[{directory["Auxiliary-experiment"],"AcceptanceAveraged-"<>LLPdirName<>".m"}],AccAveraged[mLLP,c\[Tau]],"MX"];*)
+
+
+(* ::Subsection::Closed:: *)
+(*Rough estimates of the upper and lower bounds*)
+
+
+(* ::Input:: *)
+(*Do[LowerBoundEstimate[mLLP_,prod]=((NpotGivenExperiment*ProbLLP[mLLP,1,prod]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,5}]],InterpolationOrder->1][mLLP])/(2.3ldecayLLP[mLLP,1,ELLP] mLLP/Sqrt[ELLP^2-mLLP^2]))^(-(1/2));*)
+(*UpperBoundEstimate[mLLP_,prod]=(Abs[Re[Evaluate[-(ProductLog[-1,-2.3*b/a]/b)/.{a-> NpotGivenExperiment*ProbLLP[mLLP,1,prod]*Interpolation[\[Epsilon]GeomTabs[prod][[All,{1,3}]],InterpolationOrder->1][mLLP],b->zminExp/ldecayLLP[mLLP,1,ELLPmax[0.5,\[Theta]minExp,prod]]}]]]),{prod,ProductionList}]*)
+(*ProdTest=ProductionList[[1]];*)
+(*LogLogPlot[Evaluate[{0.3LowerBoundEstimate[mLLP,ProdTest],1.8UpperBoundEstimate[mLLP,ProdTest]}],{mLLP,Max[mLLPmin[ProdTest],mmin\[Epsilon]],Min[mLLPmax[ProdTest],mmax\[Epsilon]]},Frame->True,ImageSize->Large]*)
+
+
+(* ::Subsection::Closed:: *)
+(*Number of events - fast*)
+
+
+(* ::Input:: *)
+(*FactorLowerBound=If[MemberQ[{"ANUBIS-shaft-volume-1","ANUBIS-shaft-volume-2","ANUBIS-shaft-volume-3"},SelectedExperiment]==True,0.1,0.3];*)
+(*NeventsDiscret[m_,ProdChannel_,couplinglist_]:=Module[{NevDiscret,NpotTimes\[Chi]val,zshift},*)
+(*If[Max[mLLPmin[ProdChannel],mmin\[Epsilon]]<m<Min[mLLPmax[ProdChannel],mmax\[Epsilon]],*)
+(*integrandtab=TableIntegrandDiscret[m,ProdChannel,"True"];*)
+(*NpotTimes\[Chi]val[coupling_]=NpotGivenExperiment*ProbLLP[m,coupling,ProdChannel];*)
+(*{lowerbound,upperbound}={LowerBoundEstimate[m,ProdChannel],UpperBoundEstimate[m,ProdChannel]};*)
+(*brvis=BrVis[m];*)
+(*NevDiscret[coupling_]:=If[0.1lowerbound<coupling<(*1.5*)2upperbound,NpotTimes\[Chi]val[coupling]*brvis*sumcompile[tableprefac[integrandtab,m,c\[Tau]LLP[m,coupling],1,0.]],0.];*)
+(*Table[{m,couplinglist[[i]],NevDiscret[couplinglist[[i]]]},{i,1,Length[couplinglist],1}],Table[{m,couplinglist[[i]],0.},{i,1,Length[couplinglist],1}]]*)
+(*]*)
+
+
+(* ::Subsection::Closed:: *)
+(*Number of events - slow (using built-in Mathematica functions Interpolation, NIntegrate)*)
+
+
+(* ::Input:: *)
+(*(*Differential decay probability 1/ldecayExp[-l/ldecay], where l is expressed in terms of the longitudinal displacement z and polar angle \[Theta] as z/cos\[Theta]*)*)
+(*(*Differential decay probability (1/ldecay)Exp[-l/ldecay], where l is expressed in terms of the longitudinal displacement z and polar angle \[Theta] as z/cos\[Theta]*)*)
+(*PdecayDensity[mLLP_,coupling_,\[Theta]LLP_,ELLP_,zLLP_]=Exp[-zLLP/(Cos[\[Theta]LLP]*ldecayLLP[mLLP,coupling,ELLP])]/(Abs[Cos[\[Theta]LLP]]*ldecayLLP[mLLP,coupling,ELLP]);*)
+(*(*The integrand determining the differential rate for events*)*)
+(*Do[IntegrandLLP[mLLP_,coupling_,\[Theta]LLP_,ELLP_,zLLP_,prod]=DoubleDistrLLPint[mLLP,\[Theta]LLP,ELLP,prod]*PdecayDensity[mLLP,coupling,\[Theta]LLP,ELLP,zLLP]*AzimuthalAcceptanceInt[\[Theta]LLP,zLLP]*DecayAcceptanceInt[mLLP,\[Theta]LLP,ELLP,zLLP],{prod,ProductionList}]*)
+(*IntegralLLP[mLLP_,coupling_,ProdChannel_]:=NIntegrate[Abs[IntegrandLLP[mLLP,coupling,\[Theta]LLP,Exp[ELLP],zLLP,ProdChannel]Exp[ELLP]],{\[Theta]LLP,\[Theta]minExp,\[Theta]maxExp},{ELLP,Log[mLLP],Log[ELLPmax[mLLP,\[Theta]LLP,ProdChannel]]},{zLLP,zmin\[Theta][\[Theta]LLP],zmax\[Theta][\[Theta]LLP]},Method->"AdaptiveMonteCarlo"]*)
+(*If[FacilityGivenExperiment=="ESS",*)
+(*IntegralLLP[mLLP_,U2_,"PiCharged"]:=NIntegrate[Abs[IntegrandLLP[mLLP,U2,\[Theta]LLP,ELLP,zLLP,"PiCharged"]],{\[Theta]LLP,\[Theta]minExp,\[Theta]maxExp},{ELLP,(mSM["PiCharged"]^2-mSM["mu"]^2+mLLP^2)/(2*mSM["PiCharged"])-\[CapitalDelta]Eapprox/2,(mSM["PiCharged"]^2-mSM["mu"]^2+mLLP^2)/(2*mSM["PiCharged"])+\[CapitalDelta]Eapprox/2},{zLLP,zmin\[Theta][\[Theta]LLP],zmax\[Theta][\[Theta]LLP]},Method->"AdaptiveMonteCarlo"]+NIntegrate[Abs[IntegrandLLP[mLLP,U2,\[Theta]LLP,ELLP,zLLP,"PiCharged"]],{\[Theta]LLP,\[Theta]minExp,\[Theta]maxExp},{ELLP,(mSM["PiCharged"]^2-mSM["e"]^2+mLLP^2)/(2*mSM["PiCharged"])-\[CapitalDelta]Eapprox/2,(mSM["PiCharged"]^2-mSM["e"]^2+mLLP^2)/(2*mSM["PiCharged"])+\[CapitalDelta]Eapprox/2},{zLLP,zmin\[Theta][\[Theta]LLP],zmax\[Theta][\[Theta]LLP]},Method->"AdaptiveMonteCarlo"]*)
+(*]*)
+(*NeventsInt[mLLP_,coupling_,ProdChannel_]:=If[mLLPmin[ProdChannel]<=mLLP<=mLLPmax[ProdChannel]&&BrVis[mLLP]!=0,If[0.1LowerBoundEstimate[mLLP,ProdChannel]<coupling<2UpperBoundEstimate[mLLP,ProdChannel],NpotGivenExperiment*ProbLLP[mLLP,coupling,ProdChannel]*IntegralLLP[mLLP,coupling,ProdChannel],0.],0.]*)
+
+
+(* ::Section::Closed:: *)
+(*Tests*)
+
+
+(* ::Subsection::Closed:: *)
+(*Total number of events*)
+
+
+(* ::Input:: *)
+(*(*This is a comparison between the slow and fast integration methods. For the selected mass and production channel, the numbers of events obtained using the methods should agree within 10%*)*)
+(*(*If the agreement is worse, there may be a few reasons*)*)
+(*(*1) The grid for the fast method is not dense enough. Try to increase the grid density (OutGrid\[Theta]final, OutGridEfinal, OutGridzfinal) to see whether the agreement improves. Sometimes, even a slightly denser grid for e.g. z may lead to a significant improvement in the agrement*)*)
+(*(*2) The Monte-Carlo integrator for the slow method fails to evaluate properly; this may happen if the range of the integration over energies is too large compared to the domain where most of the events actually are (off-axis experiments such as MATHUSLA and ANUBIS). Another symptom is that for the given mass and coupling the integral "jumps", i.e., returns values with large error*)*)
+(*(*A separate discussion should be made for the couplings belong to the domain c\[Tau] \[Gamma] << Subscript[z, experiment]. The discrepancy may be significant, and the reason is insufficient grid density for the fast integration method. However, due to the exponential suppression of the number of events, this may be compensated by a tiny shift in the coupling, so the discrepancy should be considered as appropriate.*)*)
+(*If[MemberQ[ProductionList,"mu"],*)
+(*ProdTest="mu";*)
+(*mtest=0.02,*)
+(*ProdTest="D";*)
+(*mtest=0.43*)
+(*];*)
+(*U2list=(*{10^-12,3*10^-12,5*10^-12,10^-11,5*10^-11,10^-10,5*10^-10,10^-9,5*10^-9,10^-8,2*10^-8,4*10^-8,10^-7,5*10^-7,6*10^-7,7*10^-7,8*10^-7,9*10^-7,10^-6,2*10^-6}//N*)Table[10^x,{x,-12.,-1.5,0.1}];*)
+(*dat1=NeventsDiscret[mtest,ProdTest,U2list];//AbsoluteTiming*)
+(*dat2=ParallelTable[{U2list[[i]],c\[Tau]LLP[mtest,U2list[[i]]],Quiet[NeventsInt[mtest,U2list[[i]],ProdTest]]},{i,1,Length[U2list],1}];//AbsoluteTiming*)
+(*Join[{{"\!\(\*FractionBox[SubscriptBox[\(m\), \(LLP\)], \(GeV\)]\)","coupling","\!\(\*FractionBox[\(c\[Tau]\), SubscriptBox[\(z\), \(min\)]]\)","\!\(\*SubscriptBox[\(N\), \(events, fast\)]\)","\!\(\*SubscriptBox[\(N\), \(events, slow\)]\)"}},Join[dat1[[All,{1,2}]],{#[[2]]/zminExp}&/@dat2,dat1[[All,{3}]],dat2[[All,{3}]],2]]//TableForm*)
+
+
+(* ::Subsection::Closed:: *)
+(*Differential number of events*)
+
+
+(* ::Input:: *)
+(*(*Variable = "Subscript[E, X]","Subscript[z, X]","Subscript[\[Theta], X]". The number belongs to the column in the tabulated data*)*)
+(*iVal:=Association[{"\!\(\*SubscriptBox[\(E\), \(X\)]\)" ->2,"\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\)"->1,"\!\(\*SubscriptBox[\(z\), \(X\)]\)"->3}]*)
+(*\[CapitalDelta]xvals["\!\(\*SubscriptBox[\(E\), \(X\)]\)"]:=\[CapitalDelta]Evals;*)
+(*\[CapitalDelta]xvals["\!\(\*SubscriptBox[\(z\), \(X\)]\)"]=\[CapitalDelta]zvals;*)
+(*Do[\[CapitalDelta]xvals["\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\)",prod]=\[CapitalDelta]\[Theta]vals[prod],{prod,ProductionList}];*)
+(*LegendX:=Association[{"\!\(\*SubscriptBox[\(E\), \(X\)]\)"->"\!\(\*SubscriptBox[\(E\), \(X\)]\) [GeV]","\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\)"->"\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\) [rad]","\!\(\*SubscriptBox[\(z\), \(X\)]\)"-> "\!\(\*SubscriptBox[\(z\), \(X\)]\) [m]"}]*)
+(*LegendY:=Association[{"\!\(\*SubscriptBox[\(E\), \(X\)]\)"->"\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(dE\), \(X\)]\) [\!\(\*SuperscriptBox[\(GeV\), \(-1\)]\)]","\!\(\*SubscriptBox[\(\[Theta]\), \(X\)]\)"->"\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(d\[Theta]\), \(X\)]\) [\!\(\*SuperscriptBox[\(rad\), \(-1\)]\)]","\!\(\*SubscriptBox[\(z\), \(X\)]\)"-> "\!\(\*SubscriptBox[\(dN\), \(ev\)]\)/\!\(\*SubscriptBox[\(dz\), \(X\)]\) [\!\(\*SuperscriptBox[\(m\), \(-1\)]\)]"}]*)
+(*(*Differential number of events*)*)
+(*NeventsDifferentialDiscretProd[m_,ProdChannel_,coupling_,Variable_]:=Module[{NpotTimes\[Chi]val},*)
+(*ival=iVal[Variable];*)
+(*NpotTimes\[Chi]val=NpotGivenExperiment*ProbLLP[m,coupling,ProdChannel];*)
+(*tablegrid0=TableIntegrandDiscret[m,ProdChannel,"True"];*)
+(*OutGridEfinalTemp=OutGridEnergy[N[m],ProdChannel];*)
+(*If[!(FacilityGivenExperiment=="ESS"&&ProdChannel=="PiCharged"),*)
+(*{OutGridEfinal,\[CapitalDelta]Evals}={1/2 (Rest[OutGridEfinalTemp]+Most[OutGridEfinalTemp]),(Rest[10^OutGridEfinalTemp]-Most[10^OutGridEfinalTemp])};*)
+(*,*)
+(*\[CapitalDelta]Eapprox=10^-5.;*)
+(*\[CapitalDelta]Evals=Table[\[CapitalDelta]Eapprox,Length[OutGridEfinalTemp]];*)
+(*OutGridEfinal=OutGridEfinalTemp;*)
+(*];*)
+(*\[CapitalDelta]xval=\[CapitalDelta]xvals[Variable];*)
+(*c\[Tau]Val=c\[Tau]LLP[m,coupling];*)
+(*brvis=BrVis[m];*)
+(*ilist=DeleteDuplicates[{ival,1,2,3}];*)
+(*tablegrid1=SortBy[{#[[ilist[[1]]]],#[[ilist[[2]]]],#[[ilist[[3]]]],#[[4]]}&/@tableGridPrefac[tablegrid0,m,c\[Tau]Val,0.],{#[[1]],#[[2]],#[[3]]}&];*)
+(*GridQuantity=tablegrid1[[All,1]]//DeleteDuplicates;*)
+(*LengthPerVariable=Length[tablegrid1]/Length[GridQuantity];*)
+(*tab1=NdiffCompiled[tablegrid1,GridQuantity,LengthPerVariable,NpotTimes\[Chi]val*brvis];*)
+(*Join[tab1[[All,{1}]],Partition[tab1[[All,2]]*\[CapitalDelta]xval^-1,1],2]*)
+(*]*)
+(*NeventsDifferentialDiscret[m_,coupling_,Variable_]:=Module[{NdiffInt,LegendList,QuantityMinMax,ValueMinMax},*)
+(*prodlisttemp={};*)
+(*Do[If[Max[mLLPmin[prod],mmin\[Epsilon]]<m<Min[mLLPmax[prod],mmax\[Epsilon]],*)
+(*prodlisttemp=Join[prodlisttemp,{prod}];*)
+(*NdiffData[prod]=NeventsDifferentialDiscretProd[m,prod,coupling,Variable];*)
+(*XvalminmaxNdiff=Select[NdiffData[prod],#[[2]]>10^-40&][[All,1]]//MinMax;*)
+(*NdiffInt[X_,prod]=If[XvalminmaxNdiff[[1]]<X<XvalminmaxNdiff[[2]],Evaluate[10^Interpolation[{Log10[#[[1]]],Log10[#[[2]]+10^-90]}&/@NdiffData[prod],InterpolationOrder->1][Log10[X]]],0]],{prod,ProductionList}];*)
+(*NdiffInt[X_,"Total"]=Sum[NdiffInt[X,prod],{prod,prodlisttemp}];*)
+(*LegendList=Join[{"Total"},prodlisttemp];*)
+(*QuantityMinMax=Flatten[Table[MinMax[NdiffData[prod][[All,1]]],{prod,prodlisttemp}],1]//MinMax;*)
+(*ValueMinMax=Max[Max[NdiffData[#][[All,2]]]&/@prodlisttemp];*)
+(*{Table[NdiffInt[X,prod],{prod,LegendList}],LegendList,QuantityMinMax,ValueMinMax}*)
+(*]*)
+(*mvaltest=If[FacilityGivenExperiment=="ESS",0.04,0.2];*)
+(*couplingvaltest=1.4LowerBoundEstimate[mvaltest,If[FacilityGivenExperiment=="ESS","PiCharged","D"]];*)
+(*quantity="\!\(\*SubscriptBox[\(E\), \(X\)]\)";*)
+(*{NdiffTab[X_],LegendList,QuantityMinMax,ValueMinMax}=NeventsDifferentialDiscret[mvaltest,couplingvaltest,quantity];*)
+(*Do[*)
+(*prch=LegendList[[i]];*)
+(*NdiffInt[X_,prch]=NdiffTab[X][[i]];*)
+(*,{i,1,Length[LegendList]}];*)
+(*plotdiff=LogLogPlot[Evaluate[Table[NdiffInt[X,prod],{prod,LegendList}]],{X,QuantityMinMax[[1]],QuantityMinMax[[2]]},Frame->True,ImageSize->Large,PlotRange->{All,{10^-5,2ValueMinMax}},PlotStyle->{{Thick,Black},{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green},{Thick,Darker@Cyan},{Thick,Magenta},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green,Dashing[0.02]}},PlotLegends->Placed[Style[#,20]&/@LegendList,Right],FrameLabel->{LegendX[quantity] ,LegendY[quantity]},FrameStyle->Directive[Black, 18],PlotLabel->Style[Row[{SelectedExperiment,". \!\(\*SubscriptBox[\(m\), \(N\)]\) = ",mvaltest," GeV, \!\(\*SuperscriptBox[\(U\), \(2\)]\) = ",couplingvaltest//N}],14,Black]]*)
+
+
+(* ::Title::Closed:: *)
+(*Exporting tabulated number of events*)
+
+
+(* ::Chapter::Closed:: *)
+(*Definitions*)
+
+
+(* ::Input:: *)
+(*directory["Nevents"]=FileNameJoin[{NotebookDirectory[],"Tabulated Nevents"}];*)
+(*directory["Nevents-LLP"]=FileNameJoin[{NotebookDirectory[],"Tabulated Nevents",LLPdirName}];*)
+(*directory["Nevents-LLP-experiment"]=FileNameJoin[{NotebookDirectory[],"Tabulated Nevents",LLPdirName,SelectedExperiment}];*)
+(*If[!DirectoryQ[directory[#]],CreateDirectory[directory[#]]]&/@{"Nevents","Nevents-LLP","Nevents-LLP-experiment"};*)
+(*Print["List of filenames with exported tabulated number of events"]*)
+(*Do[FilenameNeventsInt[prod]=ToString@StringForm["Nevents_HNL_MixingPattern_``-``-``_type_``_at_``_Npot=``_From_``.dat",Sequence@@{ToString[MixingPattern[[1]]],ToString[MixingPattern[[2]]],ToString[MixingPattern[[3]]],HNLtype,SelectedExperiment,NpotGivenExperiment//CForm//ToString,prod}],{prod,ProductionList}]*)
+(*Table[FilenameNeventsInt[prod],{prod,ProductionList}]//TableForm*)
+(*mRangeExport["K"]=Table[mx,{mx,0.051,0.495,0.02}];*)
+(*mRangeExport["D"]=Join[Table[mx,{mx,0.051,1.951,0.02}],{0.161,0.141,0.131,0.171,0.184,0.188,0.181,0.191,0.201}]//Sort//DeleteDuplicates;*)
+(*mRangeExport["B"]=Table[mx,{mx,0.051,6.301,0.02}];*)
+(*mRangeExport["W"]=Join[Table[mx,{mx,0.051,3.301,0.02}],Table[mx,{mx,3.35,10,0.05}],Table[mx,{mx,10.1,20.,0.1}]];*)
+(*If[FacilityGivenExperiment=="ESS",*)
+(*mRangeExport["mu"]=10^GridInFinal["mu"][[1]];*)
+(*mRangeExport["PiCharged"]=10^GridInFinal["PiCharged"][[1]];*)
+(*]*)
+(*couplingsRangeExport=Table[10^x,{x,-13,-3,0.03}];*)
+
+
+(* ::Chapter::Closed:: *)
+(*Exporting*)
+
+
+(* ::Input:: *)
+(*BlockExport[ProdChannel_]:=Module[{mlist},*)
+(*mlist=mRangeExport[ProdChannel];*)
+(*TabFrom=ParallelTable[Quiet[NeventsDiscret[mlist[[k]],ProdChannel,couplingsRangeExport]],{k,1,Length[mlist],1}];*)
+(*Export[FileNameJoin[{directory["Nevents-LLP-experiment"],FilenameNeventsInt[ProdChannel]}],Flatten[TabFrom,1],"Table"]*)
+(*]*)
+(*Monitor[*)
+(*Do[*)
+(*prod=ProductionList[[j]];*)
+(*BlockExport[prod],{j,1,Length[ProductionList],1}],*)
+(*Row[{ProgressIndicator[j,{1,Length[ProductionList]}]," Production mode = ",ProductionList[[j]]," (", j,"/",Length[ProductionList],")"}]]//AbsoluteTiming*)
+(*If[icounter>Length[SelectedExperimentList],BlockEvaluation["Sensitivity"]]*)
+
+
+(* ::Title::Closed:: *)
+(*Computing sensitivities*)
+
+
+(* ::Chapter::Closed:: *)
+(*Basic definitions*)
+
+
+(* ::Input:: *)
+(*LLPdirName="HNL";*)
+(*directory["Sensitivity"]=FileNameJoin[{NotebookDirectory[],"Sensitivity domains"}];*)
+(*directory["Sensitivity-LLP"]=FileNameJoin[{directory["Sensitivity"],LLPdirName}];*)
+(*If[!DirectoryQ[directory[#]],CreateDirectory[directory[#]]]&/@{"Sensitivity","Sensitivity-LLP"};*)
+(*directory["Nevents-LLP"]=FileNameJoin[{NotebookDirectory[],"Tabulated Nevents",LLPdirName}];*)
+(*dropdownDialog[list_,phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],PopupMenu[Dynamic[choice],list],Button["OK",DialogReturn[choice]]}]]*)
+(*infoDialog[phrase_]:=DialogInput[{choice=""},Column[{TextCell[phrase],Button["Proceed",DialogReturn[choice]]}]]*)
+(*selectionDialog[list_,phrase_]:=DialogInput[{choice={}},Column[{Row[{phrase}],Pane[TogglerBar[Dynamic[choice],list,Appearance->"Vertical"->{Automatic,5}],ImageSize->{Automatic,Automatic},Scrollbars->{False,True}],Button["OK",DialogReturn[choice]]}]]*)
+(*ExperimentDirectoriesListNevents=Select[FileNames["*",directory["Nevents-LLP"],1],DirectoryQ];*)
+(*Print["List of available experiments with tabulated \!\(\*SubscriptBox[\(N\), \(events\)]\) for " <>LLPdirName<>":"]*)
+(*ExperimentsListNevents=Table[FileNameTake[ExperimentDirectoriesListNevents[[i]],-1],{i,1,Length[ExperimentDirectoriesListNevents],1}]//Sort;*)
+(*ExperimentsListNevents//TableForm*)
+(*If[Length[ExperimentsListNevents]==0,Print["No experiment is available, generate first the acceptance for the given experiment using module 1"],*)
+(*SelectedExperimentList=If[Length[ExperimentsListNevents]!=0,selectionDialog[ExperimentsListNevents,"Select the experiments for which the sensitivity will be computed:"]];*)
+(*icounter=1;*)
+(*BlockEvaluation[tag_]:=Block[{},*)
+(*nb=EvaluationNotebook[];*)
+(*NotebookFind[nb,tag,All,CellTags];*)
+(*SelectionEvaluate[nb]*)
+(*];*)
+(*Do[*)
+(*BlockEvaluation["Sensitivity-computation"];*)
+(*,{icounter,1,Length[SelectedExperimentList],1}]*)
+(*]*)
+
+
+(* ::Chapter::Closed:: *)
+(*Specifying the experiment and the HNL model, importing and interpolations*)
+
+
+(* ::Section::Closed:: *)
+(*Specifying the model of HNLs*)
+
+
+(* ::Input:: *)
+(*Print["Selected experiment:"]*)
+(*GivenExperimentForSensitivityComputation=SelectedExperimentList[[icounter++]]*)
+(*CondANUBIS=MemberQ[{"ANUBIS-shaft-volume-1","ANUBIS-shaft-volume-2","ANUBIS-shaft-volume-3"},GivenExperimentForSensitivityComputation];*)
+(*If[CondANUBIS==True,infoDialog[Row[{"One of the modules of ANUBIS-shaft is chosen. The full sensitivity includes three modules. The importing will be over all modules, so for all ot the the sensitivity has to be computed"}]]]*)
+(*If[CondANUBIS==False,GivenExperimentForSensitivityComputationList={GivenExperimentForSensitivityComputation},GivenExperimentForSensitivityComputationList={"ANUBIS-shaft-volume-1","ANUBIS-shaft-volume-2","ANUBIS-shaft-volume-3"}];*)
+(*pathsNeventsAll={};*)
+(*Do[pathsNeventsAll=Join[pathsNeventsAll,FileNames["*.dat",FileNameJoin[{directory["Nevents-LLP"],exp}]]],{exp,GivenExperimentForSensitivityComputationList}];*)
+(*FilenamesNevents=Table[Last@FileNameSplit@pathsNeventsAll[[i]],{i,1,Length[pathsNeventsAll],1}];*)
+(*FilenameParameters[i_]:=StringCases[FilenamesNevents[[i]],"Nevents_HNL_MixingPattern_"~~mixinge__~~"-"~~mixing\[Mu]__~~"-"~~mixing\[Tau]__~~"_type_"~~type__~~"_at_"~~experiment__~~"_Npot="~~Npot__~~"_From_"~~mother__~~".dat":>{mixinge//ToExpression,mixing\[Mu]//ToExpression,mixing\[Tau]//ToExpression,type,experiment,Npot,mother}][[1]]*)
+(*FilenameParametersAll=Table[FilenameParameters[i],{i,1,Length[FilenamesNevents],1}]//Sort;*)
+(*TableHNLtype=DeleteDuplicates[FilenameParametersAll[[All,{1,2,3,4}]]];*)
+(*Join[{{"\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(e\)], \(2\)]\)/\!\(\*SuperscriptBox[\(U\), \(2\)]\)","\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(\[Mu]\)], \(2\)]\)/\!\(\*SuperscriptBox[\(U\), \(2\)]\)","\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(\[Tau]\)], \(2\)]\)/\!\(\*SuperscriptBox[\(U\), \(2\)]\)","HNL type"}},TableHNLtype]//TableForm*)
+(*dataSelected=dropdownDialog[TableHNLtype,"Choose available HNL mixing pattern and type (xe,x\[Mu],x\[Tau],Type):"];*)
+(*Print["Selected mixing pattern:"]*)
+(*SelectedMixingPattern={dataSelected[[1]]//ToExpression,dataSelected[[2]]//ToExpression,dataSelected[[3]]//ToExpression}*)
+(*patternsshorten=ToString[NumberForm[#,{Infinity,2}]]&/@SelectedMixingPattern;*)
+(*Print["Selected type - Dirac or Majorana:"]*)
+(*SelectedHNLtype=dataSelected[[4]]*)
+(*(*Creating the directory for exporting sensitivity curves*)*)
+(*ExperimentFolder=If[CondANUBIS==True,"ANUBIS",GivenExperimentForSensitivityComputation];*)
+(*directory["Sensitivity-LLP-exp"]=FileNameJoin[{directory["Sensitivity-LLP"],ExperimentFolder}];*)
+(*If[!DirectoryQ[directory["Sensitivity-LLP-exp"]],CreateDirectory[directory["Sensitivity-LLP-exp"]]]*)
+(*(*______________________________________________________*)*)
+(*(*Importing and interpolation*)*)
+(*(*______________________________________________________*)*)
+(*Print["Data to import:"]*)
+(*ProductionInfoList=Select[FilenameParametersAll,#[[1]]==dataSelected[[1]]&&#[[2]]==dataSelected[[2]]&&#[[3]]==dataSelected[[3]]&&#[[4]]==dataSelected[[4]]&];*)
+(*Join[{{"\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(e\)], \(2\)]\)/\!\(\*SuperscriptBox[\(U\), \(2\)]\)","\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(\[Mu]\)], \(2\)]\)/\!\(\*SuperscriptBox[\(U\), \(2\)]\)","\!\(\*SuperscriptBox[SubscriptBox[\(U\), \(\[Tau]\)], \(2\)]\)/\!\(\*SuperscriptBox[\(U\), \(2\)]\)","HNL type","Experiment","\!\(\*SubscriptBox[\(N\), \(PoT\)]\)","Mother"}},ProductionInfoList]//TableForm*)
+
+
+(* ::Section::Closed:: *)
+(*Data importing and interpolation*)
+
+
+(* ::Input:: *)
+(*NpotDefault=Interpreter["Number"][ProductionInfoList[[1]][[6]]];*)
+(*NeventsTabulated//Clear;*)
+(*\[Epsilon]reco[mLLP_]=If[StringContainsQ[GivenExperimentForSensitivityComputation,"LHCb-downstream"]==True,0.4,1];*)
+(*pathsNeventsIndex=Table[Position[FilenameParametersAll,ProductionInfoList[[i]]][[1]][[1]],{i,1,Length[ProductionInfoList],1}];*)
+(*pathsNevents=pathsNeventsAll[[#]]&/@pathsNeventsIndex;*)
+(*ProductionChannelsList=ProductionInfoList[[All,-1]];*)
+(*Do[*)
+(*Module[{prod},*)
+(*prod=ProductionChannelsList[[i]];*)
+(*(*The condition if one sums the number of events for the same production mode over several experiments*)*)
+(*IfprodExists=MemberQ[Keys[DownValues@NeventsTabulated][[All,1,1]],prod];*)
+(*NeventsTabulated[prod]=If[!IfprodExists,Import[pathsNevents[[i]],"Table"],Join[NeventsTabulated[prod][[All,{1,2}]],NeventsTabulated[prod][[All,{3}]]+Import[pathsNevents[[i]],"Table"][[All,{3}]]]];*)
+(*{mminmax[prod],couplingminmax[prod]}=(NeventsTabulated[prod][[All,#]]//MinMax)&/@{1,2};*)
+(*NevMax[prod]=NeventsTabulated[prod][[All,3]]//Max;*)
+(*NevInt[mLLP_,U2_,prod]=\[Epsilon]reco[mLLP]*If[mminmax[prod][[1]]<= mLLP<=mminmax[prod][[2]]&&couplingminmax[prod][[1]]<=U2<=couplingminmax[prod][[2]],Evaluate[10^(Interpolation[{Log10[#[[1]]],Log10[#[[2]]],Log10[#[[3]]+10^-90]}&/@NeventsTabulated[prod],InterpolationOrder->1][Log10[mLLP],Log10[U2]])],0];*)
+(*]*)
+(*,{i,1,Length[pathsNevents],1}]*)
+(*{mminmaxOverall,couplingminmaxOverall}=MinMax[Table[#[prod],{prod,ProductionChannelsList}]//Flatten]&/@{mminmax,couplingminmax};*)
+(*NevMaxOverall=Max[Table[NevMax[prod],{prod,ProductionChannelsList}]];*)
+(*NevIntOverall[mLLP_,U2_]=Sum[NevInt[mLLP,U2,prod],{prod,ProductionChannelsList}];*)
+(*pt[mLLP_]:=LogLogPlot[Evaluate[Join[Table[NevInt[mLLP,y,prod],{prod,ProductionChannelsList}]]],{y,couplingminmaxOverall[[1]],couplingminmaxOverall[[2]]},PlotLegends->Placed[Style[#,15]&/@ProductionChannelsList,Right],PlotRange->{couplingminmaxOverall,{10^-2,NevMaxOverall}},Frame->True,ImageSize->Large,FrameLabel->{"\!\(\*SuperscriptBox[\(U\), \(2\)]\)" , "\!\(\*SubscriptBox[\(N\), \(events\)]\)[\!\(\*SubscriptBox[\(m\), \(N\)]\),\!\(\*SuperscriptBox[\(U\), \(2\)]\)]"},FrameStyle->Directive[Black, 23],PlotStyle->{{Thick,Blue},{Thick,Darker@Red},{Thick,Darker@Darker@Green},{Thick,Black},{Thick,Blue,Dashing[0.02]},{Thick,Darker@Red,Dashing[0.02]},{Thick,Darker@Darker@Green,Dashing[0.02]},{Thick,Black,Dashing[0.02]}},PlotLabel->Style[Row[{GivenExperimentForSensitivityComputation,". \!\(\*SubscriptBox[\(m\), \(N\)]\) = ",mLLP, " GeV"}],20,Black]]*)
+(*pt[1.5]*)
+
+
+(* ::Chapter::Closed:: *)
+(*Sensitivity*)
+
+
+(* ::Section::Closed:: *)
+(*Subscript[N, events] density plot*)
+
+
+(* ::Input:: *)
+(*plot=DensityPlot[Evaluate[Log10[NevIntOverall[mLLP,\[Epsilon]2]]],{mLLP,mminmaxOverall[[1]],mminmaxOverall[[2]]},{\[Epsilon]2,couplingminmaxOverall[[1]],couplingminmaxOverall[[2]]},ScalingFunctions->{"Log","Log"},AspectRatio->0.78,PlotRange->{All,All,{Log10[2.3],Log10[NevMaxOverall]}},ImageSize->Large,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(N\)]\) [GeV]","\!\(\*SuperscriptBox[\(U\), \(2\)]\)"}, Frame-> True, FrameStyle->Directive[Black, 25],PlotPoints->100,PlotLegends->Placed[BarLegend[{Automatic,{Log10[2.3],Log10[NevMaxOverall]}},LegendMarkerSize->340,LegendLabel->Placed["\!\(\*SubscriptBox[\(Log\), \(10\)]\)[\!\(\*SubscriptBox[\(N\), \(ev\)]\)]",Bottom],LabelStyle->{FontSize->22},Method->{FrameStyle->Black,AxesStyle->None,TicksStyle->Black}],Right],PlotLabel->Style[Row[{ExperimentFolder}],20,Black](*,FrameTicks->{{Automatic,Automatic},{TicksPlotx,None}}*)]*)
+(*(*Export[FileNameJoin[{NotebookDirectory[],"plots/SensCalc/NeventsDensityPlotExample.pdf"}],plot,"AllowRasterization"->False]*)*)
+
+
+(* ::Section::Closed:: *)
+(*Constraints importing*)
+
+
+(* ::Input:: *)
+(*importformat["txt"]=importformat["dat"]="Table";*)
+(*importformat["m"]=importformat["mx"]="MX";*)
+(*importformat["xls"]="XLS";*)
+(*dir=FileNameJoin[{NotebookDirectory[],"contours",LLPdirName}];*)
+(*If[DirectoryQ[dir],*)
+(*filenames=FileNames[LLPdirName<>"-excluded*",dir,Infinity];*)
+(*ExcludedRegions[LLPdirName]=Import[#,importformat[FileExtension[#]]]&/@FileNames[LLPdirName<>"-excluded*",dir,Infinity];*)
+(*];*)
+(*If[!DirectoryQ[dir],*)
+(*ExcludedRegions[LLPdirName]={{{10.,10.}}};*)
+(*]*)
+(*Seesaw=Table[{mN,5*10^-11/mN},{mN,0.01,90,0.1}];*)
+(*ExcludedRegionsTemp[LLPdirName]=If[SelectedHNLtype=="Majorana",If[SelectedMixingPattern=={1,0,0},{Seesaw,ExcludedRegions[LLPdirName][[1]],ExcludedRegions[LLPdirName][[4]]},If[SelectedMixingPattern=={0,1,0},{Seesaw,ExcludedRegions[LLPdirName][[2]],ExcludedRegions[LLPdirName][[5]]},If[SelectedMixingPattern=={0,0,1},{Seesaw,ExcludedRegions[LLPdirName][[3]],ExcludedRegions[LLPdirName][[6]]},{Seesaw}]]],{Seesaw}];*)
+
+
+(* ::Section::Closed:: *)
+(*Sensitivity*)
+
+
+(* ::Input:: *)
+(*SensitivityBlock[Nev_,Npot_,SelectedProduction_]:=Block[{},*)
+(*NevTot[mLLP_,U2_]=Sum[NevInt[mLLP,U2,prod],{prod,SelectedProduction}];*)
+(*RegSens=RegionPlot[Npot/NpotDefault NevTot[10^mLLP,10^U2]>= Nev,{mLLP,Log10[mminmaxOverall[[1]]],Log10[mminmaxOverall[[2]]]},{U2,Log10[couplingminmaxOverall[[1]]],Log10[couplingminmaxOverall[[2]]]},PlotPoints->200];*)
+(*SensTemp=Cases[Normal@RegSens,Line[x_]:>x,Infinity];*)
+(*Sens=Table[{10^#[[1]],10^#[[2]]}&/@SensTemp[[i]],{i,1,Length[SensTemp],1}];*)
+(*filename=ToString@StringForm["Sensitivity_HNL_Pattern_``-``-``_``_at_``_Nev=``_Npot=``.xls",Sequence@@{patternsshorten[[1]],patternsshorten[[2]],patternsshorten[[3]],SelectedHNLtype,ExperimentFolder,Nev//ToString,Npot//CForm//ToString}];*)
+(*Export[FileNameJoin[{directory["Sensitivity-LLP-exp"],filename}],Sens];*)
+(*Sens*)
+(*]*)
+(*productionlist=Join[{"All"},ProductionChannelsList];*)
+(*DynamicModule[{input1=NpotDefault,input2=2.3,choice={"All"},list,phrase},*)
+(*DialogInput[Column[{Style[ExperimentFolder,Bold],TextCell["Enter the number of proton collisions:"],InputField[Dynamic[input1],Expression],TextCell["Enter the value of N_ev,min for which the sensitivity will be computed:"],InputField[Dynamic[input2],Expression],Row[{"Select the production channels to be used for the sensitivity calculation:"}],Pane[TogglerBar[Dynamic[choice],productionlist,Appearance->"Vertical"->{Automatic,1}],ImageSize->{Automatic,Automatic},Scrollbars->{False,True}],Button["Submit",DialogReturn[{NpotVal,NevMinVal,SelectedProduction}={input1,input2,choice}//N],ImageSize->Automatic]}]]];*)
+(*If[MemberQ[SelectedProduction,"All"],SelectedProduction=ProductionChannelsList;]*)
+(*{{"\!\(\*SubscriptBox[\(N\), \(PoT\)]\) for computation","\!\(\*SubscriptBox[\(N\), \(ev, min\)]\)","Selected production modes"},{NpotVal,NevMinVal,SelectedProduction}}//TableForm*)
+(*sens=SensitivityBlock[NevMinVal,NpotVal,SelectedProduction];*)
+(*Show[ListLogLogPlot[Cases[ExcludedRegionsTemp[LLPdirName],_?MatrixQ,All],Joined->{True,True,True,True},Frame-> True,FrameLabel->{"\!\(\*SubscriptBox[\(m\), \(N\)]\) [GeV]" , "\!\(\*SuperscriptBox[\(U\), \(2\)]\)"},FrameStyle->Directive[Black, 23],PlotStyle->{{Thick,Gray}},Filling->{1->{Bottom,Directive[Gray,Opacity[0.3]]},2->{True,Directive[Gray,Opacity[0.3]]},3->{Bottom,Directive[Gray,Opacity[0.1]]},4->{True,Directive[Gray,Opacity[0.3]]}},ImageSize->Large,PlotRange->{{1.01mminmaxOverall[[1]],1.1mminmaxOverall[[2]]},{0.3Min[Flatten[Sens]],0.98couplingminmaxOverall[[2]]}},PlotLabel->Style[Row[{"\!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] ",NevMinVal}],18,Black]],*)
+(*ListLogLogPlot[Cases[sens,_?MatrixQ,All],Joined->{True,True,True,True},PlotStyle->Flatten[{ConstantArray[{Thick,Blue},If[MatrixQ[sens],1,Length@sens]]},1],ImageSize->Large,PlotRange->{{1.01mminmaxOverall[[1]],1.1mminmaxOverall[[2]]},{couplingminmaxOverall[[1]],Max[0.2,0.98couplingminmaxOverall[[2]]]}},PlotLabel->Style[Row[{"\!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] ",NevMinVal}],18,Black],PlotLegends->Placed[Style[#,15]&/@{ExperimentFolder},{0.2,0.15}]],Graphics[{Text[Style["Excluded",24,Black],Scaled[{0.7,0.95}]]}]]*)
+
+
+(* ::Title::Closed:: *)
+(*Deleting generated cells*)
+
+
+(* ::Input:: *)
+(*FrontEndTokenExecute["DeleteGeneratedCells"];*)
+(*FrontEndTokenExecute["SelectAll"];*)
+(*FrontEndTokenExecute["SelectionCloseAllGroups"];*)
