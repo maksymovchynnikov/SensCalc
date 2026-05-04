@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     20241,        484]
-NotebookOptionsPosition[     19044,        453]
-NotebookOutlinePosition[     19448,        469]
-CellTagsIndexPosition[     19405,        466]
+NotebookDataLength[     19500,        469]
+NotebookOptionsPosition[     18433,        441]
+NotebookOutlinePosition[     18835,        457]
+CellTagsIndexPosition[     18792,        454]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -47,9 +47,9 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"The", " ", "kinematics", " ", "of", " ", "2"}], "-", 
        RowBox[{
-       "body", " ", "decays", " ", "of", " ", "B", " ", "via", " ", "the", " ",
-         "mixing", " ", "channel", " ", "is", " ", "approximated", " ", "by", 
-        " ", "B"}]}], " ", "->", " ", 
+       "body", " ", "decays", " ", "of", " ", "B", " ", "via", " ", "the", 
+        " ", "mixing", " ", "channel", " ", "is", " ", "approximated", " ", 
+        "by", " ", "B"}]}], " ", "->", " ", 
       RowBox[{"\[Pi]", "+", 
        RowBox[{
         RowBox[{"S", ".", " ", "This"}], " ", "is", " ", "reasonable", " ", 
@@ -63,13 +63,14 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"ProcessesListAll", "[", "LLPname", "]"}], "=", 
      RowBox[{"{", 
-      RowBox[{"\"\<B-mixing\>\"", ",", "\"\<Bs-quartic\>\"", 
-       ",", "\"\<B-quartic\>\"", ",", "\"\<h-quartic\>\"", 
-       ",", "\"\<K-mixing\>\"", ",", "\"\<Bremsstrahlung\>\"", 
-       ",", "\"\<Upsilon-mixing\>\"", ",", "\"\<Upsilon-quartic\>\""}], 
-      "}"}]}], ";"}], "\[IndentingNewLine]", 
+      RowBox[{
+      "\"\<B-mixing\>\"", ",", "\"\<Bs-quartic\>\"", ",", "\"\<B-quartic\>\"",
+        ",", "\"\<h-quartic\>\"", ",", "\"\<K-mixing\>\"", ",", 
+       "\"\<Bremsstrahlung\>\"", ",", "\"\<Upsilon-mixing\>\"", ",", 
+       "\"\<Upsilon-quartic\>\""}], "}"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"Topology", " ", "of", " ", "the", " ", "process"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"Topology", " ", "of", " ", "the", " ", "process"}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapThread", "[", 
      RowBox[{
@@ -77,16 +78,17 @@ Cell[BoxData[
        RowBox[{"(", 
         RowBox[{
          RowBox[{"ProductionType", "[", 
-          RowBox[{"LLPname", ",", "#1"}], "]"}], "=", "#2"}], ")"}], "&"}], ",", 
+          RowBox[{"LLPname", ",", "#1"}], "]"}], "=", "#2"}], ")"}], "&"}], 
+      ",", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{"ProcessesListAll", "[", "LLPname", "]"}], ",", 
         RowBox[{"{", 
-         RowBox[{"\"\<Decay\>\"", ",", "\"\<Decay\>\"", ",", "\"\<Decay\>\"", 
-          ",", "\"\<Decay\>\"", ",", "\"\<Decay\>\"", 
-          ",", "\"\<Scattering\>\"", ",", "\"\<Decay\>\"", 
-          ",", "\"\<Decay\>\""}], "}"}]}], "}"}]}], "]"}], ";"}], 
-   "\[IndentingNewLine]", 
+         RowBox[{
+         "\"\<Decay\>\"", ",", "\"\<Decay\>\"", ",", "\"\<Decay\>\"", ",", 
+          "\"\<Decay\>\"", ",", "\"\<Decay\>\"", ",", "\"\<Scattering\>\"", 
+          ",", "\"\<Decay\>\"", ",", "\"\<Decay\>\""}], "}"}]}], "}"}]}], 
+     "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"Particle", " ", 
@@ -100,47 +102,49 @@ Cell[BoxData[
        RowBox[{"(", 
         RowBox[{
          RowBox[{"ReactionProductsList", "[", 
-          RowBox[{"LLPname", ",", "#1"}], "]"}], "=", "#2"}], ")"}], "&"}], ",", 
+          RowBox[{"LLPname", ",", "#1"}], "]"}], "=", "#2"}], ")"}], "&"}], 
+      ",", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{"ProcessesListAll", "[", "LLPname", "]"}], ",", 
         RowBox[{"{", 
          RowBox[{
           RowBox[{"{", 
-           
-           RowBox[{"\"\<Bcharged\>\"", ",", "\"\<PiCharged\>\"", ",", 
-            "LLPname"}], "}"}], ",", 
+           RowBox[{
+           "\"\<Bcharged\>\"", ",", "\"\<PiCharged\>\"", ",", "LLPname"}], 
+           "}"}], ",", 
           RowBox[{"{", 
            RowBox[{"\"\<Bs\>\"", ",", "LLPname", ",", "LLPname"}], "}"}], ",", 
           RowBox[{"{", 
-           
-           RowBox[{"\"\<Bcharged\>\"", ",", "\"\<Kcharged\>\"", ",", 
-            "LLPname", ",", "LLPname"}], "}"}], ",", 
+           RowBox[{
+           "\"\<Bcharged\>\"", ",", "\"\<Kcharged\>\"", ",", "LLPname", ",", 
+            "LLPname"}], "}"}], ",", 
           RowBox[{"{", 
            RowBox[{"\"\<h\>\"", ",", "LLPname", ",", "LLPname"}], "}"}], ",", 
           RowBox[{"{", 
-           
-           RowBox[{"\"\<Kcharged\>\"", ",", "\"\<PiCharged\>\"", ",", 
-            "LLPname"}], "}"}], ",", 
+           RowBox[{
+           "\"\<Kcharged\>\"", ",", "\"\<PiCharged\>\"", ",", "LLPname"}], 
+           "}"}], ",", 
           RowBox[{"{", 
            RowBox[{"\"\<p\>\"", ",", "LLPname"}], "}"}], ",", 
           RowBox[{"{", 
            RowBox[{"\"\<Upsilon\>\"", ",", "\"\<photon\>\"", ",", "LLPname"}],
             "}"}], ",", 
           RowBox[{"{", 
-           
-           RowBox[{"\"\<Upsilon\>\"", ",", "\"\<photon\>\"", ",", "LLPname", ",",
-             "LLPname"}], "}"}]}], "}"}]}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+           RowBox[{
+           "\"\<Upsilon\>\"", ",", "\"\<photon\>\"", ",", "LLPname", ",", 
+            "LLPname"}], "}"}]}], "}"}]}], "}"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"If", "[", 
      RowBox[{"EventCalc", ",", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"additionalProcesses", "=", 
         RowBox[{"{", 
-         RowBox[{"\"\<Bplus-to-KS-mixing\>\"", 
-          ",", "\"\<B0-to-KstarS-mixing\>\"", 
-          ",", "\"\<Bplus-to-KSS-quartic\>\"", 
-          ",", "\"\<B0-to-KstarSS-quartic\>\""}], "}"}]}], ";", 
+         RowBox[{
+         "\"\<Bplus-to-KS-mixing\>\"", ",", "\"\<B0-to-KstarS-mixing\>\"", 
+          ",", "\"\<Bplus-to-KSS-quartic\>\"", ",", 
+          "\"\<B0-to-KstarSS-quartic\>\""}], "}"}]}], ";", 
        "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{"ProcessesListAll", "[", "LLPname", "]"}], "=", 
@@ -159,10 +163,10 @@ Cell[BoxData[
          RowBox[{"{", 
           RowBox[{"additionalProcesses", ",", 
            RowBox[{"{", 
-            
-            RowBox[{"\"\<Decay\>\"", ",", "\"\<Decay\>\"", 
-             ",", "\"\<Decay\>\"", ",", "\"\<Decay\>\""}], "}"}]}], "}"}]}], 
-        "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+            "\"\<Decay\>\"", ",", "\"\<Decay\>\"", ",", "\"\<Decay\>\"", ",", 
+             "\"\<Decay\>\""}], "}"}]}], "}"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
        RowBox[{"MapThread", "[", 
         RowBox[{
          RowBox[{
@@ -176,20 +180,20 @@ Cell[BoxData[
            RowBox[{"{", 
             RowBox[{
              RowBox[{"{", 
-              
-              RowBox[{"\"\<Bcharged\>\"", ",", "\"\<Kcharged\>\"", ",", 
-               "LLPname"}], "}"}], ",", 
+              RowBox[{
+              "\"\<Bcharged\>\"", ",", "\"\<Kcharged\>\"", ",", "LLPname"}], 
+              "}"}], ",", 
              RowBox[{"{", 
               RowBox[{"\"\<B0\>\"", ",", "\"\<Kstar892\>\"", ",", "LLPname"}],
                "}"}], ",", 
              RowBox[{"{", 
-              
-              RowBox[{"\"\<Bcharged\>\"", ",", "\"\<Kcharged\>\"", ",", 
-               "LLPname", ",", "LLPname"}], "}"}], ",", 
+              RowBox[{
+              "\"\<Bcharged\>\"", ",", "\"\<Kcharged\>\"", ",", "LLPname", 
+               ",", "LLPname"}], "}"}], ",", 
              RowBox[{"{", 
-              
-              RowBox[{"\"\<B0\>\"", ",", "\"\<Kstar892\>\"", ",", "LLPname", ",",
-                "LLPname"}], "}"}]}], "}"}]}], "}"}]}], "]"}], ";"}]}], 
+              RowBox[{
+              "\"\<B0\>\"", ",", "\"\<Kstar892\>\"", ",", "LLPname", ",", 
+               "LLPname"}], "}"}]}], "}"}]}], "}"}]}], "]"}], ";"}]}], 
      "\[IndentingNewLine]", "]"}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.913268651639258*^9, 3.9132687319597893`*^9}, {
    3.9132697430236015`*^9, 3.913269760636882*^9}, {3.9132704922250967`*^9, 
@@ -228,17 +232,18 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Their descriptions", "Subsection",
- CellChangeTimes->{{3.9505808008253574`*^9, 
-  3.9505808033833046`*^9}},ExpressionUUID->"32399c11-a602-2544-b508-\
+Cell["Descriptions of the processes", "Subsection",
+ CellChangeTimes->{{3.9505808008253574`*^9, 3.9505808033833046`*^9}, {
+  3.9869105649887676`*^9, 
+  3.9869105695679245`*^9}},ExpressionUUID->"32399c11-a602-2544-b508-\
 7b028db67318"],
 
 Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<B-mixing\>\""}], "]"}], 
-   "=", "\"\<Production of the scalars S via the mixing - from decays \
+    RowBox[{"LLPname", ",", "\"\<B-mixing\>\""}], "]"}], "=", 
+   "\"\<Production of the scalars S via the mixing - from decays \
 \!\(\*SuperscriptBox[\(B\), \
 \(+\(/\(0\)\)\)]\)\[Rule]\!\(\*SubscriptBox[\(X\), \(s/d\)]\)+S, where \
 \!\(\*SubscriptBox[\(X\), \(s/d\)]\) is a hadronic state containing s/d \
@@ -246,15 +251,15 @@ quarks. See 1904.10447\>\""}], ";"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<Bs-quartic\>\""}], "]"}], 
-   "=", "\"\<Production of the scalars S via the triliear coupling hSS - from \
+    RowBox[{"LLPname", ",", "\"\<Bs-quartic\>\""}], "]"}], "=", 
+   "\"\<Production of the scalars S via the triliear coupling hSS - from \
 decays of \!\(\*SubscriptBox[\(B\), \(s\)]\) mesons \!\(\*SubscriptBox[\(B\), \
 \(s\)]\) \[Rule] SS. See 1904.10447\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<B-quartic\>\""}], "]"}], 
-   "=", "\"\<Production of the scalars S via the triliear coupling hSS - from \
+    RowBox[{"LLPname", ",", "\"\<B-quartic\>\""}], "]"}], "=", 
+   "\"\<Production of the scalars S via the triliear coupling hSS - from \
 decays \!\(\*SuperscriptBox[\(B\), \
 \(+\(/\(0\)\)\)]\)\[Rule]\!\(\*SubscriptBox[\(X\), \(s/d\)]\)+2S, where \
 \!\(\*SubscriptBox[\(X\), \(s/d\)]\) is a hadronic state containing s/d \
@@ -262,68 +267,72 @@ quarks. See 1904.10447\>\""}], ";"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<h-quartic\>\""}], "]"}], 
-   "=", "\"\<Production of the scalars S via the triliear coupling hSS - from \
+    RowBox[{"LLPname", ",", "\"\<h-quartic\>\""}], "]"}], "=", 
+   "\"\<Production of the scalars S via the triliear coupling hSS - from \
 decays h\[Rule]SS\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<K-mixing\>\""}], "]"}], 
-   "=", "\"\<Production of the scalars S via the mixing - from decays \
+    RowBox[{"LLPname", ",", "\"\<K-mixing\>\""}], "]"}], "=", 
+   "\"\<Production of the scalars S via the mixing - from decays \
 \!\(\*SuperscriptBox[\(K\), \(+\)]\)\[Rule]\[Pi]+S. See 1904.10447\>\""}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<Bremsstrahlung\>\""}], "]"}], 
-   "=", "\"\<Production of the scalars S via the mixing - from proton \
+    RowBox[{"LLPname", ",", "\"\<Bremsstrahlung\>\""}], "]"}], "=", 
+   "\"\<Production of the scalars S via the mixing - from proton \
 bremsstrahlung. See 1904.10447 for generic description and 2409.11096 for \
 treating theoretical uncertainties\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<Bplus-to-KS-mixing\>\""}], "]"}], 
-   "=", "\"\<Partial process of the type \!\(\*SuperscriptBox[\(B\), \(+\)]\)\
+    RowBox[{"LLPname", ",", "\"\<Bplus-to-KS-mixing\>\""}], "]"}], "=", 
+   "\"\<Partial process of the type \!\(\*SuperscriptBox[\(B\), \(+\)]\)\
 \[Rule]\!\(\*SubscriptBox[\(X\), \(s\)]\)+S, with \!\(\*SubscriptBox[\(X\), \
-\(s\)]\) = \!\(\*SuperscriptBox[\(K\), \(+\)]\)\>\""}], ";"}], "\[IndentingNewLine]", 
+\(s\)]\) = \!\(\*SuperscriptBox[\(K\), \(+\)]\)\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<B0-to-KstarS-mixing\>\""}], "]"}], 
-   "=", "\"\<Partial process of the type \!\(\*SuperscriptBox[\(B\), \(0\)]\)\
+    RowBox[{"LLPname", ",", "\"\<B0-to-KstarS-mixing\>\""}], "]"}], "=", 
+   "\"\<Partial process of the type \!\(\*SuperscriptBox[\(B\), \(0\)]\)\
 \[Rule]\!\(\*SubscriptBox[\(X\), \(s\)]\)+S, with \!\(\*SubscriptBox[\(X\), \
-\(s\)]\) = \!\(\*SuperscriptBox[\(K\), \(*\)]\)\>\""}], ";"}], "\[IndentingNewLine]", 
+\(s\)]\) = \!\(\*SuperscriptBox[\(K\), \(*\)]\)\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<Bplus-to-KSS-quartic\>\""}], "]"}], 
-   "=", "\"\<Partial process of the type \!\(\*SuperscriptBox[\(B\), \(+\)]\)\
+    RowBox[{"LLPname", ",", "\"\<Bplus-to-KSS-quartic\>\""}], "]"}], "=", 
+   "\"\<Partial process of the type \!\(\*SuperscriptBox[\(B\), \(+\)]\)\
 \[Rule]\!\(\*SubscriptBox[\(X\), \(s\)]\)+SS, with \!\(\*SubscriptBox[\(X\), \
-\(s\)]\) = \!\(\*SuperscriptBox[\(K\), \(+\)]\)\>\""}], ";"}], "\[IndentingNewLine]", 
+\(s\)]\) = \!\(\*SuperscriptBox[\(K\), \(+\)]\)\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<B0-to-KstarSS-quartic\>\""}], "]"}], 
-   "=", "\"\<Partial process of the type \!\(\*SuperscriptBox[\(B\), \(0\)]\)\
+    RowBox[{"LLPname", ",", "\"\<B0-to-KstarSS-quartic\>\""}], "]"}], "=", 
+   "\"\<Partial process of the type \!\(\*SuperscriptBox[\(B\), \(0\)]\)\
 \[Rule]\!\(\*SubscriptBox[\(X\), \(s\)]\)+SS, with \!\(\*SubscriptBox[\(X\), \
-\(s\)]\) = \!\(\*SuperscriptBox[\(K\), \(*\)]\)\>\""}], ";"}], "\[IndentingNewLine]", 
+\(s\)]\) = \!\(\*SuperscriptBox[\(K\), \(*\)]\)\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<Upsilon-mixing\>\""}], "]"}], 
-   "=", "\"\<Radiative decays \[CapitalUpsilon]\[Rule]S+\[Gamma] via mixing \
+    RowBox[{"LLPname", ",", "\"\<Upsilon-mixing\>\""}], "]"}], "=", 
+   "\"\<Radiative decays \[CapitalUpsilon]\[Rule]S+\[Gamma] via mixing \
 hS\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<Upsilon-quartic\>\""}], "]"}], 
-   "=", "\"\<Radiative decays \[CapitalUpsilon]\[Rule]2S+\[Gamma] via the \
+    RowBox[{"LLPname", ",", "\"\<Upsilon-quartic\>\""}], "]"}], "=", 
+   "\"\<Radiative decays \[CapitalUpsilon]\[Rule]2S+\[Gamma] via the \
 trilinear coupling hSS\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"DescriptionProcess", "[", 
-    RowBox[{"LLPname", ",", "\"\<All channels\>\""}], "]"}], 
-   "=", "\"\<All processes from the list\>\""}], ";"}]}], "Input",
+    RowBox[{"LLPname", ",", "\"\<All channels\>\""}], "]"}], "=", 
+   "\"\<All processes from the list\>\""}], ";"}]}], "Input",
  CellChangeTimes->{{3.9505808140063744`*^9, 3.950580926587164*^9}, {
   3.9505809592090473`*^9, 3.9505810732193623`*^9}, {3.9505812053112946`*^9, 
   3.950581225636116*^9}, {3.9511481461332245`*^9, 3.951148215470001*^9}},
@@ -345,8 +354,6 @@ Cell[TextData[{
   3.8851110666890535`*^9}, {3.91336783328274*^9, 
   3.913367836688823*^9}},ExpressionUUID->"b97b4e66-c521-4117-8848-\
 be907144e732"],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
@@ -428,32 +435,13 @@ Cell[BoxData[{
    3.9137095614138393`*^9}, 3.914831447028082*^9, {3.915438811257351*^9, 
    3.915438811262354*^9}, {3.949648178389433*^9, 3.949648201800823*^9}, 
    3.949996446021963*^9, {3.9511479334115143`*^9, 3.9511479770966434`*^9}},
- CellLabel->"In[19]:=",ExpressionUUID->"e9469ab9-0236-4da8-981e-4f96c1d0f893"],
-
-Cell[BoxData[
- FormBox[
-  FractionBox["1", 
-   SuperscriptBox[
-    RowBox[{"(", 
-     RowBox[{"1", "-", 
-      RowBox[{"0.026315789473684216`", " ", 
-       RowBox[{"(", 
-        RowBox[{"27.887162`", "\[VeryThinSpace]", "-", 
-         RowBox[{"10.558`", " ", "E1"}]}], ")"}]}]}], ")"}], "2"]], 
-  TraditionalForm]], "Output",
- CellChangeTimes->{3.9434162066205883`*^9, 3.947738450729391*^9, 
-  3.9477387377807217`*^9, 3.947739284737108*^9, 3.947740407773468*^9, 
-  3.9477442512021656`*^9, 3.9482491463743305`*^9, 3.9482504446729507`*^9, 
-  3.948304315918068*^9, 3.948335053832054*^9},
- CellLabel->
-  "Out[289]=",ExpressionUUID->"c7ef1d5a-c6c3-7c49-8aee-6b49f5c38c6d"]
-}, Open  ]]
-}, Open  ]]
+ CellLabel->"In[19]:=",ExpressionUUID->"e9469ab9-0236-4da8-981e-4f96c1d0f893"]
+}, Closed]]
 }, Open  ]]
 },
-WindowSize->{1428, 729.75},
+WindowSize->{950.25, 522.75},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (December 26, 2024)",
+FrontEndVersion->"14.1 for Microsoft Windows (64-bit) (July 16, 2024)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"6ca2f3fa-b960-8142-99b9-f0407203c944"
 ]
@@ -472,19 +460,16 @@ Cell[CellGroupData[{
 Cell[576, 22, 204, 4, 67, "Chapter",ExpressionUUID->"b06bae0d-0042-4908-8c65-fa53403402b2"],
 Cell[CellGroupData[{
 Cell[805, 30, 165, 3, 66, "Section",ExpressionUUID->"87dbf68c-da68-49fd-aa77-8727e25def3f"],
-Cell[973, 35, 8729, 191, 351, "Input",ExpressionUUID->"e1ed0d49-9570-4820-b744-0bdb07787dba"],
+Cell[973, 35, 8747, 195, 465, "Input",ExpressionUUID->"e1ed0d49-9570-4820-b744-0bdb07787dba"],
 Cell[CellGroupData[{
-Cell[9727, 230, 170, 3, 53, "Subsection",ExpressionUUID->"32399c11-a602-2544-b508-7b028db67318"],
-Cell[9900, 235, 4635, 94, 294, "Input",ExpressionUUID->"cc8031d9-1777-c640-976b-51d032b7fdbe"]
+Cell[9745, 234, 234, 4, 53, "Subsection",ExpressionUUID->"32399c11-a602-2544-b508-7b028db67318"],
+Cell[9982, 240, 4647, 98, 427, "Input",ExpressionUUID->"cc8031d9-1777-c640-976b-51d032b7fdbe"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14584, 335, 525, 11, 66, "Section",ExpressionUUID->"b97b4e66-c521-4117-8848-be907144e732"],
-Cell[CellGroupData[{
-Cell[15134, 350, 3199, 80, 213, "Input",ExpressionUUID->"e9469ab9-0236-4da8-981e-4f96c1d0f893"],
-Cell[18336, 432, 668, 16, 49, "Output",ExpressionUUID->"c7ef1d5a-c6c3-7c49-8aee-6b49f5c38c6d"]
-}, Open  ]]
-}, Open  ]]
+Cell[14678, 344, 525, 11, 103, "Section",ExpressionUUID->"b97b4e66-c521-4117-8848-be907144e732"],
+Cell[15206, 357, 3199, 80, 213, "Input",ExpressionUUID->"e9469ab9-0236-4da8-981e-4f96c1d0f893"]
+}, Closed]]
 }, Open  ]]
 }
 ]
