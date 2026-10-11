@@ -3,17 +3,16 @@
 (*** Wolfram Notebook File ***)
 (* http://www.wolfram.com/nb *)
 
-(* CreatedBy='Mathematica 13.2' *)
+(* CreatedBy='Wolfram 14.3' *)
 
-(*CacheID: 234*)
 (* Internal cache information:
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
-NotebookDataPosition[       158,          7]
-NotebookDataLength[     16805,        428]
-NotebookOptionsPosition[     14982,        383]
-NotebookOutlinePosition[     15944,        411]
-CellTagsIndexPosition[     15871,        406]
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     16804,        427]
+NotebookOptionsPosition[     14987,        382]
+NotebookOutlinePosition[     15939,        410]
+CellTagsIndexPosition[     15866,        405]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -44,9 +43,9 @@ Cell[BoxData[
        RowBox[{"FileNameJoin", "[", 
         RowBox[{"{", 
          RowBox[{
-         "dirpheno", ",", "LLPdirName", ",", "\"\<decay widths\>\"", ",", 
-          "\"\<Widths-model-Fermion universal-scale-1000.-GeV.m\>\""}], "}"}],
-         "]"}], ",", "\"\<MX\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+         "dirpheno", ",", "LLPdirName", ",", "\"\<decay widths\>\"", 
+          ",", "\"\<Widths-model-ALP-fermion-scale-1000.-GeV-Default.m\>\""}\
+], "}"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
     RowBox[{"DecayWidthsDataTemp2", "=", 
      RowBox[{"DecayWidthsDataTemp", "[", 
       RowBox[{"[", "4", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
@@ -85,9 +84,10 @@ Cell[BoxData[
       RowBox[{"\[CapitalGamma]LLP", "[", 
        RowBox[{"mLLP", ",", "y"}], "]"}]]}], ";"}]}], "\[IndentingNewLine]", 
   "]"}]], "Input",
- CellChangeTimes->{{3.931158317213108*^9, 3.9311583710074577`*^9}},
- CellLabel->
-  "In[281]:=",ExpressionUUID->"f7848f41-824c-438b-91f6-a17086b51377"]
+ CellChangeTimes->{{3.931158317213108*^9, 3.9311583710074577`*^9}, {
+  3.998324062599368*^9, 
+  3.998324063282238*^9}},ExpressionUUID->"f7848f41-824c-438b-91f6-\
+a17086b51377"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -115,10 +115,10 @@ Cell[BoxData[
        RowBox[{"FileNameJoin", "[", 
         RowBox[{"{", 
          RowBox[{
-         "dirpheno", ",", "LLPsel", ",", 
-          "\"\<decay widths/Br-ratios-SensCalc-model-Fermion \
-universal-scale-1000.-GeV.m\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}], 
-      "]"}]}], ";", "\[IndentingNewLine]", 
+         "dirpheno", ",", "LLPsel", 
+          ",", "\"\<decay \
+widths/Br-ratios-SensCalc-model-ALP-fermion-scale-1000.-GeV-Default.m\>\""}\
+], "}"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
     RowBox[{"(*", 
      RowBox[{
      "List", " ", "of", " ", "all", " ", "representative", " ", "processes"}],
@@ -136,9 +136,8 @@ universal-scale-1000.-GeV.m\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}],
     RowBox[{"(*", 
      RowBox[{
      "The", " ", "mass", " ", "above", " ", "which", " ", "all", " ", 
-      "hadronic", " ", "decays", " ", "are", " ", "approximated", " ", "by", 
-      " ", "decays", " ", "into", " ", "jets"}], "*)"}], 
-    "\[IndentingNewLine]", 
+      "hadronic", " ", "decays", " ", "are", " ", "approximated", " ", "by", " ",
+       "decays", " ", "into", " ", "jets"}], "*)"}], "\[IndentingNewLine]", 
     RowBox[{"Do", "[", "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{
@@ -175,34 +174,32 @@ universal-scale-1000.-GeV.m\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}],
            RowBox[{"MemberQ", "[", 
             RowBox[{
              RowBox[{"{", 
-              RowBox[{
-              "\"\<Jets-ss\>\"", ",", "\"\<Jets-cc\>\"", ",", 
-               "\"\<Jets-GG\>\""}], "}"}], ",", "procsel"}], "]"}], "==", 
-           "True"}], ",", "\"\<Yes\>\"", ",", "\"\<No\>\""}], "]"}]}]}], 
+              
+              RowBox[{"\"\<Jets-ss\>\"", ",", "\"\<Jets-cc\>\"", 
+               ",", "\"\<Jets-GG\>\""}], "}"}], ",", "procsel"}], "]"}], "==",
+            "True"}], ",", "\"\<Yes\>\"", ",", "\"\<No\>\""}], "]"}]}]}], 
       "\[IndentingNewLine]", ",", 
       RowBox[{"{", 
        RowBox[{"i", ",", "1", ",", 
         RowBox[{"Length", "[", 
          RowBox[{
           RowBox[{"BrRatiosALPfermionData", "[", "mLLP", "]"}], "[", 
-          RowBox[{"[", "3", "]"}], "]"}], "]"}], ",", "1"}], "}"}]}], "]"}], 
-    ";", "\[IndentingNewLine]", 
+          RowBox[{"[", "3", "]"}], "]"}], "]"}], ",", "1"}], "}"}]}], "]"}], ";",
+     "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{"ProcessesList", "[", 
       RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], "=", 
      RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], ";", 
     "\[IndentingNewLine]", 
     RowBox[{
-    "Print", "[", 
-     "\"\<All processes with at least two charged/neutral particles:\>\"", 
-     "]"}], ";", "\[IndentingNewLine]", 
+    "Print", "[", "\"\<All processes with at least two charged/neutral \
+particles:\>\"", "]"}], ";", "\[IndentingNewLine]", 
     RowBox[{"ProcessesList", "[", 
      RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], ";", 
     "\[IndentingNewLine]", 
     RowBox[{
-    "Print", "[", 
-     "\"\<All processes with at least two charged particles:\>\"", "]"}], ";",
-     "\[IndentingNewLine]", 
+    "Print", "[", "\"\<All processes with at least two charged particles:\>\"",
+      "]"}], ";", "\[IndentingNewLine]", 
     RowBox[{"ProcessesList", "[", 
      RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], ";", 
     "\[IndentingNewLine]", 
@@ -304,9 +301,9 @@ Cell[BoxData[
      RowBox[{"FileNameJoin", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<temp1\>\"", ",", 
-        "\"\<br-ratios-BC10.txt\>\""}], "}"}], "]"}], ",", "tabbr", ",", 
-     "\"\<Table\>\""}], "]"}]}], "*)"}]], "Input",
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<temp1\>\"", 
+        ",", "\"\<br-ratios-BC10.txt\>\""}], "}"}], "]"}], ",", "tabbr", 
+     ",", "\"\<Table\>\""}], "]"}]}], "*)"}]], "Input",
  CellChangeTimes->{{3.928552239654828*^9, 3.928552310719253*^9}, {
   3.928552367480526*^9, 3.9285523678381133`*^9}, {3.928552444403474*^9, 
   3.9285525026275206`*^9}, {3.928552546280817*^9, 3.928552547747261*^9}, {
@@ -337,10 +334,11 @@ Cell[BoxData[
        RowBox[{"FileNameJoin", "[", 
         RowBox[{"{", 
          RowBox[{
-         "dirpheno", ",", "LLPsel", ",", 
-          "\"\<decay widths/Matrix-elements-squared-model-Fermion \
-universal-scale-1000.-GeV.m\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}], 
-      "]"}]}], ";", "\[IndentingNewLine]", 
+         "dirpheno", ",", "LLPsel", 
+          ",", "\"\<decay \
+widths/Matrix-elements-squared-model-ALP-fermion-scale-1000.-GeV-Default.m\
+\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
     RowBox[{"Do", "[", 
      RowBox[{
       RowBox[{
@@ -379,60 +377,13 @@ universal-scale-1000.-GeV.m\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}],
  CellLabel->
   "In[284]:=",ExpressionUUID->"14209710-1137-47b6-a083-d8d2417fbb8c"]
 }, Open  ]]
-}, Closed]]
+}, Open  ]]
 },
 WindowSize->{582, 594},
 WindowMargins->{{267.5, Automatic}, {Automatic, 39.5}},
-FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"99c9ea05-e691-4a4b-b1e4-7b9feb53553c"
 ]
 (* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{
- "Evaluation"->{
-  Cell[3072, 94, 311, 6, 59, "Subsection",ExpressionUUID->"4f29acd9-b0a6-4909-8884-def95866033c",
-   CellTags->"Evaluation"],
-  Cell[3386, 102, 6887, 159, 514, "Input",ExpressionUUID->"ee43d883-7a4b-4789-b654-2e4de7f86f11",
-   CellTags->"Evaluation"],
-  Cell[12288, 319, 196, 3, 59, "Subsection",ExpressionUUID->"19d67bc3-aaf1-4af6-ab82-973a1fc57a79",
-   CellTags->"Evaluation"],
-  Cell[12487, 324, 2467, 55, 200, "Input",ExpressionUUID->"14209710-1137-47b6-a083-d8d2417fbb8c",
-   CellTags->"Evaluation"]}
- }
-*)
-(*CellTagsIndex
-CellTagsIndex->{
- {"Evaluation", 15341, 394}
- }
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[CellGroupData[{
-Cell[580, 22, 158, 3, 67, "Section",ExpressionUUID->"5c161db1-755e-4358-b64b-570681e9d559"],
-Cell[CellGroupData[{
-Cell[763, 29, 186, 3, 59, "Subsection",ExpressionUUID->"abb42d05-fcc8-4866-8f8f-431a38f6263f"],
-Cell[952, 34, 2083, 55, 263, "Input",ExpressionUUID->"f7848f41-824c-438b-91f6-a17086b51377"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3072, 94, 311, 6, 59, "Subsection",ExpressionUUID->"4f29acd9-b0a6-4909-8884-def95866033c",
- CellTags->"Evaluation"],
-Cell[3386, 102, 6887, 159, 514, "Input",ExpressionUUID->"ee43d883-7a4b-4789-b654-2e4de7f86f11",
- CellTags->"Evaluation"],
-Cell[10276, 263, 1975, 51, 106, "Input",ExpressionUUID->"ca7621cf-6990-4484-901f-fda7edf1ec6d"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[12288, 319, 196, 3, 59, "Subsection",ExpressionUUID->"19d67bc3-aaf1-4af6-ab82-973a1fc57a79",
- CellTags->"Evaluation"],
-Cell[12487, 324, 2467, 55, 200, "Input",ExpressionUUID->"14209710-1137-47b6-a083-d8d2417fbb8c",
- CellTags->"Evaluation"]
-}, Open  ]]
-}, Closed]]
-}
-]
-*)
-
-(* End of internal cache information *)
 

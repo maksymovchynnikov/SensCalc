@@ -5,15 +5,14 @@
 
 (* CreatedBy='Wolfram 14.1' *)
 
-(*CacheID: 234*)
 (* Internal cache information:
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     11102,        282]
-NotebookOptionsPosition[     10481,        262]
-NotebookOutlinePosition[     10888,        278]
-CellTagsIndexPosition[     10845,        275]
+NotebookDataLength[     11311,        289]
+NotebookOptionsPosition[     10690,        269]
+NotebookOutlinePosition[     11097,        285]
+CellTagsIndexPosition[     11054,        282]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -47,9 +46,9 @@ Cell[BoxData[{
         RowBox[{
          RowBox[{
           RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], 
-         "//", "ParentDirectory"}], ",", "\"\<phenomenology\>\"", 
-        ",", "\"\<Inelastic-dipole-DM\>\"", ",", "\"\<decay widths\>\"", 
-        ",", "\"\<ctau.mx\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], 
+         "//", "ParentDirectory"}], ",", "\"\<phenomenology\>\"", ",", 
+        "\"\<Inelastic-dipole-DM\>\"", ",", "\"\<decay widths\>\"", ",", 
+        "\"\<ctau.mx\>\""}], "}"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{"Do", "[", "\[IndentingNewLine]", 
   RowBox[{
@@ -64,8 +63,9 @@ Cell[BoxData[{
           RowBox[{"[", "i", "]"}], "]"}], "[", 
          RowBox[{"[", "1", "]"}], "]"}]}], ",", 
        RowBox[{
-       "proc", "=", "\"\<\!\(\*SubscriptBox[\(\[Chi]\), \
-\(0\)]\)\[Gamma]\>\""}]}], "}"}], ",", "\[IndentingNewLine]", 
+       "proc", "=", 
+        "\"\<\!\(\*SubscriptBox[\(\[Chi]\), \(0\)]\)\[Gamma]\>\""}]}], "}"}], 
+     ",", "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{"decdescr", "=", 
        RowBox[{
@@ -73,6 +73,9 @@ Cell[BoxData[{
          RowBox[{"modelInfo", "[", "mLLP", "]"}], "[", 
          RowBox[{"[", "i", "]"}], "]"}], "[", 
         RowBox[{"[", "3", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"descrDefault", "[", "LLPsel", "]"}], "=", "decdescr"}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"\[CapitalDelta]val", "[", "LLPsel", "]"}], "=", 
        RowBox[{"N", "[", 
@@ -94,18 +97,19 @@ Cell[BoxData[{
        RowBox[{"ModelDescription", "[", "LLPsel", "]"}], "=", 
        RowBox[{"Row", "[", 
         RowBox[{"{", 
-         RowBox[{"\"\<Two fermions \[Chi], \[Chi]' with tiny mass splitting \
+         RowBox[{
+         "\"\<Two fermions \[Chi], \[Chi]' with tiny mass splitting \
 \[CapitalDelta] = (\!\(\*SubscriptBox[\(m\), \(\[Chi]'\)]\) - \
-\!\(\*SubscriptBox[\(m\), \(\[Chi]\)]\))/\!\(\*SubscriptBox[\(m\), \(\[Chi]\(\
-\\\ \)\)]\)<< 1, coupled to the EM operator via L = \!\(\*FractionBox[\(\[Mu]\
-\), \(2\)]\)\!\(\*SuperscriptBox[\(F\), \(\[Mu]\[Nu]\)]\)\!\(\*OverscriptBox[\
-\(\[Chi]\), \(_\)]\)'\!\(\*SubscriptBox[\(\[Sigma]\), \
-\(\[Mu]\[Nu]\)]\)\[Chi]. The value of \[CapitalDelta] is fixed by \
-\[CapitalDelta] = \>\"", "<>", 
+\!\(\*SubscriptBox[\(m\), \(\[Chi]\)]\))/\!\(\*SubscriptBox[\(m\), \(\(\[Chi]\
+\)\(\\\ \)\)]\)<< 1, coupled to the EM operator via L = \!\(\*FractionBox[\(\
+\[Mu]\), \(2\)]\)\!\(\*SuperscriptBox[\(F\), \
+\(\[Mu]\[Nu]\)]\)\!\(\*OverscriptBox[\(\[Chi]\), \(_\)]\)'\!\(\*SubscriptBox[\
+\(\[Sigma]\), \(\[Mu]\[Nu]\)]\)\[Chi]. The value of \[CapitalDelta] is fixed \
+by \[CapitalDelta] = \>\"", "<>", 
           RowBox[{"ToString", "[", 
-           RowBox[{"\[CapitalDelta]val", "[", "LLPsel", "]"}], "]"}], 
-          "<>", "\"\<. See 2301.05252 for the model details\>\""}], "}"}], 
-        "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"\[CapitalDelta]val", "[", "LLPsel", "]"}], "]"}], "<>", 
+          "\"\<. See 2301.05252 for the model details\>\""}], "}"}], "]"}]}], 
+      ";", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"ProcessesList", "[", 
         RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "=", 
@@ -114,8 +118,9 @@ Cell[BoxData[{
        RowBox[{"ListDecayProducts", "[", 
         RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", 
        RowBox[{"{", 
-        RowBox[{"\"\<\[Gamma]\>\"", ",", "\"\<X\>\"", ",", "\"\<Null\>\"", 
-         ",", "\"\<Null\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+        "\"\<\[Gamma]\>\"", ",", "\"\<X\>\"", ",", "\"\<Null\>\"", ",", 
+         "\"\<Null\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"couplingSymbol", "[", "LLPsel", "]"}], "=", "\[Mu]"}], ";", 
       "\[IndentingNewLine]", 
@@ -133,8 +138,8 @@ Cell[BoxData[{
          ",", "\"\<No\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"DecayDescriptionExplanation", "[", 
-        RowBox[{"LLPsel", ",", "decdescr"}], "]"}], 
-       "=", "\"\<Simple calculation of the width of the dominant decay \
+        RowBox[{"LLPsel", ",", "decdescr"}], "]"}], "=", 
+       "\"\<Simple calculation of the width of the dominant decay \
 \!\(\*SubscriptBox[\(\[Chi]\), \(1\)]\)\[Rule]\!\(\*SubscriptBox[\(\[Chi]\), \
 \(0\)]\)\[Gamma]\>\""}], ";", "\[IndentingNewLine]", 
       RowBox[{
@@ -148,8 +153,8 @@ Cell[BoxData[{
        RowBox[{"mLLP", "*", 
         RowBox[{"(", 
          RowBox[{"1", "-", 
-          RowBox[{"\[CapitalDelta]val", "[", "LLPsel", "]"}]}], ")"}]}]}], ";",
-       "\[IndentingNewLine]", 
+          RowBox[{"\[CapitalDelta]val", "[", "LLPsel", "]"}]}], ")"}]}]}], 
+      ";", "\[IndentingNewLine]", 
       RowBox[{"filepheno", "=", 
        RowBox[{"FileNameJoin", "[", 
         RowBox[{"{", 
@@ -157,8 +162,8 @@ Cell[BoxData[{
           RowBox[{
            RowBox[{
             RowBox[{"NotebookDirectory", "[", "]"}], "//", 
-            "ParentDirectory"}], "//", "ParentDirectory"}], 
-          ",", "\"\<phenomenology\>\"", ",", "\"\<ModelDescriptors.mx\>\""}], 
+            "ParentDirectory"}], "//", "ParentDirectory"}], ",", 
+          "\"\<phenomenology\>\"", ",", "\"\<ModelDescriptors.mx\>\""}], 
          "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"rowtoadd", "=", 
        RowBox[{"{", 
@@ -197,8 +202,8 @@ Cell[BoxData[{
          RowBox[{"file", ",", 
           RowBox[{
            RowBox[{"#", "[", 
-            RowBox[{"[", "1", "]"}], "]"}], "&"}]}], "]"}], 
-        ",", "\"\<MX\>\""}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+            RowBox[{"[", "1", "]"}], "]"}], "&"}]}], "]"}], ",", 
+        "\"\<MX\>\""}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
    "\[IndentingNewLine]", ",", 
    RowBox[{"{", 
     RowBox[{"i", ",", "1", ",", 
@@ -255,36 +260,17 @@ Cell[BoxData[{
    3.9514912961976175`*^9, 3.951491315906982*^9}, {3.9514914592543736`*^9, 
    3.951491500147523*^9}, {3.952072407996107*^9, 3.9520724087549267`*^9}, {
    3.9520739018613796`*^9, 3.952073920100397*^9}, {3.952326764819193*^9, 
-   3.952326785641346*^9}},ExpressionUUID->"dbb8b26d-70c6-9b44-a5b2-\
+   3.952326785641346*^9}, {3.960342920871967*^9, 
+   3.9603429293382616`*^9}},ExpressionUUID->"dbb8b26d-70c6-9b44-a5b2-\
 9f7b53974b51"]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1430.25, 822.75},
+WindowSize->{1016.25, 606.75},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (December 26, 2024)",
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"4bd37cbd-0d53-7a46-b1da-71fd83714311"
 ]
 (* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[CellGroupData[{
-Cell[576, 22, 295, 5, 66, "Section",ExpressionUUID->"d1dd46fc-7dc6-ab46-9cfb-6a1c1a18adf4"],
-Cell[CellGroupData[{
-Cell[896, 31, 246, 4, 53, "Subsection",ExpressionUUID->"d936cfb6-99a0-a248-ac15-51c71457d4ca"],
-Cell[1145, 37, 9308, 221, 675, "Input",ExpressionUUID->"dbb8b26d-70c6-9b44-a5b2-9f7b53974b51"]
-}, Open  ]]
-}, Open  ]]
-}
-]
-*)
 

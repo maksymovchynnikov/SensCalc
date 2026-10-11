@@ -1,0 +1,1519 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     68234,       1574]
+NotebookOptionsPosition[     66185,       1523]
+NotebookOutlinePosition[     67413,       1556]
+CellTagsIndexPosition[     67339,       1551]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Production via Primakov process: PDF and normalization", "Chapter",
+ CellChangeTimes->{{3.913478380065708*^9, 3.9134784012039795`*^9}},
+ CellTags->
+  "Evaluation",ExpressionUUID->"ede618e1-db1f-4052-9341-3ad98669ba20"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Collinear approximation ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Theta]", "a"], " ", "=", " ", 
+    SubscriptBox["\[Theta]", "\[Gamma]"]}], TraditionalForm]],ExpressionUUID->
+  "593b2594-587c-48c3-8754-06fb5f6003bc"]
+}], "Section",
+ CellChangeTimes->{{3.9880470872263107`*^9, 
+  3.988047100909174*^9}},ExpressionUUID->"e577f11d-6ab7-594c-a4d2-\
+a3a239c7f875"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BlockTabulatedPDFsFromPrimakov", "[", 
+   RowBox[{
+   "Facility_", ",", "Nucleus_", ",", "\[Theta]list_", ",", "Elist_"}], "]"}],
+   ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "\[Theta]min", ",", "\[Theta]max", ",", "mlist", ",", "filename1", ",", 
+      "filename2", ",", "proc", ",", "fipn", ",", "mother"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"proc", "=", "\"\<Primakov-primary\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"mother", "=", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"proc", "==", "\"\<Primakov-primary\>\""}], 
+        ",", "\"\<photon\>\"", ",", "\"\<photon-cascade\>\""}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"fipn", "=", "\"\<ALP-photon\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"mlist", "=", 
+      RowBox[{"MassList", "[", 
+       RowBox[{"fipn", ",", "proc", ",", "Facility"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"ProbPrimakovTab", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Flatten", "[", 
+         RowBox[{
+          RowBox[{"ParallelTable", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"ma", ",", "E\[Gamma]", ",", 
+              RowBox[{"Max", "[", 
+               RowBox[{
+                SuperscriptBox["10", 
+                 RowBox[{"-", "90."}]], ",", 
+                RowBox[{
+                 FractionBox["1", 
+                  RowBox[{"\[Sigma]\[Gamma]Abs", "[", "Nucleus", "]"}]], 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"Quiet", "[", 
+                    RowBox[{"\[Sigma]PrimakovNucleus", "[", 
+                    RowBox[{"ma", ",", "E\[Gamma]", ",", 
+                    RowBox[{"mnucleus", "[", "Nucleus", "]"}], ",", 
+                    RowBox[{"anucleus", "[", "Nucleus", "]"}], ",", 
+                    RowBox[{"znucleus", "[", "Nucleus", "]"}]}], "]"}], "]"}],
+                    "+", 
+                   RowBox[{"Quiet", "[", 
+                    RowBox[{"\[Sigma]PrimakovNucleons", "[", 
+                    RowBox[{"ma", ",", "E\[Gamma]", ",", 
+                    RowBox[{"znucleus", "[", "Nucleus", "]"}]}], "]"}], 
+                    "]"}]}], ")"}]}]}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"ma", ",", "mlist"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"E\[Gamma]", ",", 
+              RowBox[{"ENlist", "[", "Facility", "]"}]}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "//", "N"}], "//", 
+       "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Approximation", ":", " ", 
+         SubscriptBox["E", "a"]}], " ", "=", " ", 
+        SubscriptBox["E", "\[Gamma]"]}], ",", " ", 
+       RowBox[{
+        SubscriptBox["\[Theta]", "a"], " ", "=", " ", 
+        SubscriptBox["\[Theta]", "\[Gamma]"]}]}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ProbPrimakov", "[", 
+       RowBox[{"ma_", ",", "Ea_"}], "]"}], "=", 
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"Interpolation", "[", 
+         RowBox[{
+          RowBox[{"Log", "[", "ProbPrimakovTab", "]"}], ",", 
+          RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", 
+        RowBox[{
+         RowBox[{"Log", "[", "ma", "]"}], ",", 
+         RowBox[{"Log", "[", "Ea", "]"}]}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"MotherInterpolation", "[", 
+      RowBox[{"Facility", ",", "mother"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ALPdoubleFlux", "[", 
+       RowBox[{"ma_", ",", "\[Theta]a_", ",", "Ea_"}], "]"}], "=", 
+      RowBox[{
+       RowBox[{"DoubleDistrMotherInt", "[", 
+        RowBox[{"\[Theta]a", ",", "Ea", ",", "Facility", ",", "mother"}], 
+        "]"}], "*", 
+       RowBox[{"ProbPrimakov", "[", 
+        RowBox[{"ma", ",", "Ea"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Theta]min", ",", "\[Theta]max"}], "}"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"\[Theta]MinMax", "[", 
+          RowBox[{"Facility", ",", "\"\<photon\>\""}], "]"}], "[", 
+         RowBox[{"[", "#", "]"}], "]"}], "&"}], "/@", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2"}], "}"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"NormalizationALP1", "[", "ma_", "]"}], "=", 
+      RowBox[{
+       RowBox[{"Interpolation", "[", 
+        RowBox[{
+         RowBox[{"ParallelTable", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"ma", ",", 
+             RowBox[{"Quiet", "[", 
+              RowBox[{"NIntegrate", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"ALPdoubleFlux", "[", 
+                  RowBox[{"ma", ",", 
+                   RowBox[{"Exp", "[", "t", "]"}], ",", 
+                   RowBox[{"Exp", "[", "e", "]"}]}], "]"}], 
+                 RowBox[{"Exp", "[", 
+                  RowBox[{"t", "+", "e"}], "]"}]}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"t", ",", 
+                  RowBox[{"Log", "[", "\[Theta]min", "]"}], ",", 
+                  RowBox[{"Log", "[", "\[Theta]max", "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"e", ",", 
+                  RowBox[{"Log", "[", "ma", "]"}], ",", 
+                  RowBox[{"Log", "[", 
+                   RowBox[{"Emax", "[", 
+                    RowBox[{
+                    "\[Theta]min", ",", "Facility", ",", "\"\<photon\>\""}], 
+                    "]"}], "]"}]}], "}"}], ",", 
+                RowBox[{
+                "Method", "->", "\"\<InterpolationPointsSubdivision\>\""}]}], 
+               "]"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"ma", ",", "mlist"}], "}"}]}], "]"}], ",", 
+         RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", "ma", 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"DoubleDistrALP", "[", 
+       RowBox[{"ma_", ",", "\[Theta]a_", ",", "Ea_"}], "]"}], "=", 
+      RowBox[{
+       RowBox[{"ALPdoubleFlux", "[", 
+        RowBox[{"ma", ",", "\[Theta]a", ",", "Ea"}], "]"}], "/", 
+       RowBox[{"NormalizationALP1", "[", "ma", "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"filename1", "=", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+        "dirMain", ",", "\"\<spectra\>\"", 
+         ",", "\"\<New physics particles spectra\>\"", ",", 
+         RowBox[{"LLPfolder", "[", "\"\<ALP-photon\>\"", "]"}], ",", 
+         RowBox[{"ToString", "@", 
+          RowBox[{"StringForm", "[", 
+           RowBox[{"\"\<DoubleDistr_``_``-``_``.m\>\"", ",", 
+            RowBox[{"Sequence", "@@", 
+             RowBox[{"{", 
+              RowBox[{"fipn", ",", "proc", ",", "Nucleus", ",", "Facility"}], 
+              "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"filename2", "=", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"dirMain", ",", "\"\<phenomenology\>\"", ",", 
+         RowBox[{"LLPfolder", "[", "fipn", "]"}], 
+         ",", "\"\<Production probabilities\>\"", ",", 
+         RowBox[{"ToString", "@", 
+          RowBox[{"StringForm", "[", 
+           RowBox[{"\"\<Pprod_``_``-``_``.m\>\"", ",", 
+            RowBox[{"Sequence", "@@", 
+             RowBox[{"{", 
+              RowBox[{"fipn", ",", "proc", ",", "Nucleus", ",", "Facility"}], 
+              "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"tabulatedDistr", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Flatten", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", 
+              RowBox[{"DoubleDistrALP", "[", 
+               RowBox[{"ma", ",", "\[Theta]a", ",", "Ea"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"ma", ",", "mlist"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"\[Theta]a", ",", "\[Theta]list"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Ea", ",", "Elist"}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], "]"}], "//", "N"}], "//",
+        "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{"filename1", ",", "tabulatedDistr", ",", "\"\<MX\>\""}], "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{"filename2", ",", 
+       RowBox[{"NormalizationALP1", "[", "ma", "]"}], ",", "\"\<MX\>\""}], 
+      "]"}], ";"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.913478598526929*^9, 3.9134786088906193`*^9}, {
+   3.913479045210778*^9, 3.9134790484558215`*^9}, {3.913479859567234*^9, 
+   3.9134798610344944`*^9}, {3.9136289669868803`*^9, 3.913629003229072*^9}, {
+   3.9136290904436054`*^9, 3.9136290914999332`*^9}, 3.913883326179581*^9, {
+   3.913883380744624*^9, 3.913883402165001*^9}, {3.913887808984487*^9, 
+   3.913887814403036*^9}, 3.915082852511978*^9, {3.9154388176298885`*^9, 
+   3.9154388176340685`*^9}, {3.9423247079044304`*^9, 3.942324734955353*^9}, {
+   3.988257294742363*^9, 3.9882572968081284`*^9}, {3.988307448518383*^9, 
+   3.9883074515765*^9}, {3.9888992258065367`*^9, 3.988899237449174*^9}, {
+   3.989163854748476*^9, 3.989163909676755*^9}},
+ CellTags->
+  "Evaluation",ExpressionUUID->"1b07e271-afb1-4157-a0b3-9451e6471051"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Alternative - MC with exact ALP-\[Gamma] angle", "Section",
+ CellChangeTimes->{{3.9880470584913883`*^9, 3.9880470709032555`*^9}},
+ CellTags->
+  "Evaluation",ExpressionUUID->"20808182-612b-ba47-a55a-280cf65a84d4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"BlockTabulatedPDFsFromPrimakovAlt", "[", 
+     RowBox[{
+     "Facility_", ",", "proc_", ",", "Nucleus_", ",", "\[Theta]list_", ",", 
+      "Elist_", ",", 
+      RowBox[{"Nevents_", ":", 
+       RowBox[{"10", "^", "7"}]}], ",", 
+      RowBox[{"order_", ":", "9"}], ",", 
+      RowBox[{"IfTesting_", ":", "\"\<False\>\""}]}], "]"}], ":=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "mlist", ",", "filename1", ",", "filename2", ",", "fipn", ",", 
+        "photonDistrTab", ",", "photonPoints", ",", "perMassData", ",", 
+        "norms", ",", "tabulatedDistr", ",", "ma", ",", "rawALP", ",", 
+        "weights", ",", "norm", ",", "alpPoints", ",", "tabpdf", ",", 
+        "mother", ",", "eminsamplPrim", ",", "emaxPhoton", ",", 
+        "strataTemplate", ",", "activeStrata", ",", "fractions", ",", 
+        "rawNevents", ",", "neventsByStratum", ",", "remainder", ",", 
+        "addOne", ",", "stratumData", ",", "i", ",", "eminStratum", ",", 
+        "emaxStratum", ",", "neventsStratum", ",", "norm\[Gamma]Stratum", ",",
+         "rawALPStratum", ",", "weightsStratum", ",", "goodStratum", ",", 
+        "combinedWeights", ",", "combinedALPPoints", ",", "emptyTabpdf", ",", 
+        "neventsTotal", ",", "nStrata", ",", "strataFractions"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"fipn", "=", "\"\<ALP-photon\>\""}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"neventsTotal", "=", 
+        RowBox[{"Round", "[", "Nevents", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"mlist", "=", 
+        RowBox[{"MassList", "[", 
+         RowBox[{"fipn", ",", "proc", ",", "Facility"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"mother", "=", 
+        RowBox[{
+         RowBox[{"ReactionProductsList", "[", 
+          RowBox[{"\"\<ALP-photon\>\"", ",", "proc"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"photonDistrTab", "=", 
+        RowBox[{"DataDistr", "[", 
+         RowBox[{"Facility", ",", "mother"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"emaxPhoton", "=", 
+        RowBox[{"Max", "[", 
+         RowBox[{"photonDistrTab", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"nStrata", "=", "7"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"strataFractions", "=", 
+        RowBox[{"{", 
+         RowBox[{
+         "0.20", ",", "0.15", ",", "0.15", ",", "0.15", ",", "0.15", ",", 
+          "0.10", ",", "0.10"}], "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"strataTemplate", "=", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", "edges", "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"edges", "=", 
+            RowBox[{"Exp", "@", 
+             RowBox[{"Subdivide", "[", 
+              RowBox[{
+               RowBox[{"Log", "[", "0.1", "]"}], ",", 
+               RowBox[{"Log", "[", "emaxPhoton", "]"}], ",", "nStrata"}], 
+              "]"}]}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Transpose", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Most", "[", "edges", "]"}], ",", 
+              RowBox[{"Rest", "[", "edges", "]"}], ",", "strataFractions"}], 
+             "}"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"perMassData", "=", 
+        RowBox[{
+         RowBox[{"ResourceFunction", "[", "\"\<MonitorProgress\>\"", "]"}], "@", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"eminsamplPrim", "=", 
+             RowBox[{"Max", "[", 
+              RowBox[{"0.1", ",", "ma"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"emptyTabpdf", "=", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Flatten", "[", 
+                RowBox[{
+                 RowBox[{"Table", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", 
+                    RowBox[{"10", "^", 
+                    RowBox[{"-", "90."}]}]}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"\[Theta]a", ",", "\[Theta]list"}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"Ea", ",", "Elist"}], "}"}]}], "]"}], ",", "1"}], 
+                "]"}], "//", "N"}], "//", "Developer`ToPackedArray"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"activeStrata", "=", 
+             RowBox[{"Select", "[", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", "eminsamplPrim"}], 
+                    "]"}], ",", 
+                    RowBox[{"Min", "[", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", "emaxPhoton"}], 
+                    "]"}], ",", 
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}], "}"}], "&"}], "/@", 
+                 "strataTemplate"}], ")"}], ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], ">", 
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], "&"}]}], "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Length", "[", "activeStrata", "]"}], ">", "0"}], ",", 
+              RowBox[{
+               RowBox[{"fractions", "=", 
+                RowBox[{
+                 RowBox[{"activeStrata", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"All", ",", "3"}], "]"}], "]"}], "/", 
+                 RowBox[{"Total", "[", 
+                  RowBox[{"activeStrata", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"All", ",", "3"}], "]"}], "]"}], "]"}]}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"rawNevents", "=", 
+                RowBox[{"N", "[", 
+                 RowBox[{"fractions", "*", "neventsTotal"}], "]"}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"neventsByStratum", "=", 
+                RowBox[{"Floor", "[", "rawNevents", "]"}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"remainder", "=", 
+                RowBox[{"neventsTotal", "-", 
+                 RowBox[{"Total", "[", "neventsByStratum", "]"}]}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"remainder", ">", "0"}], ",", 
+                 RowBox[{
+                  RowBox[{"addOne", "=", 
+                   RowBox[{"Ordering", "[", 
+                    RowBox[{
+                    RowBox[{"rawNevents", "-", "neventsByStratum"}], ",", 
+                    RowBox[{"-", "remainder"}]}], "]"}]}], ";", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"neventsByStratum", "[", 
+                    RowBox[{"[", "addOne", "]"}], "]"}], "=", 
+                   RowBox[{
+                    RowBox[{"neventsByStratum", "[", 
+                    RowBox[{"[", "addOne", "]"}], "]"}], "+", "1"}]}], 
+                  ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+               RowBox[{"stratumData", "=", 
+                RowBox[{"Table", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"eminStratum", ",", "emaxStratum"}], "}"}], "=", 
+                    RowBox[{"activeStrata", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"neventsStratum", "=", 
+                    RowBox[{"neventsByStratum", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"neventsStratum", ">", "0"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"photonPoints", ",", "norm\[Gamma]Stratum"}], 
+                    "}"}], "=", 
+                    RowBox[{"N", "@", 
+                    RowBox[{"BlockPointsFromSmoothDistribution1", "[", 
+                    RowBox[{
+                    "photonDistrTab", ",", "0.", ",", "neventsStratum", ",", 
+                    "order", ",", "Facility", ",", "eminStratum", ",", 
+                    "emaxStratum"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"photonPoints", "=", 
+                    RowBox[{
+                    "photonPoints", "//", "Developer`ToPackedArray"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"rawALPStratum", "=", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ALPsamplingComp", "[", 
+                    RowBox[{"photonPoints", ",", "ma", ",", 
+                    RowBox[{"anucleus", "[", "Nucleus", "]"}], ",", 
+                    RowBox[{"znucleus", "[", "Nucleus", "]"}], ",", 
+                    RowBox[{"mnucleus", "[", "Nucleus", "]"}]}], "]"}], "//", 
+                    "N"}], "//", "Developer`ToPackedArray"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"weightsStratum", "=", 
+                    RowBox[{
+                    RowBox[{"rawALPStratum", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "3"}], "]"}], "]"}], "/", 
+                    RowBox[{"\[Sigma]\[Gamma]Abs", "[", "Nucleus", "]"}]}]}], 
+                    ";", "\[IndentingNewLine]", 
+                    RowBox[{"goodStratum", "=", 
+                    RowBox[{"Flatten", "@", 
+                    RowBox[{"Position", "[", 
+                    RowBox[{"weightsStratum", ",", 
+                    RowBox[{"_", "?", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"#", ">", "0."}], "&"}], ")"}]}]}], "]"}]}]}], ";",
+                     "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Length", "[", "goodStratum", "]"}], ">", "0"}], "&&", 
+                    RowBox[{"norm\[Gamma]Stratum", ">", "0."}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"norm\[Gamma]Stratum", "*", 
+                    RowBox[{
+                    RowBox[{"weightsStratum", "[", 
+                    RowBox[{"[", "goodStratum", "]"}], "]"}], "/", 
+                    RowBox[{"Length", "[", "photonPoints", "]"}]}]}], ",", 
+                    RowBox[{"rawALPStratum", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"goodStratum", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}]}], "}"}], ",",
+                     "Nothing"}], "]"}]}], ",", "Nothing"}], "]"}]}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", 
+                    RowBox[{"Length", "[", "activeStrata", "]"}]}], "}"}]}], 
+                 "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Length", "[", "stratumData", "]"}], ">", "0"}], ",", 
+                 RowBox[{
+                  RowBox[{"combinedWeights", "=", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"Join", "@@", 
+                    RowBox[{"stratumData", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "//", "N"}], "//",
+                     "Developer`ToPackedArray"}]}], ";", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"combinedALPPoints", "=", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"Join", "@@", 
+                    RowBox[{"stratumData", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "//", "N"}], "//",
+                     "Developer`ToPackedArray"}]}], ";", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"norm", "=", 
+                   RowBox[{"Total", "[", "combinedWeights", "]"}]}]}], ",", 
+                 RowBox[{"norm", "=", "0."}]}], "]"}]}], ",", 
+              RowBox[{"norm", "=", "0."}]}], "]"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"norm", ">", "0."}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"alpPoints", "=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"RandomChoice", "[", 
+                   RowBox[{
+                    RowBox[{"combinedWeights", "->", "combinedALPPoints"}], ",",
+                     "neventsTotal"}], "]"}], "//", "N"}], "//", 
+                 "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"FromDataToSmoothDistribution", "[", 
+                RowBox[{
+                "alpPoints", ",", "ma", ",", "Facility", ",", "IfTesting"}], 
+                "]"}], ";", "\[IndentingNewLine]", 
+               RowBox[{"tabpdf", "=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Flatten", "[", 
+                   RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", 
+                    RowBox[{"Max", "[", 
+                    RowBox[{
+                    RowBox[{"10", "^", 
+                    RowBox[{"-", "90."}]}], ",", 
+                    RowBox[{"DoubleDistr", "[", 
+                    RowBox[{"\[Theta]a", ",", "Ea"}], "]"}]}], "]"}]}], "}"}],
+                     ",", 
+                    RowBox[{"{", 
+                    RowBox[{"\[Theta]a", ",", "\[Theta]list"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Ea", ",", "Elist"}], "}"}]}], "]"}], ",", "1"}], 
+                   "]"}], "//", "N"}], "//", "Developer`ToPackedArray"}]}]}], 
+              "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+              RowBox[{"tabpdf", "=", "emptyTabpdf"}]}], "\[IndentingNewLine]",
+              "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"ma", ",", 
+              RowBox[{"Max", "[", 
+               RowBox[{
+                RowBox[{"10", "^", 
+                 RowBox[{"-", "90."}]}], ",", "norm"}], "]"}], ",", 
+              "tabpdf"}], "}"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"ma", ",", "mlist"}], "}"}]}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"norms", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"perMassData", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}], "//", "N"}], "//",
+          "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"NormalizationALP", "[", "ma_", "]"}], "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Interpolation", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], ",", 
+                  RowBox[{"Max", "[", 
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", 
+                    RowBox[{"10", "^", 
+                    RowBox[{"-", "90."}]}]}], "]"}]}], "}"}], "&"}], "/@", 
+               "norms"}], ")"}], "//", "Log"}], ",", 
+            RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", 
+          RowBox[{"Log", "[", "ma", "]"}], "]"}], "//", "Exp"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"tabulatedDistr", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Join", "@@", 
+           RowBox[{"perMassData", "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "3"}], "]"}], "]"}]}], "//", "N"}], "//", 
+         "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"filename1", "=", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "dirMain", ",", "\"\<spectra\>\"", 
+           ",", "\"\<New physics particles spectra\>\"", ",", 
+           RowBox[{"LLPfolder", "[", "\"\<ALP-photon\>\"", "]"}], ",", 
+           RowBox[{"ToString", "@", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{"\"\<DoubleDistr_``_``-``_``.m\>\"", ",", 
+              RowBox[{"Sequence", "@@", 
+               RowBox[{"{", 
+                RowBox[{
+                "fipn", ",", "proc", ",", "Nucleus", ",", "Facility"}], 
+                "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"filename2", "=", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{"dirMain", ",", "\"\<phenomenology\>\"", ",", 
+           RowBox[{"LLPfolder", "[", "fipn", "]"}], 
+           ",", "\"\<Production probabilities\>\"", ",", 
+           RowBox[{"ToString", "@", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{"\"\<Pprod_``_``-``_``.m\>\"", ",", 
+              RowBox[{"Sequence", "@@", 
+               RowBox[{"{", 
+                RowBox[{
+                "fipn", ",", "proc", ",", "Nucleus", ",", "Facility"}], 
+                "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Export", "[", 
+        RowBox[{"filename1", ",", "tabulatedDistr", ",", "\"\<MX\>\""}], 
+        "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Export", "[", 
+        RowBox[{"filename2", ",", 
+         RowBox[{"NormalizationALP", "[", "ma", "]"}], ",", "\"\<MX\>\""}], 
+        "]"}], ";"}]}], "]"}]}], "\[IndentingNewLine]", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ClearAll", "[", 
+     RowBox[{
+     "$PrimakovPhotonStrataCache", ",", "PrimakovPhotonStrataKey", ",", 
+      "ClearPrimakovPhotonStrataCache", ",", "BuildPrimakovPhotonStrata", ",",
+       "GetPrimakovPhotonStrata", ",", "BlockTabulatedPDFsFromPrimakovAlt"}], 
+     "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"$PrimakovPhotonStrataCache", "=", 
+     RowBox[{"<|", "|>"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PrimakovPhotonStrataKey", "[", 
+      RowBox[{"Facility_", ",", "mother_", ",", "Nevents_", ",", 
+       RowBox[{"order_", ":", "9"}], ",", 
+       RowBox[{"nStrata_", ":", "8"}], ",", 
+       RowBox[{"eminPhoton_", ":", "0.1"}]}], "]"}], ":=", 
+     RowBox[{"{", 
+      RowBox[{"Facility", ",", "mother", ",", 
+       RowBox[{"Round", "[", "Nevents", "]"}], ",", "order", ",", 
+       RowBox[{"Round", "[", "nStrata", "]"}], ",", 
+       RowBox[{"N", "[", "eminPhoton", "]"}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ClearPrimakovPhotonStrataCache", "[", "]"}], ":=", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"$PrimakovPhotonStrataCache", "=", 
+        RowBox[{"<|", "|>"}]}], ";"}], ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ClearPrimakovPhotonStrataCache", "[", 
+      RowBox[{"Facility_", ",", "mother_", ",", "Nevents_", ",", 
+       RowBox[{"order_", ":", "9"}], ",", 
+       RowBox[{"nStrata_", ":", "8"}], ",", 
+       RowBox[{"eminPhoton_", ":", "0.1"}]}], "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"AssociationQ", "[", "$PrimakovPhotonStrataCache", "]"}], ",", 
+       RowBox[{"KeyDropFrom", "[", 
+        RowBox[{"$PrimakovPhotonStrataCache", ",", 
+         RowBox[{"PrimakovPhotonStrataKey", "[", 
+          RowBox[{
+          "Facility", ",", "mother", ",", "Nevents", ",", "order", ",", 
+           "nStrata", ",", "eminPhoton"}], "]"}]}], "]"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"BuildPrimakovPhotonStrata", "[", 
+      RowBox[{"Facility_", ",", "mother_", ",", "Nevents_", ",", 
+       RowBox[{"order_", ":", "9"}], ",", 
+       RowBox[{"nStrata_", ":", "8"}], ",", 
+       RowBox[{"eminPhoton_", ":", "0.1"}]}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "photonDistrTab", ",", "eminPhotonEff", ",", "emaxPhoton", ",", 
+         "neventsTotal", ",", "nStrataEff", ",", "strataEdges", ",", 
+         "rawNevents", ",", "neventsByStratum", ",", "remainder", ",", 
+         "addOne", ",", "stratumSample", ",", "photonPoints", ",", 
+         "norm\[Gamma]Stratum"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"photonDistrTab", "=", 
+         RowBox[{"DataDistr", "[", 
+          RowBox[{"Facility", ",", "mother"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"eminPhotonEff", "=", 
+         RowBox[{"Max", "[", 
+          RowBox[{"eminPhoton", ",", 
+           RowBox[{"Min", "[", 
+            RowBox[{"photonDistrTab", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"emaxPhoton", "=", 
+         RowBox[{"Max", "[", 
+          RowBox[{"photonDistrTab", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"neventsTotal", "=", 
+         RowBox[{"Round", "[", "Nevents", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"nStrataEff", "=", 
+         RowBox[{"Max", "[", 
+          RowBox[{"1", ",", 
+           RowBox[{"Round", "[", "nStrata", "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"emaxPhoton", "<=", "eminPhotonEff"}], "||", 
+           RowBox[{"neventsTotal", "<=", "0"}]}], ",", 
+          RowBox[{"Return", "[", 
+           RowBox[{"{", "}"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"strataEdges", "=", 
+         RowBox[{"Exp", "@", 
+          RowBox[{"Subdivide", "[", 
+           RowBox[{
+            RowBox[{"Log", "[", "eminPhotonEff", "]"}], ",", 
+            RowBox[{"Log", "[", "emaxPhoton", "]"}], ",", "nStrataEff"}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"rawNevents", "=", 
+         RowBox[{"N", "[", 
+          RowBox[{
+           RowBox[{"ConstantArray", "[", 
+            RowBox[{
+             RowBox[{"1.", "/", "nStrataEff"}], ",", "nStrataEff"}], "]"}], "*",
+            "neventsTotal"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"neventsByStratum", "=", 
+         RowBox[{"Floor", "[", "rawNevents", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"remainder", "=", 
+         RowBox[{"neventsTotal", "-", 
+          RowBox[{"Total", "[", "neventsByStratum", "]"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"remainder", ">", "0"}], ",", 
+          RowBox[{
+           RowBox[{"addOne", "=", 
+            RowBox[{"Ordering", "[", 
+             RowBox[{
+              RowBox[{"rawNevents", "-", "neventsByStratum"}], ",", 
+              RowBox[{"-", "remainder"}]}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"neventsByStratum", "[", 
+             RowBox[{"[", "addOne", "]"}], "]"}], "=", 
+            RowBox[{
+             RowBox[{"neventsByStratum", "[", 
+              RowBox[{"[", "addOne", "]"}], "]"}], "+", "1"}]}], ";"}]}], 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"neventsByStratum", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ">", "0"}], ",", 
+            RowBox[{
+             RowBox[{"stratumSample", "=", 
+              RowBox[{"N", "@", 
+               RowBox[{"BlockPointsFromSmoothDistribution1", "[", 
+                RowBox[{"photonDistrTab", ",", "0.", ",", 
+                 RowBox[{"neventsByStratum", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], ",", "order", ",", 
+                 "Facility", ",", 
+                 RowBox[{"strataEdges", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], ",", 
+                 RowBox[{"strataEdges", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", "+", "1"}], "]"}], "]"}]}], "]"}]}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"photonPoints", "=", 
+              RowBox[{
+               RowBox[{"stratumSample", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "//", 
+               "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"norm\[Gamma]Stratum", "=", 
+              RowBox[{"stratumSample", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Length", "[", "photonPoints", "]"}], ">", "0"}], "&&", 
+                RowBox[{"norm\[Gamma]Stratum", ">", "0."}]}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"strataEdges", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], ",", 
+                 RowBox[{"strataEdges", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", "+", "1"}], "]"}], "]"}], ",", "photonPoints",
+                  ",", "norm\[Gamma]Stratum"}], "}"}], ",", "Nothing"}], 
+              "]"}]}], ",", "Nothing"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "nStrataEff"}], "}"}]}], "]"}]}]}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"GetPrimakovPhotonStrata", "[", 
+      RowBox[{"Facility_", ",", "mother_", ",", "Nevents_", ",", 
+       RowBox[{"order_", ":", "9"}], ",", 
+       RowBox[{"nStrata_", ":", "8"}], ",", 
+       RowBox[{"eminPhoton_", ":", "0.1"}]}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"key", ",", "value"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", 
+           RowBox[{"AssociationQ", "[", "$PrimakovPhotonStrataCache", "]"}]}],
+           ",", 
+          RowBox[{
+           RowBox[{"$PrimakovPhotonStrataCache", "=", 
+            RowBox[{"<|", "|>"}]}], ";"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"key", "=", 
+         RowBox[{"PrimakovPhotonStrataKey", "[", 
+          RowBox[{
+          "Facility", ",", "mother", ",", "Nevents", ",", "order", ",", 
+           "nStrata", ",", "eminPhoton"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", 
+           RowBox[{"KeyExistsQ", "[", 
+            RowBox[{"$PrimakovPhotonStrataCache", ",", "key"}], "]"}]}], ",", 
+          RowBox[{
+           RowBox[{"value", "=", 
+            RowBox[{"BuildPrimakovPhotonStrata", "[", 
+             RowBox[{
+             "Facility", ",", "mother", ",", "Nevents", ",", "order", ",", 
+              "nStrata", ",", "eminPhoton"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AssociateTo", "[", 
+            RowBox[{"$PrimakovPhotonStrataCache", ",", 
+             RowBox[{"key", "->", "value"}]}], "]"}], ";"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"$PrimakovPhotonStrataCache", "[", "key", "]"}]}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Sampler", " ", "itself"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"BlockTabulatedPDFsFromPrimakovAlt", "[", RowBox[{"Facility_", ",", "proc_", ",", "Nucleus_", ",", "\[Theta]list_", ",", "Elist_", ",", RowBox[{"Nevents_", ":", SuperscriptBox["10", "7"]}], ",", RowBox[{"order_", ":", "9"}], ",", RowBox[{"IfTesting_", ":", "\"False\""}], ",", RowBox[{"photonStrataInput_", ":", "Automatic"}], ",", RowBox[{"nPhotonStrata_", ":", "8"}], ",", RowBox[{"LLP_", ":", "\"ALP-photon\""}]}], "]"}], ":=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "mlist", ",", "filename1", ",", "filename2", ",", "fipn", ",", 
+        "photonPoints", ",", "perMassData", ",", "norms", ",", 
+        "tabulatedDistr", ",", "ma", ",", "norm", ",", "alpPoints", ",", 
+        "tabpdf", ",", "mother", ",", "eminsamplPrim", ",", "photonStrata", ",",
+         "stratumData", ",", "eminStratum", ",", "emaxStratum", ",", 
+        "norm\[Gamma]Stratum", ",", "rawALPStratum", ",", "weightsStratum", ",",
+         "goodStratum", ",", "combinedWeights", ",", "combinedALPPoints", ",",
+         "emptyTabpdf", ",", "neventsTotal"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"fipn", "=", "LLP"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"neventsTotal", "=", 
+        RowBox[{"Round", "[", "Nevents", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"mlist", "=", 
+        RowBox[{"MassList", "[", 
+         RowBox[{"fipn", ",", "proc", ",", "Facility"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"mother", "=", 
+        RowBox[{
+         RowBox[{"ReactionProductsList", "[", 
+          RowBox[{"fipn", ",", "proc"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"photonStrata", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"photonStrataInput", "===", "Automatic"}], ",", 
+          RowBox[{"GetPrimakovPhotonStrata", "[", 
+           RowBox[{
+           "Facility", ",", "mother", ",", "neventsTotal", ",", "order", ",", 
+            "nPhotonStrata"}], "]"}], ",", "photonStrataInput"}], "]"}]}], ";",
+        "\[IndentingNewLine]", 
+       RowBox[{"perMassData", "=", 
+        RowBox[{
+         RowBox[{"ResourceFunction", "[", "\"\<MonitorProgress\>\"", "]"}], "@", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"eminsamplPrim", "=", 
+             RowBox[{"Max", "[", 
+              RowBox[{"0.1", ",", "ma"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"emptyTabpdf", "=", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Flatten", "[", 
+                RowBox[{
+                 RowBox[{"Table", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", 
+                    RowBox[{"10", "^", 
+                    RowBox[{"-", "90."}]}]}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"\[Theta]a", ",", "\[Theta]list"}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"Ea", ",", "Elist"}], "}"}]}], "]"}], ",", "1"}], 
+                "]"}], "//", "N"}], "//", "Developer`ToPackedArray"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"stratumData", "=", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"eminStratum", ",", "emaxStratum"}], "}"}], "=", 
+                 RowBox[{"photonStrata", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"emaxStratum", ">", "eminsamplPrim"}], ",", 
+                  RowBox[{
+                   RowBox[{"photonPoints", "=", 
+                    RowBox[{"photonStrata", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "3"}], "]"}], "]"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"norm\[Gamma]Stratum", "=", 
+                    RowBox[{"photonStrata", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "4"}], "]"}], "]"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"rawALPStratum", "=", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ALPsamplingComp", "[", 
+                    RowBox[{"photonPoints", ",", "ma", ",", 
+                    RowBox[{"anucleus", "[", "Nucleus", "]"}], ",", 
+                    RowBox[{"znucleus", "[", "Nucleus", "]"}], ",", 
+                    RowBox[{"mnucleus", "[", "Nucleus", "]"}]}], "]"}], "//", 
+                    "N"}], "//", "Developer`ToPackedArray"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"weightsStratum", "=", 
+                    RowBox[{
+                    RowBox[{"rawALPStratum", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "3"}], "]"}], "]"}], "/", 
+                    RowBox[{"\[Sigma]\[Gamma]Abs", "[", "Nucleus", "]"}]}]}], 
+                   ";", "\[IndentingNewLine]", 
+                   RowBox[{"goodStratum", "=", 
+                    RowBox[{"Flatten", "@", 
+                    RowBox[{"Position", "[", 
+                    RowBox[{"weightsStratum", ",", 
+                    RowBox[{"_", "?", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"#", ">", "0."}], "&"}], ")"}]}]}], "]"}]}]}], ";",
+                    "\[IndentingNewLine]", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Length", "[", "goodStratum", "]"}], ">", "0"}], "&&", 
+                    RowBox[{"norm\[Gamma]Stratum", ">", "0."}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"norm\[Gamma]Stratum", "*", 
+                    RowBox[{
+                    RowBox[{"weightsStratum", "[", 
+                    RowBox[{"[", "goodStratum", "]"}], "]"}], "/", 
+                    RowBox[{"Length", "[", "photonPoints", "]"}]}]}], ",", 
+                    RowBox[{"rawALPStratum", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"goodStratum", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}]}], "}"}], ",",
+                     "Nothing"}], "]"}]}], ",", "Nothing"}], "]"}]}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", 
+                 RowBox[{"Length", "[", "photonStrata", "]"}]}], "}"}]}], 
+              "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Length", "[", "stratumData", "]"}], ">", "0"}], ",", 
+              RowBox[{
+               RowBox[{"combinedWeights", "=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Join", "@@", 
+                   RowBox[{"stratumData", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "//", "N"}], "//",
+                  "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"combinedALPPoints", "=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Join", "@@", 
+                   RowBox[{"stratumData", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "//", "N"}], "//",
+                  "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"norm", "=", 
+                RowBox[{"Total", "[", "combinedWeights", "]"}]}]}], ",", 
+              RowBox[{"norm", "=", "0."}]}], "]"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"norm", ">", "0."}], ",", 
+              RowBox[{
+               RowBox[{"alpPoints", "=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"RandomChoice", "[", 
+                   RowBox[{
+                    RowBox[{"combinedWeights", "->", "combinedALPPoints"}], ",",
+                     "neventsTotal"}], "]"}], "//", "N"}], "//", 
+                 "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"FromDataToSmoothDistribution", "[", 
+                RowBox[{
+                "alpPoints", ",", "ma", ",", "Facility", ",", "IfTesting"}], 
+                "]"}], ";", "\[IndentingNewLine]", 
+               RowBox[{"tabpdf", "=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Flatten", "[", 
+                   RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", 
+                    RowBox[{"Max", "[", 
+                    RowBox[{
+                    RowBox[{"10", "^", 
+                    RowBox[{"-", "90."}]}], ",", 
+                    RowBox[{"DoubleDistr", "[", 
+                    RowBox[{"\[Theta]a", ",", "Ea"}], "]"}]}], "]"}]}], "}"}],
+                     ",", 
+                    RowBox[{"{", 
+                    RowBox[{"\[Theta]a", ",", "\[Theta]list"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"Ea", ",", "Elist"}], "}"}]}], "]"}], ",", "1"}], 
+                   "]"}], "//", "N"}], "//", "Developer`ToPackedArray"}]}]}], 
+              ",", 
+              RowBox[{"tabpdf", "=", "emptyTabpdf"}]}], "]"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"ma", ",", 
+              RowBox[{"Max", "[", 
+               RowBox[{
+                RowBox[{"10", "^", 
+                 RowBox[{"-", "90."}]}], ",", "norm"}], "]"}], ",", 
+              "tabpdf"}], "}"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"ma", ",", "mlist"}], "}"}]}], "]"}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"norms", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"perMassData", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}], "//", "N"}], "//",
+          "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"NormalizationALP", "[", "ma_", "]"}], "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Interpolation", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], ",", 
+                  RowBox[{"Max", "[", 
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", 
+                    RowBox[{"10", "^", 
+                    RowBox[{"-", "90."}]}]}], "]"}]}], "}"}], "&"}], "/@", 
+               "norms"}], ")"}], "//", "Log"}], ",", 
+            RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", 
+          RowBox[{"Log", "[", "ma", "]"}], "]"}], "//", "Exp"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"tabulatedDistr", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Join", "@@", 
+           RowBox[{"perMassData", "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "3"}], "]"}], "]"}]}], "//", "N"}], "//", 
+         "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"filename1", "=", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "dirMain", ",", "\"\<spectra\>\"", 
+           ",", "\"\<New physics particles spectra\>\"", ",", 
+           RowBox[{"LLPfolder", "[", "fipn", "]"}], ",", 
+           RowBox[{"ToString", "@", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{"\"\<DoubleDistr_``_``-``_``.m\>\"", ",", 
+              RowBox[{"Sequence", "@@", 
+               RowBox[{"{", 
+                RowBox[{
+                "fipn", ",", "proc", ",", "Nucleus", ",", "Facility"}], 
+                "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"filename2", "=", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{"dirMain", ",", "\"\<phenomenology\>\"", ",", 
+           RowBox[{"LLPfolder", "[", "fipn", "]"}], 
+           ",", "\"\<Production probabilities\>\"", ",", 
+           RowBox[{"ToString", "@", 
+            RowBox[{"StringForm", "[", 
+             RowBox[{"\"\<Pprod_``_``-``_``.m\>\"", ",", 
+              RowBox[{"Sequence", "@@", 
+               RowBox[{"{", 
+                RowBox[{
+                "fipn", ",", "proc", ",", "Nucleus", ",", "Facility"}], 
+                "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Export", "[", 
+        RowBox[{"filename1", ",", "tabulatedDistr", ",", "\"\<MX\>\""}], 
+        "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Export", "[", RowBox[{"filename2", ",", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"fipn", "\[Equal]", "\"ALP-electroweak\""}], ",", SuperscriptBox[RowBox[{"(", FractionBox["1", RowBox[{"137.035999177`", " ", "\[Pi]"}]], ")"}], "2"], ",", "1.`"}], "]"}], " ", RowBox[{"NormalizationALP", "[", "ma", "]"}]}], ",", "\"MX\""}], "]"}], ";"}]}], "]"}]}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.988047071457571*^9, 3.988047077893732*^9}, {
+   3.988047111606743*^9, 3.988047121426918*^9}, {3.988047663570057*^9, 
+   3.9880476638303413`*^9}, {3.9880477958521805`*^9, 
+   3.9880478086662426`*^9}, {3.988080551560381*^9, 3.988080585427006*^9}, {
+   3.9880810938867702`*^9, 3.9880811118934116`*^9}, {3.988257300019558*^9, 
+   3.9882573058584976`*^9}, 3.988258813848568*^9, {3.9882724247039948`*^9, 
+   3.9882724405914345`*^9}, {3.988272657266617*^9, 3.9882727317155113`*^9}, {
+   3.988273029294588*^9, 3.9882730637643547`*^9}, {3.988273135720787*^9, 
+   3.98827313596546*^9}, {3.9883066412423725`*^9, 3.98830664359795*^9}, {
+   3.9883068442654915`*^9, 3.9883068452975464`*^9}, {3.9883069094124775`*^9, 
+   3.9883069286478996`*^9}, {3.9883073758772793`*^9, 3.988307378445917*^9}, 
+   3.9883081753162804`*^9, 3.9883084647985897`*^9, {3.9883384971471615`*^9, 
+   3.9883384978989143`*^9}, {3.98834043870397*^9, 3.988340439347252*^9}, 
+   3.98835207424893*^9, {3.98889924674673*^9, 3.988899252059188*^9}, {
+   3.9890482548821793`*^9, 3.989048265799341*^9}, {3.989048351830247*^9, 
+   3.989048405328423*^9}, {3.9890485234358397`*^9, 3.989048529857604*^9}, {
+   3.9890524162062693`*^9, 3.989052421333033*^9}, {3.989078136595703*^9, 
+   3.989078138747335*^9}, {3.989081963031632*^9, 3.9890820093008738`*^9}, {
+   3.989082039384944*^9, 3.9890820487824802`*^9}, {3.98908431504434*^9, 
+   3.9890843291685877`*^9}, {3.9890843593339863`*^9, 3.9890843645763607`*^9}},
+ CellTags->
+  "Evaluation",ExpressionUUID->"fafb8be1-a845-dd48-80f5-ba022b244b6b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Production via photon fusion: PDF and normalization", "Chapter",
+ CellChangeTimes->{{3.913478380065708*^9, 3.9134784012039795`*^9}, {
+  3.913627395484844*^9, 3.913627396913028*^9}},
+ CellTags->
+  "Evaluation",ExpressionUUID->"af9d6ef0-a707-4b09-bb51-ae1bcb296b9c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"TabulatedDistrFusion", "[", 
+    RowBox[{
+    "m_", ",", "Facility_", ",", "Nucleus_", ",", "\[Theta]list_", ",", 
+     "Elist_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"(*", 
+       RowBox[{"norm", ",", "tabulateddistr", ",", "distr"}], "*)"}], 
+      RowBox[{"logemin", ",", "logemax", ",", "logthmin", ",", "logthmax"}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"distrprob", "[", 
+        RowBox[{"th_", ",", "e_"}], "]"}], ":=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{"StringContainsQ", "[", 
+           RowBox[{"Facility", ",", 
+            RowBox[{"{", 
+             RowBox[{"\"\<LHC\>\"", ",", "\"\<FCC-hh\>\""}], "}"}]}], "]"}]}],
+          ",", 
+         RowBox[{"d2Pd\[Theta]adEaFusion1", "[", 
+          RowBox[{"m", ",", "th", ",", "e", ",", "Facility", ",", "Nucleus"}],
+           "]"}], ",", 
+         RowBox[{"d2Pd\[Theta]adEaFusion", "[", 
+          RowBox[{"m", ",", "th", ",", "e", ",", "Facility", ",", "Nucleus"}],
+           "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"tabulateddistr", "=", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{
+         RowBox[{"ParallelTable", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"m", ",", "th", ",", "e", ",", 
+             RowBox[{"Max", "[", 
+              RowBox[{
+               RowBox[{"Quiet", "[", 
+                RowBox[{"distrprob", "[", 
+                 RowBox[{"th", ",", "e"}], "]"}], "]"}], ",", 
+               SuperscriptBox["10", 
+                RowBox[{"-", "90."}]]}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"th", ",", "\[Theta]list"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"e", ",", "Elist"}], "}"}]}], "]"}], ",", "1"}], "]"}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"distr", "[", 
+        RowBox[{"logth_", ",", "loge_"}], "]"}], "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Interpolation", "[", 
+          RowBox[{
+           RowBox[{"Log", "[", 
+            RowBox[{"tabulateddistr", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", 
+               RowBox[{"{", 
+                RowBox[{"2", ",", "3", ",", "4"}], "}"}]}], "]"}], "]"}], 
+            "]"}], ",", 
+           RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", 
+         RowBox[{"logth", ",", "loge"}], "]"}], "//", "Exp"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"logthmin", ",", "logthmax", ",", "logemin", ",", "logemax"}],
+         "}"}], "=", 
+       RowBox[{"Log", "[", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"MinMax", "[", 
+            RowBox[{"tabulateddistr", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], ",", 
+           RowBox[{"MinMax", "[", 
+            RowBox[{"tabulateddistr", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "3"}], "]"}], "]"}], "]"}]}], "}"}], "]"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"norm", "=", 
+       RowBox[{"Quiet", "[", 
+        RowBox[{"NIntegrate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"distr", "[", 
+            RowBox[{"logth", ",", "loge"}], "]"}], 
+           RowBox[{"Exp", "[", 
+            RowBox[{"logth", "+", "loge"}], "]"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"logth", ",", "logthmin", ",", "logthmax"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"loge", ",", 
+            RowBox[{"Max", "[", 
+             RowBox[{
+              RowBox[{"Log", "[", "m", "]"}], ",", "logemin"}], "]"}], ",", 
+            "logemax"}], "}"}], ",", 
+          RowBox[{
+          "Method", "->", "\"\<InterpolationPointsSubdivision\>\""}]}], "]"}],
+         "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"normalizedDistr", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], ",", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", "3", "]"}], "]"}], ",", 
+              FractionBox[
+               RowBox[{"#", "[", 
+                RowBox[{"[", "4", "]"}], "]"}], "norm"]}], "}"}], "&"}], "/@",
+            "tabulateddistr"}], ")"}], "//", "N"}], "//", 
+        "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"normalizedDistr", ",", 
+        RowBox[{"{", 
+         RowBox[{"m", ",", "norm"}], "}"}]}], "}"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"BlockTabulatedPDFsFromFusion", "[", 
+   RowBox[{
+   "Facility_", ",", "Nucleus_", ",", "\[Theta]list_", ",", "Elist_"}], "]"}],
+   ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "\[Theta]min", ",", "\[Theta]max", ",", "mlist", ",", "filename1", ",", 
+      "filename2", ",", "fipn", ",", "procn"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fipn", "=", "\"\<ALP-photon\>\""}], ";", "\[IndentingNewLine]", 
+     RowBox[{"procn", "=", "\"\<Photon-fusion\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"mlist", "=", 
+      RowBox[{"MassList", "[", 
+       RowBox[{"fipn", ",", "procn", ",", "Facility"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"tabphoton", "=", 
+      RowBox[{"Monitor", "[", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"TabulatedDistrFusion", "[", 
+           RowBox[{
+            RowBox[{"mlist", "[", 
+             RowBox[{"[", "t", "]"}], "]"}], ",", "Facility", ",", "Nucleus", 
+            ",", "\[Theta]list", ",", "Elist"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "1", ",", 
+            RowBox[{"Length", "[", "mlist", "]"}], ",", "1"}], "}"}]}], "]"}],
+         ",", 
+        RowBox[{"Row", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"ProgressIndicator", "[", 
+             RowBox[{"t", ",", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", 
+                RowBox[{"Length", "[", "mlist", "]"}]}], "}"}]}], "]"}], 
+            ",", "\"\< \!\(\*SubscriptBox[\(m\), \(LLP\)]\) = \>\"", ",", 
+            RowBox[{"mlist", "[", 
+             RowBox[{"[", "t", "]"}], "]"}], ",", "\"\< GeV\>\"", 
+            ",", "\"\< (\>\"", ",", "t", ",", "\"\</\>\"", ",", 
+            RowBox[{"Length", "[", "mlist", "]"}], ",", "\"\<)\>\""}], "}"}], 
+          ",", "\"\< \>\""}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Approximation", ":", " ", 
+         SubscriptBox["E", "a"]}], " ", "=", " ", 
+        SubscriptBox["E", "\[Gamma]"]}], ",", " ", 
+       RowBox[{
+        SubscriptBox["\[Theta]", "a"], " ", "=", " ", 
+        SubscriptBox["\[Theta]", "\[Gamma]"]}]}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ProbFusion", "[", "ma_", "]"}], "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Interpolation", "[", 
+         RowBox[{
+          RowBox[{"Log", "[", 
+           RowBox[{"tabphoton", "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], ",", 
+          RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", 
+        RowBox[{"Log", "[", "ma", "]"}], "]"}], "//", "Exp"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"DoubleDistrDataTemp", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Join", "[", "##", "]"}], "&"}], "@@", 
+          RowBox[{"tabphoton", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ")"}], "//", "N"}], "//",
+        "Developer`ToPackedArray"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"filename1", "=", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+        "dirMain", ",", "\"\<spectra\>\"", 
+         ",", "\"\<New physics particles spectra\>\"", ",", 
+         RowBox[{"LLPfolder", "[", "fipn", "]"}], ",", 
+         RowBox[{"ToString", "@", 
+          RowBox[{"StringForm", "[", 
+           RowBox[{"\"\<DoubleDistr_``_``-``_``.m\>\"", ",", 
+            RowBox[{"Sequence", "@@", 
+             RowBox[{"{", 
+              RowBox[{"fipn", ",", "procn", ",", "Nucleus", ",", "Facility"}],
+               "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"filename2", "=", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"dirMain", ",", "\"\<phenomenology\>\"", ",", 
+         RowBox[{"LLPfolder", "[", "fipn", "]"}], 
+         ",", "\"\<Production probabilities\>\"", ",", 
+         RowBox[{"ToString", "@", 
+          RowBox[{"StringForm", "[", 
+           RowBox[{"\"\<Pprod_``_``-``_``.m\>\"", ",", 
+            RowBox[{"Sequence", "@@", 
+             RowBox[{"{", 
+              RowBox[{"fipn", ",", "procn", ",", "Nucleus", ",", "Facility"}],
+               "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{"filename1", ",", "DoubleDistrDataTemp", ",", "\"\<MX\>\""}], 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{"filename2", ",", 
+       RowBox[{"ProbFusion", "[", "ma", "]"}], ",", "\"\<MX\>\""}], "]"}], 
+     ";"}]}], "\[IndentingNewLine]", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.913627425572337*^9, 3.913627427006501*^9}, 
+   3.913627465032012*^9, {3.913627509276449*^9, 3.9136278742102737`*^9}, {
+   3.9136279246778717`*^9, 3.913628135432181*^9}, {3.9136282326248674`*^9, 
+   3.913628281699194*^9}, {3.913628363496106*^9, 3.913628367727805*^9}, {
+   3.9136284201757483`*^9, 3.913628457803237*^9}, {3.9136290205165215`*^9, 
+   3.9136290251922073`*^9}, {3.913629580494795*^9, 3.913629585016095*^9}, {
+   3.9136297750593214`*^9, 3.913629778222994*^9}, 3.9136551228944874`*^9, {
+   3.913712412805249*^9, 3.9137124446999893`*^9}, 3.9137128438911424`*^9, 
+   3.9138833261850767`*^9, {3.913883412726009*^9, 3.9138834639831047`*^9}, 
+   3.913887831994038*^9, 3.915082868680538*^9, {3.9154388176486096`*^9, 
+   3.915438817655858*^9}, {3.9168310963628426`*^9, 3.9168311002503395`*^9}, {
+   3.916831572415639*^9, 3.916831687536377*^9}, 3.928649513119931*^9, {
+   3.9286507548370743`*^9, 3.9286507774906178`*^9}, {3.928651788576705*^9, 
+   3.9286518075763903`*^9}, {3.928651924333969*^9, 3.9286519273396626`*^9}, {
+   3.9355977586735687`*^9, 3.935597813002146*^9}, {3.9423246206864204`*^9, 
+   3.942324689128565*^9}, {3.9595024236362076`*^9, 3.959502432814888*^9}, {
+   3.9888992583135433`*^9, 3.9888992653398647`*^9}},
+ CellTags->"Evaluation",
+ CellLabel->"In[28]:=",ExpressionUUID->"7101a228-73dd-406a-8181-affd5068b625"]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>0.9 Inherited,
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"891dd40f-0be0-47d0-806c-0702d8b091bd"
+]
+(* End of Notebook Content *)
+

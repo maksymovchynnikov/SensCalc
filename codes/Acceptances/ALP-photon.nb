@@ -5,15 +5,14 @@
 
 (* CreatedBy='Wolfram 14.1' *)
 
-(*CacheID: 234*)
 (* Internal cache information:
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     18985,        499]
-NotebookOptionsPosition[     17532,        467]
-NotebookOutlinePosition[     17939,        483]
-CellTagsIndexPosition[     17896,        480]
+NotebookDataLength[     20250,        526]
+NotebookOptionsPosition[     18513,        491]
+NotebookOutlinePosition[     18920,        507]
+CellTagsIndexPosition[     18877,        504]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -181,9 +180,9 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{
          RowBox[{"ListBrRatiosTemp", "[", 
-          
-          RowBox[{"\"\<ALP-photon\>\"", ",", "mLLP_", 
-           ",", "\"\<\[Gamma]-pair\>\""}], "]"}], ",", 
+          RowBox[{
+          "\"\<ALP-photon\>\"", ",", "mLLP_", ",", "\"\<\[Gamma]-pair\>\""}], 
+          "]"}], ",", 
          RowBox[{"ListDecayProducts", "[", 
           RowBox[{"\"\<ALP-photon\>\"", ",", "\"\<\[Gamma]-pair\>\""}], "]"}],
           ",", 
@@ -193,35 +192,40 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{"1", ",", 
         RowBox[{"{", 
-         RowBox[{"\"\<\[Gamma]\>\"", ",", "\"\<\[Gamma]\>\"", 
-          ",", "\"\<Null\>\"", ",", "\"\<Null\>\""}], "}"}], 
-        ",", "\"\<No\>\""}], "}"}]}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{
+         "\"\<\[Gamma]\>\"", ",", "\"\<\[Gamma]\>\"", ",", "\"\<Null\>\"", 
+          ",", "\"\<Null\>\""}], "}"}], ",", "\"\<No\>\""}], "}"}]}]}], ";", 
+    "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{"ListBrRatios", "[", 
-      RowBox[{"\"\<ALP-photon\>\"", ",", "mLLP_", 
-       ",", "\"\<\[Gamma]-pair\>\""}], "]"}], "=", 
+      RowBox[{
+      "\"\<ALP-photon\>\"", ",", "mLLP_", ",", "\"\<\[Gamma]-pair\>\""}], 
+      "]"}], "=", 
      RowBox[{"ListBrRatiosTemp", "[", 
-      RowBox[{"\"\<ALP-photon\>\"", ",", "mLLP", 
-       ",", "\"\<\[Gamma]-pair\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+      "\"\<ALP-photon\>\"", ",", "mLLP", ",", "\"\<\[Gamma]-pair\>\""}], 
+      "]"}]}], ";", "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{
       RowBox[{
-      "Print", "[", "\"\<All processes with at least two charged/neutral \
-particles:\>\"", "]"}], "\[IndentingNewLine]", 
+      "Print", "[", 
+       "\"\<All processes with at least two charged/neutral particles:\>\"", 
+       "]"}], "\[IndentingNewLine]", 
       RowBox[{"ProcessesList", "[", 
        RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "=", 
      RowBox[{
       RowBox[{
        RowBox[{"procList", "[", "LLPsel", "]"}], "\[IndentingNewLine]", 
        RowBox[{
-       "Print", 
-        "[", "\"\<All processes with at least two charged particles:\>\"", 
-        "]"}], "\[IndentingNewLine]", 
+       "Print", "[", 
+        "\"\<All processes with at least two charged particles:\>\"", "]"}], 
+       "\[IndentingNewLine]", 
        RowBox[{"ProcessesList", "[", 
         RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}]}], "=", 
       RowBox[{
        RowBox[{"procListnoecal", "[", "LLPsel", "]"}], "\[IndentingNewLine]", 
-       RowBox[{"Print", "[", "\"\<Processes with jets:\>\"", "]"}], "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", "\"\<Processes with jets:\>\"", "]"}], 
+       "\[IndentingNewLine]", 
        RowBox[{"Select", "[", 
         RowBox[{
          RowBox[{"ProcessesList", "[", 
@@ -233,7 +237,13 @@ particles:\>\"", "]"}], "\[IndentingNewLine]",
           "&"}]}], "]"}]}]}]}]}], "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"LLPsel", "=", "\"\<ALP-photon\>\""}], ";"}], "\[IndentingNewLine]", 
+    RowBox[{"LLPsel", "=", "\"\<ALP-photon\>\""}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", "\"\<Default description:\>\"", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"descrDefault", "[", "LLPsel", "]"}], "=", "\"\<Default\>\""}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"BrRatiosDPdata", "[", 
@@ -246,10 +256,10 @@ particles:\>\"", "]"}], "\[IndentingNewLine]",
           RowBox[{
            RowBox[{
             RowBox[{"NotebookDirectory", "[", "]"}], "//", 
-            "ParentDirectory"}], "//", "ParentDirectory"}], 
-          ",", "\"\<phenomenology\>\"", ",", "LLPsel", 
-          ",", "\"\<decay widths/BrRatiosALPphoton.mx\>\""}], "}"}], "]"}], 
-       ",", "\"\<MX\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+            "ParentDirectory"}], "//", "ParentDirectory"}], ",", 
+          "\"\<phenomenology\>\"", ",", "LLPsel", ",", 
+          "\"\<decay widths/BrRatiosALPphoton.mx\>\""}], "}"}], "]"}], ",", 
+       "\"\<MX\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "List", " ", "of", " ", "all", " ", "representative", " ", "processes"}], 
@@ -362,7 +372,8 @@ particles:\>\"", "]"}], "\[IndentingNewLine]",
      RowBox[{"{", 
       RowBox[{"proc", ",", 
        RowBox[{"ProcessesList", "[", 
-        RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+        RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
    "Print", "[", "\"\<All processes with at least two charged particles:\>\"",
      "]"}], "\[IndentingNewLine]", 
@@ -370,7 +381,8 @@ particles:\>\"", "]"}], "\[IndentingNewLine]",
     RowBox[{"ProcessesList", "[", 
      RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], "=", 
     RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], "\[IndentingNewLine]", 
-   RowBox[{"Print", "[", "\"\<Processes with jets:\>\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", "\"\<Processes with jets:\>\"", "]"}], 
+   "\[IndentingNewLine]", 
    RowBox[{"Select", "[", 
     RowBox[{
      RowBox[{"ProcessesList", "[", 
@@ -400,7 +412,8 @@ particles:\>\"", "]"}], "\[IndentingNewLine]",
         RowBox[{
          RowBox[{
           RowBox[{"#", "[", 
-           RowBox[{"[", "1", "]"}], "]"}], "==", "LLPsel"}], "&"}]}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "==", "LLPsel"}], "&"}]}], "]"}], 
+      "[", 
       RowBox[{"[", 
        RowBox[{"All", ",", "2"}], "]"}], "]"}], "//", 
      "DeleteDuplicates"}]}]}]}]], "Input",
@@ -411,97 +424,26 @@ particles:\>\"", "]"}], "\[IndentingNewLine]",
    3.916155441754284*^9, 3.916155468043769*^9}, {3.9161567187636194`*^9, 
    3.9161567271626825`*^9}, {3.9422315577250824`*^9, 3.9422315693256035`*^9}, 
    3.942231615586157*^9, {3.947609220961569*^9, 3.9476092357620544`*^9}, 
-   3.9493787004661217`*^9, {3.952326949407242*^9, 
-   3.9523269549548836`*^9}},ExpressionUUID->"18c4821b-541e-41f1-8fa2-\
-a1b67a039dab"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"\<\"2\[Gamma]\"\>", 
-   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(e\\), \
-\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(e\\), \\(-\\)]\\)\[Gamma]\"\>", 
-   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Mu]\\), \
-\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Mu]\\), \\(-\\)]\\)\[Gamma]\"\>"}], 
-  "}"}]], "Output",
- CellChangeTimes->{3.934279430560424*^9, 3.942231618576309*^9, 
-  3.947609238761503*^9},
- CellLabel->
-  "Out[199]=",ExpressionUUID->"27c1911f-08d4-eb4e-b320-b9371db44c44"],
+   3.9493787004661217`*^9, {3.952326949407242*^9, 3.9523269549548836`*^9}, {
+   3.9603427272089615`*^9, 3.9603427322894893`*^9}},
+ CellLabel->"In[71]:=",ExpressionUUID->"18c4821b-541e-41f1-8fa2-a1b67a039dab"],
 
 Cell[BoxData["\<\"All processes with at least two charged particles:\"\>"], \
 "Print",
  CellChangeTimes->{3.934279430566717*^9, 3.942231618576309*^9, 
-  3.947609238765684*^9},
+  3.947609238765684*^9, 3.960342734835961*^9},
  CellLabel->
   "During evaluation of \
-In[197]:=",ExpressionUUID->"6dd51708-daef-b24d-9dde-b8b7c94bf8eb"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"\<\"\\!\\(\\*SuperscriptBox[\\(e\\), \
-\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(e\\), \\(-\\)]\\)\[Gamma]\"\>", 
-   ",", "\<\"\\!\\(\\*SuperscriptBox[\\(\[Mu]\\), \
-\\(+\\)]\\)\\!\\(\\*SuperscriptBox[\\(\[Mu]\\), \\(-\\)]\\)\[Gamma]\"\>"}], 
-  "}"}]], "Output",
- CellChangeTimes->{3.934279430560424*^9, 3.942231618576309*^9, 
-  3.9476092387677917`*^9},
- CellLabel->
-  "Out[203]=",ExpressionUUID->"455867af-accf-a147-9415-d45f5c477f7b"],
-
-Cell[BoxData["\<\"Processes with jets:\"\>"], "Print",
- CellChangeTimes->{3.934279430566717*^9, 3.942231618576309*^9, 
-  3.9476092387698994`*^9},
- CellLabel->
-  "During evaluation of \
-In[197]:=",ExpressionUUID->"4552427f-bc77-a14c-895e-33e344987012"],
-
-Cell[BoxData[
- RowBox[{"{", "}"}]], "Output",
- CellChangeTimes->{3.934279430560424*^9, 3.942231618576309*^9, 
-  3.9476092387726917`*^9},
- CellLabel->
-  "Out[205]=",ExpressionUUID->"1a359ebb-7187-414a-9021-8921f2de8769"]
+In[71]:=",ExpressionUUID->"c2bf1cd0-c50e-4f53-8b66-d37c3fda3cdc"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1430.25, 828.75},
+WindowSize->{1016.25, 606.75},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"14.2 for Microsoft Windows (64-bit) (December 26, 2024)",
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (November 18, 2022)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"f9471ac2-93e9-1b4d-9350-a278581dfbd2"
 ]
 (* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[CellGroupData[{
-Cell[576, 22, 206, 4, 66, "Section",ExpressionUUID->"e028c4e9-337d-4dda-90a4-9253eb8fb45d"],
-Cell[785, 28, 2946, 76, 332, "Input",ExpressionUUID->"6ab7ee31-93bb-1140-a753-a15f0f0f5699"],
-Cell[CellGroupData[{
-Cell[3756, 108, 166, 3, 53, "Subsection",ExpressionUUID->"f0f7ec43-6121-6849-a22f-ddde4c1312db"],
-Cell[3925, 113, 1715, 46, 127, "Input",ExpressionUUID->"4966e61d-ff67-064a-a94e-f1112d79368f"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[5677, 164, 235, 5, 53, "Subsection",ExpressionUUID->"a4ca677c-b1c1-4a9b-8379-627b7f9d3671"],
-Cell[CellGroupData[{
-Cell[5937, 173, 9817, 242, 637, "Input",ExpressionUUID->"18c4821b-541e-41f1-8fa2-a1b67a039dab"],
-Cell[15757, 417, 500, 11, 32, "Output",ExpressionUUID->"27c1911f-08d4-eb4e-b320-b9371db44c44"],
-Cell[16260, 430, 281, 6, 22, "Print",ExpressionUUID->"6dd51708-daef-b24d-9dde-b8b7c94bf8eb"],
-Cell[16544, 438, 472, 10, 32, "Output",ExpressionUUID->"455867af-accf-a147-9415-d45f5c477f7b"],
-Cell[17019, 450, 251, 5, 22, "Print",ExpressionUUID->"4552427f-bc77-a14c-895e-33e344987012"],
-Cell[17273, 457, 219, 5, 32, "Output",ExpressionUUID->"1a359ebb-7187-414a-9021-8921f2de8769"]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]]
-}
-]
-*)
 

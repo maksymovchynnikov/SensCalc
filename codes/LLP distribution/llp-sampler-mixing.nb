@@ -1,0 +1,902 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     40908,        938]
+NotebookOptionsPosition[     39241,        894]
+NotebookOutlinePosition[     40339,        925]
+CellTagsIndexPosition[     40266,        920]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Production via mixing (following 2201.05170): PDF", "Chapter",
+ CellChangeTimes->{{3.9134597715669737`*^9, 3.9134597736762543`*^9}, {
+  3.913461115960853*^9, 3.913461116761843*^9}, {3.9304674535225143`*^9, 
+  3.9304674561467667`*^9}},
+ CellTags->
+  "Evaluation",ExpressionUUID->"f3b32902-6fe5-4ad4-b5c3-8b35b664974e"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Theta]", "mother"], ",", 
+    RowBox[{
+     SubscriptBox["E", "mother"], "->", 
+     SubscriptBox["\[Theta]", "LLP"]}], ",", 
+    SubscriptBox["E", "LLP"]}], TraditionalForm]],ExpressionUUID->
+  "603bee3f-a248-420d-b60d-c2984b1233a8"],
+ ", following 2201.05170"
+}], "Section",
+ CellChangeTimes->{{3.913458830855912*^9, 3.9134588664358997`*^9}, 
+   3.9134597783208*^9, {3.9154388130799675`*^9, 3.9154388130822153`*^9}},
+ CellTags->
+  "Evaluation",ExpressionUUID->"54ec8fa0-0730-4730-9e8d-64b1b5a581d6"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LLPkinematicsMixing", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Hold", "@", 
+      RowBox[{"Compile", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"mdata", ",", "_Real", ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"mLLP", ",", "_Real"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Eplab", ",", "_Real"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"IfCollider", ",", 
+            RowBox[{"True", "|", "False"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"IfESS", ",", 
+            RowBox[{"True", "|", "False"}]}], "}"}]}], "}"}], ",", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"\[Theta]llpFin", "=", "0."}], ",", 
+            RowBox[{"ellpFin", "=", "0."}], ",", 
+            RowBox[{"pboost", "=", "0."}], ",", 
+            RowBox[{"emes", "=", "0."}], ",", 
+            RowBox[{"pxmes", "=", "0."}], ",", 
+            RowBox[{"pymes", "=", "0."}], ",", 
+            RowBox[{"pzmes", "=", "0."}], ",", 
+            RowBox[{"mmes", "=", "0."}], ",", 
+            RowBox[{"pzmesCM", "=", "0."}], ",", 
+            RowBox[{"pzllpCM", "=", "0."}], ",", 
+            RowBox[{"ellpCM", "=", "0."}], ",", 
+            RowBox[{"pxllpLab", "=", "0."}], ",", 
+            RowBox[{"pyllpLab", "=", "0."}], ",", 
+            RowBox[{"pzllpLab", "=", "0."}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"pboost", "=", 
+            SqrtBox[
+             RowBox[{
+              SuperscriptBox["Eplab", "2"], "-", 
+              SuperscriptBox["0.938", "2"]}]]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"emes", "=", 
+            RowBox[{"Compile`GetElement", "[", 
+             RowBox[{"mdata", ",", "4"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"pxmes", "=", 
+            RowBox[{"Compile`GetElement", "[", 
+             RowBox[{"mdata", ",", "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"pymes", "=", 
+            RowBox[{"Compile`GetElement", "[", 
+             RowBox[{"mdata", ",", "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"pzmes", "=", 
+            RowBox[{"Compile`GetElement", "[", 
+             RowBox[{"mdata", ",", "3"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"mmes", "=", 
+            RowBox[{"Compile`GetElement", "[", 
+             RowBox[{"mdata", ",", "5"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{
+             RowBox[{
+             "If", " ", "the", " ", "facility", " ", "is", " ", "beam", " ", 
+              "dump"}], ",", " ", 
+             RowBox[{"then", " ", "boost", " ", "the", " ", 
+              RowBox[{"meson", "'"}], "s", " ", "kinematics", " ", "to", " ", 
+              "CM", " ", "frame"}], ",", " ", 
+             RowBox[{"relate", " ", "it", " ", "to", " ", "the", " ", 
+              RowBox[{"LLP", "'"}], "s", " ", "kinematics"}], ",", " ", 
+             RowBox[{"and", " ", "boost", " ", 
+              RowBox[{"back", ".", " ", "Otherwise"}], " ", 
+              RowBox[{"(", 
+               RowBox[{"if", " ", "it", " ", "is", " ", "collider"}], ")"}]}],
+              ",", " ", 
+             RowBox[{
+             "simply", " ", "renormalize", " ", "the", " ", "LLP", " ", 
+              "energy"}]}], "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"!", "IfCollider"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Meson", "'"}], "s", " ", "and", " ", 
+                RowBox[{"LLP", "'"}], "s", " ", "kinematics", " ", "at", " ", 
+                "CM", " ", "frame"}], ",", " ", 
+               RowBox[{
+               "assuming", " ", "that", " ", "their", " ", "CM", " ", 
+                "momenta", " ", "are", " ", "the", " ", 
+                RowBox[{"same", ".", " ", "It"}], " ", "is", " ", "also", " ",
+                 "assumed", " ", "that", " ", "the", " ", "boost", " ", "is", 
+                " ", "in", " ", "the", " ", "z", " ", "direction"}]}], "*)"}],
+              "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"pzmesCM", "=", 
+               RowBox[{"pzllpCM", "=", 
+                RowBox[{"pproductLab3Cart", "[", 
+                 RowBox[{"0.", ",", "0.", ",", 
+                  RowBox[{"-", "pboost"}], ",", "Eplab", ",", "0.938", ",", 
+                  "pxmes", ",", "pymes", ",", "pzmes", ",", "emes"}], 
+                 "]"}]}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"ellpCM", "=", 
+               SqrtBox[
+                RowBox[{
+                 SuperscriptBox["pxmes", "2"], "+", 
+                 SuperscriptBox["pymes", "2"], "+", 
+                 SuperscriptBox["pzllpCM", "2"], "+", 
+                 SuperscriptBox["mLLP", "2"]}]]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+                RowBox[{"LLP", "'"}], "s", " ", "kinematics", " ", "at", " ", 
+                "lab", " ", "frame"}], "*)"}], "\[IndentingNewLine]", 
+              RowBox[{"pxllpLab", "=", "pxmes"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"pyllpLab", "=", "pymes"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"pzllpLab", "=", 
+               RowBox[{"pproductLab3Cart", "[", 
+                RowBox[{
+                "0.", ",", "0.", ",", "pboost", ",", "Eplab", ",", "0.938", ",",
+                  "pxmes", ",", "pymes", ",", "pzllpCM", ",", "ellpCM"}], 
+                "]"}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"ellpFin", "=", 
+               SqrtBox[
+                RowBox[{
+                 SuperscriptBox["pxllpLab", "2"], "+", 
+                 SuperscriptBox["pyllpLab", "2"], "+", 
+                 SuperscriptBox["pzllpLab", "2"], "+", 
+                 SuperscriptBox["mLLP", "2"]}]]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Warning", "!"}], " ", "If", " ", "relating", " ", 
+                 "the", " ", "angle", " ", "of", " ", "the", " ", "LLP", " ", 
+                 "to", " ", "the", " ", "meson", " ", "angle", " ", "by", " ",
+                  "boosting", " ", "to", " ", "CM", " ", "frame"}], ",", " ", 
+                RowBox[{"inadequate", " ", "results", " ", "may", " ", "be", " ", 
+                 RowBox[{"produced", ".", " ", "I"}], " ", "am", " ", 
+                 "working", " ", "on", " ", "improved", " ", "approach", " ", 
+                 "of", " ", "the", " ", "production", " ", "via", " ", 
+                 "mixing"}]}], "*)"}], "\[IndentingNewLine]", 
+              RowBox[{"\[Theta]llpFin", "=", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"!", "IfESS"}], ",", 
+                 RowBox[{"ArcCos", "[", 
+                  FractionBox["pzllpLab", 
+                   SqrtBox[
+                    RowBox[{
+                    SuperscriptBox["pxllpLab", "2"], "+", 
+                    SuperscriptBox["pyllpLab", "2"], "+", 
+                    SuperscriptBox["pzllpLab", "2"]}]]], "]"}], ",", 
+                 RowBox[{"ArcCos", "[", 
+                  FractionBox["pzmes", 
+                   SqrtBox[
+                    RowBox[{
+                    SuperscriptBox["pxmes", "2"], "+", 
+                    SuperscriptBox["pymes", "2"], "+", 
+                    SuperscriptBox["pzmes", "2"]}]]], "]"}]}], "]"}]}], ";"}],
+              "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"ellpFin", "=", 
+               SqrtBox[
+                RowBox[{
+                 SuperscriptBox["pxmes", "2"], "+", 
+                 SuperscriptBox["pymes", "2"], "+", 
+                 SuperscriptBox["pzmes", "2"], "+", 
+                 SuperscriptBox["mLLP", "2"]}]]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"\[Theta]llpFin", "=", 
+               RowBox[{"ArcCos", "[", 
+                FractionBox[
+                 RowBox[{"Abs", "[", "pzmes", "]"}], 
+                 SqrtBox[
+                  RowBox[{
+                   SuperscriptBox["pxmes", "2"], "+", 
+                   SuperscriptBox["pymes", "2"], "+", 
+                   SuperscriptBox["pzmes", "2"]}]]], "]"}]}], ";"}]}], 
+            "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"\[Theta]llpFin", ",", "ellpFin"}], "}"}]}]}], 
+         "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+        RowBox[{"CompilationTarget", "->", "\"\<C\>\""}], ",", 
+        RowBox[{"RuntimeOptions", "->", "\"\<Speed\>\""}], ",", 
+        RowBox[{"RuntimeAttributes", "->", 
+         RowBox[{"{", "Listable", "}"}]}], ",", 
+        RowBox[{"Parallelization", "->", "True"}]}], "]"}]}], "/.", 
+     RowBox[{"ruleDown", "[", 
+      RowBox[{"{", "pproductLab3Cart", "}"}], "]"}]}], "//", 
+    "ReleaseHold"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "CompiledFunctionTools`"}], "\n", 
+ RowBox[{
+  RowBox[{"CompilePrint", "@", "LLPkinematicsMixing"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"(*", 
+    RowBox[{
+     SubscriptBox["p", "CM"], " ", 
+     RowBox[{"(", 
+      RowBox[{"proton", "-", 
+       RowBox[{"proton", " ", "collisions"}]}], ")"}], " ", "in", " ", 
+     "terms", " ", "of", " ", 
+     SubscriptBox["p", "lab"], " ", "assuming", " ", "that", " ", 
+     SubscriptBox["p", "lab"], " ", "is", " ", "aligned", " ", "along", " ", 
+     "the", " ", "boost"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PcmPlab", "[", 
+      RowBox[{"plab_", ",", "m_", ",", "Eplab_", ",", "mp_"}], "]"}], "=", 
+     RowBox[{"Assuming", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"mp", ">", "0"}], "&&", 
+        RowBox[{"Eplab", ">", "0"}]}], ",", 
+       RowBox[{"Simplify", "[", 
+        RowBox[{
+         RowBox[{"\[Gamma]CMbeamDump", "[", 
+          RowBox[{"Eplab", ",", "mp"}], "]"}], 
+         RowBox[{"(", 
+          RowBox[{"plab", "-", 
+           RowBox[{
+            RowBox[{"vCMbeamDump", "[", 
+             RowBox[{"Eplab", ",", "mp"}], "]"}], "*", 
+            SqrtBox[
+             RowBox[{
+              SuperscriptBox["plab", "2"], "+", 
+              SuperscriptBox["m", "2"]}]]}]}], ")"}]}], "]"}]}], "]"}]}], ";",
+     "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"inverse", " ", "relation"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"PlabPcm", "[", 
+      RowBox[{"pcm_", ",", "m_", ",", "Eplab_", ",", "mp_"}], "]"}], "=", 
+     RowBox[{
+      RowBox[{"plab", "/.", 
+       RowBox[{
+        RowBox[{"Solve", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"PcmPlab", "[", 
+            RowBox[{"plab", ",", "m", ",", "Eplab", ",", "mp"}], "]"}], "\[Equal]",
+            "pcm"}], ",", "plab"}], "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "//", "Simplify"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+       "Relation", " ", "between", " ", "the", " ", "meson", " ", "and", " ", 
+        "DP", " ", "energies", " ", "and", " ", "angles", " ", "in", " ", 
+        "the", " ", "CM", " ", 
+        RowBox[{"frame", ".", " ", "Obtained"}], " ", "under", " ", 
+        "assumption", " ", "that", " ", "at", " ", "the", " ", "CM", " ", 
+        "frame", " ", "of", " ", "proton"}], "-", 
+       RowBox[{
+       "proton", " ", "collisions", " ", "the", " ", "meson", " ", "and", " ",
+         "DP"}]}], " ", "|", "momenta", "|", " ", 
+      RowBox[{"are", " ", "the", " ", "same"}]}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"EcmMesonEcmLLP", "[", 
+      RowBox[{"EV_", ",", "mV_", ",", "mmeson_"}], "]"}], "=", 
+     SqrtBox[
+      RowBox[{
+       SuperscriptBox["EV", "2"], "-", 
+       SuperscriptBox["mV", "2"], "+", 
+       SuperscriptBox["mmeson", "2"]}]]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+       "Relation", " ", "between", " ", "meson", " ", "and", " ", "DP", " ", 
+        "kinematics", " ", "in", " ", "lab", " ", 
+        RowBox[{"frame", ".", " ", "Obtained"}], " ", "under", " ", 
+        "assumption", " ", "that", " ", "at", " ", "the", " ", "CM", " ", 
+        "frame", " ", "of", " ", "proton"}], "-", 
+       RowBox[{
+       "proton", " ", "collisions", " ", "the", " ", "meson", " ", "and", " ",
+         "DP"}]}], " ", "|", "momenta", "|", " ", 
+      RowBox[{"are", " ", "the", " ", "same"}]}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"plabMesonElabLLP", "[", 
+      RowBox[{"EV_", ",", "mmeson_", ",", "mV_", ",", "Eplab_", ",", "mp_"}], 
+      "]"}], "=", 
+     RowBox[{"Assuming", "[", 
+      RowBox[{
+       RowBox[{"EV", ">", "0"}], ",", 
+       RowBox[{"Simplify", "[", 
+        RowBox[{"PlabPcm", "[", 
+         RowBox[{
+          RowBox[{"PcmPlab", "[", 
+           RowBox[{
+            SqrtBox[
+             RowBox[{
+              SuperscriptBox["EV", "2"], "-", 
+              SuperscriptBox["mV", "2"]}]], ",", "mV", ",", "Eplab", ",", 
+            "mp"}], "]"}], ",", "mmeson", ",", "Eplab", ",", "mp"}], "]"}], 
+        "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ElabMesonElabDP", "[", 
+      RowBox[{"EV_", ",", "mmeson_", ",", "mV_", ",", "Eplab_", ",", "mp_"}], 
+      "]"}], "=", 
+     SqrtBox[
+      RowBox[{
+       SuperscriptBox[
+        RowBox[{"plabMesonElabLLP", "[", 
+         RowBox[{"EV", ",", "mmeson", ",", "mV", ",", "Eplab", ",", "mp"}], 
+         "]"}], "2"], "+", 
+       SuperscriptBox["mmeson", "2"]}]]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"\[Theta]labMeson\[Theta]ElabDP", "[", 
+      RowBox[{
+      "EV_", ",", "\[Theta]V_", ",", "mmeson_", ",", "mV_", ",", "Eplab_", ",",
+        "mp_"}], "]"}], "=", 
+     RowBox[{"ArcSin", "[", 
+      RowBox[{
+       RowBox[{"Sin", "[", "\[Theta]V", "]"}], 
+       FractionBox[
+        SqrtBox[
+         RowBox[{
+          SuperscriptBox["EV", "2"], "-", 
+          SuperscriptBox["mV", "2"]}]], 
+        RowBox[{"plabMesonElabLLP", "[", 
+         RowBox[{"EV", ",", "mmeson", ",", "mV", ",", "Eplab", ",", "mp"}], 
+         "]"}]]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"If", " ", 
+        SubscriptBox["E", "a"]}], " ", "<", " ", 
+       SubscriptBox["E", 
+        RowBox[{"a", ",", "min"}]]}], ",", " ", 
+      RowBox[{"then", " ", "there", " ", "is", " ", "no", " ", "solution", " ", 
+       SubscriptBox["E", "meson"], 
+       RowBox[{"(", 
+        SubscriptBox["E", "a"], ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"EVminBeamDump", "[", 
+      RowBox[{"mmeson_", ",", "mV_", ",", "Eplab_", ",", "mp_"}], "]"}], "=", 
+     RowBox[{"EV", "/.", 
+      RowBox[{
+       RowBox[{"Solve", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"plabMesonElabLLP", "[", 
+           RowBox[{"EV", ",", "mmeson", ",", "mV", ",", "Eplab", ",", "mp"}], 
+           "]"}], "\[Equal]", "0"}], ",", "EV"}], "]"}], "[", 
+       RowBox[{"[", "4", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"EVminCM", "[", 
+      RowBox[{"mmeson_", ",", "mV_"}], "]"}], "=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"mV", ">", "mmeson"}], ",", 
+       RowBox[{"Evaluate", "[", 
+        RowBox[{"EV", "/.", 
+         RowBox[{
+          RowBox[{"Solve", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"EcmMesonEcmLLP", "[", 
+              RowBox[{"EV", ",", "mV", ",", "mmeson"}], "]"}], "\[Equal]", 
+             "0"}], ",", "EV"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", "mV"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"Jacobian", " ", 
+       SubscriptBox["E", "meson"]}], ",", 
+      RowBox[{
+       SubscriptBox["\[Theta]", "meson"], " ", "\[Rule]", " ", 
+       SubscriptBox["E", "a"]}], ",", 
+      SubscriptBox["\[Theta]", "a"]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Jacobian\[Theta]mesonEmesonTo\[Theta]VEVBeamDump", "[", 
+      RowBox[{
+      "Eplab_", ",", "mp_", ",", "mmeson_", ",", "mV_", ",", "\[Theta]V_", ",",
+        "EV_"}], "]"}], "=", 
+     RowBox[{
+      RowBox[{"Abs", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"\[Theta]labMeson\[Theta]ElabDP", "[", 
+            RowBox[{
+            "EV", ",", "\[Theta]V", ",", "mmeson", ",", "mV", ",", "Eplab", ",",
+              "mp"}], "]"}], ",", "\[Theta]V"}], "]"}], "*", 
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"ElabMesonElabDP", "[", 
+            RowBox[{"EV", ",", "mmeson", ",", "mV", ",", "Eplab", ",", "mp"}],
+             "]"}], ",", "EV"}], "]"}]}], "-", 
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"\[Theta]labMeson\[Theta]ElabDP", "[", 
+            RowBox[{
+            "EV", ",", "\[Theta]V", ",", "mmeson", ",", "mV", ",", "Eplab", ",",
+              "mp"}], "]"}], ",", "EV"}], "]"}], "*", 
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"ElabMesonElabDP", "[", 
+            RowBox[{"EV", ",", "mmeson", ",", "mV", ",", "Eplab", ",", "mp"}],
+             "]"}], ",", "\[Theta]V"}], "]"}]}]}], "]"}], "//", 
+      "Simplify"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"JacobianEmesonToEVCollider", "[", 
+      RowBox[{"EV_", ",", "mV_", ",", "mmeson_"}], "]"}], "=", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"EcmMesonEcmLLP", "[", 
+        RowBox[{"EV", ",", "mV", ",", "mmeson"}], "]"}], ",", "EV"}], "]"}]}],
+     ";"}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.8878207555057163`*^9, 3.887820778838458*^9}, {
+   3.8878208916198773`*^9, 3.8878208936597385`*^9}, {3.913458914135668*^9, 
+   3.913458914735282*^9}, {3.91629922979214*^9, 3.916299256298482*^9}, 
+   3.916306139185005*^9, {3.9164670679404135`*^9, 3.9164670938412204`*^9}, {
+   3.9164671327717648`*^9, 3.916467144409526*^9}, {3.916484558159028*^9, 
+   3.916484574451497*^9}, {3.917284452828832*^9, 3.9172844564113083`*^9}, {
+   3.917284490013545*^9, 3.9172844952406764`*^9}, {3.918135737000326*^9, 
+   3.9181358021729116`*^9}, {3.918135935319717*^9, 3.9181359399533167`*^9}, {
+   3.918146283917324*^9, 3.9181463414791327`*^9}, {3.9341351723353515`*^9, 
+   3.934135224806628*^9}},
+ CellTags->"Evaluation",
+ CellLabel->
+  "In[298]:=",ExpressionUUID->"10bfeb06-9144-49dd-bfc4-7b328bbc41f4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Distribution of LLPs obtained using the transformation ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["E", "meson"], ",", 
+    RowBox[{
+     SubscriptBox["\[Theta]", "meson"], " ", "\[Rule]", 
+     SubscriptBox["E", "LLP"]}], ",", " ", 
+    SubscriptBox["\[Theta]", "LLP"]}], TraditionalForm]],ExpressionUUID->
+  "708685cd-8d89-4c33-9f4a-84896d3da4f2"]
+}], "Section",
+ CellChangeTimes->{
+  3.9134597857722173`*^9, {3.9154388172966666`*^9, 3.9154388173046603`*^9}},
+ CellTags->
+  "Evaluation",ExpressionUUID->"914774a9-a755-46fc-97b9-7ec9e54ef28d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"BlockTabulatedPDFsFromMixingsMass", "[", 
+   RowBox[{
+   "LLP_", ",", "Facility_", ",", "mLLP_", ",", "process_", ",", "Nevents_", ",",
+     "\[Theta]list_", ",", "Elist_", ",", "\[Theta]minExtr_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"maxmass", "=", 
+      RowBox[{"MaxMass", "[", 
+       RowBox[{"LLP", ",", "Facility", ",", "process"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"mLLP", "<", "maxmass"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"partcontent", "=", 
+         RowBox[{"ReactionProductsList", "[", 
+          RowBox[{"LLP", ",", "process"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"meson", "=", 
+         RowBox[{"partcontent", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"mmeson", "=", 
+         RowBox[{"mSM", "[", "meson", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"elab", "=", 
+         RowBox[{"EmaxFacility", "[", "Facility", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Length", "[", 
+            RowBox[{"MotherPoints", "[", 
+             RowBox[{"meson", ",", "Facility", ",", "\"\<False\>\""}], "]"}], 
+            "]"}], "!=", "Nevents"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"MotherPoints", "[", 
+             RowBox[{"meson", ",", "Facility", ",", "\"\<False\>\""}], "]"}], 
+            "=", 
+            RowBox[{"PointsSampler", "[", 
+             RowBox[{
+             "Facility", ",", "meson", ",", "Nevents", ",", "\"\<False\>\""}],
+              "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"IfCollider", "=", 
+         RowBox[{"StringContainsQ", "[", 
+          RowBox[{"Facility", ",", 
+           RowBox[{"{", 
+            RowBox[{"\"\<LHC\>\"", ",", "\"\<FCC-hh\>\""}], "}"}]}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"IfESS", "=", 
+         RowBox[{"Facility", "==", "\"\<ESS\>\""}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"\[Theta]Edata", "=", 
+         RowBox[{"LLPkinematicsMixing", "[", 
+          RowBox[{
+           RowBox[{"MotherPoints", "[", 
+            RowBox[{"meson", ",", "Facility", ",", "\"\<False\>\""}], "]"}], ",",
+            "mLLP", ",", "elab", ",", "IfCollider", ",", "IfESS"}], "]"}]}], ";",
+         "\[IndentingNewLine]", 
+        RowBox[{"FromDataToSmoothDistribution", "[", 
+         RowBox[{
+         "\[Theta]Edata", ",", "mLLP", ",", "Facility", 
+          ",", "\"\<False\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"The", " ", "tabulated", " ", "distribution"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"tab1", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Flatten", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"mLLP", ",", "\[Theta]LLP", ",", "ELLP", ",", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"\[Theta]LLP", "<", "\[Theta]minExtr"}], ",", 
+                   RowBox[{
+                    FractionBox["\[Theta]LLP", "\[Theta]minExtr"], 
+                    RowBox[{"DoubleDistr", "[", 
+                    RowBox[{"\[Theta]minExtr", ",", "ELLP"}], "]"}]}], ",", 
+                   RowBox[{"DoubleDistr", "[", 
+                    RowBox[{"\[Theta]LLP", ",", "ELLP"}], "]"}]}], "]"}]}], 
+                "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"\[Theta]LLP", ",", "\[Theta]list"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"ELLP", ",", "Elist"}], "}"}]}], "]"}], ",", "1"}], 
+            "]"}], "//", "N"}], "//", "Developer`ToPackedArray"}]}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"mLLP", ">=", "maxmass"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"tab1", "=", 
+         RowBox[{"TabZeroDistr", "[", 
+          RowBox[{"mLLP", ",", "\[Theta]list", ",", "Elist"}], "]"}]}], 
+        ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "tab1"}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"DoubleDistrLLPfromMixing", "[", 
+     RowBox[{"mLLP_", ",", "meson_", ",", "Facility_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"mmeson", ",", "elab"}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "This", " ", "block", " ", "produces", " ", "the", " ", 
+          "interpolation", " ", "of", " ", "the", " ", "mother", " ", 
+          "distribution", " ", "function"}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"mmeson", "=", 
+          RowBox[{"mSM", "[", "meson", "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"elab", "=", 
+          RowBox[{"EmaxFacility", "[", "Facility", "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"distr", "[", 
+           RowBox[{"th_", ",", "e_"}], "]"}], "=", 
+          RowBox[{"DoubleDistrMotherInt", "[", 
+           RowBox[{"th", ",", "e", ",", "Facility", ",", "meson"}], "]"}]}], ";",
+          "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"!", 
+            RowBox[{"MemberQ", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"\"\<FCC-hh\>\"", ",", "\"\<LHC\>\""}], "}"}], ",", 
+              "Facility"}], "]"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"Facility", "!=", "\"\<ESS\>\""}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"distrmixing", "[", 
+                RowBox[{"\[Theta]LLP_", ",", "ELLP_"}], "]"}], "=", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"ELLP", ">", 
+                   RowBox[{"Max", "[", 
+                    RowBox[{"mLLP", ",", 
+                    RowBox[{"EVminBeamDump", "[", 
+                    RowBox[{"mmeson", ",", "mLLP", ",", "elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}]}], "]"}]}], 
+                    "]"}]}], "&&", 
+                  RowBox[{"0", "<", 
+                   RowBox[{
+                    RowBox[{"Sin", "[", "\[Theta]LLP", "]"}], 
+                    FractionBox[
+                    SqrtBox[
+                    RowBox[{
+                    SuperscriptBox["ELLP", "2"], "-", 
+                    SuperscriptBox["mLLP", "2"]}]], 
+                    RowBox[{"plabMesonElabLLP", "[", 
+                    RowBox[{"ELLP", ",", "mmeson", ",", "mLLP", ",", "elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}]}], "]"}]]}], "<", 
+                   "1"}]}], ",", 
+                 RowBox[{"Evaluate", "[", 
+                  RowBox[{
+                   RowBox[{
+                   "Jacobian\[Theta]mesonEmesonTo\[Theta]VEVBeamDump", "[", 
+                    RowBox[{"elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}], ",", "mmeson", ",",
+                     "mLLP", ",", "\[Theta]LLP", ",", "ELLP"}], "]"}], "*", 
+                   RowBox[{"distr", "[", 
+                    RowBox[{
+                    RowBox[{"\[Theta]labMeson\[Theta]ElabDP", "[", 
+                    RowBox[{
+                    "ELLP", ",", "\[Theta]LLP", ",", "mmeson", ",", "mLLP", ",",
+                     "elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}]}], "]"}], ",", 
+                    RowBox[{"ElabMesonElabDP", "[", 
+                    RowBox[{"ELLP", ",", "mmeson", ",", "mLLP", ",", "elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}]}], "]"}]}], 
+                    "]"}]}], "]"}], ",", "0."}], "]"}]}], ";"}], 
+             "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"distrmixingTemp", "[", 
+                 RowBox[{"\[Theta]LLP_", ",", "ELLP_"}], "]"}], "=", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"ELLP", ">", "mLLP"}], ",", 
+                  RowBox[{"Evaluate", "[", 
+                   RowBox[{"distr", "[", 
+                    RowBox[{"\[Theta]LLP", ",", "ELLP"}], "]"}], "]"}], ",", 
+                  "0."}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"distrmixingNorm", "=", 
+                RowBox[{"NIntegrate", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"distrmixingTemp", "[", 
+                    RowBox[{
+                    RowBox[{"Exp", "[", "\[Theta]LLP", "]"}], ",", 
+                    RowBox[{"Exp", "[", "ELLP", "]"}]}], "]"}], 
+                   RowBox[{"Exp", "[", 
+                    RowBox[{"\[Theta]LLP", "+", "ELLP"}], "]"}]}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"\[Theta]LLP", ",", 
+                    RowBox[{"Log", "[", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "5."}]], "]"}], ",", 
+                    RowBox[{"Log", "[", 
+                    RowBox[{"Pi", "-", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "5."}]]}], "]"}]}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"ELLP", ",", 
+                    RowBox[{"Log", "[", "mLLP", "]"}], ",", 
+                    RowBox[{"Log", "[", "elab", "]"}]}], "}"}], ",", 
+                  RowBox[{
+                  "Method", 
+                   "->", "\"\<InterpolationPointsSubdivision\>\""}]}], 
+                 "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"distrmixing", "[", 
+                 RowBox[{"\[Theta]LLP_", ",", "ELLP_"}], "]"}], "=", 
+                FractionBox[
+                 RowBox[{"distrmixingTemp", "[", 
+                  RowBox[{"\[Theta]LLP", ",", "ELLP"}], "]"}], 
+                 "distrmixingNorm"]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"distrmixing", "[", 
+                RowBox[{"\[Theta]LLP_", ",", "ELLP_"}], "]"}], "=", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"ELLP", ">", 
+                   RowBox[{"Max", "[", 
+                    RowBox[{"mLLP", ",", 
+                    RowBox[{"EVminBeamDump", "[", 
+                    RowBox[{"mmeson", ",", "mLLP", ",", "elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}]}], "]"}]}], 
+                    "]"}]}], "&&", 
+                  RowBox[{"0", "<", 
+                   RowBox[{
+                    RowBox[{"Sin", "[", "\[Theta]LLP", "]"}], 
+                    FractionBox[
+                    SqrtBox[
+                    RowBox[{
+                    SuperscriptBox["ELLP", "2"], "-", 
+                    SuperscriptBox["mLLP", "2"]}]], 
+                    RowBox[{"plabMesonElabLLP", "[", 
+                    RowBox[{"ELLP", ",", "mmeson", ",", "mLLP", ",", "elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}]}], "]"}]]}], "<", 
+                   "1"}]}], ",", 
+                 RowBox[{"Evaluate", "[", 
+                  RowBox[{
+                   RowBox[{
+                   "Jacobian\[Theta]mesonEmesonTo\[Theta]VEVBeamDump", "[", 
+                    RowBox[{"elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}], ",", "mmeson", ",",
+                     "mLLP", ",", "\[Theta]LLP", ",", "ELLP"}], "]"}], "*", 
+                   RowBox[{"distr", "[", 
+                    RowBox[{
+                    RowBox[{"\[Theta]labMeson\[Theta]ElabDP", "[", 
+                    RowBox[{
+                    "ELLP", ",", "\[Theta]LLP", ",", "mmeson", ",", "mLLP", ",",
+                     "elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}]}], "]"}], ",", 
+                    RowBox[{"ElabMesonElabDP", "[", 
+                    RowBox[{"ELLP", ",", "mmeson", ",", "mLLP", ",", "elab", ",", 
+                    RowBox[{"mSM", "[", "\"\<p\>\"", "]"}]}], "]"}]}], 
+                    "]"}]}], "]"}], ",", "0."}], "]"}]}], ";"}]}], 
+            "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"distrmixing", "[", 
+              RowBox[{"\[Theta]LLP_", ",", "ELLP_"}], "]"}], "=", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"ELLP", ">", 
+                RowBox[{"Max", "[", 
+                 RowBox[{"mLLP", ",", 
+                  RowBox[{"EVminCM", "[", 
+                   RowBox[{"mmeson", ",", "mLLP"}], "]"}]}], "]"}]}], ",", 
+               RowBox[{"Evaluate", "[", 
+                RowBox[{
+                 RowBox[{"JacobianEmesonToEVCollider", "[", 
+                  RowBox[{"ELLP", ",", "mLLP", ",", "mmeson"}], "]"}], "*", 
+                 RowBox[{"distr", "[", 
+                  RowBox[{"\[Theta]LLP", ",", 
+                   RowBox[{"EcmMesonEcmLLP", "[", 
+                    RowBox[{"ELLP", ",", "mLLP", ",", "mmeson"}], "]"}]}], 
+                  "]"}]}], "]"}], ",", "0."}], "]"}]}], ";"}]}], 
+          "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"distrmixing", "[", 
+          RowBox[{"\[Theta]LLP", ",", "ELLP"}], "]"}]}]}], 
+       "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+      RowBox[{"BlockTabulatedPDFsFromMixing", "[", 
+       RowBox[{
+       "LLP_", ",", "Facility_", ",", "mLLP_", ",", "mode_", ",", 
+        "\[Theta]list_", ",", "Elist_"}], "]"}]}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"(*", 
+         RowBox[{"meson", ",", "distr", ",", "tab1", ",", "maxmass"}], "*)"}],
+         "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"meson", "=", 
+         RowBox[{
+          RowBox[{"ReactionProductsList", "[", 
+           RowBox[{"LLP", ",", "mode"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", 
+           RowBox[{"IfMotherInterpolated", "[", 
+            RowBox[{"Facility", ",", "meson"}], "]"}]}], ",", 
+          RowBox[{"MotherInterpolation", "[", 
+           RowBox[{"Facility", ",", "meson"}], "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"distrMixing", "[", 
+          RowBox[{"\[Theta]LLP_", ",", "ELLP_"}], "]"}], "=", 
+         RowBox[{"DoubleDistrLLPfromMixing", "[", 
+          RowBox[{"mLLP", ",", "meson", ",", "Facility"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"maxmass", "=", 
+         RowBox[{"MaxMass", "[", 
+          RowBox[{"LLP", ",", "Facility", ",", "mode"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"mLLP", "<", "maxmass"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"tab1", "=", 
+            RowBox[{"Quiet", "[", 
+             RowBox[{"Flatten", "[", 
+              RowBox[{
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"mLLP", ",", "\[Theta]LLP", ",", "ELLP", ",", 
+                   RowBox[{"distrMixing", "[", 
+                    RowBox[{"\[Theta]LLP", ",", "ELLP"}], "]"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"\[Theta]LLP", ",", "\[Theta]list"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"ELLP", ",", "Elist"}], "}"}]}], "]"}], ",", "1"}], 
+              "]"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"mLLP", ">=", "maxmass"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"tab1", "=", 
+            RowBox[{"TabZeroDistr", "[", 
+             RowBox[{"mLLP", ",", "\[Theta]list", ",", "Elist"}], "]"}]}], 
+           ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        "tab1"}]}], "\[IndentingNewLine]", "]"}]}]}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.8927063664848423`*^9, 3.8927063671548953`*^9}, {
+   3.894706218755332*^9, 3.894706219417214*^9}, {3.9134589356453934`*^9, 
+   3.913458962067128*^9}, {3.9134590018271694`*^9, 3.9134591181654263`*^9}, {
+   3.913459148176505*^9, 3.9134591817172475`*^9}, {3.9134593070753903`*^9, 
+   3.9134594162969933`*^9}, {3.9134594470565405`*^9, 3.91345957430658*^9}, {
+   3.9134596520246434`*^9, 3.913459694635381*^9}, {3.9134601634554663`*^9, 
+   3.9134601637156563`*^9}, {3.913460245465927*^9, 3.9134603976158504`*^9}, {
+   3.913887786035822*^9, 3.9138877885773587`*^9}, 3.9143967646453066`*^9, {
+   3.915438817320672*^9, 3.915438817548157*^9}, 3.9154409661820297`*^9, {
+   3.9156088052661343`*^9, 3.9156088269112997`*^9}, {3.916298256776675*^9, 
+   3.9162982598468757`*^9}, {3.9162983371083894`*^9, 3.916298341303644*^9}, {
+   3.916300242001726*^9, 3.9163002462977047`*^9}, {3.9163006722715197`*^9, 
+   3.91630067448092*^9}, {3.9163294677972217`*^9, 3.9163295219195547`*^9}, {
+   3.916329750384121*^9, 3.9163298342904625`*^9}, 3.9163299829065704`*^9, 
+   3.9163302244457893`*^9, {3.9163305347617893`*^9, 3.9163306338743334`*^9}, 
+   3.9163307735447073`*^9, {3.9163316972199535`*^9, 3.916331737906413*^9}, {
+   3.9163317732181625`*^9, 3.916331776694725*^9}, {3.916390095187765*^9, 
+   3.916390098605654*^9}, {3.9164670679574475`*^9, 3.916467093322209*^9}, {
+   3.916467132786764*^9, 3.9164671440888643`*^9}, {3.916484579319687*^9, 
+   3.91648461580857*^9}, 3.9181468498541465`*^9, {3.9423245726414986`*^9, 
+   3.94232457596566*^9}, {3.9423247639196568`*^9, 3.942324764312027*^9}, {
+   3.959502506954956*^9, 3.9595025152831535`*^9}},
+ CellTags->"Evaluation",
+ CellLabel->
+  "In[301]:=",ExpressionUUID->"9a09b993-83b9-4b7f-a695-d518137e83ee"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>0.9 Inherited,
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e69182c0-5969-4143-b82a-b903253bad01"
+]
+(* End of Notebook Content *)
+
