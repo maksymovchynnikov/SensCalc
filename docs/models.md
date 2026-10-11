@@ -16,10 +16,11 @@ The following model identifiers are used in filenames and notebook definitions. 
 | `ALP-fermion` | Axion-like particle with universal fermion couplings at 1 TeV; heavy and light meson decays and production through hadronic interactions | [2501.04525](https://arxiv.org/abs/2501.04525) |
 | `ALP-gluon` | Axion-like particle coupled to gluons at 1 TeV; meson decays and production through hadronic interactions | [2501.04525](https://arxiv.org/abs/2501.04525) |
 | `ALP-electroweak` | Axion-like particle coupled to the weak SU(2) gauge fields; B and charged-kaon decays, primary and cascade Primakov production; diphoton decay | [2609.19269](https://arxiv.org/abs/2609.19269) |
+| `Inelastic-DP-DM` family | Inelastic dark matter produced through a dark-photon mediator; the heavier state decays into the lighter one and visible particles | [2012.08595](https://arxiv.org/abs/2012.08595), [2409.11096](https://arxiv.org/abs/2409.11096) |
 | `Inelastic-dipole-DM` family | Two dark fermions coupled through an electromagnetic transition dipole; the heavier state decays into the lighter one and a photon | [2301.05252](https://arxiv.org/abs/2301.05252) |
 | `MCP` | Millicharged particle production; the public workflow supplies fluxes | [2205.09137](https://arxiv.org/abs/2205.09137) |
 
-Available mechanisms depend on the facility and its input spectra. Notebook 2 displays the implemented model/facility combinations before generation. Additional chapters cover `Dark-QCD-rho` and `Inelastic-DP-DM`, with parameters and input tables defined in their model sections.
+Available mechanisms depend on the facility and its input spectra. Notebook 2 displays the implemented model/facility combinations before generation. The `Dark-QCD-rho` chapter defines the dark-vector-meson parameters and input tables.
 
 ## Heavy neutral leptons
 
@@ -91,7 +92,18 @@ For `ALP-electroweak`, the diphoton coupling is $`g_{a\gamma\gamma}=\alpha_{\rm 
 
 This calculation sets $`\mathrm{Br}(a\to\gamma\gamma)=1`$, following the diphoton approximation in [arXiv:2609.19269](https://arxiv.org/abs/2609.19269). See the [input definitions](../phenomenology/ALP-electroweak/README.md) for mass coverage, recoil states and production normalization, and the [constraint reference](../contours/ALP-electroweak/README.md) for existing bounds.
 
+The `ALP-electroweak` exclusion data are taken from the [FORESEE ALP-W repository](https://github.com/KlingFelix/FORESEE/tree/main/Models/ALP-W), converted to the coupling convention above and combined into ordered laboratory and astrophysical contours.
+
 ## Electromagnetic dark-sector interactions
+
+For `Inelastic-DP-DM`, a dark photon couples a light fermion $`\chi`$ to a heavier state $`\chi'`$ through
+
+```math
+\mathcal L\supset\frac{\epsilon}{2}V_{\mu\nu}F^{\mu\nu}
++\sqrt{4\pi\alpha_D}\,V_\mu\bar\chi'\gamma^\mu\chi+\mathrm{h.c.}
+```
+
+Here $`\alpha_D`$ is the dark-sector fine-structure constant. An on-shell mediator with $`m_V>m_\chi+m_{\chi'}`$ produces the two states; the heavier one decays through an off-shell dark photon into the lighter state and visible particles. The scan uses $`\epsilon^2\alpha_D`$ for the fixed mass ratios of the selected model.
 
 The transition-dipole model uses
 
