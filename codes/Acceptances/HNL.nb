@@ -132,116 +132,52 @@ Cell["Importing lifetime", "Subsection",
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"HNLsList", "=", 
-   RowBox[{"{", 
-    RowBox[{
-    "\"\<HNL-mixing-e\>\"", ",", "\"\<HNL-mixing-mu\>\"", ",", 
-     "\"\<HNL-mixing-tau\>\""}], "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"Do", "[", "\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{
-    RowBox[{
-     RowBox[{"DecayDescriptionExplanation", "[", 
-      RowBox[{"LLP", ",", "\"\<Default\>\""}], "]"}], "=", 
-     "\"\<Description from 1805.08567, but with improved matching between \
-hadronic decays described using pQCD and exclusively (dedicated merging for \
-each mixing and charged/neutral current)\>\""}], ";"}], "\[IndentingNewLine]",
-    ",", 
-   RowBox[{"{", 
-    RowBox[{"LLP", ",", "HNLsList"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
- RowBox[{"Print", "[", "\"\<Default description:\>\"", 
-  "]"}], "\[IndentingNewLine]", 
- RowBox[{"Do", "[", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"descrDefault", "[", "LLPsel", "]"}], "=", "\"\<Default\>\""}], 
-   ",", 
-   RowBox[{"{", 
-    RowBox[{"LLPsel", ",", "HNLsList"}], "}"}]}], 
-  "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"\[CapitalGamma]table", "=", 
-   RowBox[{"Import", "[", 
-    RowBox[{
-     RowBox[{"FileNameJoin", "[", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{
-         RowBox[{
-          RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], 
-         "//", "ParentDirectory"}], ",", "\"\<phenomenology\>\"", ",", 
-        "\"\<HNL\>\"", ",", "\"\<decay widths\>\"", ",", 
-        "\"\<HNLdecayWidth.dat\>\""}], "}"}], "]"}], ",", "\"\<Table\>\""}], 
-    "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"DecayWidth", "[", 
-      RowBox[{"mLLP_", ",", "U2_", ",", 
-       RowBox[{"HNLsList", "[", 
-        RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", 
-     RowBox[{"DecayWidth", "[", 
-      RowBox[{"mLLP_", ",", "U2_", ",", 
-       RowBox[{"HNLsList", "[", 
-        RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", 
-     RowBox[{"DecayWidth", "[", 
-      RowBox[{"mLLP_", ",", "U2_", ",", 
-       RowBox[{"HNLsList", "[", 
-        RowBox[{"[", "3", "]"}], "]"}]}], "]"}]}], "}"}], "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"U2", 
-      RowBox[{"(", 
-       RowBox[{"10", "^", 
-        RowBox[{
-         RowBox[{"Interpolation", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{
-               RowBox[{"#", "[", 
-                RowBox[{"[", "1", "]"}], "]"}], ",", 
-               RowBox[{"Log10", "[", 
-                RowBox[{
-                 RowBox[{"#", "[", 
-                  RowBox[{"[", "2", "]"}], "]"}], "+", 
-                 SuperscriptBox["10", 
-                  RowBox[{"-", "99"}]]}], "]"}]}], "}"}], "&"}], "/@", 
-            RowBox[{"\[CapitalGamma]table", "[", 
-             RowBox[{"[", 
-              RowBox[{"All", ",", 
-               RowBox[{"{", 
-                RowBox[{"1", ",", "#"}], "}"}]}], "]"}], "]"}]}], ",", 
-           RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
-         "mLLP", "]"}]}], ")"}]}], "&"}], "/@", 
-    RowBox[{"{", 
-     RowBox[{"2", ",", "3", ",", "4"}], "}"}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"Do", "[", "\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{
-    RowBox[{
-     RowBox[{"c\[Tau]LLP", "[", 
-      RowBox[{"HNL", ",", "\"\<Default\>\"", ",", "mLLP_", ",", "U2_"}], 
-      "]"}], "=", 
-     FractionBox["chbar", 
-      RowBox[{"DecayWidth", "[", 
-       RowBox[{"mLLP", ",", "U2", ",", "HNL"}], "]"}]]}], ";", 
-    "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"couplingSymbol", "[", "HNL", "]"}], "=", "U2"}], ";"}], 
-   "\[IndentingNewLine]", ",", 
-   RowBox[{"{", 
-    RowBox[{"HNL", ",", "HNLsList"}], "}"}]}], "]"}]}], "Input",
- CellChangeTimes->{{3.947644385761383*^9, 3.947644386447445*^9}, {
-  3.947644426996685*^9, 3.947644584279354*^9}, {3.9476448392904873`*^9, 
-  3.947644845055895*^9}, {3.9493785072403965`*^9, 3.9493785103533325`*^9}, {
-  3.9603428124393244`*^9, 3.9603428265596876`*^9}},
- CellLabel->"In[8]:=",ExpressionUUID->"cfc78be7-3c9a-8c40-9908-9e7c869e6a53"]
+Cell[
+ BoxData[
+  RowBox[
+   {RowBox[{"(", RowBox[{RowBox[{"HNLsList", "=", RowBox[{"{", RowBox[{"\"HNL-mixing-e\"", ",", 
+              "\"HNL-mixing-mu\"", ",", "\"HNL-mixing-tau\""}], "}"}]}], ";"}], ")"}], ";", "Null", 
+    ";", RowBox[{"Do", "[", 
+      RowBox[{RowBox[{RowBox[{RowBox[{"DecayDescriptionExplanation", "[", RowBox[{"LLP", ",", 
+                "\"Default\""}], "]"}], "=", "\"Description from 1805.08567, but with improved \
+matching between hadronic decays described using pQCD and exclusively (dedicated merging for each \
+mixing and charged/neutral current)\""}], ";"}], ",", 
+        RowBox[{"{", RowBox[{"LLP", ",", "HNLsList"}], "}"}]}], "]"}], ";", "Null", ";", 
+    RowBox[{"Print", "[", "\"Default description:\"", "]"}], ";", "Null", ";", 
+    RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"descrDefault", "[", "LLPsel", "]"}], "=", 
+          "\"Default\""}], ",", RowBox[{"{", RowBox[{"LLPsel", ",", "HNLsList"}], "}"}]}], "]"}], 
+    ";", "Null", ";", 
+    RowBox[{"(", RowBox[{RowBox[{"\[CapitalGamma]table", "=", 
+          RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[
+                 {"{", RowBox[{RowBox[{"ParentDirectory", "[", RowBox[{"ParentDirectory", "[", 
+                        RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",", 
+                    "\"phenomenology\"", ",", "\"HNL\"", ",", "\"decay widths\"", ",", 
+                    "\"HNLdecayWidth.dat\""}], "}"}], "]"}], ",", "\"Table\""}], "]"}]}], ";"}], 
+      ")"}], ";", "Null", ";", 
+    RowBox[
+     {"(", RowBox[{RowBox[{RowBox[{"{", RowBox[{RowBox[{"DecayWidth", "[", RowBox[{"mLLP_", ",", 
+                  "U2_", ",", RowBox[{"HNLsList", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}]}], "]"}], ",", RowBox[{"DecayWidth", "[", 
+                RowBox[{"mLLP_", ",", "U2_", ",", RowBox[{"HNLsList", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}]}], "]"}], ",", RowBox[{"DecayWidth", "[", 
+                RowBox[{"mLLP_", ",", "U2_", ",", RowBox[{"HNLsList", "\[LeftDoubleBracket]", "3", 
+                    "\[RightDoubleBracket]"}]}], "]"}]}], "}"}], "=", 
+          RowBox[{RowBox[{"(", RowBox[{RowBox[{"U2", " ", RowBox[{RowBox[{"Interpolation", "[", 
+                      RowBox[{RowBox[{"\[CapitalGamma]table", "\[LeftDoubleBracket]", RowBox[
+                           {"All", ",", RowBox[{"{", RowBox[{"1", ",", "#1"}], "}"}]}], 
+                          "\[RightDoubleBracket]"}], ",", RowBox[{"InterpolationOrder", "\[Rule]", 
+                          "1"}]}], "]"}], "[", "mLLP", "]"}]}], "&"}], ")"}], "/@", 
+            RowBox[{"{", RowBox[{"2", ",", "3", ",", "4"}], "}"}]}]}], ";"}], ")"}], ";", "Null", 
+    ";", RowBox[{"Do", "[", 
+      RowBox[{RowBox[{RowBox[{RowBox[{"c\[Tau]LLP", "[", RowBox[{"HNL", ",", "\"Default\"", ",", 
+                "mLLP_", ",", "U2_"}], "]"}], "=", FractionBox["chbar", 
+             RowBox[{"DecayWidth", "[", RowBox[{"mLLP", ",", "U2", ",", "HNL"}], "]"}]]}], ";", 
+          RowBox[{RowBox[{"couplingSymbol", "[", "HNL", "]"}], "=", "U2"}], ";"}], ",", 
+        RowBox[{"{", RowBox[{"HNL", ",", "HNLsList"}], "}"}]}], "]"}]}]], "Input", 
+ CellChangeTimes -> {{3.947644385761383*^9, 3.947644386447445*^9}, 
+   {3.947644426996685*^9, 3.947644584279354*^9}, {3.9476448392904873*^9, 3.947644845055895*^9}, 
+   {3.9493785072403965*^9, 3.9493785103533325*^9}, {3.9603428124393244*^9, 3.9603428265596876*^9}}, 
+ CellLabel -> "In[8]:=", ExpressionUUID -> "cfc78be7-3c9a-8c40-9908-9e7c869e6a53"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -293,316 +229,184 @@ ratios, and matrix elements\
    3.9476443337882442`*^9},ExpressionUUID->"fd5069c3-5171-4bef-b5a5-\
 12dfdd9ecebb"],
 
-Cell[BoxData[
- RowBox[{"\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{
-    RowBox[{
-     RowBox[{"HNLdecaypheno0", "[", 
-      RowBox[{"mLLP_", ",", "E1_", ",", "E3_"}], "]"}], "=", 
-     RowBox[{RowBox[{"Function", "[", RowBox[{"row", ",", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"row", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], "\[Equal]", "\"2Piv\""}], ",", RowBox[{"With", "[", RowBox[{RowBox[{"{", RowBox[{"matrix", "=", FractionBox[RowBox[{RowBox[{"4", " ", SuperscriptBox["mLLP", "4"]}], "-", RowBox[{"16", " ", "E1", " ", SuperscriptBox["mLLP", "3"]}], "-", RowBox[{"6", " ", "E3", " ", SuperscriptBox["mLLP", "3"]}], "+", RowBox[{"16", " ", SuperscriptBox["E1", "2"], " ", SuperscriptBox["mLLP", "2"]}], "+", RowBox[{"16", " ", "E1", " ", "E3", " ", SuperscriptBox["mLLP", "2"]}], "-", RowBox[{"8", " ", SuperscriptBox[RowBox[{"ParamProductMass", "[", "211.`", "]"}], "2"], " ", "E3", " ", "mLLP"}]}], RowBox[{SuperscriptBox[RowBox[{"(", RowBox[{SuperscriptBox["mLLP", "2"], "-", RowBox[{"2", " ", "E3", " ", "mLLP"}], "-", SuperscriptBox[RowBox[{"ParamProductMass", "[", "113.`", "]"}], "2"]}], ")"}], "2"], "+", SuperscriptBox[RowBox[{"(", RowBox[{"0.1478`", " ", RowBox[{"ParamProductMass", "[", "113.`", "]"}]}], ")"}], "2"]}]]}], "}"}], ",", RowBox[{"ReplacePart", "[", RowBox[{"row", ",", RowBox[{"{", RowBox[{RowBox[{RowBox[{"{", RowBox[{"2", ",", "2"}], "}"}], "\[Rule]", RowBox[{"ParamPDGidToProduct", "[", RowBox[{"-", "211.`"}], "]"}]}], ",", RowBox[{"6", "\[Rule]", "matrix"}], ",", RowBox[{"7", "\[Rule]", "matrix"}], ",", RowBox[{"8", "\[Rule]", "matrix"}]}], "}"}]}], "]"}]}], "]"}], ",", "row"}], "]"}]}], "]"}], "/@", RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"ParentDirectory", "[", RowBox[{"ParentDirectory", "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",", "\"phenomenology/HNL/decay widths/HNLdecaysSensCalc.mx\""}], "}"}], "]"}], ",", "\"MX\""}], "]"}]}]}], ";"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{
-     RowBox[{
-     "Merging", " ", "processes", " ", "and", " ", "charge", " ", 
-      "conjugated", " ", "ones"}], ",", " ", 
-     RowBox[{
-     "as", " ", "for", " ", "the", " ", "practic", " ", "purposes", " ", 
-      "there", " ", "is", " ", "no", " ", "difference"}]}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"proclist", "=", 
-     RowBox[{
-      RowBox[{"HNLdecaypheno0", "[", 
-       RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-      RowBox[{"[", 
-       RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"HNLdecaypheno", "[", 
-      RowBox[{"mLLP_", ",", "E1_", ",", "E3_"}], "]"}], "=", 
-     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{"Do", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"Module", "[", 
-      RowBox[{
-       RowBox[{"{", "procbar", "}"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{"!", 
-          RowBox[{"StringContainsQ", "[", 
-           RowBox[{"proc", ",", "\"\<bar\>\""}], "]"}]}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"procbar", "=", 
-           RowBox[{"proc", "<>", "\"\<bar\>\""}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{"stringproc", "[", 
-            RowBox[{"mLLP_", ",", "E1_", ",", "E3_"}], "]"}], "=", 
-           RowBox[{"Select", "[", 
-            RowBox[{
-             RowBox[{"HNLdecaypheno0", "[", 
-              RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], ",", 
-             RowBox[{
-              RowBox[{
-               RowBox[{
-                RowBox[{"#", "[", 
-                 RowBox[{"[", "1", "]"}], "]"}], "==", "proc"}], "||", 
-               RowBox[{
-                RowBox[{"#", "[", 
-                 RowBox[{"[", "1", "]"}], "]"}], "==", "procbar"}]}], "&"}]}],
-             "]"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{"HNLdecaypheno", "[", 
-            RowBox[{"mLLP_", ",", "E1_", ",", "E3_"}], "]"}], "=", 
-           RowBox[{"Join", "[", 
-            RowBox[{
-             RowBox[{"HNLdecaypheno", "[", 
-              RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], ",", 
-             RowBox[{"{", 
-              RowBox[{"{", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{
-                  RowBox[{"stringproc", "[", 
-                   RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                  RowBox[{"[", "1", "]"}], "]"}], "[", 
-                 RowBox[{"[", "1", "]"}], "]"}], ",", 
-                RowBox[{
-                 RowBox[{
-                  RowBox[{"stringproc", "[", 
-                   RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                  RowBox[{"[", "1", "]"}], "]"}], "[", 
-                 RowBox[{"[", "2", "]"}], "]"}], ",", 
-                RowBox[{"Total", "[", 
-                 RowBox[{
-                  RowBox[{"stringproc", "[", 
-                   RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                  RowBox[{"[", 
-                   RowBox[{"All", ",", "3"}], "]"}], "]"}], "]"}], ",", 
-                RowBox[{"Total", "[", 
-                 RowBox[{
-                  RowBox[{"stringproc", "[", 
-                   RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                  RowBox[{"[", 
-                   RowBox[{"All", ",", "4"}], "]"}], "]"}], "]"}], ",", 
-                RowBox[{"Total", "[", 
-                 RowBox[{
-                  RowBox[{"stringproc", "[", 
-                   RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                  RowBox[{"[", 
-                   RowBox[{"All", ",", "5"}], "]"}], "]"}], "]"}], ",", 
-                RowBox[{
-                 RowBox[{
-                  RowBox[{"stringproc", "[", 
-                   RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                  RowBox[{"[", "1", "]"}], "]"}], "[", 
-                 RowBox[{"[", "6", "]"}], "]"}], ",", 
-                RowBox[{
-                 RowBox[{
-                  RowBox[{"stringproc", "[", 
-                   RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                  RowBox[{"[", "1", "]"}], "]"}], "[", 
-                 RowBox[{"[", "7", "]"}], "]"}], ",", 
-                RowBox[{
-                 RowBox[{
-                  RowBox[{"stringproc", "[", 
-                   RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                  RowBox[{"[", "1", "]"}], "]"}], "[", 
-                 RowBox[{"[", "8", "]"}], "]"}]}], "}"}], "}"}]}], 
-            "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}], 
-      "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
-     RowBox[{"{", 
-      RowBox[{"proc", ",", "proclist"}], "}"}]}], "]"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{"e", " ", "mixing"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"LLPsel", "=", 
-     RowBox[{"HNLsList", "[", 
-      RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"channelsnonzero", "[", 
-        RowBox[{
-         RowBox[{"HNLsList", "[", 
-          RowBox[{"[", "1", "]"}], "]"}], ",", "mLLP_", ",", "E1_", ",", 
-         "E3_"}], "]"}], ",", 
-       RowBox[{"channelsnonzero", "[", 
-        RowBox[{
-         RowBox[{"HNLsList", "[", 
-          RowBox[{"[", "2", "]"}], "]"}], ",", "mLLP_", ",", "E1_", ",", 
-         "E3_"}], "]"}], ",", 
-       RowBox[{"channelsnonzero", "[", 
-        RowBox[{
-         RowBox[{"HNLsList", "[", 
-          RowBox[{"[", "3", "]"}], "]"}], ",", "mLLP_", ",", "E1_", ",", 
-         "E3_"}], "]"}]}], "}"}], "=", 
-     RowBox[{"Table", "[", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"Select", "[", 
-         RowBox[{
-          RowBox[{"HNLdecaypheno", "[", 
-           RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], ",", 
-          RowBox[{
-           RowBox[{"!", 
-            RowBox[{"FreeQ", "[", 
-             RowBox[{
-              RowBox[{"#", "[", 
-               RowBox[{"[", "i", "]"}], "]"}], ",", "0"}], "]"}]}], "&"}]}], 
-         "]"}], "[", 
-        RowBox[{"[", 
-         RowBox[{"All", ",", 
-          RowBox[{"{", 
-           RowBox[{"1", ",", "2", ",", "i", ",", 
-            RowBox[{"3", "+", "i"}]}], "}"}]}], "]"}], "]"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"i", ",", 
-         RowBox[{"{", 
-          RowBox[{"3", ",", "4", ",", "5"}], "}"}]}], "}"}]}], "]"}]}], ";"}],
-    "\[IndentingNewLine]", 
-   RowBox[{"Do", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{
-      RowBox[{
-       RowBox[{"ProcessesList", "[", 
-        RowBox[{"hnl", ",", "\"\<True\>\""}], "]"}], "=", 
-       RowBox[{
-        RowBox[{"channelsnonzero", "[", 
-         RowBox[{"hnl", ",", "mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-        RowBox[{"[", 
-         RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"Do", "[", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"Module", "[", 
-         RowBox[{
-          RowBox[{"{", "proc", "}"}], ",", "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{"proc", "=", 
-            RowBox[{
-             RowBox[{"ProcessesList", "[", 
-              RowBox[{"hnl", ",", "\"\<True\>\""}], "]"}], "[", 
-             RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{"ListDecayProducts", "[", 
-             RowBox[{"hnl", ",", "proc"}], "]"}], "=", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"channelsnonzero", "[", 
-               RowBox[{"hnl", ",", "mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-              RowBox[{"[", "i", "]"}], "]"}], "[", 
-             RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{"JetsPresence", "[", 
-             RowBox[{"hnl", ",", "proc"}], "]"}], "=", 
-            RowBox[{"If", "[", 
-             RowBox[{
-              RowBox[{"StringContainsQ", "[", 
-               RowBox[{"proc", ",", "\"\<Jets\>\""}], "]"}], ",", 
-              "\"\<Yes\>\"", ",", "\"\<No\>\""}], "]"}]}], ";", 
-           "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{"ListBrRatios", "[", 
-             RowBox[{
-             "hnl", ",", "mLLP_", ",", "proc", ",", "\"\<Default\>\""}], 
-             "]"}], "=", 
-            RowBox[{
-             RowBox[{"ListBrRatiosTemp", "[", 
-              RowBox[{
-              "hnl", ",", "mLLP_", ",", "proc", ",", "\"\<Default\>\""}], 
-              "]"}], "=", 
-             RowBox[{
-              RowBox[{
-               RowBox[{"channelsnonzero", "[", 
-                RowBox[{"hnl", ",", "mLLP", ",", "E1", ",", "E3"}], "]"}], 
-               "[", 
-               RowBox[{"[", "i", "]"}], "]"}], "[", 
-              RowBox[{"[", "3", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
-           RowBox[{"If", "[", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"Length", "[", 
-               RowBox[{"Select", "[", 
-                RowBox[{
-                 RowBox[{"ListDecayProducts", "[", 
-                  RowBox[{"hnl", ",", "proc"}], "]"}], ",", 
-                 RowBox[{
-                  RowBox[{"#", "!=", "\"\<Null\>\""}], "&"}]}], "]"}], "]"}], 
-              "==", "3"}], ",", "\[IndentingNewLine]", 
-             RowBox[{
-              RowBox[{
-               RowBox[{"Msquared3BodyLLP", "[", 
-                RowBox[{
-                "hnl", ",", "proc", ",", "E1_", ",", "E3_", ",", "mLLP_", 
-                 ",", "\"\<Default\>\""}], "]"}], "=", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"channelsnonzero", "[", 
-                  RowBox[{"hnl", ",", "mLLP", ",", "E1", ",", "E3"}], "]"}], 
-                 "[", 
-                 RowBox[{"[", "i", "]"}], "]"}], "[", 
-                RowBox[{"[", "4", "]"}], "]"}]}], ";"}]}], 
-            "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
-         "]"}], "\[IndentingNewLine]", ",", 
-        RowBox[{"{", 
-         RowBox[{"i", ",", "1", ",", 
-          RowBox[{"Length", "[", 
-           RowBox[{"ProcessesList", "[", 
-            RowBox[{"hnl", ",", "\"\<True\>\""}], "]"}], "]"}], ",", "1"}], 
-         "}"}]}], "]"}]}], "\[IndentingNewLine]", ",", 
-     RowBox[{"{", 
-      RowBox[{"hnl", ",", "HNLsList"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
-   RowBox[{"Do", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{
-      RowBox[{
-       RowBox[{"ProcessesList", "[", 
-        RowBox[{"hnl", ",", "\"\<False\>\""}], "]"}], "=", 
-       RowBox[{"procListnoecal", "[", "hnl", "]"}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"listDecayDescriptions", "[", "hnl", "]"}], "=", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"Select", "[", 
-          RowBox[{
-           RowBox[{"Transpose", "[", 
-            RowBox[{
-             RowBox[{
-              RowBox[{
-               RowBox[{"Keys", "[", 
-                RowBox[{"DownValues", "@", "ListBrRatios"}], "]"}], "[", 
-               RowBox[{"[", 
-                RowBox[{"All", ",", "1", ",", "#"}], "]"}], "]"}], "&"}], "/@", 
-             RowBox[{"{", 
-              RowBox[{"1", ",", 
-               RowBox[{"-", "1"}]}], "}"}]}], "]"}], ",", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"#", "[", 
-              RowBox[{"[", "1", "]"}], "]"}], "==", "hnl"}], "&"}]}], "]"}], 
-         "[", 
-         RowBox[{"[", 
-          RowBox[{"All", ",", "2"}], "]"}], "]"}], "//", 
-        "DeleteDuplicates"}]}]}], "\[IndentingNewLine]", ",", 
-     RowBox[{"{", 
-      RowBox[{"hnl", ",", "HNLsList"}], "}"}]}], "]"}]}]}]], "Input",
- CellChangeTimes->{{3.9150017181778774`*^9, 3.915001732671895*^9}, {
-   3.9314521067365255`*^9, 3.9314526395370398`*^9}, {3.9314527609265566`*^9, 
-   3.931452796927639*^9}, {3.9314528591850047`*^9, 3.9314529283931494`*^9}, {
-   3.931453056051444*^9, 3.931453068809456*^9}, {3.931507467994008*^9, 
-   3.931507597598462*^9}, {3.9315079265437927`*^9, 3.931507930289673*^9}, 
-   3.9339177336919994`*^9, 3.94268975585627*^9, {3.947608990834215*^9, 
-   3.9476089985147095`*^9}, {3.947644295035736*^9, 3.947644325700369*^9}, 
-   3.949378513995447*^9, {3.9523268681025505`*^9, 3.952326876232807*^9}},
- CellLabel->"In[15]:=",ExpressionUUID->"bc9566a7-deb5-4e1a-8d46-cdc526ba053c"],
+Cell[
+ BoxData[
+  RowBox[
+   {RowBox[{"(", RowBox[{RowBox[{RowBox[{"HNLdecaypheno0", "[", RowBox[{"mLLP_", ",", "E1_", ",", 
+              "E3_"}], "]"}], "=", RowBox[{RowBox[{"Function", "[", RowBox[{"row", ",", 
+                RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"row", "\[LeftDoubleBracket]", "1", 
+                        "\[RightDoubleBracket]"}], "\[Equal]", "\"2Piv\""}], ",", RowBox[
+                     {"With", "[", RowBox[{RowBox[{"{", RowBox[{"matrix", "=", FractionBox[
+                             RowBox[{RowBox[{"4", " ", SuperscriptBox["mLLP", "4"]}], "-", 
+                               RowBox[{"16", " ", "E1", " ", SuperscriptBox["mLLP", "3"]}], "-", 
+                               RowBox[{"6", " ", "E3", " ", SuperscriptBox["mLLP", "3"]}], "+", 
+                               RowBox[{"16", " ", SuperscriptBox["E1", "2"], " ", SuperscriptBox[
+                                 "mLLP", "2"]}], "+", RowBox[{"16", " ", "E1", " ", "E3", " ", 
+                                 SuperscriptBox["mLLP", "2"]}], "-", RowBox[{"8", " ", 
+                                 SuperscriptBox[RowBox[{"ParamProductMass", "[", "211.`", "]"}], 
+                                 "2"], " ", "E3", " ", "mLLP"}]}], RowBox[{SuperscriptBox[RowBox[
+                                 {"(", RowBox[{SuperscriptBox["mLLP", "2"], "-", RowBox[{"2", " ", 
+                                 "E3", " ", "mLLP"}], "-", SuperscriptBox[RowBox[
+                                 {"ParamProductMass", "[", "113.`", "]"}], "2"]}], ")"}], "2"], 
+                               "+", SuperscriptBox[RowBox[{"(", RowBox[{"0.1478`", " ", RowBox[
+                                 {"ParamProductMass", "[", "113.`", "]"}]}], ")"}], "2"]}]]}], 
+                          "}"}], ",", RowBox[{"ReplacePart", "[", RowBox[{"row", ",", RowBox[
+                             {"{", RowBox[{RowBox[{RowBox[{"{", RowBox[{"2", ",", "2"}], "}"}], 
+                                 "\[Rule]", RowBox[{"ParamPDGidToProduct", "[", RowBox[{"-", 
+                                 "211.`"}], "]"}]}], ",", RowBox[{"6", "\[Rule]", "matrix"}], ",", 
+                                RowBox[{"7", "\[Rule]", "matrix"}], ",", RowBox[{"8", "\[Rule]", 
+                                 "matrix"}]}], "}"}]}], "]"}]}], "]"}], ",", "row"}], "]"}]}], 
+              "]"}], "/@", RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", 
+                  RowBox[{"{", RowBox[{RowBox[{"ParentDirectory", "[", RowBox[{"ParentDirectory", 
+                          "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",", 
+                      "\"phenomenology/HNL/decay widths/HNLdecaysSensCalc.mx\""}], "}"}], "]"}], 
+                ",", "\"MX\""}], "]"}]}]}], ";"}], ")"}], ";", 
+    RowBox[{"(", RowBox[{RowBox[{"proclist", "=", 
+          RowBox[{RowBox[{"HNLdecaypheno0", "[", RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], 
+            "\[LeftDoubleBracket]", RowBox[{"All", ",", "1"}], "\[RightDoubleBracket]"}]}], ";"}], 
+      ")"}], ";", 
+    RowBox[{"(", RowBox[{RowBox[{RowBox[{"HNLdecaypheno", "[", RowBox[{"mLLP_", ",", "E1_", ",", 
+              "E3_"}], "]"}], "=", RowBox[{"{", "}"}]}], ";"}], ")"}], ";", 
+    RowBox[{"Do", "[", RowBox[{RowBox[{"Module", "[", RowBox[{RowBox[{"{", "procbar", "}"}], ",", 
+            RowBox[{"If", "[", RowBox[{RowBox[{"!", RowBox[{"StringContainsQ", "[", 
+                    RowBox[{"proc", ",", "\"bar\""}], "]"}]}], ",", RowBox[
+                 {RowBox[{"procbar", "=", RowBox[{"proc", "<>", "\"bar\""}]}], ";", 
+                  RowBox[{RowBox[{"stringproc", "[", RowBox[{"mLLP_", ",", "E1_", ",", "E3_"}], 
+                      "]"}], "=", RowBox[{"Select", "[", RowBox[{RowBox[{"HNLdecaypheno0", "[", 
+                          RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], ",", RowBox[
+                         {RowBox[{RowBox[{RowBox[{"#1", "\[LeftDoubleBracket]", "1", 
+                                "\[RightDoubleBracket]"}], "\[Equal]", "proc"}], "||", RowBox[
+                             {RowBox[{"#1", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                              "\[Equal]", "procbar"}]}], "&"}]}], "]"}]}], ";", RowBox[
+                   {RowBox[{"HNLdecaypheno", "[", RowBox[{"mLLP_", ",", "E1_", ",", "E3_"}], "]"}], 
+                    "=", RowBox[{"Join", "[", RowBox[{RowBox[{"HNLdecaypheno", "[", RowBox[
+                           {"mLLP", ",", "E1", ",", "E3"}], "]"}], ",", RowBox[{"{", RowBox[
+                           {"{", RowBox[{RowBox[{RowBox[{RowBox[{"stringproc", "[", RowBox[{"mLLP", 
+                                 ",", "E1", ",", "E3"}], "]"}], "\[LeftDoubleBracket]", "1", 
+                                 "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
+                                "\[RightDoubleBracket]"}], ",", RowBox[{RowBox[{RowBox[
+                                 {"stringproc", "[", RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], 
+                                 "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                                "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], ",", 
+                              RowBox[{"Total", "[", RowBox[{RowBox[{"stringproc", "[", RowBox[
+                                 {"mLLP", ",", "E1", ",", "E3"}], "]"}], "\[LeftDoubleBracket]", 
+                                 RowBox[{"All", ",", "3"}], "\[RightDoubleBracket]"}], "]"}], ",", 
+                              RowBox[{"Total", "[", RowBox[{RowBox[{"stringproc", "[", RowBox[
+                                 {"mLLP", ",", "E1", ",", "E3"}], "]"}], "\[LeftDoubleBracket]", 
+                                 RowBox[{"All", ",", "4"}], "\[RightDoubleBracket]"}], "]"}], ",", 
+                              RowBox[{"Total", "[", RowBox[{RowBox[{"stringproc", "[", RowBox[
+                                 {"mLLP", ",", "E1", ",", "E3"}], "]"}], "\[LeftDoubleBracket]", 
+                                 RowBox[{"All", ",", "5"}], "\[RightDoubleBracket]"}], "]"}], ",", 
+                              RowBox[{RowBox[{RowBox[{"stringproc", "[", RowBox[{"mLLP", ",", "E1", 
+                                 ",", "E3"}], "]"}], "\[LeftDoubleBracket]", "1", 
+                                 "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "6", 
+                                "\[RightDoubleBracket]"}], ",", RowBox[{RowBox[{RowBox[
+                                 {"stringproc", "[", RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], 
+                                 "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                                "\[LeftDoubleBracket]", "7", "\[RightDoubleBracket]"}], ",", 
+                              RowBox[{RowBox[{RowBox[{"stringproc", "[", RowBox[{"mLLP", ",", "E1", 
+                                 ",", "E3"}], "]"}], "\[LeftDoubleBracket]", "1", 
+                                 "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "8", 
+                                "\[RightDoubleBracket]"}]}], "}"}], "}"}]}], "]"}]}]}]}], "]"}]}], 
+          "]"}], ",", RowBox[{"{", RowBox[{"proc", ",", "proclist"}], "}"}]}], "]"}], ";", 
+    RowBox[{"(", RowBox[{RowBox[{"LLPsel", "=", RowBox[{"HNLsList", "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], ";"}], ")"}], ";", 
+    RowBox[{"(", RowBox[{RowBox[{RowBox[{"{", RowBox[{RowBox[{"channelsnonzero", "[", 
+                RowBox[{RowBox[{"HNLsList", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                  ",", "mLLP_", ",", "E1_", ",", "E3_"}], "]"}], ",", RowBox[{"channelsnonzero", 
+                "[", RowBox[{RowBox[{"HNLsList", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], ",", "mLLP_", ",", "E1_", ",", "E3_"}], "]"}], ",", 
+              RowBox[{"channelsnonzero", "[", RowBox[{RowBox[{"HNLsList", "\[LeftDoubleBracket]", 
+                    "3", "\[RightDoubleBracket]"}], ",", "mLLP_", ",", "E1_", ",", "E3_"}], 
+                "]"}]}], "}"}], "=", RowBox[{"Table", "[", 
+            RowBox[{RowBox[{RowBox[{"Select", "[", RowBox[{RowBox[{"HNLdecaypheno", "[", 
+                      RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], ",", RowBox[
+                     {RowBox[{"!", RowBox[{"FreeQ", "[", RowBox[{RowBox[{"#1", 
+                              "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], ",", "0"}], 
+                          "]"}]}], "&"}]}], "]"}], "\[LeftDoubleBracket]", RowBox[{"All", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "2", ",", "i", ",", RowBox[{"3", "+", "i"}]}], 
+                    "}"}]}], "\[RightDoubleBracket]"}], ",", RowBox[{"{", RowBox[{"i", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "4", ",", "5"}], "}"}]}], "}"}]}], "]"}]}], ";"}], 
+      ")"}], ";", RowBox[{"Do", "[", 
+      RowBox[{RowBox[{RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"hnl", ",", "\"True\""}], 
+              "]"}], "=", RowBox[{RowBox[{"channelsnonzero", "[", RowBox[{"hnl", ",", "mLLP", ",", 
+                  "E1", ",", "E3"}], "]"}], "\[LeftDoubleBracket]", RowBox[{"All", ",", "1"}], 
+              "\[RightDoubleBracket]"}]}], ";", RowBox[{"Do", "[", 
+            RowBox[{RowBox[{"Module", "[", RowBox[{RowBox[{"{", "proc", "}"}], ",", 
+                  RowBox[{RowBox[{"proc", "=", RowBox[{RowBox[{"ProcessesList", "[", RowBox[
+                           {"hnl", ",", "\"True\""}], "]"}], "\[LeftDoubleBracket]", "i", 
+                        "\[RightDoubleBracket]"}]}], ";", RowBox[{RowBox[{"ListDecayProducts", "[", 
+                        RowBox[{"hnl", ",", "proc"}], "]"}], "=", RowBox[{RowBox[{RowBox[
+                           {"channelsnonzero", "[", RowBox[{"hnl", ",", "mLLP", ",", "E1", ",", 
+                              "E3"}], "]"}], "\[LeftDoubleBracket]", "i", 
+                          "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "2", 
+                        "\[RightDoubleBracket]"}]}], ";", RowBox[{RowBox[{"JetsPresence", "[", 
+                        RowBox[{"hnl", ",", "proc"}], "]"}], "=", RowBox[{"If", "[", RowBox[
+                         {RowBox[{"StringContainsQ", "[", RowBox[{"proc", ",", "\"Jets\""}], "]"}], 
+                          ",", "\"Yes\"", ",", "\"No\""}], "]"}]}], ";", RowBox[
+                     {RowBox[{"ListBrRatios", "[", RowBox[{"hnl", ",", "mLLP_", ",", "proc", ",", 
+                          "\"Default\""}], "]"}], "=", RowBox[{RowBox[{"ListBrRatiosTemp", "[", 
+                          RowBox[{"hnl", ",", "mLLP_", ",", "proc", ",", "\"Default\""}], "]"}], 
+                        "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"JetsPresence", "[", 
+                                RowBox[{"hnl", ",", "proc"}], "]"}], "\[Equal]", "\"Yes\""}], ",", 
+                            RowBox[{RowBox[{RowBox[{"channelsnonzero", "[", RowBox[{"hnl", ",", 
+                                 "mLLP", ",", "E1", ",", "E3"}], "]"}], "\[LeftDoubleBracket]", 
+                                "i", "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "3", 
+                              "\[RightDoubleBracket]"}], ",", RowBox[{"With", "[", RowBox[
+                               {RowBox[{"{", RowBox[{RowBox[{"br", "=", RowBox[{RowBox[{RowBox[
+                                 {"channelsnonzero", "[", RowBox[{"hnl", ",", "mLLP", ",", "E1", 
+                                 ",", "E3"}], "]"}], "\[LeftDoubleBracket]", "i", 
+                                 "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "3", 
+                                 "\[RightDoubleBracket]"}]}], ",", RowBox[{"threshold", "=", 
+                                 RowBox[{"Total", "[", RowBox[{"ParamProductMass", "/@", RowBox[
+                                 {"ParamProductToPDGid", "/@", RowBox[{"DeleteCases", "[", RowBox[
+                                 {RowBox[{"ListDecayProducts", "[", RowBox[{"hnl", ",", "proc"}], 
+                                 "]"}], ",", "\"Null\""}], "]"}]}]}], "]"}]}]}], "}"}], ",", 
+                                RowBox[{"If", "[", RowBox[{RowBox[{"mLLP", ">", "threshold"}], ",", 
+                                 "br", ",", "0.`"}], "]"}]}], "]"}]}], "]"}]}]}], ";", 
+                    RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", RowBox[{"Select", 
+                              "[", RowBox[{RowBox[{"ListDecayProducts", "[", RowBox[{"hnl", ",", 
+                                 "proc"}], "]"}], ",", RowBox[{RowBox[{"#1", "\[NotEqual]", 
+                                 "\"Null\""}], "&"}]}], "]"}], "]"}], "\[Equal]", "3"}], ",", 
+                        RowBox[{RowBox[{RowBox[{"Msquared3BodyLLP", "[", RowBox[{"hnl", ",", 
+                                "proc", ",", "E1_", ",", "E3_", ",", "mLLP_", ",", "\"Default\""}], 
+                              "]"}], "=", RowBox[{RowBox[{RowBox[{RowBox[{"channelsnonzero", "[", 
+                                 RowBox[{"hnl", ",", "mLLP", ",", "E1", ",", "E3"}], "]"}], 
+                                 "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+                                "\[LeftDoubleBracket]", "4", "\[RightDoubleBracket]"}], "/.", 
+                              "\[VeryThinSpace]", RowBox[{"Thread", "[", RowBox[{RowBox[{"{", 
+                                 RowBox[{"m1", ",", "m2", ",", "m3"}], "}"}], "\[Rule]", RowBox[
+                                 {"ParamProductMass", "/@", RowBox[{"ParamProductToPDGid", "/@", 
+                                 RowBox[{"Take", "[", RowBox[{RowBox[{"ListDecayProducts", "[", 
+                                 RowBox[{"hnl", ",", "proc"}], "]"}], ",", "3"}], "]"}]}]}]}], 
+                                "]"}]}]}], ";"}]}], "]"}], ";"}]}], "]"}], ",", 
+              RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", RowBox[
+                     {"ProcessesList", "[", RowBox[{"hnl", ",", "\"True\""}], "]"}], "]"}], ",", 
+                  "1"}], "}"}]}], "]"}]}], ",", RowBox[{"{", RowBox[{"hnl", ",", "HNLsList"}], 
+          "}"}]}], "]"}], ";", 
+    RowBox[{"Do", "[", RowBox[
+       {RowBox[{RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"hnl", ",", "\"False\""}], "]"}], 
+            "=", RowBox[{"procListnoecal", "[", "hnl", "]"}]}], ";", 
+          RowBox[{RowBox[{"listDecayDescriptions", "[", "hnl", "]"}], "=", 
+            RowBox[{"DeleteDuplicates", "[", RowBox[{RowBox[{"Select", "[", RowBox[
+                   {TemplateBox[{RowBox[{"(", RowBox[{RowBox[{"(", RowBox[{RowBox[{RowBox[{"Keys", 
+                                 "[", RowBox[{"DownValues", "[", "ListBrRatios", "]"}], "]"}], 
+                                "\[LeftDoubleBracket]", RowBox[{"All", ",", "1", ",", "#1"}], 
+                                "\[RightDoubleBracket]"}], "&"}], ")"}], "/@", RowBox[{"{", 
+                            RowBox[{"1", ",", RowBox[{"-", "1"}]}], "}"}]}], ")"}]}, "Transpose", 
+                     SyntaxForm -> SuperscriptBox], ",", RowBox[{RowBox[{RowBox[{"#1", 
+                          "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], "\[Equal]", 
+                        "hnl"}], "&"}]}], "]"}], "\[LeftDoubleBracket]", RowBox[{"All", ",", "2"}], 
+                "\[RightDoubleBracket]"}], "]"}]}]}], ",", 
+        RowBox[{"{", RowBox[{"hnl", ",", "HNLsList"}], "}"}]}], "]"}]}]], "Input", 
+ CellChangeTimes -> {{3.9150017181778774*^9, 3.915001732671895*^9}, 
+   {3.9314521067365255*^9, 3.9314526395370398*^9}, {3.9314527609265566*^9, 3.931452796927639*^9}, 
+   {3.9314528591850047*^9, 3.9314529283931494*^9}, {3.931453056051444*^9, 3.931453068809456*^9}, 
+   {3.931507467994008*^9, 3.931507597598462*^9}, {3.9315079265437927*^9, 3.931507930289673*^9}, 
+   3.9339177336919994*^9, 3.94268975585627*^9, {3.947608990834215*^9, 3.9476089985147095*^9}, 
+   {3.947644295035736*^9, 3.947644325700369*^9}, 3.949378513995447*^9, 
+   {3.9523268681025505*^9, 3.952326876232807*^9}}, CellLabel -> "In[15]:=", 
+ ExpressionUUID -> "bc9566a7-deb5-4e1a-8d46-cdc526ba053c"],
 
 Cell[CellGroupData[{
 

@@ -575,15 +575,7 @@ Cell[BoxData[{
        RowBox[{"{", 
         RowBox[{"m", ",", "10.7", ",", "63.", ",", "0.1"}], "}"}]}], "]"}]}], 
     "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"mGrid", "=", 
-   RowBox[{"Select", "[", 
-    RowBox[{"mGrid", ",", 
-     RowBox[{
-      RowBox[{"!", 
-       RowBox[{"(", 
-        RowBox[{"1.911", "<=", "#", "<=", "1.914"}], ")"}]}], "&"}]}], 
-    "]"}]}], ";"}], "\[IndentingNewLine]", 
+RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"LLPdirName", "==", "\"ALP-fermion\""}], ",", RowBox[{"mGrid", "=", RowBox[{"Sort", "@", RowBox[{"DeleteDuplicates", "@", RowBox[{"Join", "[", RowBox[{"mGrid", ",", RowBox[{"{", RowBox[{RowBox[{"ALPFermionMatchingMass", "[", "decayDescrSelected", "]"}], ",", RowBox[{RowBox[{"ALPFermionMatchingMass", "[", "decayDescrSelected", "]"}], "-", SuperscriptBox["10", RowBox[{"-", "9"}]]}]}], "}"}]}], "]"}]}]}]}]}], "]"}], ";"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{
    RowBox[{"channels", "=", "ListProcessesLLP"}], ";"}], 
@@ -604,7 +596,7 @@ Cell[BoxData[{
            RowBox[{"\"\<Log[\>\"", "->", "\"\<log(\>\""}], ",", 
            RowBox[{"\"\<Exp[\>\"", "->", "\"\<exp(\>\""}], ",", 
            RowBox[{"\"\<Sqrt[\>\"", "->", "\"\<sqrt(\>\""}], ",", 
-           RowBox[{"\"\<^\>\"", "->", "\"\<**\>\""}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"\"\<*^\>\"", "->", "\"\<e\>\""}], ",", RowBox[{"\"\<^\>\"", "->", "\"\<**\>\""}]}], "}"}]}], "]"}], ",", 
        RowBox[{"{", 
         RowBox[{
          RowBox[{"\"\<[\>\"", "->", "\"\<(\>\""}], ",", 
@@ -662,7 +654,7 @@ Cell[BoxData[{
            RowBox[{"\"\<Log[\>\"", "->", "\"\<log(\>\""}], ",", 
            RowBox[{"\"\<Exp[\>\"", "->", "\"\<exp(\>\""}], ",", 
            RowBox[{"\"\<Sqrt[\>\"", "->", "\"\<sqrt(\>\""}], ",", 
-           RowBox[{"\"\<^\>\"", "->", "\"\<**\>\""}], ",", 
+           RowBox[{"\"\<*^\>\"", "->", "\"\<e\>\""}], ",", RowBox[{"\"\<^\>\"", "->", "\"\<**\>\""}], ",", 
            RowBox[{"\"\<[\>\"", "->", "\"\<(\>\""}], ",", 
            RowBox[{"\"\<]\>\"", "->", "\"\<)\>\""}]}], "}"}]}], "]"}]}]}], 
      "]"}]}], ";"}], "\[IndentingNewLine]", "\n", "\[IndentingNewLine]", 
