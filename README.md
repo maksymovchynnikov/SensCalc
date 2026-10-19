@@ -44,8 +44,8 @@ Please cite the SensCalc method and the works relevant to the physics inputs use
 | SensCalc method | M. Ovchynnikov, J.-L. Tastet, O. Mikulenko and K. Bondarenko, *Sensitivities to feebly interacting particles: public and unified calculations*, Phys. Rev. D **108**, 075028 (2023), [arXiv:2305.13383](https://arxiv.org/abs/2305.13383). |
 | Dark photons and event generation | Y. Kyselov and M. Ovchynnikov, *Searches for long-lived dark photons at proton accelerator experiments*, Phys. Rev. D **111**, 015030 (2025), [arXiv:2409.11096](https://arxiv.org/abs/2409.11096). |
 | Production through meson mixing | Y. Kyselov, S. Mrenna and M. Ovchynnikov, *New physics particles mixing with mesons: production in the fragmentation chain*, Phys. Rev. D **112**, 055033 (2025), [arXiv:2504.06828](https://arxiv.org/abs/2504.06828). |
-| Electroweak ALPs and diphoton signals | M. Climescu, M. F. Mikkelsen and M. Ovchynnikov, *SHiP as a (post-)discovery machine: identifying the diphoton signals' origin*, [arXiv:2609.19269](https://arxiv.org/abs/2609.19269). |
-| Photophilic ALPs from electromagnetic cascades | M. Climescu, Y. Kyselov and M. Ovchynnikov, *Detector performance at SHiP for cascade-produced long-lived particles*, Phys. Rev. D **114**, 056016 (2026), [arXiv:2606.07743](https://arxiv.org/abs/2606.07743). |
+| `ALP-photon`: primary and cascade Primakoff production, angle-energy fluxes and diphoton acceptance | M. Climescu, Y. Kyselov and M. Ovchynnikov, *Detector performance at SHiP for cascade-produced long-lived particles*, Phys. Rev. D **114**, 056016 (2026), [arXiv:2606.07743](https://arxiv.org/abs/2606.07743). |
+| `ALP-electroweak`: meson decays, primary and cascade Primakoff production, flux normalization and diphoton signals | M. Climescu, M. F. Mikkelsen and M. Ovchynnikov, *SHiP as a (post-)discovery machine: identifying the diphoton signals' origin*, [arXiv:2609.19269](https://arxiv.org/abs/2609.19269). |
 
 References for individual models accompany their definitions.
 
