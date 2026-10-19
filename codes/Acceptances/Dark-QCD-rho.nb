@@ -238,8 +238,8 @@ Cell[BoxData[{
                  RowBox[{
                   RowBox[{"NotebookDirectory", "[", "]"}], "//", 
                   "ParentDirectory"}], "//", "ParentDirectory"}], ",", 
-                "\"\<phenomenology\>\"", ",", "LLPsel", ",", 
-                "\"\<decay widths\>\"", ",", "\"\<Decay-Width-DP.txt\>\""}], 
+                "\"\<phenomenology\>\"", ",", "\"DP\"", ",", 
+                "\"\<decay widths\>\"", ",", "\"\<GammaDarkPhoton.txt\>\""}], 
                "}"}], "]"}], ",", "\"\<Table\>\""}], "]"}]}], ",", 
           RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
         RowBox[{"Log10", "[", "mLLP", "]"}], "]"}], ")"}]}]}]}], ";"}], 
@@ -336,199 +336,16 @@ a093d1ef80ce"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"LLPsel", "=", "LLPselGen"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"BrRatiosDPdata", "[", 
-     RowBox[{"mLLP_", ",", "E1_", ",", "E3_"}], "]"}], "=", 
-    RowBox[{"Import", "[", 
-     RowBox[{
-      RowBox[{"FileNameJoin", "[", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{
-          RowBox[{
-           RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}],
-           "//", "ParentDirectory"}], ",", "\"\<phenomenology\>\"", ",", 
-         "LLPsel", ",", "\"\<decay widths/BrRatios.mx\>\""}], "}"}], "]"}], 
-      ",", "\"\<MX\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{
-   "List", " ", "of", " ", "all", " ", "representative", " ", "processes"}], 
-   "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"ProcessesList", "[", 
-     RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], "=", 
-    RowBox[{
-     RowBox[{"BrRatiosDPdata", "[", 
-      RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-     RowBox[{"[", 
-      RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Do", "[", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"Module", "[", 
-     RowBox[{
-      RowBox[{"{", "proc", "}"}], ",", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"proc", "=", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"BrRatiosDPdata", "[", 
-           RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-          RowBox[{"[", "i", "]"}], "]"}], "[", 
-         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"ListDecayProducts", "[", 
-         RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"BrRatiosDPdata", "[", 
-           RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-          RowBox[{"[", "i", "]"}], "]"}], "[", 
-         RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"JetsPresence", "[", 
-         RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", 
-        RowBox[{"If", "[", 
-         RowBox[{
-          RowBox[{"StringContainsQ", "[", 
-           RowBox[{"proc", ",", "\"\<Jets\>\""}], "]"}], ",", "\"\<Yes\>\"", 
-          ",", "\"\<No\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"Do", "[", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{
-          RowBox[{
-           RowBox[{"ListBrRatios", "[", 
-            RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "descr"}], 
-            "]"}], "=", 
-           RowBox[{
-            RowBox[{"ListBrRatiosTemp", "[", 
-             RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "descr"}], 
-             "]"}], "=", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"BrRatiosDPdata", "[", 
-               RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-              RowBox[{"[", "i", "]"}], "]"}], "[", 
-             RowBox[{"[", "3", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"If", "[", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"Length", "[", 
-              RowBox[{"Select", "[", 
-               RowBox[{
-                RowBox[{"ListDecayProducts", "[", 
-                 RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", 
-                RowBox[{
-                 RowBox[{"#", "!=", "\"\<Null\>\""}], "&"}]}], "]"}], "]"}], "==",
-              "3"}], ",", "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"Msquared3BodyLLP", "[", 
-               RowBox[{
-               "LLPsel", ",", "proc", ",", "E1_", ",", "E3_", ",", "mLLP_", 
-                ",", "descr"}], "]"}], "=", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"BrRatiosDPdata", "[", 
-                 RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "[", 
-                RowBox[{"[", "i", "]"}], "]"}], "[", 
-               RowBox[{"[", "4", "]"}], "]"}]}], ";"}]}], 
-           "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", ",", 
-         RowBox[{"{", 
-          RowBox[{"descr", ",", "descrs"}], "}"}]}], "]"}]}]}], 
-     "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
-    RowBox[{"{", 
-     RowBox[{"i", ",", "1", ",", 
-      RowBox[{"Length", "[", 
-       RowBox[{"BrRatiosDPdata", "[", 
-        RowBox[{"mLLP", ",", "E1", ",", "E3"}], "]"}], "]"}], ",", "1"}], 
-     "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"Do", "[", "\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"Do", "[", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"ListBrRatios", "[", 
-        RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "descr"}], "]"}], 
-       "=", 
-       RowBox[{
-        RowBox[{"ListBrRatiosTemp", "[", 
-         RowBox[{"LLPsel", ",", "mLLP", ",", "proc", ",", "descr"}], "]"}], 
-        "/", 
-        RowBox[{"Sum", "[", 
-         RowBox[{
-          RowBox[{"ListBrRatiosTemp", "[", 
-           RowBox[{"LLPsel", ",", "mLLP", ",", "pr", ",", "descr"}], "]"}], 
-          ",", 
-          RowBox[{"{", 
-           RowBox[{"pr", ",", 
-            RowBox[{"ProcessesList", "[", 
-             RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], 
-         "]"}]}]}], "\[IndentingNewLine]", ",", 
-      RowBox[{"{", 
-       RowBox[{"proc", ",", 
-        RowBox[{"ProcessesList", "[", 
-         RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}]}], "}"}]}], "]"}], 
-    ";"}], "\[IndentingNewLine]", ",", 
-   RowBox[{"{", 
-    RowBox[{"descr", ",", "descrs"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-  "Print", "[", "\"\<All processes with at least two charged particles:\>\"", 
-   "]"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"ProcessesList", "[", 
-    RowBox[{"LLPsel", ",", "\"\<False\>\""}], "]"}], "=", 
-   RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Print", "[", "\"\<Processes with jets:\>\"", "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Select", "[", 
-   RowBox[{
-    RowBox[{"ProcessesList", "[", 
-     RowBox[{"LLPsel", ",", "\"\<True\>\""}], "]"}], ",", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"JetsPresence", "[", 
-       RowBox[{"LLPsel", ",", "#"}], "]"}], "==", "\"\<Yes\>\""}], "&"}]}], 
-   "]"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"listDecayDescriptions", "[", "LLPsel", "]"}], "=", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"Select", "[", 
-     RowBox[{
-      RowBox[{"Transpose", "[", 
-       RowBox[{
-        RowBox[{
-         RowBox[{
-          RowBox[{"Keys", "[", 
-           RowBox[{"DownValues", "@", "ListBrRatios"}], "]"}], "[", 
-          RowBox[{"[", 
-           RowBox[{"All", ",", "1", ",", "#"}], "]"}], "]"}], "&"}], "/@", 
-        RowBox[{"{", 
-         RowBox[{"1", ",", 
-          RowBox[{"-", "1"}]}], "}"}]}], "]"}], ",", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"#", "[", 
-         RowBox[{"[", "1", "]"}], "]"}], "==", "LLPsel"}], "&"}]}], "]"}], 
-    "[", 
-    RowBox[{"[", 
-     RowBox[{"All", ",", "2"}], "]"}], "]"}], "//", 
-   "DeleteDuplicates"}]}]}], "Input",
+Cell[BoxData[RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"!", RowBox[{"ListQ", "[", RowBox[{"ProcessesList", "[", RowBox[{"\"DP\"", ",", "\"True\""}], "]"}], "]"}]}], ",", RowBox[{"Block", "[", RowBox[{RowBox[{"{", "LLPsel", "}"}], ",", RowBox[{"NotebookEvaluate", "[", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"DP.nb\""}], "}"}], "]"}], "]"}]}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+RowBox[{"LLPsel", "=", "LLPselGen"}], ";", "\[IndentingNewLine]", 
+RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], "=", RowBox[{"ProcessesList", "[", RowBox[{"\"DP\"", ",", "\"True\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{RowBox[{"ListDecayProducts", "[", RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", RowBox[{"ListDecayProducts", "[", RowBox[{"\"DP\"", ",", "proc"}], "]"}]}], ";", "\[IndentingNewLine]", 
+RowBox[{RowBox[{"JetsPresence", "[", RowBox[{"LLPsel", ",", "proc"}], "]"}], "=", RowBox[{"JetsPresence", "[", RowBox[{"\"DP\"", ",", "proc"}], "]"}]}], ";", "\[IndentingNewLine]", 
+RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "descr"}], "]"}], "=", RowBox[{"ListBrRatiosTemp", "[", RowBox[{"\"DP\"", ",", "mLLP", ",", "proc", ",", "\"Default\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+RowBox[{RowBox[{"ListBrRatios", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "descr"}], "]"}], "=", RowBox[{"ListBrRatios", "[", RowBox[{"\"DP\"", ",", "mLLP", ",", "proc", ",", "\"Default\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", RowBox[{"DeleteCases", "[", RowBox[{RowBox[{"ListDecayProducts", "[", RowBox[{"LLPsel", ",", "proc"}], "]"}], ",", "\"Null\""}], "]"}], "]"}], "===", "3"}], ",", RowBox[{RowBox[{"Msquared3BodyLLP", "[", RowBox[{"LLPsel", ",", "proc", ",", "E1_", ",", "E3_", ",", "mLLP_", ",", "descr"}], "]"}], "=", RowBox[{"Msquared3BodyLLP", "[", RowBox[{"\"DP\"", ",", "proc", ",", "E1", ",", "E3", ",", "mLLP", ",", "\"Default\""}], "]"}]}]}], "]"}]}], ",", RowBox[{"{", RowBox[{"descr", ",", "descrs"}], "}"}]}], "]"}]}], ",", RowBox[{"{", RowBox[{"proc", ",", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}]}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"False\""}], "]"}], "=", RowBox[{"ProcessesList", "[", RowBox[{"\"DP\"", ",", "\"False\""}], "]"}]}], ";", "\[IndentingNewLine]", 
+RowBox[{RowBox[{"listDecayDescriptions", "[", "LLPsel", "]"}], "=", "descrs"}], ";"}]], "Input",
  CellChangeTimes->{{3.8928698695146074`*^9, 3.8928699093413143`*^9}, {
    3.892869967056516*^9, 3.892870045863139*^9}, {3.892870084834973*^9, 
    3.8928701425044723`*^9}, {3.8928706138148975`*^9, 3.892870629455335*^9}, {

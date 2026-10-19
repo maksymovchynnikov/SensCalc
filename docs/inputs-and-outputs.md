@@ -133,7 +133,7 @@ px    py    pz    energy    mass    PDG_identifier    electric_charge    stabili
 
 The first five quantities are in GeV, charge is in proton-charge units, and stability is `1.` for a stable or metastable particle and `0.` for an unstable one. PDG identifiers are numeric, for example `22.` for a photon. Variable-length events are padded on the right with `-999.` to form rectangular arrays. Treat padding as missing particle data.
 
-Names follow the `<model>_<channel>_<mass>.m` convention, with the model and channel spelling used by the decay definitions. Read these files with the import format used in the corresponding model section.
+Names follow the `<model>_<channel>_<mass>.wxf` convention, with the model and channel spelling used by the decay definitions. These losslessly compressed files restore the complete machine-precision arrays with `BinaryDeserialize[ReadByteArray[path]]`. The loaders also accept binary MX samples with a `.m` suffix.
 
 Hadronized samples are available at discrete masses. The initialization constructs a compatible mass list and can fall back to the implemented hadronic-proxy treatment where a sample is absent.
 

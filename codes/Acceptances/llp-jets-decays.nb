@@ -34,7 +34,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"filespathsPS", "=", 
    RowBox[{"FileNames", "[", 
-    RowBox[{"\"\<*.m\>\"", ",", 
+    RowBox[{RowBox[{"{", RowBox[{"\"*.m\"", ",", "\"*.wxf\""}], "}"}], ",", 
      RowBox[{"FileNameJoin", "[", 
       RowBox[{"{", 
        RowBox[{
@@ -68,7 +68,7 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{
       "fip__", "~~", "\"\<_\>\"", "~~", "process__", "~~", "\"\<_\>\"", "~~", 
-       "mass__", "~~", "\"\<.m\>\""}], ":>", 
+       "mass__", "~~", RowBox[{"(", RowBox[{"\".m\"", "|", "\".wxf\""}], ")"}]}], ":>", 
       RowBox[{"{", 
        RowBox[{"fip", ",", "process", ",", "mass"}], "}"}]}]}], "]"}], "[", 
    RowBox[{"[", "1", "]"}], "]"}]}], "\[IndentingNewLine]", 
@@ -115,10 +115,10 @@ Cell[BoxData[{
            RowBox[{"[", "i", "]"}], "]"}], "[", 
           RowBox[{"[", "3", "]"}], "]"}], "//", "ToExpression"}], "//", 
         "N"}]}], "]"}], "=", 
-     RowBox[{"Import", "[", 
-      RowBox[{
-       RowBox[{"filespathsPS", "[", 
-        RowBox[{"[", "i", "]"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], ",", 
+     RowBox[{"If", "[", RowBox[{
+      RowBox[{RowBox[{"FileExtension", "[", RowBox[{"filespathsPS", "[", RowBox[{"[", "i", "]"}], "]"}], "]"}], "===", "\"wxf\""}], ",",
+      RowBox[{"BinaryDeserialize", "[", RowBox[{"ReadByteArray", "[", RowBox[{"filespathsPS", "[", RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}], ",",
+      RowBox[{"Import", "[", RowBox[{RowBox[{"filespathsPS", "[", RowBox[{"[", "i", "]"}], "]"}], ",", "\"MX\""}], "]"}]}], "]"}]}], ",", 
     RowBox[{"{", 
      RowBox[{"i", ",", "1", ",", 
       RowBox[{"Length", "[", "filenamesPS", "]"}], ",", "1"}], "}"}]}], "]"}],

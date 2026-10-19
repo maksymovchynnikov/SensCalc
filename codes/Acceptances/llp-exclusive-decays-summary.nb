@@ -45,6 +45,33 @@ Cell["LLPs - total", "Section",
 
 Cell[CellGroupData[{
 
+Cell[BoxData[RowBox[{RowBox[{"(", RowBox[{RowBox[{"Clear", "[", "SecondaryDecaySamples", "]"}],
+        ";"}], ")"}], ";",
+    RowBox[{"(", RowBox[{RowBox[{"Scan", "[", RowBox[{RowBox[{"Function", "[", RowBox[{"file", ",",
+                RowBox[{"With", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"pdg", "=", RowBox[
+                           {"ToExpression", "[", RowBox[{RowBox[{"StringSplit", "[", RowBox[
+                                 {RowBox[{"FileBaseName", "[", "file", "]"}], ",", "\"_\""}],
+                                "]"}], "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}],
+                            "]"}]}], ",", RowBox[{"sample", "=", RowBox[{"If", "[", RowBox[{
+      RowBox[{RowBox[{"FileExtension", "[", "file", "]"}], "===", "\"wxf\""}], ",",
+      RowBox[{"BinaryDeserialize", "[", RowBox[{"ReadByteArray", "[", "file", "]"}], "]"}], ",",
+      RowBox[{"Import", "[", RowBox[{"file", ",", "\"MX\""}], "]"}]}], "]"}]}]}], "}"}], ",", RowBox[
+                     {RowBox[{RowBox[{"SecondaryDecaySamples", "[", "pdg", "]"}], "=", "sample"}],
+                      ";", RowBox[{RowBox[{"OnlyUnch", "[", RowBox[{"ParamPDGidToProduct", "[",
+                            RowBox[{"N", "[", "pdg", "]"}], "]"}], "]"}], "=", RowBox[{"N", "[",
+                          FractionBox[RowBox[{"Count", "[", RowBox[{RowBox[{RowBox[{"(", RowBox[
+                                 {RowBox[{"Count", "[", RowBox[{RowBox[{"#1",
+                                 "\[LeftDoubleBracket]", RowBox[{"7", ";;", "All", ";;", "8"}],
+                                 "\[RightDoubleBracket]"}], ",", RowBox[{"x_", "/;", RowBox[
+                                 {RowBox[{"x", "\[NotEqual]", "0.`"}], "&&", RowBox[{"x",
+                                 "\[NotEqual]", RowBox[{"-", "999.`"}]}]}]}]}], "]"}], "&"}],
+                                 ")"}], "/@", "sample"}], ",", "0"}], "]"}], RowBox[{"Length", "[",
+                             "sample", "]"}]], "]"}]}], ";"}]}], "]"}]}], "]"}], ",",
+            RowBox[{"FileNames", "[", RowBox[{RowBox[{"{", RowBox[{"\"SM_*.m\"", ",", "\"SM_*.wxf\""}], "}"}], ",", RowBox[{"FileNameJoin", "[",
+                  RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"..\"", ",",
+                      "\"..\"", ",", "\"simulated phase space\"", ",", "\"SM\""}], "}"}], "]"}]}],
+              "]"}]}], "]"}], ";"}], ")"}]}]], "Input"],
+
 Cell[BoxData[{
  RowBox[{
   RowBox[{"LLPlist", "=", 
@@ -3196,7 +3223,15 @@ Cell[BoxData[{
        RowBox[{"DataUnstableAtLLPrestFrame", "[", 
         RowBox[{"[", "1", "]"}], "]"}], "[", 
        RowBox[{"[", "indexpdg1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"massUnstableDecayProduct", "=", 
+     RowBox[{"If", "[",
+  RowBox[{RowBox[{"ListQ", "[", RowBox[{"SecondaryDecaySamples", "[",
+        RowBox[{"Round", "[", "pdgprod", "]"}], "]"}], "]"}], ",",
+    RowBox[{"Return", "[", RowBox[{"TabBoostedDecayProducts", "[",
+        RowBox[{"DataUnstableAtLLPrestFrame", ",", RowBox[{"RandomChoice", "[",
+            RowBox[{RowBox[{"SecondaryDecaySamples", "[", RowBox[{"Round", "[", "pdgprod", "]"}],
+                "]"}], ",", RowBox[{"Length", "[", "DataUnstableAtLLPrestFrame", "]"}]}], "]"}]}],
+        "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]",
+RowBox[{"massUnstableDecayProduct", "=",
       RowBox[{
        RowBox[{"DataUnstableAtLLPrestFrame", "[", 
         RowBox[{"[", "1", "]"}], "]"}], "[", 

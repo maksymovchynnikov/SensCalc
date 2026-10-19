@@ -29,6 +29,9 @@ The [PDF user guide](SensCalc_manual.pdf) covers the physics conventions and the
 - [Recommended event selections](docs/recommended-selections.md): SHiP cuts and the NA62 reference selection.
 - [Inputs, outputs and extensions](docs/inputs-and-outputs.md): file formats, units and how to add a model or production channel.
 - [Event generation](docs/event-generation.md): weighted LLP decays and their output format.
+- [Preparing decay samples](tools/decay-samples/README.md): converting fips-jets HepMC events to Mathematica inputs and generating quark-pair and secondary charm decays with Pythia.
+
+The acceptance calculation includes secondary decays of $D^\pm$, $D_s^\pm$ and $\eta_c$ using compact, pre-generated Pythia samples. These inputs are included; Pythia is required only to regenerate them.
 
 SensCalc includes heavy neutral leptons, dark photons, Higgs-mixed scalars, vector bosons coupled to baryon and lepton currents, several axion-like particle models, and inelastic dark matter coupled through a dark photon or an electromagnetic transition dipole. Millicharged particle production is also available. The [model reference](docs/models.md) defines their interactions and scan parameters.
 
