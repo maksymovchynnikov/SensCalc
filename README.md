@@ -37,6 +37,14 @@ SensCalc's tabulated hadronic decay phase space does not include [exHad](https:/
 
 SensCalc includes heavy neutral leptons, dark photons, Higgs-mixed scalars, vector bosons coupled to baryon and lepton currents, several axion-like particle models, and inelastic dark matter coupled through a dark photon or an electromagnetic transition dipole. Millicharged particle production is also available. The [model reference](docs/models.md) defines their interactions and scan parameters.
 
+For the scalar [BC5 benchmark](https://arxiv.org/abs/1901.09966), set the
+Higgs branching fraction to $\mathrm{Br}(h\to SS)=0.01$ in the scalar
+sensitivity notebook, where $h$ is the Higgs boson and $S$ the light scalar.
+This parameter controls pair production independently of the mixing that sets
+the decay lifetime. Select both pair-production and mixing-induced channels
+for a combined prediction. Sensitivity filenames record the chosen Higgs
+branching fraction as `BrhToSS=…`.
+
 ## Physics references and citation
 
 Please cite the SensCalc method and the works relevant to the physics inputs used in your calculation.
