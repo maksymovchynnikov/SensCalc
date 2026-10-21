@@ -33,6 +33,8 @@ The [PDF user guide](SensCalc_manual.pdf) covers the physics conventions and the
 
 The acceptance calculation includes secondary decays of $D^\pm$, $D_s^\pm$ and $\eta_c$ using compact, pre-generated Pythia samples. These inputs are included; Pythia is required only to regenerate them.
 
+SensCalc's tabulated hadronic decay phase space does not include [exHad](https://github.com/maksymovchynnikov/exHad). Equal total widths or branching fractions between programs do not imply identical exclusive final states, daughter momenta or detector acceptances. Comparisons with exHad must distinguish the rate inputs, decay and hadronization models, and detector selections; differences between the tabulated Pythia samples and exHad-generated events must be assessed separately.
+
 SensCalc includes heavy neutral leptons, dark photons, Higgs-mixed scalars, vector bosons coupled to baryon and lepton currents, several axion-like particle models, and inelastic dark matter coupled through a dark photon or an electromagnetic transition dipole. Millicharged particle production is also available. The [model reference](docs/models.md) defines their interactions and scan parameters.
 
 ## Physics references and citation

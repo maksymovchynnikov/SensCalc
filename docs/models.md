@@ -76,7 +76,14 @@ The dual of a field strength is $`\widetilde X^{\mu\nu}=\tfrac12\epsilon^{\mu\nu
 | `ALP-gluon` | $`\mathcal L\supset[\alpha_s/(4\pi f_a)]aG^A_{\mu\nu}\widetilde G^{A\mu\nu}`$ at 1 TeV | $`f_a^{-1}`$ in GeV$`^{-1}`$ |
 | `ALP-electroweak` | $`\mathcal L\supset[\alpha_2g_W/(4\pi)]aW^I_{\mu\nu}\widetilde W^{I\mu\nu}`$ | $`g_W`$ in GeV$`^{-1}`$ |
 
-Here $`a`$ is the axion-like field, $`f_a`$ is its interaction scale, $`v`$ is the electroweak vacuum expectation value, and $`\alpha_s`$ and $`\alpha_2`$ are the strong and weak fine-structure constants. The indices $`A`$ and $`I`$ label gluon and weak gauge fields. Evolution from 1 TeV induces other interactions in `ALP-fermion` and `ALP-gluon`; their decay tables include alternative hadronic descriptions.
+Here $`a`$ is the axion-like field, $`f_a`$ is its interaction scale, $`v=246\,\mathrm{GeV}`$ is the electroweak vacuum expectation value, and $`\alpha_s`$ and $`\alpha_2`$ are the strong and weak fine-structure constants. The indices $`A`$ and $`I`$ label gluon and weak gauge fields. Evolution from 1 TeV induces other interactions in `ALP-fermion` and `ALP-gluon`; their decay tables include alternative hadronic descriptions.
+
+For `ALP-fermion` at mass $`m_a`$, the partial width into channel $`i`$ is determined by the tabulated coefficient $`W_i(m_a)`$, in GeV$`^3`$:
+
+```math
+\Gamma_i(m_a,y)=\frac{W_i(m_a)}{f_a^2}
+=\left(\frac{y}{2v}\right)^2W_i(m_a).
+```
 
 Production of `ALP-fermion` in B decays includes both strange recoil states and $`B\to\pi a`$. Their spectra are combined using the relative branching fractions from the production tables.
 
