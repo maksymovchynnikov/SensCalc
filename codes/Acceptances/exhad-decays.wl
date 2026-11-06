@@ -1,5 +1,4 @@
 (* Conditional exHad samples. Lifetimes and channel rates remain host-owned. *)
-If[!ValueQ[$UseExHadDecaySamples],$UseExHadDecaySamples=True];
 exHadSampleDirectory=FileNameJoin[{Nest[ParentDirectory,DirectoryName[$InputFileName],2],"simulated phase space","exHad"}];
 Clear[exHadRecords,exHadData,exHadRecord,exHadGroup,exHadAvailable,exHadDraw,exHadBranchingRatio];
 exHadCachedFile="";exHadCachedArray={};
@@ -11,10 +10,10 @@ exHadRecord[llp_,mass_,description_,channel_]:=SelectFirst[exHadRecords,
 exHadRecord[llp_,mass_,description_,exHadChannel[key_]]:=SelectFirst[exHadRecords,
  #model===llp && #description===description && Abs[#mass-mass]<10^-10 && #key===key&,Missing["NotTabulated"]];
 exHadAvailable[llp_,mass_,channel_,had_,description_]:=
- TrueQ[$UseExHadDecaySamples]&&had==="True"&&AssociationQ[exHadRecord[llp,mass,description,channel]];
-exHadGroup::selection="The exHad sample for `1` at `2` GeV describes all hadronic decays together. Select the complete hadronic channel set, or set $UseExHadDecaySamples=False for the Pythia baseline.";
+ had==="True"&&AssociationQ[exHadRecord[llp,mass,description,channel]];
+exHadGroup::selection="The exHad sample for `1` at `2` GeV describes all hadronic decays together. Select the complete hadronic channel set.";
 exHadGroup[llp_,mass_,processes_,had_,description_]:=Module[{record,positive,selected},
- If[!TrueQ[$UseExHadDecaySamples]||had=!="True"||!MemberQ[exHadBosons,llp],Return[processes]];
+ If[had=!="True"||!MemberQ[exHadBosons,llp],Return[processes]];
  record=exHadRecord[llp,mass,description,"hadronic"];
  If[!AssociationQ[record],Return[processes]];
  positive=Select[record["members"],TrueQ[ListBrRatios[llp,mass,#,description]>0]&];

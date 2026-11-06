@@ -19,6 +19,8 @@ ev["codes/Acceptances/DP.nb",{2,3}];
 ev["codes/Acceptances/B-L.nb",{2,3}];
 files=FileNames[{"*.m","*.wxf"},FileNameJoin[{root,"simulated phase space"}]];
 masses[model_]:=Sort[DeleteDuplicates[N[ToExpression[Last[StringSplit[FileBaseName[#],"_"]]]]&/@Select[files,StringStartsQ[FileNameTake[#],model<>"_"]&]]];
+sampleRecords=Import[FileNameJoin[{root,"simulated phase space","exHad","manifest.json"}],"RawJSON"];
+Do[masses[model]=Sort[DeleteDuplicates[Join[masses[model],N[Lookup[Select[sampleRecords,#model===model&],"mass"]],If[StringStartsQ[model,"HNL-mixing-"],{1.25},{}]]]],{model,DeleteDuplicates[Lookup[sampleRecords,"model"]]}];
 masses["ALP-fermion"]=masses["ALP-gluon"];
 masses["HNL-mixing-mu"]=masses["HNL-mixing-tau"]=masses["HNL-mixing-e"];
 specs={};

@@ -31,6 +31,7 @@ a8b51d796029"],
 Cell[CellGroupData[{
 
 Cell[BoxData[{
+ RowBox[{"Clear", "[", "PhaseSpaceDecaysRestJets", "]", ";"}], "\[IndentingNewLine]",
  RowBox[{"Get", "[", "FileNameJoin", "[", "{", "NotebookDirectory", "[", "]", ",", "\"exhad-decays.wl\"", "}", "]", "]", ";"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{"filespathsPS", "=", 
@@ -328,6 +329,7 @@ Cell[BoxData[{
    "\[IndentingNewLine]", ",", 
    RowBox[{"{", 
     RowBox[{"LLP", ",", "LLPlist"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"mjetsrange", "[", "LLP", "]"}], "=", RowBox[{"Sort", "[", RowBox[{"DeleteDuplicates", "[", RowBox[{"Join", "[", RowBox[{RowBox[{"mjetsrange", "[", "LLP", "]"}], ",", RowBox[{"N", "[", RowBox[{RowBox[{"(", RowBox[{"#mass", "&"}], ")"}], "/@", RowBox[{"Select", "[", RowBox[{"exHadRecords", ",", RowBox[{RowBox[{"#model", "===", "LLP"}], "&"}]}], "]"}]}], "]"}], ",", RowBox[{"If", "[", RowBox[{RowBox[{"StringStartsQ", "[", RowBox[{"LLP", ",", "\"HNL-mixing-\""}], "]"}], ",", RowBox[{"{", "1.25`", "}"}], ",", RowBox[{"{", "}"}]}], "]"}]}], "]"}], "]"}], "]"}]}], ",", RowBox[{"{", RowBox[{"LLP", ",", "LLPlist"}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{
    RowBox[{"mjetsrange", "[", "\"\<HNL-mixing-mu\>\"", "]"}], "=", 
@@ -434,6 +436,7 @@ channels\>\"", "]"}], "\[IndentingNewLine]",
       RowBox[{"{", 
        RowBox[{"1", ",", "2"}], "}"}]}], "//", "Transpose"}], "//", 
     "DeleteDuplicates"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{RowBox[{"fulljetslist", "=", RowBox[{"DeleteDuplicates", "[", RowBox[{"Join", "[", RowBox[{"fulljetslist", ",", RowBox[{"Flatten", "[", RowBox[{RowBox[{RowBox[{"Function", "[", RowBox[{"record", ",", RowBox[{RowBox[{"(", RowBox[{RowBox[{"{", RowBox[{RowBox[{"record", "[", "\"model\"", "]"}], ",", "#1"}], "}"}], "&"}], ")"}], "/@", RowBox[{"Select", "[", RowBox[{RowBox[{"record", "[", "\"members\"", "]"}], ",", RowBox[{RowBox[{"StringStartsQ", "[", RowBox[{"#1", ",", "\"Jets-\""}], "]"}], "&"}]}], "]"}]}]}], "]"}], "/@", "exHadRecords"}], ",", "1"}], "]"}]}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]",
  RowBox[{"Do", "[", "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{

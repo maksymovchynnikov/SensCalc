@@ -1,6 +1,6 @@
 # exHad decay samples
 
-These compressed event samples describe hadronic decays of the Higgs-mixed scalar, fermion-universal ALP, dark photon, $B-L$ vector, and heavy neutral leptons. [exHad](https://github.com/maksymovchynnikov/exHad) generates complete daughter four-momenta in the parent rest frame. SensCalc boosts the events and applies the experimental selection. Regeneration requires exHad and WolframKernel; acceptance calculations use the stored tables directly.
+These compressed event samples describe hadronic decays of the Higgs-mixed scalar, fermion-universal ALP, dark photon, $B-L$ vector, and heavy neutral leptons. [exHad](https://github.com/maksymovchynnikov/exHad) generates complete daughter four-momenta in the parent rest frame using the hadronization model of [arXiv:2609.16104](https://arxiv.org/abs/2609.16104). SensCalc boosts the events and applies the experimental selection. Regeneration requires exHad and WolframKernel; acceptance calculations use the stored tables directly.
 
 The scalar samples cover all four decay-width calculations available in SensCalc. For each boson, the complete hadronic final state is sampled with the total hadronic branching fraction from the selected SensCalc calculation. Exclusive hadronic channels are combined before sampling. Leptonic and diphoton decays keep their existing treatment. Total widths and production rates are unchanged.
 
@@ -22,7 +22,7 @@ Each table contains 3000 unweighted events. The mass points are the existing Sen
 
 With **Hadronized products** selected, the acceptance notebook uses these samples at their tabulated masses. Other masses and decay descriptions keep the existing treatment. The ALP-gluon model continues to use its original Pythia samples.
 
-For bosons, include the complete hadronic channel set in the decay selection. A selection containing only some hadronic channels requires the Pythia calculation: set `$UseExHadDecaySamples = False` after initialization. The same setting restores the baseline for all models; `True` enables the exHad tables again. Leptonic-only selections are supported with either setting.
+For bosons, include the complete hadronic channel set in the decay selection. Leptonic-only selections are also supported. The exHad samples are used automatically wherever they are tabulated.
 
 The events use the eight-field format described in [Preparing decay samples](../README.md). Neutrinos are retained. Photons, electrons, muons, charged pions and kaons, long-lived neutral kaons, and nucleons are terminal particles. The loader holds one additional table in memory at a time.
 

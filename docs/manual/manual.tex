@@ -1,0 +1,43 @@
+% From this directory, run pdflatex -halt-on-error manual.tex twice.
+% The resulting manual.pdf is distributed as ../../SensCalc_manual.pdf.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm,headheight=15pt]{geometry}
+\usepackage{microtype,amsmath,amssymb,booktabs,tabularx,array,longtable}
+\usepackage{enumitem,fvextra,xcolor,tikz,fancyhdr,needspace}
+\usetikzlibrary{arrows.meta,positioning}
+\definecolor{linkblue}{HTML}{185A8A}
+\definecolor{lightblue}{HTML}{EFF5F9}
+\usepackage[unicode,colorlinks=true,linkcolor=linkblue,urlcolor=linkblue,citecolor=linkblue,
+  pdftitle={SensCalc: user guide},pdfauthor={Maksym Ovchynnikov},
+  pdfsubject={Physics models, calculations and use of SensCalc}]{hyperref}
+\usepackage{bookmark}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\emergencystretch}{2em}
+\widowpenalty=10000
+\clubpenalty=10000
+\renewcommand{\arraystretch}{1.22}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlist{nosep,leftmargin=1.5em,topsep=5pt}
+\setcounter{tocdepth}{1}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textsc{SensCalc}}
+\fancyhead[R]{\small User guide}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\arxiv}[1]{\href{https://arxiv.org/abs/#1}{arXiv:#1}}
+\newcommand{\GeV}{\mathrm{GeV}}
+\newcommand{\Br}{\operatorname{Br}}
+\newcommand{\hc}{\mathrm{h.c.}}
+\newcommand{\dd}{\mathrm{d}}
+\DefineVerbatimEnvironment{Code}{Verbatim}{fontsize=\small,breaklines=true,breakanywhere=true,
+  frame=single,rulecolor=\color{black!20},framesep=6pt}
+\begin{document}
+\input{content.tex}
+\end{document}
