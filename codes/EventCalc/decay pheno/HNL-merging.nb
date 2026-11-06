@@ -37,32 +37,11 @@ Cell[BoxData[{
  RowBox[{"Do", "[", "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{
-     RowBox[{"DecayWidth", "[", 
-      RowBox[{"mLLP_", ",", "U2_", ",", "HNL"}], "]"}], "=", 
-     FractionBox["chbar", 
-      RowBox[{"c\[Tau]LLP", "[", 
-       RowBox[{"HNL", ",", "\"\<Default\>\"", ",", "mLLP", ",", "U2"}], 
-       "]"}]]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+    RowBox[{RowBox[{"DecayWidth", "[", RowBox[{"mLLP_", ",", "U2_", ",", "HNL"}], "]"}], "=", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"HNLtype", "\[Equal]", "\"Dirac\""}], ",", FractionBox["1", "2"], ",", "1"}], "]"}], "*", FractionBox["chbar", RowBox[{"c\[Tau]LLP", "[", RowBox[{"HNL", ",", "\"Default\"", ",", "mLLP", ",", "U2"}], "]"}]]}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", ",",
    RowBox[{"{", 
     RowBox[{"HNL", ",", "HNLsList"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{
-   RowBox[{"\[CapitalGamma]LLP", "[", 
-    RowBox[{"mLLP_", ",", "U2_"}], "]"}], "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"If", "[", 
-      RowBox[{
-       RowBox[{"HNLtype", "\[Equal]", "\"\<Dirac\>\""}], ",", 
-       RowBox[{"1", "/", "2"}], ",", "1"}], "]"}], 
-     RowBox[{
-      RowBox[{"(", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"DecayWidth", "[", 
-          RowBox[{"mLLP", ",", "U2", ",", "#"}], "]"}], "&"}], "/@", 
-        "HNLsList"}], ")"}], ".", "MixingPattern"}]}], "//", "Chop"}]}], 
+  RowBox[{RowBox[{"\[CapitalGamma]LLP", "[", RowBox[{"mLLP_", ",", "U2_"}], "]"}], "=", RowBox[{RowBox[{"1", RowBox[{RowBox[{"(", RowBox[{RowBox[{RowBox[{"DecayWidth", "[", RowBox[{"mLLP", ",", "U2", ",", "#"}], "]"}], "&"}], "/@", "HNLsList"}], ")"}], ".", "MixingPattern"}]}], "//", "Chop"}]}],
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{

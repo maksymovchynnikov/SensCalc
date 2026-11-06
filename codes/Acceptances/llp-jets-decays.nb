@@ -20,7 +20,7 @@ Notebook[{
 
 Cell[CellGroupData[{
 Cell["\<\
-Phase space of decay products - pre-simulated in pythia (for decays into jets)\
+Precomputed hadronic decay samples\
 \>", "Section",
  CellChangeTimes->{{3.8896808751910667`*^9, 3.8896808925929117`*^9}, {
   3.8896810405865717`*^9, 3.889681040711938*^9}, {3.8928219291767955`*^9, 
@@ -31,6 +31,7 @@ a8b51d796029"],
 Cell[CellGroupData[{
 
 Cell[BoxData[{
+ RowBox[{"Get", "[", "FileNameJoin", "[", "{", "NotebookDirectory", "[", "]", ",", "\"exhad-decays.wl\"", "}", "]", "]", ";"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{"filespathsPS", "=", 
    RowBox[{"FileNames", "[", 
@@ -46,6 +47,7 @@ Cell[BoxData[{
      RowBox[{"If", "[", 
       RowBox[{"AccSensCalc", ",", "1", ",", "Infinity"}], "]"}]}], "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
+ RowBox[{"filespathsPS", "=", "Select", "[", "filespathsPS", ",", "!", "MemberQ", "[", "FileNameSplit", "[", "#", "]", ",", "\"exHad\"", "]", "&", "]", ";"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{"filenamesPS", "=", 
    RowBox[{"Table", "[", 

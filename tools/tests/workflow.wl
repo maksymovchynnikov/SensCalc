@@ -1,0 +1,37 @@
+Get[FileNameJoin[{DirectoryName[$InputFileName],"common.wl"}]];
+load["codes/for-sensitivities.nb",6];condcontinue=True;
+ProductionList={"fixture"};FacilityGivenExperiment="LHC";mmin\[Epsilon]=.1;mmax\[Epsilon]=2.;mLLPmin[_]=.1;mLLPmax[_]=2.;ELLPmax[___]=10.;\[Theta]minExp=.5;
+TableIntegrandDiscret[___]:={{.8,5.,10.,.3,1.},{1.1,5.,20.,.2,2.}};
+NpotGivenExperiment=1.;ProbLLP[___]=1.;BrVis[_]=.37;LowerBoundEstimate[___]=.001;UpperBoundEstimate[___]=100.;c\[Tau]LLP[_,_]=100.;zminExp=0.;zmaxExp=26.5;
+Do[SelectedExperiment=exp;load["3. HNL sensitivity.nb",20];load["3. HNL sensitivity.nb",23];
+ ref=If[exp=="SHiP-ECN3",1.,2.]*.37*sumcompile[tableprefac[TableIntegrandDiscret[],1.,100.,1,0.]];
+ b=NeventsDiscret[1.,"fixture",{1.}][[1,3]];a=If[DownValues[NeventsDiscret1]=={},b,NeventsDiscret1[1.,"fixture",1.,"True"]];
+ check["HNL quadrature normalization "<>exp,Max[Abs[{a,b}/ref-1.]]<10^-12,{a,b,ref}];
+ def=Cases[held["3. HNL sensitivity.nb",24],x:HoldPattern[SetDelayed[NeventsInt[___],_]]:>HoldComplete[x],Infinity];ev[def];IntegralLLP[___]=.25;
+ check["HNL adaptive normalization "<>exp,Abs[NeventsInt[1.,1.,"fixture"]/(If[exp=="SHiP-ECN3",1.,2.]*.37*.25)-1.]<10^-12],{exp,{"SHiP-ECN3","ANUBIS-ceiling","Mid-eta"}}];
+load["codes/decay-acceptance.nb",24];
+call=First[Cases[held["1. Acceptances. ANUBIS-ceiling.nb",26],x:HoldPattern[FinalBlockMass[___]]:>HoldComplete[x],Infinity]];
+fixture=call/.{LLPchoiceForComputation->"Scalar",HoldPattern[masslist[[l]]]->1.,proclist->{"fixture"},isim->10,hadropt->"False",acceptancetypechoice->">=2",ntracksmin->2,descr->"fixture"};
+GivenExperiment="ANUBIS-ceiling";DecayVolumeAsDetectorGivenExperiment="False";
+DecayAcceptanceBlock[___]:={{.5,10.,10.,.2,.8}};\[Epsilon]dec2Compiled[t_,m_]:=Join[ConstantArray[{m},Length[t]],t,2];
+arity=fixture/.HoldPattern[HoldComplete[FinalBlockMass[args___]]]:>Length[HoldComplete[args]];
+value=ReleaseHold[fixture];check["ANUBIS nine-argument dispatch",arity==9&&MatrixQ[value,NumericQ],value];
+load["codes/generic.nb",1];
+DetectorPlaneOrientationGivenExperiment="Transverse";xLongMaxDetectorGivenExperiment=26.5;pointSecondCoordinate=2;
+xshiftval=1.7;yshiftval=1.8;RouterDecayVolumeGivenExperiment[_]=19.9;
+LLPdecVTXatGivenZx[z_,th_,ph_]=z Tan[th] Cos[ph];LLPdecVTXatGivenZy[z_,th_,ph_]=z Tan[th] Sin[ph];
+load["codes/decay-acceptance.nb",6];
+traj=DaughterTrajectory[0.,15.,20.,26.5,0.,1.,2.];residual=(traj[[1]]-xshiftval)^2+(traj[[2]]-yshiftval)^2-19.9^2;
+check["ANUBIS propagation uses configured center",Abs[residual]<10^-10,residual];
+(* Actual normalization helper: secondary visible branching is not applied twice. *)
+def=Cases[held["codes/Acceptances/llp-exclusive-decays-summary.nb",2],x:HoldPattern[SetDelayed[BrVisibleGivenSetup[___],_]]:>HoldComplete[x],Infinity];ev[def];
+ListBrRatios["fixture",_,"eta-c",_]=.2;ListBrRatios["fixture",_,"charged",_]=.3;ecalfactor["fixture","eta-c"]=.78;
+Do[value=BrVisibleGivenSetup["fixture",2.,{"eta-c","charged"},ecal,"Default"];check["unconditional secondary normalization "<>ecal,value==.5,value],{ecal,{"True","False"}}];
+(* Configuration hashes distinguish HNL nature/mixing, leaving other models unchanged. *)
+hashDef=First[held["EventCalc.nb",18]];
+FacilitySelected="SPS";ProdChannelsSelected={"D"};ListDecaysLLPselected={"e pi"};decayDescrSelected="Default";GivenExperiment="SHiP-ECN3";
+LLPdirName="Scalar";ev[hashDef];expected="cfg-"<>StringTake[Hash[{FacilitySelected,Sort[ProdChannelsSelected],Sort[ListDecaysLLPselected],decayDescrSelected},"SHA256","HexString"],20];
+check["non-HNL export identity unchanged",FileNameTake[direxportdata]==expected];
+LLPdirName="HNL";hashes=Flatten[Table[HNLtype=n;MixingPattern=p;ev[hashDef];FileNameTake[direxportdata],{n,{"Dirac","Majorana"}},{p,{{1.,0.,0.},{0.,1.,0.}}}]];
+check["HNL export identity separates nature and mixing",Length[DeleteDuplicates[hashes]]==4];
+finish["workflow-results"];

@@ -3975,23 +3975,7 @@ Cell[BoxData[{
        RowBox[{"kTto\[Theta]a", "[", 
         RowBox[{"ma", ",", "\[Theta]a", ",", "Ea"}], "]"}]}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"IntegrandFusionConverted1", "[", 
-        RowBox[{
-        "ma_", ",", "\[Theta]a_", ",", "Ea_", ",", "m_", ",", "t_", ",", 
-         "Facility", ",", "\"\<p\>\""}], "]"}], "=", 
-       RowBox[{
-        FractionBox["1", "2"], 
-        RowBox[{
-         RowBox[{"IntegrandFusionTemp2", "[", 
-          RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", 
-           FractionBox[
-            RowBox[{"m", "+", "t"}], "2"], ",", 
-           FractionBox[
-            RowBox[{"(", 
-             RowBox[{"m", "-", "t"}], ")"}], "2"], ",", "Facility", ",", 
-           "\"\<p\>\""}], "]"}], "[", 
-         RowBox[{"[", "2", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{RowBox[{"IntegrandFusionConverted1", "[", RowBox[{"ma_", ",", "\[Theta]a_", ",", "Ea_", ",", "m_", ",", "t_", ",", "Facility", ",", "\"p\""}], "]"}], "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"0", "\[LessEqual]", FractionBox[RowBox[{"m", "+", "t"}], "2"], "\[LessEqual]", RowBox[{"pTp1MaxEPA", "[", RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", "Facility", ",", "\"p\""}], "]"}]}], "&&", RowBox[{"0", "\[LessEqual]", FractionBox[RowBox[{"m", "-", "t"}], "2"], "\[LessEqual]", RowBox[{"pTp2MaxEPA", "[", RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", "Facility", ",", "\"p\""}], "]"}]}]}], ",", RowBox[{"Evaluate", "[", RowBox[{FractionBox["1", "2"], RowBox[{RowBox[{"IntegrandFusionTemp2", "[", RowBox[{"ma", ",", "\[Theta]a", ",", "Ea", ",", FractionBox[RowBox[{"m", "+", "t"}], "2"], ",", FractionBox[RowBox[{"(", RowBox[{"m", "-", "t"}], ")"}], "2"], ",", "Facility", ",", "\"p\""}], "]"}], "[", RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", "0."}], "]"}]}], ";", "\[IndentingNewLine]",
       RowBox[{"\[Epsilon]v", "=", 
        SuperscriptBox["10", 
         RowBox[{"-", "9."}]]}], ";", "\[IndentingNewLine]", 

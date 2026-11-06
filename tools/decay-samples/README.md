@@ -50,3 +50,7 @@ WolframKernel -noinit -script tools/decay-samples/partonic-decays/export.wls \
 ```
 
 The preparation step checks the analytic HNL expression against the loaded matrix elements and records the masses. Rejection sampling produces 3000 independent primary decays per channel and parent mass; Pythia then generates complete final states. Each saved event must conserve four-momentum, electric charge and baryon number. These samples were generated with Pythia 8.312. Another version may give different fragmentation and decay distributions. Remove the temporary JSON events after checking the compact Mathematica inputs.
+
+## exHad samples
+
+[exHad decay samples](exhad/README.md) provide complete hadronic final states for the supported models on the SensCalc mass grid. The generation tools check conservation laws and lossless export before installation. ALP-gluon retains the existing Pythia samples.

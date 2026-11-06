@@ -64,6 +64,14 @@ Open [`4. Plots.nb`](../4.%20Plots.nb), run the relevant model chapter and choos
 
 HNL plots can combine different mixing patterns and Dirac/Majorana natures. Such a mixed plot keeps every selected sensitivity curve, uses the title “HNLs” and omits exclusion overlays. Select a common configuration when you want its matching constraints and detailed title.
 
+## Inelastic dark matter through a dark photon
+
+1. In [`1. Acceptances.nb`](../1.%20Acceptances.nb), select the desired [`Inelastic-DP-DM` model](models.md#electromagnetic-dark-sector-interactions) and compute its decay acceptance for the experiment.
+2. In [`2. LLP distribution.nb`](../2.%20LLP%20distribution.nb), select **`DP`** and generate the dark photon distributions in angle and energy for the required facility and production channels, together with their production probabilities. Existing matching inputs can be reused.
+3. Run [`3. Inelastic-DP-DM sensitivity.nb`](../3.%20Inelastic-DP-DM%20sensitivity.nb), choose `Tabulated Nevents+sensitivity`, and select the same inelastic model and experiment. The notebook samples dark photons $V$ from those tables and simulates $V\to\chi'\chi$, where $\chi'$ is the heavier state and $\chi$ the lighter one. It tabulates the distribution in laboratory angle and energy of $\chi'$ before calculating event counts and sensitivity.
+
+Missing $\chi'$ distributions are generated automatically. If they already exist, choose **Use available distributions** or **Recompute distributions** in the dialog. Recompute them after changing the mediator production inputs or the model's mass parameters.
+
 ## Reusing a calculation
 
 | Change | What to run again |

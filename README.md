@@ -19,6 +19,8 @@ For an implemented model and experiment, evaluate **“Launch this section to ru
 
 Follow the [installation and first calculation](docs/getting-started.md) for a complete example.
 
+For `Inelastic-DP-DM`, follow the [dark photon production and decay workflow](docs/getting-started.md#inelastic-dark-matter-through-a-dark-photon).
+
 ## Documentation
 
 The [PDF user guide](SensCalc_manual.pdf) covers the physics conventions and the full calculation workflow.
@@ -33,7 +35,7 @@ The [PDF user guide](SensCalc_manual.pdf) covers the physics conventions and the
 
 The acceptance calculation includes secondary decays of $D^\pm$, $D_s^\pm$ and $\eta_c$ using compact, pre-generated Pythia samples. These inputs are included; Pythia is required only to regenerate them.
 
-SensCalc's tabulated hadronic decay phase space does not include [exHad](https://github.com/maksymovchynnikov/exHad). Equal total widths or branching fractions between programs do not imply identical exclusive final states, daughter momenta or detector acceptances. Comparisons with exHad must distinguish the rate inputs, decay and hadronization models, and detector selections; differences between the tabulated Pythia samples and exHad-generated events must be assessed separately.
+SensCalc includes precomputed [exHad](https://github.com/maksymovchynnikov/exHad) decay samples for HNLs, Higgs-mixed scalars, fermion-universal ALPs, dark photons and $B-L$ vectors. At the tabulated masses, these provide complete hadronic final states for acceptance calculations; total widths and production rates remain those of SensCalc. Bosonic hadronic channels are combined with their summed branching fraction. ALP-gluon continues to use its original Pythia samples. Mass coverage, channel selection and regeneration instructions are given in [exHad decay samples](tools/decay-samples/exhad/README.md).
 
 SensCalc includes heavy neutral leptons, dark photons, Higgs-mixed scalars, vector bosons coupled to baryon and lepton currents, several axion-like particle models, and inelastic dark matter coupled through a dark photon or an electromagnetic transition dipole. Millicharged particle production is also available. The [model reference](docs/models.md) defines their interactions and scan parameters.
 

@@ -538,7 +538,7 @@ Cell[CellGroupData[{
 Cell[BoxData[{
  RowBox[{
   RowBox[{
-   RowBox[{"direxportdata", "=", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"temp1\"", ",", "\"EventCalc-python-data\"", ",", "LLPdirName", ",", "GivenExperiment", ",", RowBox[{"\"cfg-\"", "<>", RowBox[{"StringTake", "[", RowBox[{RowBox[{"Hash", "[", RowBox[{RowBox[{"{", RowBox[{"FacilitySelected", ",", RowBox[{"Sort", "[", "ProdChannelsSelected", "]"}], ",", RowBox[{"Sort", "[", "ListDecaysLLPselected", "]"}], ",", "decayDescrSelected"}], "}"}], ",", "\"SHA256\"", ",", "\"HexString\""}], "]"}], ",", "20"}], "]"}]}]}], "}"}], "]"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+   RowBox[{"direxportdata", "=", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"temp1\"", ",", "\"EventCalc-python-data\"", ",", "LLPdirName", ",", "GivenExperiment", ",", RowBox[{"\"cfg-\"", "<>", RowBox[{"StringTake", "[", RowBox[{RowBox[{"Hash", "[", RowBox[{RowBox[{"Join", "[", RowBox[{RowBox[{"{", RowBox[{"FacilitySelected", ",", RowBox[{"Sort", "[", "ProdChannelsSelected", "]"}], ",", RowBox[{"Sort", "[", "ListDecaysLLPselected", "]"}], ",", "decayDescrSelected"}], "}"}], ",", RowBox[{"If", "[", RowBox[{RowBox[{"LLPdirName", "\[Equal]", "\"HNL\""}], ",", RowBox[{"{", RowBox[{"HNLtype", ",", "MixingPattern"}], "}"}], ",", RowBox[{"{", "}"}]}], "]"}]}], "]"}], ",", "\"SHA256\"", ",", "\"HexString\""}], "]"}], ",", "20"}], "]"}]}]}], "}"}], "]"}]}], ";"}], "\n"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{
    RowBox[{"If", "[", 
@@ -693,62 +693,7 @@ RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"LLPdirName", "==", "\"ALP-fermion\""
      RowBox[{"ParamProductToPDGid", "."}]}]}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"pdgToken", "=", 
-    RowBox[{
-     RowBox[{"<|", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"-", "11."}], "->", "\"\<eP\>\""}], ",", 
-       RowBox[{"11.", "->", "\"\<eM\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "13."}], "->", "\"\<muP\>\""}], ",", 
-       RowBox[{"13.", "->", "\"\<muM\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "15."}], "->", "\"\<tauP\>\""}], ",", 
-       RowBox[{"15.", "->", "\"\<tauM\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "12."}], "->", "\"\<nuebar\>\""}], ",", 
-       RowBox[{"12.", "->", "\"\<nue\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "14."}], "->", "\"\<numubar\>\""}], ",", 
-       RowBox[{"14.", "->", "\"\<numu\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "16."}], "->", "\"\<nutaubar\>\""}], ",", 
-       RowBox[{"16.", "->", "\"\<nutau\>\""}], ",", 
-       RowBox[{"22.", "->", "\"\<gamma\>\""}], ",", 
-       RowBox[{"211.", "->", "\"\<piP\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "211."}], "->", "\"\<piM\>\""}], ",", 
-       RowBox[{"111.", "->", "\"\<pi0\>\""}], ",", 
-       RowBox[{"321.", "->", "\"\<KP\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "321."}], "->", "\"\<KM\>\""}], ",", 
-       RowBox[{"310.", "->", "\"\<KS\>\""}], ",", 
-       RowBox[{"130.", "->", "\"\<KL\>\""}], ",", 
-       RowBox[{"311.", "->", "\"\<K0\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "311."}], "->", "\"\<K0bar\>\""}], ",", 
-       RowBox[{"221.", "->", "\"\<eta\>\""}], ",", 
-       RowBox[{"331.", "->", "\"\<etaPrime\>\""}], ",", 
-       RowBox[{"223.", "->", "\"\<omega\>\""}], ",", 
-       RowBox[{"333.", "->", "\"\<phi\>\""}], ",", 
-       RowBox[{"113.", "->", "\"\<rho0\>\""}], ",", 
-       RowBox[{"213.", "->", "\"\<rhoP\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "213."}], "->", "\"\<rhoM\>\""}], ",", 
-       RowBox[{"313.", "->", "\"\<Kstar0\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "313."}], "->", "\"\<Kstar0bar\>\""}], ",", 
-       RowBox[{"323.", "->", "\"\<KstarP\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "323."}], "->", "\"\<KstarM\>\""}], ",", 
-       RowBox[{"2212.", "->", "\"\<p\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "2212."}], "->", "\"\<pbar\>\""}], ",", 
-       RowBox[{"2112.", "->", "\"\<n\>\""}], ",", 
-       RowBox[{
-        RowBox[{"-", "2112."}], "->", "\"\<nbar\>\""}]}], "|>"}], "//", 
-     "N"}]}], ";"}], "\[IndentingNewLine]", "\n"}], "\[IndentingNewLine]", 
+   RowBox[{"pdgToken", "=", RowBox[{RowBox[{"<|", RowBox[{RowBox[{RowBox[{"-", "11."}], "->", "\"eP\""}], ",", RowBox[{"11.", "->", "\"eM\""}], ",", RowBox[{RowBox[{"-", "13."}], "->", "\"muP\""}], ",", RowBox[{"13.", "->", "\"muM\""}], ",", RowBox[{RowBox[{"-", "15."}], "->", "\"tauP\""}], ",", RowBox[{"15.", "->", "\"tauM\""}], ",", RowBox[{RowBox[{"-", "12."}], "->", "\"nuebar\""}], ",", RowBox[{"12.", "->", "\"nue\""}], ",", RowBox[{RowBox[{"-", "14."}], "->", "\"numubar\""}], ",", RowBox[{"14.", "->", "\"numu\""}], ",", RowBox[{RowBox[{"-", "16."}], "->", "\"nutaubar\""}], ",", RowBox[{"16.", "->", "\"nutau\""}], ",", RowBox[{"22.", "->", "\"gamma\""}], ",", RowBox[{"211.", "->", "\"piP\""}], ",", RowBox[{RowBox[{"-", "211."}], "->", "\"piM\""}], ",", RowBox[{"111.", "->", "\"pi0\""}], ",", RowBox[{"321.", "->", "\"KP\""}], ",", RowBox[{RowBox[{"-", "321."}], "->", "\"KM\""}], ",", RowBox[{"310.", "->", "\"KS\""}], ",", RowBox[{"130.", "->", "\"KL\""}], ",", RowBox[{"311.", "->", "\"K0\""}], ",", RowBox[{RowBox[{"-", "311."}], "->", "\"K0bar\""}], ",", RowBox[{"221.", "->", "\"eta\""}], ",", RowBox[{"331.", "->", "\"etaPrime\""}], ",", RowBox[{"223.", "->", "\"omega\""}], ",", RowBox[{"333.", "->", "\"phi\""}], ",", RowBox[{"113.", "->", "\"rho0\""}], ",", RowBox[{"213.", "->", "\"rhoP\""}], ",", RowBox[{RowBox[{"-", "213."}], "->", "\"rhoM\""}], ",", RowBox[{"313.", "->", "\"Kstar0\""}], ",", RowBox[{RowBox[{"-", "313."}], "->", "\"Kstar0bar\""}], ",", RowBox[{"323.", "->", "\"KstarP\""}], ",", RowBox[{RowBox[{"-", "323."}], "->", "\"KstarM\""}], ",", RowBox[{"2212.", "->", "\"p\""}], ",", RowBox[{RowBox[{"-", "2212."}], "->", "\"pbar\""}], ",", RowBox[{"2112.", "->", "\"n\""}], ",", RowBox[{RowBox[{"-", "2112."}], "->", "\"nbar\""}], ",", RowBox[{"1.`", "\[Rule]", "\"d\""}], ",", RowBox[{RowBox[{"-", "1.`"}], "\[Rule]", "\"dbar\""}], ",", RowBox[{"2.`", "\[Rule]", "\"u\""}], ",", RowBox[{RowBox[{"-", "2.`"}], "\[Rule]", "\"ubar\""}], ",", RowBox[{"3.`", "\[Rule]", "\"s\""}], ",", RowBox[{RowBox[{"-", "3.`"}], "\[Rule]", "\"sbar\""}], ",", RowBox[{"4.`", "\[Rule]", "\"c\""}], ",", RowBox[{RowBox[{"-", "4.`"}], "\[Rule]", "\"cbar\""}], ",", RowBox[{"5.`", "\[Rule]", "\"b\""}], ",", RowBox[{RowBox[{"-", "5.`"}], "\[Rule]", "\"bbar\""}], ",", RowBox[{"21.`", "\[Rule]", "\"g\""}], ",", RowBox[{"20113.`", "\[Rule]", "\"a10\""}], ",", RowBox[{"411.`", "\[Rule]", "\"DP\""}], ",", RowBox[{RowBox[{"-", "411.`"}], "\[Rule]", "\"DM\""}], ",", RowBox[{"431.`", "\[Rule]", "\"DsP\""}], ",", RowBox[{RowBox[{"-", "431.`"}], "\[Rule]", "\"DsM\""}], ",", RowBox[{"441.`", "\[Rule]", "\"etac\""}]}], "|>"}], "//", "N"}]}], ";"}], "\[IndentingNewLine]", "\n"}], "\[IndentingNewLine]",
  RowBox[{
   RowBox[{
    RowBox[{

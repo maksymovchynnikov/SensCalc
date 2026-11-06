@@ -1625,15 +1625,11 @@ Cell[BoxData[{
        RowBox[{
         SuperscriptBox[
          RowBox[{"(", 
-          RowBox[{
-           RowBox[{"xx", "[", 
-            RowBox[{"x0", ",", "vx", ",", "t"}], "]"}], "+", "xshift"}], 
+          RowBox[{RowBox[{"xx", "[", RowBox[{"x0", ",", "vx", ",", "t"}], "]"}], "-", "xshift"}],
           ")"}], "2"], "+", 
         SuperscriptBox[
          RowBox[{"(", 
-          RowBox[{
-           RowBox[{"yy", "[", 
-            RowBox[{"y0", ",", "vy", ",", "t"}], "]"}], "+", "yshift"}], 
+          RowBox[{RowBox[{"yy", "[", RowBox[{"y0", ",", "vy", ",", "t"}], "]"}], "-", "yshift"}],
           ")"}], "2"]}], "//", "Expand"}], "//", "Simplify"}]}], ";", 
     "\[IndentingNewLine]", 
     RowBox[{"(*", 
@@ -2105,7 +2101,7 @@ Cell["Particular decay product - geometric part", "Subsubsection",
 2eb3b562d51f"],
 
 Cell[BoxData[
- RowBox[{RowBox[{"coordsAtDetectorEndMagnetComp", "=", RowBox[{"With", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"kappa", "=", FractionBox["Bval", FractionBox[RowBox[{"cval", " ", "GeVTokgVal"}], "qValSI"]]}], ",", RowBox[{"zMin", "=", "zMagnetMinGivenExperiment"}], ",", RowBox[{"zMax", "=", "zMagnetMaxGivenExperiment"}]}], "}"}], ",", RowBox[{"Compile", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"z0", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"x0", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"y0", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"px", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"py", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"pz", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"q", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"zDet", ",", "_Real"}], "}"}]}], "}"}], ",", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"xDet", "=", "99999.`"}], ",", RowBox[{"yDet", "=", "99999.`"}], ",", RowBox[{"zEnter", "=", "0.`"}], ",", RowBox[{"zExit", "=", "0.`"}], ",", RowBox[{"dz", "=", "0.`"}], ",", RowBox[{"k", "=", "0.`"}], ",", RowBox[{"pxExit", "=", "0.`"}], ",", RowBox[{"pzExit", "=", "0.`"}], ",", RowBox[{"pzSquared", "=", "0.`"}], ",", RowBox[{"xExit", "=", "0.`"}], ",", RowBox[{"yExit", "=", "0.`"}], ",", RowBox[{"angle", "=", "0.`"}]}], "}"}], ",", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"pz", ">", "0.`"}], "&&", RowBox[{"zDet", "\[GreaterEqual]", "z0"}]}], ",", RowBox[{RowBox[{"zEnter", "=", RowBox[{"Min", "[", RowBox[{"zDet", ",", RowBox[{"Max", "[", RowBox[{"z0", ",", "zMin"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"zExit", "=", RowBox[{"Max", "[", RowBox[{"zEnter", ",", RowBox[{"Min", "[", RowBox[{"zDet", ",", "zMax"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"dz", "=", RowBox[{"zExit", "-", "zEnter"}]}], ";", "\[IndentingNewLine]", RowBox[{"k", "=", RowBox[{"kappa", " ", "q"}]}], ";", "\[IndentingNewLine]", RowBox[{"xExit", "=", RowBox[{"x0", "+", FractionBox[RowBox[{RowBox[{"(", RowBox[{"zEnter", "-", "z0"}], ")"}], " ", "px"}], "pz"]}]}], ";", "\[IndentingNewLine]", RowBox[{"yExit", "=", RowBox[{"y0", "+", FractionBox[RowBox[{RowBox[{"(", RowBox[{"zEnter", "-", "z0"}], ")"}], " ", "py"}], "pz"]}]}], ";", "\[IndentingNewLine]", RowBox[{"pxExit", "=", RowBox[{"px", "-", RowBox[{"k", " ", "dz"}]}]}], ";", "\[IndentingNewLine]", RowBox[{"pzSquared", "=", RowBox[{SuperscriptBox["pz", "2"], "+", RowBox[{RowBox[{"(", RowBox[{"px", "-", "pxExit"}], ")"}], " ", RowBox[{"(", RowBox[{"px", "+", "pxExit"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"pzSquared", ">", "0.`"}], ",", RowBox[{RowBox[{"pzExit", "=", SqrtBox["pzSquared"]}], ";", "\[IndentingNewLine]", RowBox[{"xExit", "+=", FractionBox[RowBox[{"dz", " ", RowBox[{"(", RowBox[{"px", "+", "pxExit"}], ")"}]}], RowBox[{"pz", "+", "pzExit"}]]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Abs", "[", RowBox[{"k", " ", "dz"}], "]"}], "<", FractionBox[RowBox[{"Abs", "[", "pz", "]"}], SuperscriptBox["10", "8"]]}], ",", RowBox[{"yExit", "+=", RowBox[{FractionBox[RowBox[{"py", " ", "dz"}], "pz"], "-", FractionBox[RowBox[{"py", " ", "px", " ", "k", " ", SuperscriptBox["dz", "2"]}], RowBox[{"2", " ", SuperscriptBox["pz", "3"]}]]}]}], ",", RowBox[{RowBox[{"angle", "=", RowBox[{"ArcTan", "[", RowBox[{RowBox[{RowBox[{"px", " ", "pxExit"}], "+", RowBox[{"pz", " ", "pzExit"}]}], ",", RowBox[{RowBox[{"px", " ", "pzExit"}], "-", RowBox[{"pxExit", " ", "pz"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"yExit", "+=", FractionBox[RowBox[{"py", " ", "angle"}], "k"]}]}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"xDet", "=", RowBox[{"xExit", "+", FractionBox[RowBox[{RowBox[{"(", RowBox[{"zDet", "-", "zExit"}], ")"}], " ", "pxExit"}], "pzExit"]}]}], ";", "\[IndentingNewLine]", RowBox[{"yDet", "=", RowBox[{"yExit", "+", FractionBox[RowBox[{RowBox[{"(", RowBox[{"zDet", "-", "zExit"}], ")"}], " ", "py"}], "pzExit"]}]}]}]}], "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"{", RowBox[{"xDet", ",", "yDet"}], "}"}]}]}], "]"}], ",", RowBox[{"CompilationTarget", "\[Rule]", "\"C\""}], ",", RowBox[{"RuntimeOptions", "\[Rule]", "\"Speed\""}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"conditionDecayAcceptanceGeometric", "=", RowBox[{"ReleaseHold", "[", RowBox[{RowBox[{RowBox[{"Hold", "[", RowBox[{"Compile", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"charge1", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"pdg1", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"xdecayfip", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"ydecayfip", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"zfip", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"px1lab", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"py1lab", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"pz1lab", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"E1lab", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"zmagnMzfip", ",", "_Real"}], "}"}]}], "}"}], ",", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"xFinal", "=", "99999.`"}], ",", RowBox[{"yFinal", "=", "99999.`"}], ",", RowBox[{"plane", "=", "0.`"}], ",", RowBox[{"zEnter", "=", "0.`"}], ",", RowBox[{"zExit", "=", "0.`"}], ",", RowBox[{"dz", "=", "0.`"}], ",", RowBox[{"k", "=", "0.`"}], ",", RowBox[{"pxExit", "=", "0.`"}], ",", RowBox[{"pzExit", "=", "0.`"}], ",", RowBox[{"pzSquared", "=", "0.`"}], ",", RowBox[{"driftBefore", "=", "0.`"}], ",", RowBox[{"driftAfter", "=", "0.`"}], ",", RowBox[{"bendTime", "=", "0.`"}]}], "}"}], ",", RowBox[{RowBox[{"plane", "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Abs", "[", "pdg1", "]"}], "\[Equal]", "13.`"}], ",", "xLongMuonPlaneGivenExperiment", ",", "xLongNonMuonPlaneGivenExperiment"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Bval", "\[Equal]", "0.`"}], "||", RowBox[{"charge1", "\[Equal]", "0.`"}], "||", RowBox[{"zfip", "\[GreaterEqual]", "zMagnetMaxGivenExperiment"}], "||", RowBox[{"plane", "\[LessEqual]", "zMagnetMinGivenExperiment"}]}], ",", RowBox[{RowBox[{"xFinal", "=", RowBox[{"DaughterTrajectoryCoord1", "[", RowBox[{"xdecayfip", ",", "ydecayfip", ",", "zfip", ",", "plane", ",", "px1lab", ",", "py1lab", ",", "pz1lab"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"yFinal", "=", RowBox[{"DaughterTrajectoryCoord2", "[", RowBox[{"xdecayfip", ",", "ydecayfip", ",", "zfip", ",", "plane", ",", "px1lab", ",", "py1lab", ",", "pz1lab"}], "]"}]}]}], ",", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"pz1lab", ">", "0.`"}], "&&", RowBox[{"plane", "\[GreaterEqual]", "zfip"}]}], ",", RowBox[{RowBox[{"zEnter", "=", RowBox[{"If", "[", RowBox[{RowBox[{"zfip", ">", "zMagnetMinGivenExperiment"}], ",", "zfip", ",", "zMagnetMinGivenExperiment"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"zExit", "=", RowBox[{"If", "[", RowBox[{RowBox[{"plane", "<", "zMagnetMaxGivenExperiment"}], ",", "plane", ",", "zMagnetMaxGivenExperiment"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"dz", "=", RowBox[{"zExit", "-", "zEnter"}]}], ";", "\[IndentingNewLine]", RowBox[{"k", "=", FractionBox[RowBox[{"Bval", " ", "charge1"}], FractionBox[RowBox[{"cval", " ", "GeVTokgVal"}], "qValSI"]]}], ";", "\[IndentingNewLine]", RowBox[{"pxExit", "=", RowBox[{"px1lab", "-", RowBox[{"k", " ", "dz"}]}]}], ";", "\[IndentingNewLine]", RowBox[{"pzSquared", "=", RowBox[{SuperscriptBox["pz1lab", "2"], "+", RowBox[{RowBox[{"(", RowBox[{"px1lab", "-", "pxExit"}], ")"}], " ", RowBox[{"(", RowBox[{"px1lab", "+", "pxExit"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"pzSquared", ">", "0.`"}], ",", RowBox[{RowBox[{"pzExit", "=", SqrtBox["pzSquared"]}], ";", "\[IndentingNewLine]", RowBox[{"driftBefore", "=", FractionBox[RowBox[{"zEnter", "-", "zfip"}], "pz1lab"]}], ";", "\[IndentingNewLine]", RowBox[{"driftAfter", "=", FractionBox[RowBox[{"plane", "-", "zExit"}], "pzExit"]}], ";", "\[IndentingNewLine]", RowBox[{"xFinal", "=", RowBox[{"xdecayfip", "+", RowBox[{"driftBefore", " ", "px1lab"}], "+", FractionBox[RowBox[{"dz", " ", RowBox[{"(", RowBox[{"px1lab", "+", "pxExit"}], ")"}]}], RowBox[{"pz1lab", "+", "pzExit"}]], "+", RowBox[{"driftAfter", " ", "pxExit"}]}]}], ";", "\[IndentingNewLine]", RowBox[{"bendTime", "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Abs", "[", RowBox[{"k", " ", "dz"}], "]"}], "<", FractionBox[RowBox[{"Abs", "[", "pz1lab", "]"}], SuperscriptBox["10", "8"]]}], ",", RowBox[{FractionBox["dz", "pz1lab"], "-", FractionBox[RowBox[{"px1lab", " ", "k", " ", SuperscriptBox["dz", "2"]}], RowBox[{"2", " ", SuperscriptBox["pz1lab", "3"]}]]}], ",", FractionBox[RowBox[{"2.`", " ", RowBox[{"ArcTan", "[", FractionBox[RowBox[{"px1lab", "-", "pxExit"}], RowBox[{"pz1lab", "+", "pzExit"}]], "]"}]}], "k"]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"yFinal", "=", RowBox[{"ydecayfip", "+", RowBox[{"py1lab", " ", RowBox[{"(", RowBox[{"driftBefore", "+", "bendTime", "+", "driftAfter"}], ")"}]}]}]}]}]}], "]"}]}]}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"xFinal", "\[Equal]", "99999.`"}], "||", RowBox[{"yFinal", "\[Equal]", "99999.`"}]}], ",", "0.`", ",", RowBox[{"N", "[", RowBox[{"DecayAcceptanceGeometry", "[", RowBox[{"xFinal", ",", "yFinal", ",", "plane"}], "]"}], "]"}]}], "]"}]}]}], "]"}], ",", RowBox[{"CompilationTarget", "\[Rule]", "\"C\""}], ",", RowBox[{"RuntimeOptions", "\[Rule]", "\"Speed\""}], ",", RowBox[{"RuntimeAttributes", "\[Rule]", RowBox[{"{", "Listable", "}"}]}], ",", RowBox[{"Parallelization", "\[Rule]", "True"}], ",", RowBox[{"CompilationOptions", "\[Rule]", RowBox[{"{", RowBox[{"\"InlineCompiledFunctions\"", "\[Rule]", "True"}], "}"}]}]}], "]"}], "]"}], "/.", "\[VeryThinSpace]", RowBox[{"ruleDown", "[", RowBox[{"{", RowBox[{"DaughterTrajectoryCoord1", ",", "DaughterTrajectoryCoord2", ",", "DecayAcceptanceGeometry"}], "}"}], "]"}]}], "/.", "\[VeryThinSpace]", RowBox[{"ruleOwn", "[", RowBox[{"{", RowBox[{"cval", ",", "GeVTokgVal", ",", "qValSI", ",", "Bval", ",", "xLongMuonPlaneGivenExperiment", ",", "xLongNonMuonPlaneGivenExperiment", ",", "zMagnetMinGivenExperiment", ",", "zMagnetMaxGivenExperiment"}], "}"}], "]"}]}], "]"}]}]}]], "Input",
+ RowBox[{RowBox[{"coordsAtDetectorEndMagnetComp", "=", RowBox[{"With", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"kappa", "=", FractionBox["Bval", FractionBox[RowBox[{"cval", " ", "GeVTokgVal"}], "qValSI"]]}], ",", RowBox[{"zMin", "=", "zMagnetMinGivenExperiment"}], ",", RowBox[{"zMax", "=", "zMagnetMaxGivenExperiment"}]}], "}"}], ",", RowBox[{"Compile", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"z0", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"x0", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"y0", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"px", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"py", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"pz", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"q", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"zDet", ",", "_Real"}], "}"}]}], "}"}], ",", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"xDet", "=", "99999.`"}], ",", RowBox[{"yDet", "=", "99999.`"}], ",", RowBox[{"zEnter", "=", "0.`"}], ",", RowBox[{"zExit", "=", "0.`"}], ",", RowBox[{"dz", "=", "0.`"}], ",", RowBox[{"k", "=", "0.`"}], ",", RowBox[{"pxExit", "=", "0.`"}], ",", RowBox[{"pzExit", "=", "0.`"}], ",", RowBox[{"pzSquared", "=", "0.`"}], ",", RowBox[{"xExit", "=", "0.`"}], ",", RowBox[{"yExit", "=", "0.`"}], ",", RowBox[{"angle", "=", "0.`"}]}], "}"}], ",", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"pz", ">", "0.`"}], "&&", RowBox[{"zDet", "\[GreaterEqual]", "z0"}]}], ",", RowBox[{RowBox[{"zEnter", "=", RowBox[{"Min", "[", RowBox[{"zDet", ",", RowBox[{"Max", "[", RowBox[{"z0", ",", "zMin"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"zExit", "=", RowBox[{"Max", "[", RowBox[{"zEnter", ",", RowBox[{"Min", "[", RowBox[{"zDet", ",", "zMax"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"dz", "=", RowBox[{"zExit", "-", "zEnter"}]}], ";", "\[IndentingNewLine]", RowBox[{"k", "=", RowBox[{"kappa", " ", "q"}]}], ";", "\[IndentingNewLine]", RowBox[{"xExit", "=", RowBox[{"x0", "+", FractionBox[RowBox[{RowBox[{"(", RowBox[{"zEnter", "-", "z0"}], ")"}], " ", "px"}], "pz"]}]}], ";", "\[IndentingNewLine]", RowBox[{"yExit", "=", RowBox[{"y0", "+", FractionBox[RowBox[{RowBox[{"(", RowBox[{"zEnter", "-", "z0"}], ")"}], " ", "py"}], "pz"]}]}], ";", "\[IndentingNewLine]", RowBox[{"pxExit", "=", RowBox[{"px", "-", RowBox[{"k", " ", "dz"}]}]}], ";", "\[IndentingNewLine]", RowBox[{"pzSquared", "=", RowBox[{SuperscriptBox["pz", "2"], "+", RowBox[{RowBox[{"(", RowBox[{"px", "-", "pxExit"}], ")"}], " ", RowBox[{"(", RowBox[{"px", "+", "pxExit"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"pzSquared", ">", "0.`"}], ",", RowBox[{RowBox[{"pzExit", "=", SqrtBox["pzSquared"]}], ";", "\[IndentingNewLine]", RowBox[{"xExit", "+=", FractionBox[RowBox[{"dz", " ", RowBox[{"(", RowBox[{"px", "+", "pxExit"}], ")"}]}], RowBox[{"pz", "+", "pzExit"}]]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Abs", "[", RowBox[{"k", " ", "dz"}], "]"}], "<", FractionBox[RowBox[{"Abs", "[", "pz", "]"}], SuperscriptBox["10", "8"]]}], ",", RowBox[{"yExit", "+=", RowBox[{FractionBox[RowBox[{"py", " ", "dz"}], "pz"], "-", FractionBox[RowBox[{"py", " ", "px", " ", "k", " ", SuperscriptBox["dz", "2"]}], RowBox[{"2", " ", SuperscriptBox["pz", "3"]}]]}]}], ",", RowBox[{RowBox[{"angle", "=", RowBox[{"ArcTan", "[", RowBox[{RowBox[{RowBox[{"px", " ", "pxExit"}], "+", RowBox[{"pz", " ", "pzExit"}]}], ",", RowBox[{RowBox[{"px", " ", "pzExit"}], "-", RowBox[{"pxExit", " ", "pz"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"yExit", "+=", FractionBox[RowBox[{"py", " ", "angle"}], "k"]}]}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"xDet", "=", RowBox[{"xExit", "+", FractionBox[RowBox[{RowBox[{"(", RowBox[{"zDet", "-", "zExit"}], ")"}], " ", "pxExit"}], "pzExit"]}]}], ";", "\[IndentingNewLine]", RowBox[{"yDet", "=", RowBox[{"yExit", "+", FractionBox[RowBox[{RowBox[{"(", RowBox[{"zDet", "-", "zExit"}], ")"}], " ", "py"}], "pzExit"]}]}]}]}], "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"{", RowBox[{"xDet", ",", "yDet"}], "}"}]}]}], "]"}], ",", RowBox[{"CompilationTarget", "\[Rule]", "\"C\""}], ",", RowBox[{"RuntimeOptions", "\[Rule]", "\"Speed\""}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"conditionDecayAcceptanceGeometric", "=", RowBox[{"With", "[", RowBox[{RowBox[{"{", RowBox[{"volumeDetector", "=", RowBox[{"Boole", "[", RowBox[{"DecayVolumeAsDetectorGivenExperiment", "\[Equal]", "\"True\""}], "]"}]}], "}"}], ",", RowBox[{"ReleaseHold", "[", RowBox[{RowBox[{RowBox[{"Hold", "[", RowBox[{"Compile", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"charge1", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"pdg1", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"xdecayfip", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"ydecayfip", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"zfip", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"px1lab", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"py1lab", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"pz1lab", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"E1lab", ",", "_Real"}], "}"}], ",", RowBox[{"{", RowBox[{"zmagnMzfip", ",", "_Real"}], "}"}]}], "}"}], ",", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"xFinal", "=", "99999.`"}], ",", RowBox[{"yFinal", "=", "99999.`"}], ",", RowBox[{"plane", "=", "0.`"}], ",", RowBox[{"zEnter", "=", "0.`"}], ",", RowBox[{"zExit", "=", "0.`"}], ",", RowBox[{"dz", "=", "0.`"}], ",", RowBox[{"k", "=", "0.`"}], ",", RowBox[{"pxExit", "=", "0.`"}], ",", RowBox[{"pzExit", "=", "0.`"}], ",", RowBox[{"pzSquared", "=", "0.`"}], ",", RowBox[{"driftBefore", "=", "0.`"}], ",", RowBox[{"driftAfter", "=", "0.`"}], ",", RowBox[{"bendTime", "=", "0.`"}]}], "}"}], ",", RowBox[{RowBox[{"plane", "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Abs", "[", "pdg1", "]"}], "\[Equal]", "13.`"}], ",", "xLongMuonPlaneGivenExperiment", ",", "xLongNonMuonPlaneGivenExperiment"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Bval", "\[Equal]", "0.`"}], "||", RowBox[{"charge1", "\[Equal]", "0.`"}], "||", RowBox[{"zfip", "\[GreaterEqual]", "zMagnetMaxGivenExperiment"}], "||", RowBox[{"plane", "\[LessEqual]", "zMagnetMinGivenExperiment"}]}], ",", RowBox[{RowBox[{"xFinal", "=", RowBox[{"DaughterTrajectoryCoord1", "[", RowBox[{"xdecayfip", ",", "ydecayfip", ",", "zfip", ",", "plane", ",", "px1lab", ",", "py1lab", ",", "pz1lab"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"yFinal", "=", RowBox[{"DaughterTrajectoryCoord2", "[", RowBox[{"xdecayfip", ",", "ydecayfip", ",", "zfip", ",", "plane", ",", "px1lab", ",", "py1lab", ",", "pz1lab"}], "]"}]}]}], ",", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"pz1lab", ">", "0.`"}], "&&", RowBox[{"plane", "\[GreaterEqual]", "zfip"}]}], ",", RowBox[{RowBox[{"zEnter", "=", RowBox[{"If", "[", RowBox[{RowBox[{"zfip", ">", "zMagnetMinGivenExperiment"}], ",", "zfip", ",", "zMagnetMinGivenExperiment"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"zExit", "=", RowBox[{"If", "[", RowBox[{RowBox[{"plane", "<", "zMagnetMaxGivenExperiment"}], ",", "plane", ",", "zMagnetMaxGivenExperiment"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"dz", "=", RowBox[{"zExit", "-", "zEnter"}]}], ";", "\[IndentingNewLine]", RowBox[{"k", "=", FractionBox[RowBox[{"Bval", " ", "charge1"}], FractionBox[RowBox[{"cval", " ", "GeVTokgVal"}], "qValSI"]]}], ";", "\[IndentingNewLine]", RowBox[{"pxExit", "=", RowBox[{"px1lab", "-", RowBox[{"k", " ", "dz"}]}]}], ";", "\[IndentingNewLine]", RowBox[{"pzSquared", "=", RowBox[{SuperscriptBox["pz1lab", "2"], "+", RowBox[{RowBox[{"(", RowBox[{"px1lab", "-", "pxExit"}], ")"}], " ", RowBox[{"(", RowBox[{"px1lab", "+", "pxExit"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"pzSquared", ">", "0.`"}], ",", RowBox[{RowBox[{"pzExit", "=", SqrtBox["pzSquared"]}], ";", "\[IndentingNewLine]", RowBox[{"driftBefore", "=", FractionBox[RowBox[{"zEnter", "-", "zfip"}], "pz1lab"]}], ";", "\[IndentingNewLine]", RowBox[{"driftAfter", "=", FractionBox[RowBox[{"plane", "-", "zExit"}], "pzExit"]}], ";", "\[IndentingNewLine]", RowBox[{"xFinal", "=", RowBox[{"xdecayfip", "+", RowBox[{"driftBefore", " ", "px1lab"}], "+", FractionBox[RowBox[{"dz", " ", RowBox[{"(", RowBox[{"px1lab", "+", "pxExit"}], ")"}]}], RowBox[{"pz1lab", "+", "pzExit"}]], "+", RowBox[{"driftAfter", " ", "pxExit"}]}]}], ";", "\[IndentingNewLine]", RowBox[{"bendTime", "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Abs", "[", RowBox[{"k", " ", "dz"}], "]"}], "<", FractionBox[RowBox[{"Abs", "[", "pz1lab", "]"}], SuperscriptBox["10", "8"]]}], ",", RowBox[{FractionBox["dz", "pz1lab"], "-", FractionBox[RowBox[{"px1lab", " ", "k", " ", SuperscriptBox["dz", "2"]}], RowBox[{"2", " ", SuperscriptBox["pz1lab", "3"]}]]}], ",", FractionBox[RowBox[{"2.`", " ", RowBox[{"ArcTan", "[", FractionBox[RowBox[{"px1lab", "-", "pxExit"}], RowBox[{"pz1lab", "+", "pzExit"}]], "]"}]}], "k"]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"yFinal", "=", RowBox[{"ydecayfip", "+", RowBox[{"py1lab", " ", RowBox[{"(", RowBox[{"driftBefore", "+", "bendTime", "+", "driftAfter"}], ")"}]}]}]}]}]}], "]"}]}]}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"volumeDetector", "==", "1"}], ",", "1.", ",", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"xFinal", "\[Equal]", "99999.`"}], "||", RowBox[{"yFinal", "\[Equal]", "99999.`"}]}], ",", "0.`", ",", RowBox[{"N", "[", RowBox[{"DecayAcceptanceGeometry", "[", RowBox[{"xFinal", ",", "yFinal", ",", "plane"}], "]"}], "]"}]}], "]"}]}], "]"}]}]}], "]"}], ",", RowBox[{"CompilationTarget", "\[Rule]", "\"C\""}], ",", RowBox[{"RuntimeOptions", "\[Rule]", "\"Speed\""}], ",", RowBox[{"RuntimeAttributes", "\[Rule]", RowBox[{"{", "Listable", "}"}]}], ",", RowBox[{"Parallelization", "\[Rule]", "True"}], ",", RowBox[{"CompilationOptions", "\[Rule]", RowBox[{"{", RowBox[{"\"InlineCompiledFunctions\"", "\[Rule]", "True"}], "}"}]}]}], "]"}], "]"}], "/.", "\[VeryThinSpace]", RowBox[{"ruleDown", "[", RowBox[{"{", RowBox[{"DaughterTrajectoryCoord1", ",", "DaughterTrajectoryCoord2", ",", "DecayAcceptanceGeometry"}], "}"}], "]"}]}], "/.", "\[VeryThinSpace]", RowBox[{"ruleOwn", "[", RowBox[{"{", RowBox[{"cval", ",", "GeVTokgVal", ",", "qValSI", ",", "Bval", ",", "xLongMuonPlaneGivenExperiment", ",", "xLongNonMuonPlaneGivenExperiment", ",", "zMagnetMinGivenExperiment", ",", "zMagnetMaxGivenExperiment", ",", "DecayVolumeAsDetectorGivenExperiment"}], "}"}], "]"}]}], "]"}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{
   3.905533887197404*^9, {3.910241569630865*^9, 3.910241603711719*^9}, {
    3.9102416680806513`*^9, 3.9102417664708004`*^9}, {3.91024180291088*^9, 
@@ -2846,13 +2842,7 @@ Cell[BoxData[
                   " ", "to", " ", "be", " ", "reconstructed"}]}], "*)"}], 
                "\[IndentingNewLine]", 
                RowBox[{
-                RowBox[{"xLongProjVal", "=", 
-                 RowBox[{"If", "[", 
-                  RowBox[{
-                   RowBox[{
-                    RowBox[{"Abs", "[", "pdg1", "]"}], "==", "13."}], ",", 
-                   "xLongMuonPlaneGivenExperiment", ",", 
-                   "xLongNonMuonPlaneGivenExperiment"}], "]"}]}], ";", 
+                RowBox[{"xLongProjVal", "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"pdg1", "\[Equal]", "22.`"}], "||", RowBox[{"pdg1", "\[Equal]", "130.`"}]}], ",", "ECALpositionGivenExperiment", ",", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Abs", "[", "pdg1", "]"}], "\[Equal]", "13.`"}], ",", "xLongMuonPlaneGivenExperiment", ",", "xLongNonMuonPlaneGivenExperiment"}], "]"}]}], "]"}]}], ";",
                 "\[IndentingNewLine]", 
                 RowBox[{"(*", 
                  RowBox[{
@@ -2991,12 +2981,7 @@ Cell[BoxData[
             "DaughterTrajectoryCoord1", ",", "DaughterTrajectoryCoord2", ",", 
              "xAtDetectorEndMagnetEffect", ",", "yAtDetectorEndMagnetEffect", 
              ",", "xAtMagnetStart", ",", "yAtMagnetEnd"}], "}"}], "]"}]}], "/.", 
-         RowBox[{"ruleOwn", "[", 
-          RowBox[{"{", 
-           RowBox[{
-           "Bval", ",", "xLongMuonPlaneGivenExperiment", ",", 
-            "xLongNonMuonPlaneGivenExperiment", ",", 
-            "zMagnetMaxGivenExperiment"}], "}"}], "]"}]}], "//", 
+         RowBox[{"ruleOwn", "[", RowBox[{"{", RowBox[{"Bval", ",", "xLongMuonPlaneGivenExperiment", ",", "xLongNonMuonPlaneGivenExperiment", ",", "zMagnetMaxGivenExperiment", ",", "ECALpositionGivenExperiment"}], "}"}], "]"}]}], "//",
         "ReleaseHold"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"<<", "CompiledFunctionTools`"}], ";"}], "\n", 
@@ -5298,10 +5283,7 @@ Cell[BoxData[{
                     " ", "for", " ", "the", " ", "first", " ", "decay", " ", 
                     "product"}], "*)"}], "\[IndentingNewLine]", 
                     RowBox[{
-                    RowBox[{"{", 
-                    RowBox[{
-                    "condg1", ",", "Coord1FinProd", ",", "Coord2FinProd"}], 
-                    "}"}], "=", 
+                    "condg1", "=",
                     RowBox[{"CondGeom", "[", 
                     RowBox[{
                     "charge1", ",", "pdg1", ",", "xdecayfip", ",", 
@@ -5346,105 +5328,7 @@ Cell[BoxData[{
                     RowBox[{"{", 
                     RowBox[{"f1", ",", "0", ",", "f1max", ",", "1"}], "}"}]}],
                      "]"}], ";", "\[IndentingNewLine]", 
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"condGood", ">", "0."}], "&&", 
-                    RowBox[{"WhetherCuts", "==", "1"}], "&&", 
-                    RowBox[{"condBad", "==", "0."}]}], ",", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{
-                    "Values", " ", "of", " ", "the", " ", "energy", " ", 
-                    "cuts", " ", "for", " ", "the", " ", "decay", " ", 
-                    "products"}], "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{"IfEcuts", "==", "1"}], ",", 
-                    RowBox[{"count", "+=", 
-                    RowBox[{"CondE", "[", 
-                    RowBox[{
-                    "22.", ",", "0.", ",", "22.", ",", "e1", ",", "e2"}], 
-                    "]"}]}]}], "]"}], ";"}]}], "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{"(*", 
-                    RowBox[{"The", " ", 
-                    SubscriptBox["p", "T"], " ", 
-                    RowBox[{"cut", ".", " ", "If"}], " ", "it", " ", "is", 
-                    " ", "present", " ", "then", " ", "evaluate", " ", "the", 
-                    " ", 
-                    RowBox[{"acceptance", ".", " ", "If"}], " ", "not", " ", 
-                    "then", " ", "proceeding", " ", "to", " ", "the", " ", 
-                    "next", " ", "cut"}], "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"IfpTcuts", "==", "1"}], "&&", 
-                    RowBox[{"cond", "\[Equal]", "1"}]}], ",", 
-                    RowBox[{"cond", "=", 
-                    RowBox[{"CondPT", "[", 
-                    RowBox[{
-                    "pdg1", ",", "pdg2", ",", "px1lab", ",", "py1lab", ",", 
-                    "px2lab", ",", "py2lab"}], "]"}]}]}], "]"}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{"The", " ", "IP", " ", 
-                    RowBox[{"cut", ".", " ", "If"}], " ", "it", " ", "is", 
-                    " ", "present", " ", "then", " ", "evaluate", " ", "the", 
-                    " ", 
-                    RowBox[{"acceptance", ".", " ", "If"}], " ", "not", " ", 
-                    "then", " ", "proceeding", " ", "to", " ", "the", " ", 
-                    "next", " ", "cut"}], "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"IfIPcuts", "==", "1"}], "&&", 
-                    RowBox[{"cond", "\[Equal]", "1"}]}], ",", 
-                    RowBox[{"cond", "=", 
-                    RowBox[{"CondIP", "[", 
-                    RowBox[{
-                    "pdg1", ",", "pdg2", ",", "xdecayfip", ",", "ydecayfip", 
-                    ",", "zfip", ",", "px1lab", ",", "px2lab", ",", "py1lab", 
-                    ",", "py2lab", ",", "pz1lab", ",", "pz2lab"}], "]"}]}]}], 
-                    "]"}], ";", "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{"The", " ", "spatial", " ", "separation", " ", 
-                    RowBox[{"cut", ".", " ", "If"}], " ", "it", " ", "is", 
-                    " ", "present", " ", "then", " ", "evaluate", " ", "the", 
-                    " ", 
-                    RowBox[{"acceptance", ".", " ", "If"}], " ", "not", " ", 
-                    "then", " ", "proceeding", " ", "to", " ", "the", " ", 
-                    "next", " ", "cut"}], "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"IfAngSepCuts", "==", "1"}], "&&", 
-                    RowBox[{"cond", "\[Equal]", "1"}]}], ",", 
-                    RowBox[{"cond", "=", 
-                    RowBox[{"CondSS", "[", 
-                    RowBox[{
-                    "pdg1", ",", "pdg2", ",", "zfip", ",", "px1lab", ",", 
-                    "px2lab", ",", "py1lab", ",", "py2lab", ",", "pz1lab", 
-                    ",", "pz2lab"}], "]"}]}]}], "]"}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{
-                    "The", " ", "invariant", " ", "mass", " ", "cut"}], 
-                    "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"IfminvCuts", "==", "1"}], "&&", 
-                    RowBox[{"cond", "\[Equal]", "1"}]}], ",", 
-                    RowBox[{"cond", "=", 
-                    RowBox[{"CondMinv", "[", 
-                    RowBox[{
-                    "pdg1", ",", "pdg2", ",", "px1lab", ",", "py1lab", ",", 
-                    "pz1lab", ",", "E1lab", ",", "px2lab", ",", "py2lab", ",",
-                     "pz2lab", ",", "E2lab"}], "]"}]}]}], "]"}], ";"}], 
-                    "*)"}], "\[IndentingNewLine]", "]"}], ";"}], 
+                    RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"0.`", "<", "condGood", "\[LessEqual]", "2.`"}], "&&", RowBox[{"condBad", "\[Equal]", "0.`"}]}], ",", RowBox[{"count", "+=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"WhetherCuts", "\[Equal]", "1"}], "&&", RowBox[{"IfEcuts", "\[Equal]", "1"}]}], ",", RowBox[{"CondE", "[", RowBox[{"22.`", ",", "0.`", ",", "22.`", ",", "e1", ",", "e2"}], "]"}], ",", "1.`"}], "]"}]}]}], "]"}], ";"}],
                    "\[IndentingNewLine]", ",", 
                    RowBox[{"{", 
                     RowBox[{"j", ",", "1", ",", "len"}], "}"}]}], "]"}], 
@@ -5560,6 +5444,7 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"{", "length", "}"}], ",", "\[IndentingNewLine]", 
      RowBox[{
+      RowBox[{"If", "[", "exHadAvailable", "[", "LLP", ",", "mLLP", ",", "SpecificDecay", ",", "HadronizationOption", ",", "descr", "]", ",", "Return", "[", "exHadDraw", "[", "LLP", ",", "mLLP", ",", "SpecificDecay", ",", "isim", ",", "descr", "]", "]", "]"}], ";", "\[IndentingNewLine]",
       RowBox[{"If", "[", 
        RowBox[{
         RowBox[{
@@ -6207,7 +6092,7 @@ Cell[BoxData[
       "List", " ", "of", " ", "processes", " ", "for", " ", "the", " ", 
        "given", " ", "LLP"}], "*)"}], "\[IndentingNewLine]", 
      RowBox[{
-      RowBox[{"ProcessesListGivenComputation", "=", RowBox[{"Select", "[", RowBox[{"proclist", ",", RowBox[{"Function", "[", RowBox[{"proc", ",", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"HadronizationOption", "\[Equal]", "\"True\""}], "&&", RowBox[{RowBox[{"JetsPresence", "[", RowBox[{"LLP", ",", "proc"}], "]"}], "\[Equal]", "\"Yes\""}], "&&", RowBox[{"ifHadronizedPhaseSpaceIsPresent", "[", RowBox[{"LLP", ",", "mLLP", ",", "proc"}], "]"}]}], ",", "True", ",", RowBox[{"mLLP", ">", RowBox[{"(", RowBox[{RowBox[{"Total", "[", RowBox[{RowBox[{"(", RowBox[{RowBox[{"ParamProductMass", "[", RowBox[{"ParamProductToPDGid", "[", "#1", "]"}], "]"}], "&"}], ")"}], "/@", RowBox[{"DeleteCases", "[", RowBox[{RowBox[{"ListDecayProducts", "[", RowBox[{"LLP", ",", "proc"}], "]"}], ",", "\"Null\""}], "]"}]}], "]"}], "/.", "\[VeryThinSpace]", RowBox[{"{", RowBox[{"mX", "\[Rule]", RowBox[{"mXval", "[", RowBox[{"LLP", ",", "mLLP"}], "]"}]}], "}"}]}], ")"}]}]}], "]"}]}], "]"}]}], "]"}]}], ";", 
+      RowBox[{"ProcessesListGivenComputation", "=", RowBox[{"exHadProcesses", "[", RowBox[{"LLP", ",", "mLLP", ",", "proclist", ",", "HadronizationOption", ",", "descr"}], "]"}]}], ";",
       "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
@@ -6216,7 +6101,7 @@ Cell[BoxData[
       RowBox[{"ListBrRatiosGivenComputation", "=", 
        RowBox[{
         RowBox[{
-         RowBox[{"ListBrRatios", "[", 
+         RowBox[{"exHadBranchingRatio", "[",
           RowBox[{"LLP", ",", "mLLP", ",", "#", ",", "descr"}], "]"}], "&"}], 
         "/@", "ProcessesListGivenComputation"}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"If", "[", 
@@ -6354,7 +6239,7 @@ Cell[BoxData[
                  RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";", 
               "\[IndentingNewLine]", 
               RowBox[{"DecayAcceptancesList", "=", 
-               RowBox[{"With", "[", RowBox[{RowBox[{"{", RowBox[{"weights", "=", FractionBox[RowBox[{RowBox[{"(", RowBox[{RowBox[{"ListBrRatios", "[", RowBox[{"LLP", ",", "mLLP", ",", "#1", ",", "descr"}], "]"}], "&"}], ")"}], "/@", "proclistgiven"}], RowBox[{"Total", "[", "ListBrRatiosGivenComputation", "]"}]]}], "}"}], ",", RowBox[{"Total", "[", RowBox[{"Table", "[", RowBox[{RowBox[{RowBox[{"weights", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], " ", RowBox[{"DecayAcceptanceELLP\[Theta]LLPzLLPoverall", "[", RowBox[{"LLP", ",", "mLLP", ",", RowBox[{"{", RowBox[{"proclistgiven", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], "}"}], ",", RowBox[{"{", RowBox[{"isimlistgiven", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], "}"}], ",", "gridNonZero", ",", "HadronizationOption", ",", "AllProductsWithinAcceptance", ",", "ntracksmin", ",", "descr", ",", "listUndesiredProducts"}], "]"}]}], ",", RowBox[{"{", RowBox[{"i", ",", RowBox[{"Length", "[", "proclistgiven", "]"}]}], "}"}]}], "]"}], "]"}]}], "]"}]}], ";", 
+               RowBox[{"With", "[", RowBox[{RowBox[{"{", RowBox[{"weights", "=", FractionBox[RowBox[{RowBox[{"(", RowBox[{RowBox[{"exHadBranchingRatio", "[", RowBox[{"LLP", ",", "mLLP", ",", "#1", ",", "descr"}], "]"}], "&"}], ")"}], "/@", "proclistgiven"}], RowBox[{"Total", "[", "ListBrRatiosGivenComputation", "]"}]]}], "}"}], ",", RowBox[{"Total", "[", RowBox[{"Table", "[", RowBox[{RowBox[{RowBox[{"weights", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], " ", RowBox[{"DecayAcceptanceELLP\[Theta]LLPzLLPoverall", "[", RowBox[{"LLP", ",", "mLLP", ",", RowBox[{"{", RowBox[{"proclistgiven", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], "}"}], ",", RowBox[{"{", RowBox[{"isimlistgiven", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], "}"}], ",", "gridNonZero", ",", "HadronizationOption", ",", "AllProductsWithinAcceptance", ",", "ntracksmin", ",", "descr", ",", "listUndesiredProducts"}], "]"}]}], ",", RowBox[{"{", RowBox[{"i", ",", RowBox[{"Length", "[", "proclistgiven", "]"}]}], "}"}]}], "]"}], "]"}]}], "]"}]}], ";",
               "\[IndentingNewLine]", 
               RowBox[{"(*", 
                RowBox[{

@@ -1,0 +1,14 @@
+$HistoryLength=0;
+{raw,out,n,w}=Take[$CommandLine,-4];
+{n,w}=ToExpression/@{n,w};
+stream=OpenRead[raw,BinaryFormat->True];
+array=Developer`ToPackedArray[Partition[BinaryReadList[stream,"Real64",ByteOrdering->-1],w]];
+Close[stream];
+If[Dimensions[array]=!={n,w}||!MatrixQ[array,MachineNumberQ],Quit[2]];
+stream=OpenWrite[out,BinaryFormat->True];
+BinaryWrite[stream,Normal[BinarySerialize[array,PerformanceGoal->"Size"]],"Byte"];
+Close[stream];
+restored=BinaryDeserialize[ReadByteArray[out]];
+If[BinarySerialize[array,PerformanceGoal->"Speed"]=!=BinarySerialize[restored,PerformanceGoal->"Speed"],DeleteFile[out];Quit[3]];
+DeleteFile[raw];
+Print["ROUNDTRIP ",n," x ",w];Quit[];

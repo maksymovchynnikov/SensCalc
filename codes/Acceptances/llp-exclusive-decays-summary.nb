@@ -234,32 +234,7 @@ Cell[BoxData[{
       RowBox[{"{", 
        RowBox[{"1", ",", "2"}], "}"}]}], "]"}]}], "]"}], 
   ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"BrVisibleGivenSetup", "[", 
-   RowBox[{
-   "LLP_", ",", "mLLP_", ",", "proclist_", ",", "ECALoption_", ",", 
-    "descr_"}], "]"}], ":=", 
-  RowBox[{"Block", "[", 
-   RowBox[{
-    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{"Sum", "[", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"ListBrRatios", "[", 
-        RowBox[{"LLP", ",", "mLLP", ",", 
-         RowBox[{"proclist", "[", 
-          RowBox[{"[", "i", "]"}], "]"}], ",", "descr"}], "]"}], "*", 
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{"ECALoption", "==", "\"\<True\>\""}], ",", "1", ",", 
-         RowBox[{"ecalfactor", "[", 
-          RowBox[{"LLP", ",", 
-           RowBox[{"proclist", "[", 
-            RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}]}], ",", 
-      RowBox[{"{", 
-       RowBox[{"i", ",", "1", ",", 
-        RowBox[{"Length", "[", "proclist", "]"}], ",", "1"}], "}"}]}], 
-     "]"}]}], "\[IndentingNewLine]", "]"}]}]}], "Input",
+ RowBox[{RowBox[{"BrVisibleGivenSetup", "[", RowBox[{"LLP_", ",", "mLLP_", ",", "proclist_", ",", "ECALoption_", ",", "descr_"}], "]"}], ":=", RowBox[{UnderoverscriptBox["\[Sum]", "i", RowBox[{"Length", "[", "proclist", "]"}]], RowBox[{"ListBrRatios", "[", RowBox[{"LLP", ",", "mLLP", ",", RowBox[{"proclist", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], ",", "descr"}], "]"}]}]}]}], "Input",
  CellChangeTimes->{{3.9038904300343843`*^9, 3.9038904467633495`*^9}, {
    3.9038974232518253`*^9, 3.9038974246177225`*^9}, {3.9048779761248674`*^9, 
    3.9048780930220118`*^9}, {3.9048783142877655`*^9, 
@@ -1291,6 +1266,13 @@ Cell[BoxData[{
       RowBox[{
        RowBox[{"pdg1", "==", "pdgX"}], ",", 
        RowBox[{"mass1", "=", 
+        RowBox[{"mXval", "[",
+         RowBox[{"LLP", ",", "m"}], "]"}]}]}], "]"}], ";",
+     "\[IndentingNewLine]",
+     RowBox[{"If", "[",
+      RowBox[{
+       RowBox[{"pdg2", "==", "pdgX"}], ",",
+       RowBox[{"mass2", "=",
         RowBox[{"mXval", "[", 
          RowBox[{"LLP", ",", "m"}], "]"}]}]}], "]"}], ";", 
      "\[IndentingNewLine]", 

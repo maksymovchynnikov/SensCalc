@@ -2057,16 +2057,7 @@ Cell[BoxData[{
         RowBox[{"eminSample", ">", "eminData"}], "||", 
         RowBox[{"emaxSample", "<", "emaxData"}]}], ",", "\[IndentingNewLine]", 
        RowBox[{
-        RowBox[{"norm", "=", 
-         RowBox[{
-          RowBox[{"If", "[", 
-           RowBox[{"if\[Theta]logSampling", ",", 
-            RowBox[{"(", 
-             RowBox[{"\[Theta]logmax", "-", "\[Theta]logmin"}], ")"}], ",", 
-            RowBox[{"(", 
-             RowBox[{"\[Theta]max", "-", "\[Theta]min"}], ")"}]}], "]"}], "*", 
-          FractionBox[
-           RowBox[{"Total", "[", "weights", "]"}], "NevSampl"]}]}], ";", 
+        RowBox[{"norm", "=", RowBox[{RowBox[{"If", "[", RowBox[{"IfCollider", ",", "2.`", ",", "1.`"}], "]"}], "*", RowBox[{RowBox[{"If", "[", RowBox[{"if\[Theta]logSampling", ",", RowBox[{"(", RowBox[{"\[Theta]logmax", "-", "\[Theta]logmin"}], ")"}], ",", RowBox[{"(", RowBox[{"\[Theta]max", "-", "\[Theta]min"}], ")"}]}], "]"}], "*", FractionBox[RowBox[{"Total", "[", "weights", "]"}], "NevSampl"]}]}]}], ";",
         "\[IndentingNewLine]", 
         RowBox[{"{", 
          RowBox[{"motherdata", ",", "norm"}], "}"}]}], "\[IndentingNewLine]", 

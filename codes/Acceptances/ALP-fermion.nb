@@ -50,16 +50,76 @@ e2c263eceafd"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{RowBox[{RowBox[{"LLPsel", "=", "\"ALP-fermion\""}], ";"}], "Null", RowBox[{RowBox[{"filesDecay", "=", RowBox[{"FileNames", "[", RowBox[{"\"Widths*\"", ",", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"ParentDirectory", "[", RowBox[{"ParentDirectory", "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",", "\"phenomenology\"", ",", "LLPsel", ",", "\"decay widths\""}], "}"}], "]"}]}], "]"}]}], ";"}], "Null", RowBox[{"descrlist", "=", RowBox[{RowBox[{"(", RowBox[{RowBox[{RowBox[{"StringSplit", "[", RowBox[{RowBox[{"FileNameTake", "[", "#1", "]"}], ",", RowBox[{"{", RowBox[{"\"GeV-\"", ",", "\".m\""}], "}"}]}], "]"}], "[[", "2", "]]"}], "&"}], ")"}], "/@", "filesDecay"}]}], "Null", RowBox[{"Print", "[", "\"Default description:\"", "]"}], "Null", RowBox[{RowBox[{"descrDefault", "[", "LLPsel", "]"}], "=", "\"Default\""}], "Null", RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"DecayWidthsDataTemp", "=", RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"ParentDirectory", "[", RowBox[{"ParentDirectory", "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",", "\"phenomenology\"", ",", "LLPsel", ",", "\"decay widths\"", ",", RowBox[{"\"Widths-model-ALP-fermion-scale-1000.-GeV-\"", "<>", "descr", "<>", "\".m\""}]}], "}"}], "]"}], ",", "\"MX\""}], "]"}]}], ";", RowBox[{"DecayWidthsDataTemp2", "=", RowBox[{"DecayWidthsDataTemp", "[[", "4", "]]"}]}], ";", RowBox[{"Print", "[", TagBox[TagBox[GridBox[{{RowBox[{"Table", "[", RowBox[{"i", ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", RowBox[{"DecayWidthsDataTemp2", "[[", "1", "]]"}], "]"}], ",", "1"}], "}"}]}], "]"}]}, {RowBox[{"DecayWidthsDataTemp2", "[[", "1", "]]"}]}}, RowSpacings -> 1, ColumnAlignments -> Left, ColumnAlignments -> Left], Column], Function[BoxForm`e$, TableForm[BoxForm`e$]]], "]"}], ";", RowBox[{"DecayWidthsData", "=", RowBox[{"Drop", "[", RowBox[{"DecayWidthsDataTemp2", ",", "3"}], "]"}]}], ";", RowBox[{"totalwidthdata", "=", RowBox[{"DecayWidthsData", "[[", RowBox[{"All", ",", RowBox[{"{", RowBox[{"1", ",", RowBox[{"-", "1"}]}], "}"}]}], "]]"}]}], ";", RowBox[{RowBox[{"c\[Tau]LLP", "[", RowBox[{"LLPsel", ",", "descr", ",", "mLLP_", ",", "y_"}], "]"}], "=", FractionBox["chbar", RowBox[{SuperscriptBox[RowBox[{"(", FractionBox["1", RowBox[{"2", " ", "vh"}]], ")"}], "2"], " ", SuperscriptBox["y", "2"], " ", RowBox[{RowBox[{"Interpolation", "[", RowBox[{RowBox[{"DecayWidthsData", "[[", RowBox[{"All", ",", RowBox[{"{", RowBox[{"1", ",", RowBox[{"-", "1"}]}], "}"}]}], "]]"}], ",", RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", "mLLP", "]"}]}]]}], ";", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", "DecayWidthsDataTemp", "]"}], ">=", "5"}], ",", RowBox[{RowBox[{"c\[Tau]LLP", "[", RowBox[{"LLPsel", ",", "descr", ",", "mLLP_", ",", "y_"}], "]"}], "=", FractionBox["chbar", RowBox[{SuperscriptBox[RowBox[{"(", FractionBox["y", RowBox[{"2", " ", "vh"}]], ")"}], "2"], " ", RowBox[{RowBox[{"DecayWidthsDataTemp", "[[", RowBox[{"5", ",", "\"width_functions\"", ",", "\"Total\""}], "]]"}], "[", "mLLP", "]"}]}]]}]}], "]"}], ";", RowBox[{RowBox[{"ALPFermionMatchingMass", "[", "descr", "]"}], "=", RowBox[{"DecayWidthsDataTemp", "[[", "3", "]]"}]}], ";", RowBox[{RowBox[{"couplingSymbol", "[", "LLPsel", "]"}], "=", "y"}], ";"}], ",", RowBox[{"{", RowBox[{"descr", ",", "descrlist"}], "}"}]}], "]"}], "Null", RowBox[{RowBox[{RowBox[{"DecayDescriptionExplanation", "[", RowBox[{"LLPsel", ",", "\"2310.03524\""}], "]"}], "=", "\"Description of hadronic width of ALPs closely following 2310.03524: no inclusion of mixing of ALPs with heavy pseudoscalar excitations\""}], ";"}], "Null", RowBox[{RowBox[{RowBox[{"DecayDescriptionExplanation", "[", RowBox[{"LLPsel", ",", "\"Default\""}], "]"}], "=", "\"Description of the ALP widths from 2501.04525: invariance under chiral rotation parameters, inclusion of mixing of ALPs with heavy pseudoscalar excitations\""}], ";"}], "Null", RowBox[{RowBox[{"descr", "=", "\"PBC description\""}], ";"}], "Null", RowBox[{RowBox[{"(", RowBox[{RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"data", ",", RowBox[{"channels", "=", RowBox[{"{", RowBox[{"\"2e\"", ",", "\"2\[Mu]\"", ",", "\"2\[Tau]\""}], "}"}]}], ",", "columns"}], "}"}], ",", RowBox[{RowBox[{"data", "=", RowBox[{RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"ParentDirectory", "[", RowBox[{"ParentDirectory", "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",", "\"phenomenology\"", ",", "LLPsel", ",", "\"decay widths\"", ",", "\"Widths-model-ALP-fermion-scale-1000.-GeV-2310.03524.m\""}], "}"}], "]"}], ",", "\"MX\""}], "]"}], "[[", "4", "]]"}]}], ";", RowBox[{"columns", "=", RowBox[{RowBox[{"(", RowBox[{RowBox[{"First", "[", RowBox[{"FirstPosition", "[", RowBox[{RowBox[{"data", "[[", "1", "]]"}], ",", "#1"}], "]"}], "]"}], "&"}], ")"}], "/@", "channels"}]}], ";", RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"DecayWidthALPFermionPBC", "[", RowBox[{RowBox[{"channels", "[[", "i", "]]"}], ",", "mLLP_"}], "]"}], "=", RowBox[{RowBox[{"Interpolation", "[", RowBox[{RowBox[{RowBox[{"Drop", "[", RowBox[{"data", ",", "3"}], "]"}], "[[", RowBox[{"All", ",", RowBox[{"{", RowBox[{"1", ",", RowBox[{"columns", "[[", "i", "]]"}]}], "}"}]}], "]]"}], ",", RowBox[{"InterpolationOrder", "->", "1"}]}], "]"}], "[", "mLLP", "]"}]}], ",", RowBox[{"{", RowBox[{"i", ",", RowBox[{"Length", "[", "channels", "]"}]}], "}"}]}], "]"}], ";", RowBox[{RowBox[{"c\[Tau]LLP", "[", RowBox[{"LLPsel", ",", "descr", ",", "mLLP_", ",", "y_"}], "]"}], "=", FractionBox["chbar", RowBox[{SuperscriptBox[RowBox[{"(", FractionBox["y", RowBox[{"2", " ", "vh"}]], ")"}], "2"], " ", RowBox[{"Total", "[", RowBox[{RowBox[{"(", RowBox[{RowBox[{"DecayWidthALPFermionPBC", "[", RowBox[{"#1", ",", "mLLP"}], "]"}], "&"}], ")"}], "/@", "channels"}], "]"}]}]]}]}]}], "]"}], ";"}], ")"}], ";"}], "Null", RowBox[{RowBox[{RowBox[{"DecayDescriptionExplanation", "[", RowBox[{"LLPsel", ",", "descr"}], "]"}], "=", "\"Description of hadronic width following the PBC report 1901.09966: no hadronic decays. It was widely used in the past\""}], ";"}]}], "Input",
- CellChangeTimes->{{3.947642806380352*^9, 3.9476428308293724`*^9}, {
-  3.947642906738901*^9, 3.9476429863027744`*^9}, {3.9476431920064354`*^9, 
-  3.9476433106195183`*^9}, {3.9476439362139225`*^9, 3.947643947001032*^9}, {
-  3.9476449962221203`*^9, 3.9476449984828835`*^9}, {3.949378592984188*^9, 
-  3.949378594695677*^9}, {3.9508674487473145`*^9, 3.9508674847956524`*^9}, {
-  3.954311023085331*^9, 3.9543111295543537`*^9}, {3.954311204191601*^9, 
-  3.95431120777277*^9}, {3.9543113227261276`*^9, 3.9543113438981*^9}, {
-  3.960342613707219*^9, 3.960342620277689*^9}},
- CellLabel->"In[37]:=",ExpressionUUID->"0e4eee1a-a4db-1a44-9d85-435eb2b941f8"],
+Cell[BoxData[RowBox[{RowBox[{"LLPsel", "=", "\"ALP-fermion\""}], ";", "\:f3a3",
+    RowBox[{"descrlist", "=", RowBox[{"{", "\"Default\"", "}"}]}], ";", "\:f3a3",
+    RowBox[{"Print", "[", "\"Default description:\"", "]"}], ";", "\:f3a3",
+    RowBox[{RowBox[{"descrDefault", "[", "LLPsel", "]"}], "=", "\"Default\""}], ";", "\:f3a3",
+    RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"DecayWidthsDataTemp", "=",
+            RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{",
+                    RowBox[{RowBox[{"ParentDirectory", "[", RowBox[{"ParentDirectory", "[",
+                          RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",",
+                      "\"phenomenology\"", ",", "LLPsel", ",", "\"decay widths\"", ",",
+                      RowBox[{"\"Widths-model-ALP-fermion-scale-1000.-GeV-\"", "<>", "descr", "<>",
+                        "\".m\""}]}], "}"}], "]"}], ",", "\"MX\""}], "]"}]}], ";",
+          RowBox[{"DecayWidthsDataTemp2", "=", RowBox[{"DecayWidthsDataTemp", "\:301a", "4",
+              "\:301b"}]}], ";", RowBox[{"Print", "[", RowBox[{"{", RowBox[{RowBox[{"Table", "[",
+                  RowBox[{"i", ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[",
+                          RowBox[{"DecayWidthsDataTemp2", "\:301a", "1", "\:301b"}], "]"}], ",", "1"}],
+                      "}"}]}], "]"}], ",", RowBox[{"DecayWidthsDataTemp2", "\:301a", "1", "\:301b"}]}],
+              "}"}], "]"}], ";", RowBox[{"DecayWidthsData", "=",
+            RowBox[{"Drop", "[", RowBox[{"DecayWidthsDataTemp2", ",", "3"}], "]"}]}], ";",
+          RowBox[{"totalwidthdata", "=", RowBox[{"DecayWidthsData", "\:301a", RowBox[{"All", ",",
+                RowBox[{"{", RowBox[{"1", ",", RowBox[{"-", "1"}]}], "}"}]}], "\:301b"}]}], ";",
+          RowBox[{RowBox[{"c\:03c4LLP", "[", RowBox[{"LLPsel", ",", "descr", ",", "mLLP_", ",", "y_"}],
+              "]"}], "=", FractionBox["chbar", RowBox[{SuperscriptBox[RowBox[{"(", FractionBox["1",
+                   RowBox[{"2", " ", "vh"}]], ")"}], "2"], " ", SuperscriptBox["y", "2"], " ",
+               RowBox[{RowBox[{"Interpolation", "[", RowBox[{RowBox[{"DecayWidthsData", "\:301a",
+                       RowBox[{"All", ",", RowBox[{"{", RowBox[{"1", ",", RowBox[{"-", "1"}]}],
+                           "}"}]}], "\:301b"}], ",", RowBox[{"InterpolationOrder", "\:f522", "1"}]}],
+                   "]"}], "[", "mLLP", "]"}]}]]}], ";",
+          RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", "DecayWidthsDataTemp", "]"}],
+                "\:2265", "5"}], ",", RowBox[{RowBox[{"c\:03c4LLP", "[", RowBox[{"LLPsel", ",", "descr",
+                    ",", "mLLP_", ",", "y_"}], "]"}], "=", FractionBox["chbar",
+                 RowBox[{SuperscriptBox[RowBox[{"(", FractionBox["y", RowBox[{"2", " ", "vh"}]],
+                      ")"}], "2"], " ", RowBox[{RowBox[{"DecayWidthsDataTemp", "\:301a", RowBox[
+                        {"5", ",", "\"width_functions\"", ",", "\"Total\""}], "\:301b"}], "[", "mLLP",
+                     "]"}]}]]}]}], "]"}], ";", RowBox[{RowBox[{"ALPFermionMatchingMass", "[",
+              "descr", "]"}], "=", RowBox[{"DecayWidthsDataTemp", "\:301a", "3", "\:301b"}]}], ";",
+          RowBox[{RowBox[{"couplingSymbol", "[", "LLPsel", "]"}], "=", "y"}], ";"}], ",",
+        RowBox[{"{", RowBox[{"descr", ",", "descrlist"}], "}"}]}], "]"}], ";", "\:f3a3",
+    RowBox[{RowBox[{"DecayDescriptionExplanation", "[", RowBox[{"LLPsel", ",", "\"Default\""}],
+        "]"}], "=", "\"Description of the ALP widths from 2501.04525: invariance under chiral \
+rotation parameters, inclusion of mixing of ALPs with heavy pseudoscalar excitations\""}], ";",
+    "\:f3a3", RowBox[{"descr", "=", "\"PBC description\""}], ";", "\:f3a3",
+    RowBox[{"(", RowBox[{RowBox[{"Module", "[",
+          RowBox[{RowBox[{"{", RowBox[{"data", ",", RowBox[{"channels", "=", RowBox[
+                   {"{", RowBox[{"\"2e\"", ",", "\"2\:03bc\"", ",", "\"2\:03c4\""}], "}"}]}], ",",
+                "columns"}], "}"}], ",", RowBox[{RowBox[{"data", "=", RowBox[{"Import", "[",
+                  RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[
+                           {"ParentDirectory", "[", RowBox[{"ParentDirectory", "[", RowBox[
+                               {"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",",
+                          "\"phenomenology\"", ",", "LLPsel", ",", "\"decay widths\"", ",",
+                          "\"PBC-leptonic-widths.wxf\""}], "}"}], "]"}], ",", "\"WXF\""}], "]"}]}],
+              ";", RowBox[{"columns", "=", RowBox[{RowBox[{"(", RowBox[{RowBox[{"First", "[",
+                        RowBox[{"FirstPosition", "[", RowBox[{RowBox[{"data", "\:301a", "1", "\:301b"}],
+                            ",", "#1"}], "]"}], "]"}], "&"}], ")"}], "/@", "channels"}]}], ";",
+              RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"DecayWidthALPFermionPBC", "[",
+                      RowBox[{RowBox[{"channels", "\:301a", "i", "\:301b"}], ",", "mLLP_"}], "]"}], "=",
+                    RowBox[{RowBox[{"Interpolation", "[", RowBox[{RowBox[{RowBox[{"Rest", "[",
+                              "data", "]"}], "\:301a", RowBox[{"All", ",", RowBox[{"{", RowBox[
+                                 {"1", ",", RowBox[{"columns", "\:301a", "i", "\:301b"}]}], "}"}]}],
+                            "\:301b"}], ",", RowBox[{"InterpolationOrder", "\:f522", "1"}]}], "]"}], "[",
+                      "mLLP", "]"}]}], ",", RowBox[{"{", RowBox[{"i", ",", RowBox[{"Length", "[",
+                        "channels", "]"}]}], "}"}]}], "]"}], ";", RowBox[{RowBox[{"c\:03c4LLP", "[",
+                  RowBox[{"LLPsel", ",", "descr", ",", "mLLP_", ",", "y_"}], "]"}], "=",
+                FractionBox["chbar", RowBox[{SuperscriptBox[RowBox[{"(", FractionBox["y",
+                       RowBox[{"2", " ", "vh"}]], ")"}], "2"], " ", RowBox[{"Total", "[",
+                     RowBox[{RowBox[{"(", RowBox[{RowBox[{"DecayWidthALPFermionPBC", "[", RowBox[
+                              {"#1", ",", "mLLP"}], "]"}], "&"}], ")"}], "/@", "channels"}],
+                     "]"}]}]]}]}]}], "]"}], ";"}], ")"}], ";", "\:f3a3",
+    RowBox[{RowBox[{"DecayDescriptionExplanation", "[", RowBox[{"LLPsel", ",", "descr"}], "]"}],
+      "=", "\"Description of hadronic width following the PBC report 1901.09966: no hadronic \
+decays. It was widely used in the past\""}], ";", "\:f3a3"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -80,34 +140,96 @@ b89b7e08b7fb"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{RowBox[{RowBox[{"(", RowBox[{RowBox[{"LLPsel", "=", "\"ALP-fermion\""}], ";", RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"2310.03524\""}], "]"}], "=", RowBox[{RowBox[{"ListBrRatios", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"2310.03524\""}], "]"}], "=", "0.`"}]}], ",", RowBox[{"{", RowBox[{"proc", ",", RowBox[{"{", RowBox[{"\"2p\"", ",", "\"2n\""}], "}"}]}], "}"}]}], "]"}]}], ")"}], ";"}], "Null", RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{RowBox[{"BrRatiosALPgluonData", "[", "ma_", "]"}], "=", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"data", "=", TemplateBox[{RowBox[{"DeleteDuplicates", "[", TemplateBox[{RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"ParentDirectory", "[", RowBox[{"ParentDirectory", "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",", "\"phenomenology\"", ",", "LLPsel", ",", RowBox[{"\"decay widths/Br-ratios-SensCalc-model-ALP-fermion-scale-1000.-GeV-\"", "<>", "descr", "<>", "\".m\""}]}], "}"}], "]"}], ",", "\"MX\""}], "]"}]}, "Transpose", SyntaxForm -> SuperscriptBox], "]"}]}, "Transpose", SyntaxForm -> SuperscriptBox]}], "}"}], ",", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", RowBox[{"DeleteDuplicates", "[", RowBox[{"data", "[[", "1", "]]"}], "]"}], "]"}], "!=", RowBox[{"Length", "[", RowBox[{"data", "[[", "1", "]]"}], "]"}]}], ",", RowBox[{RowBox[{"Print", "[", RowBox[{"\"Conflicting duplicate ALP decay channels in \"", ",", "descr"}], "]"}], ";", RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";", "data"}]}], "]"}]}], ";", RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], "=", RowBox[{RowBox[{RowBox[{"BrRatiosALPgluonData", "[", "ma", "]"}], "[[", "1", "]]"}], "/.", " ", RowBox[{"{", RowBox[{"\"Jets\"", "->", "\"Jets-GG\""}], "}"}]}]}], ";", RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"procsel", "=", RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], "[[", "i", "]]"}]}], ";", RowBox[{RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "procsel", ",", "descr"}], "]"}], "=", RowBox[{RowBox[{"ListBrRatios", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "procsel", ",", "descr"}], "]"}], "=", RowBox[{RowBox[{RowBox[{"BrRatiosALPgluonData", "[", "mLLP", "]"}], "[[", "3", "]]"}], "[[", "i", "]]"}]}]}], ";", RowBox[{RowBox[{"ListDecayProducts", "[", RowBox[{"LLPsel", ",", "procsel"}], "]"}], "=", RowBox[{RowBox[{RowBox[{"BrRatiosALPgluonData", "[", "ma", "]"}], "[[", "2", "]]"}], "[[", "i", "]]"}]}], ";", RowBox[{RowBox[{"JetsPresence", "[", RowBox[{"LLPsel", ",", "procsel"}], "]"}], "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"MemberQ", "[", RowBox[{RowBox[{"{", RowBox[{"\"Jets-ss\"", ",", "\"Jets-cc\"", ",", "\"Jets-GG\""}], "}"}], ",", "procsel"}], "]"}], "==", "True"}], ",", "\"Yes\"", ",", "\"No\""}], "]"}]}]}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", RowBox[{RowBox[{"BrRatiosALPgluonData", "[", "mLLP", "]"}], "[[", "3", "]]"}], "]"}], ",", "1"}], "}"}]}], "]"}], ";", RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"False\""}], "]"}], "=", RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], ";"}], ",", RowBox[{"{", RowBox[{"descr", ",", "descrlist"}], "}"}]}], "]"}], "Null", RowBox[{RowBox[{"procleptonic", "=", RowBox[{"{", RowBox[{"\"2e\"", ",", "\"2\[Mu]\"", ",", "\"2\[Tau]\""}], "}"}]}], ";"}], "Null", RowBox[{"Do", "[", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"MemberQ", "[", RowBox[{"procleptonic", ",", "proc"}], "]"}], ",", RowBox[{RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"PBC description\""}], "]"}], "=", RowBox[{RowBox[{"ListBrRatios", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"PBC description\""}], "]"}], "=", FractionBox[RowBox[{"DecayWidthALPFermionPBC", "[", RowBox[{"proc", ",", "mLLP"}], "]"}], RowBox[{"Total", "[", RowBox[{RowBox[{"(", RowBox[{RowBox[{"DecayWidthALPFermionPBC", "[", RowBox[{"#1", ",", "mLLP"}], "]"}], "&"}], ")"}], "/@", "procleptonic"}], "]"}]]}]}], ",", RowBox[{RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"PBC description\""}], "]"}], "=", RowBox[{RowBox[{"ListBrRatios", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"PBC description\""}], "]"}], "=", "0.`"}]}]}], "]"}], ",", RowBox[{"{", RowBox[{"proc", ",", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}]}], "}"}]}], "]"}], "Null", TagBox[TemplateBox[{RowBox[{"Table", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], "[[", "i", "]]"}], ",", RowBox[{"ListDecayProducts", "[", RowBox[{"LLPsel", ",", RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], "[[", "i", "]]"}]}], "]"}]}], "}"}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], "]"}], ",", "1"}], "}"}]}], "]"}]}, "Transpose", SyntaxForm -> SuperscriptBox], Function[BoxForm`e$, TableForm[BoxForm`e$]]], "Null", RowBox[{"Print", "[", "\"All processes with at least two charged/neutral particles:\"", "]"}], "Null", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], "Null", RowBox[{"Print", "[", "\"All processes with at least two charged particles:\"", "]"}], "Null", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"False\""}], "]"}], "Null", RowBox[{"Print", "[", "\"Processes with jets:\"", "]"}], "Null", RowBox[{"Select", "[", RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], ",", RowBox[{RowBox[{RowBox[{"JetsPresence", "[", RowBox[{"LLPsel", ",", "#1"}], "]"}], "==", "\"Yes\""}], "&"}]}], "]"}], "Null", RowBox[{"LogLogPlot", "[", RowBox[{RowBox[{"Evaluate", "[", RowBox[{"{", RowBox[{RowBox[{UnderoverscriptBox["\[Sum]", "pr", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}]], RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mN", ",", "pr", ",", "\"2310.03524\""}], "]"}]}], ",", RowBox[{UnderoverscriptBox["\[Sum]", "pr", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}]], RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mN", ",", "pr", ",", "\"PBC description\""}], "]"}]}]}], "}"}], "]"}], ",", RowBox[{"{", RowBox[{"mN", ",", "0.05`", ",", "4.5`"}], "}"}], ",", RowBox[{"PlotRange", "->", "All"}]}], "]"}], "Null", RowBox[{RowBox[{"listDecayDescriptions", "[", "LLPsel", "]"}], "=", RowBox[{"SortBy", "[", RowBox[{RowBox[{"DeleteDuplicates", "[", RowBox[{RowBox[{"Select", "[", RowBox[{TemplateBox[{RowBox[{"(", RowBox[{RowBox[{"(", RowBox[{RowBox[{RowBox[{"Keys", "[", RowBox[{"DownValues", "[", "ListBrRatios", "]"}], "]"}], "[[", RowBox[{"All", ",", "1", ",", "#1"}], "]]"}], "&"}], ")"}], "/@", RowBox[{"{", RowBox[{"1", ",", RowBox[{"-", "1"}]}], "}"}]}], ")"}]}, "Transpose", SyntaxForm -> SuperscriptBox], ",", RowBox[{RowBox[{RowBox[{"#1", "[[", "1", "]]"}], "==", "LLPsel"}], "&"}]}], "]"}], "[[", RowBox[{"All", ",", "2"}], "]]"}], "]"}], ",", RowBox[{RowBox[{"#1", "=!=", "\"Default\""}], "&"}]}], "]"}]}]}], "Input",
- CellChangeTimes->{
-  3.890550139666936*^9, {3.890550225678339*^9, 3.8905502571105175`*^9}, {
-   3.9037089371677756`*^9, 3.9037089439815345`*^9}, {3.903708979372821*^9, 
-   3.903709071842332*^9}, {3.903709123667943*^9, 3.903709226373082*^9}, {
-   3.903709360274336*^9, 3.903709364947524*^9}, {3.903709483835615*^9, 
-   3.9037096654511623`*^9}, {3.9037097177970533`*^9, 
-   3.9037098360539303`*^9}, {3.9037103532952595`*^9, 
-   3.9037103632426353`*^9}, {3.903710395751079*^9, 3.903710408113423*^9}, {
-   3.903710492251489*^9, 3.903710494171282*^9}, {3.903710532838067*^9, 
-   3.9037105578595686`*^9}, {3.9037105941769485`*^9, 3.903710656587475*^9}, {
-   3.903710703287961*^9, 3.903710787202149*^9}, {3.903710830833022*^9, 
-   3.90371097286856*^9}, {3.9037118073187575`*^9, 3.903711830251164*^9}, {
-   3.903712519797754*^9, 3.9037125202464137`*^9}, {3.903712590022724*^9, 
-   3.903712669073572*^9}, {3.903712804384085*^9, 3.903712807490596*^9}, {
-   3.9037197386198025`*^9, 3.903719741955517*^9}, {3.9038905956628914`*^9, 
-   3.9038906116934423`*^9}, 3.9040576433552656`*^9, {3.9040576840438805`*^9, 
-   3.9040576904235263`*^9}, {3.9040578262073174`*^9, 
-   3.9040578322293296`*^9}, {3.9048110831533213`*^9, 3.904811147309662*^9}, {
-   3.9056199398047037`*^9, 3.9056199429410725`*^9}, {3.9139782591992173`*^9, 
-   3.913978267591053*^9}, {3.915437186448371*^9, 3.915437186498675*^9}, 
-   3.9161554091235695`*^9, {3.916155441708729*^9, 3.9161554679911823`*^9}, {
-   3.916160829408192*^9, 3.9161608322763567`*^9}, 3.9339177337079544`*^9, {
-   3.9476090886213284`*^9, 3.9476090924600906`*^9}, 3.949378599719095*^9, {
-   3.9543112328654346`*^9, 3.954311242645481*^9}, 3.954311281334305*^9, {
-   3.954311399646044*^9, 3.954311609665764*^9}, {3.954311669795355*^9, 
-   3.9543117263713017`*^9}, {3.9543118038930244`*^9, 3.954311804121809*^9}},
- CellLabel->"In[48]:=",ExpressionUUID->"1844cc9f-603e-4f50-8cf9-45cc02677286"]
+Cell[BoxData[RowBox[{RowBox[{"LLPsel", "=", "\"ALP-fermion\""}], ";", "\:f3a3",
+    RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{RowBox[{"BrRatiosALPgluonData", "[", "ma_", "]"}],
+            "=", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"data", "=", TemplateBox[
+                     {RowBox[{"DeleteDuplicates", "[", TemplateBox[{RowBox[{"Import", "[",
+                            RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[
+                                 {"ParentDirectory", "[", RowBox[{"ParentDirectory", "[", RowBox[
+                                 {"NotebookDirectory", "[", "]"}], "]"}], "]"}], ",",
+                                 "\"phenomenology\"", ",", "LLPsel", ",", RowBox[{"\"decay \
+widths/Br-ratios-SensCalc-model-ALP-fermion-scale-1000.-GeV-\"", "<>", "descr", "<>", "\".m\""}]}],
+                                 "}"}], "]"}], ",", "\"MX\""}], "]"}]}, "Transpose", SyntaxForm ->
+                          SuperscriptBox], "]"}]}, "Transpose", SyntaxForm -> SuperscriptBox]}],
+                  "}"}], ",", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[",
+                          RowBox[{"DeleteDuplicates", "[", RowBox[{"data", "\:301a", "1", "\:301b"}],
+                            "]"}], "]"}], "\:2260", RowBox[{"Length", "[", RowBox[{"data", "\:301a", "1",
+                            "\:301b"}], "]"}]}], ",", RowBox[{RowBox[{"Print", "[", RowBox[
+                           {"\"Conflicting duplicate ALP decay channels in \"", ",", "descr"}],
+                          "]"}], ";", RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";", "data"}]}],
+              "]"}]}], ";", RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",",
+                "\"True\""}], "]"}], "=", RowBox[{RowBox[{RowBox[{"BrRatiosALPgluonData", "[",
+                  "ma", "]"}], "\:301a", "1", "\:301b"}], "/.", "\:200a", RowBox[{"{",
+                RowBox[{"\"Jets\"", "\:f522", "\"Jets-GG\""}], "}"}]}]}], ";",
+          RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"procsel", "=", RowBox[
+                   {RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}],
+                    "\:301a", "i", "\:301b"}]}], ";", RowBox[{RowBox[{"ListBrRatiosTemp", "[",
+                    RowBox[{"LLPsel", ",", "mLLP_", ",", "procsel", ",", "descr"}], "]"}], "=",
+                  RowBox[{RowBox[{"ListBrRatios", "[", RowBox[{"LLPsel", ",", "mLLP_", ",",
+                        "procsel", ",", "descr"}], "]"}], "=", RowBox[{RowBox[{RowBox[
+                         {"BrRatiosALPgluonData", "[", "mLLP", "]"}], "\:301a", "3", "\:301b"}], "\:301a",
+                      "i", "\:301b"}]}]}], ";", RowBox[{RowBox[{"ListDecayProducts", "[",
+                    RowBox[{"LLPsel", ",", "procsel"}], "]"}], "=", RowBox[
+                   {RowBox[{RowBox[{"BrRatiosALPgluonData", "[", "ma", "]"}], "\:301a", "2", "\:301b"}],
+                    "\:301a", "i", "\:301b"}]}], ";", RowBox[{RowBox[{"JetsPresence", "[",
+                    RowBox[{"LLPsel", ",", "procsel"}], "]"}], "=", RowBox[{"If", "[",
+                    RowBox[{RowBox[{RowBox[{"MemberQ", "[", RowBox[{RowBox[{"{", RowBox[
+                               {"\"Jets-ss\"", ",", "\"Jets-cc\"", ",", "\"Jets-GG\""}], "}"}],
+                            ",", "procsel"}], "]"}], "\:f431", "True"}], ",", "\"Yes\"", ",",
+                      "\"No\""}], "]"}]}]}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",",
+                  RowBox[{"Length", "[", RowBox[{RowBox[{"BrRatiosALPgluonData", "[", "mLLP",
+                        "]"}], "\:301a", "3", "\:301b"}], "]"}], ",", "1"}], "}"}]}], "]"}], ";",
+          RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"False\""}], "]"}], "=",
+            RowBox[{"procListnoecal", "[", "LLPsel", "]"}]}], ";"}], ",",
+        RowBox[{"{", RowBox[{"descr", ",", "descrlist"}], "}"}]}], "]"}], ";", "\:f3a3",
+    RowBox[{"procleptonic", "=", RowBox[{"{", RowBox[{"\"2e\"", ",", "\"2\:03bc\"", ",", "\"2\:03c4\""}],
+        "}"}]}], ";", "\:f3a3",
+    RowBox[{"Do", "[", RowBox[
+       {RowBox[{"If", "[", RowBox[{RowBox[{"MemberQ", "[", RowBox[{"procleptonic", ",", "proc"}],
+              "]"}], ",", RowBox[{RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mLLP_",
+                  ",", "proc", ",", "\"PBC description\""}], "]"}], "=",
+              RowBox[{RowBox[{"ListBrRatios", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc",
+                    ",", "\"PBC description\""}], "]"}], "=", FractionBox[RowBox[
+                  {"DecayWidthALPFermionPBC", "[", RowBox[{"proc", ",", "mLLP"}], "]"}],
+                 RowBox[{"Total", "[", RowBox[{RowBox[{"(", RowBox[{RowBox[
+                          {"DecayWidthALPFermionPBC", "[", RowBox[{"#1", ",", "mLLP"}], "]"}],
+                         "&"}], ")"}], "/@", "procleptonic"}], "]"}]]}]}], ",",
+            RowBox[{RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mLLP_", ",", "proc",
+                  ",", "\"PBC description\""}], "]"}], "=", RowBox[{RowBox[{"ListBrRatios", "[",
+                  RowBox[{"LLPsel", ",", "mLLP_", ",", "proc", ",", "\"PBC description\""}], "]"}],
+                "=", "0.`"}]}]}], "]"}], ",",
+        RowBox[{"{", RowBox[{"proc", ",", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",",
+                "\"True\""}], "]"}]}], "}"}]}], "]"}], ";", "\:f3a3",
+    TemplateBox[{RowBox[{"Table", "[",
+        RowBox[{RowBox[{"{", RowBox[{RowBox[{RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",",
+                    "\"True\""}], "]"}], "\:301a", "i", "\:301b"}], ",", RowBox[{"ListDecayProducts",
+                "[", RowBox[{"LLPsel", ",", RowBox[{RowBox[{"ProcessesList", "[", RowBox[
+                       {"LLPsel", ",", "\"True\""}], "]"}], "\:301a", "i", "\:301b"}]}], "]"}]}], "}"}],
+          ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[",
+                RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], "]"}],
+              ",", "1"}], "}"}]}], "]"}]}, "Transpose", SyntaxForm -> SuperscriptBox], ";", "\:f3a3",
+    RowBox[{"Print", "[", "\"All processes with at least two charged/neutral particles:\"", "]"}],
+    ";", "\:f3a3", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}], ";",
+    "\:f3a3", RowBox[{"Print", "[", "\"All processes with at least two charged particles:\"", "]"}],
+    ";", "\:f3a3", RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"False\""}], "]"}], ";",
+    "\:f3a3", RowBox[{"Print", "[", "\"Processes with jets:\"", "]"}], ";", "\:f3a3",
+    RowBox[{"Select", "[", RowBox[{RowBox[{"ProcessesList", "[",
+          RowBox[{"LLPsel", ",", "\"True\""}], "]"}], ",",
+        RowBox[{RowBox[{RowBox[{"JetsPresence", "[", RowBox[{"LLPsel", ",", "#1"}], "]"}], "\:f431",
+            "\"Yes\""}], "&"}]}], "]"}], ";", "\:f3a3",
+    RowBox[{"LogLogPlot", "[",
+      RowBox[{RowBox[{"Evaluate", "[", RowBox[{"{", RowBox[{RowBox[{UnderoverscriptBox["\:2211", "pr",
+                 RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}]],
+                RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mN", ",", "pr", ",",
+                    "\"Default\""}], "]"}]}], ",", RowBox[{UnderoverscriptBox["\:2211", "pr",
+                 RowBox[{"ProcessesList", "[", RowBox[{"LLPsel", ",", "\"True\""}], "]"}]],
+                RowBox[{"ListBrRatiosTemp", "[", RowBox[{"LLPsel", ",", "mN", ",", "pr", ",",
+                    "\"PBC description\""}], "]"}]}]}], "}"}], "]"}], ",",
+        RowBox[{"{", RowBox[{"mN", ",", "0.05`", ",", "4.5`"}], "}"}], ",",
+        RowBox[{"PlotRange", "\:f522", "All"}]}], "]"}], ";", "\:f3a3",
+    RowBox[{RowBox[{"listDecayDescriptions", "[", "LLPsel", "]"}], "=",
+      RowBox[{"{", RowBox[{"\"Default\"", ",", "\"PBC description\""}], "}"}]}], ";", "\:f3a3"}]],
+ "Input"]
 }, Open  ]]
 }, Open  ]],
 

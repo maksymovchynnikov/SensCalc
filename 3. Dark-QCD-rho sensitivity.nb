@@ -694,233 +694,7 @@ Cell["Via Drell-Yan", "Subsection",
   "Number-of-events+sensitivity", 
    "Acceptance"},ExpressionUUID->"deee4ff3-fc78-e849-adbe-3cc6c1bf967c"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"(*", 
-   RowBox[{
-   "___", "___", "___", "___", "___", "___", "___", "___", "___", "__"}], 
-   "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{
-    RowBox[{"Production", " ", "from", " ", "Drell"}], "-", 
-    RowBox[{"Yan", " ", "process"}]}], "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{
-   "___", "___", "___", "___", "___", "___", "___", "___", "___", "__"}], 
-   "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{
-    RowBox[{"Average", " ", "enhancement", " ", "LO", " ", "vs", " ", "LO"}], 
-    "+", 
-    RowBox[{
-    "NLO", " ", "obtained", " ", "for", " ", "SPS", " ", "energies", " ", 
-     "in", " ", "2011.05115"}]}], "*)"}], "\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"kfactorNLO", "=", "1.7"}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{"(*", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"\[Sigma]DrellYanData", "[", "Facility_", "]"}], ":=", 
-     RowBox[{"Block", "[", 
-      RowBox[{
-       RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"dat", "=", 
-         RowBox[{"Import", "[", 
-          RowBox[{
-           RowBox[{"FileNameJoin", "[", 
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"directory", "[", "\"\<Production weights\>\"", "]"}], 
-              ",", 
-              RowBox[{
-              "\"\<sigmaDrellYan_DP_\>\"", "<>", "Facility", "<>", 
-               "\"\<.txt\>\""}]}], "}"}], "]"}], ",", "\"\<Table\>\""}], 
-          "]"}]}], ";", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "=", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"Min", "[", 
-            RowBox[{"dat", "[", 
-             RowBox[{"[", 
-              RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], ",", 
-           RowBox[{"Max", "[", 
-            RowBox[{"dat", "[", 
-             RowBox[{"[", 
-              RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], "}"}]}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"int", "[", "ma_", "]"}], "=", 
-         RowBox[{"If", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{
-             RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "[", 
-             RowBox[{"[", "1", "]"}], "]"}], "\[LessEqual]", " ", "ma", 
-            "\[LessEqual]", 
-            RowBox[{
-             RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "[", 
-             RowBox[{"[", "2", "]"}], "]"}]}], ",", 
-           RowBox[{"Evaluate", "[", 
-            RowBox[{"10", "^", 
-             RowBox[{"(", 
-              RowBox[{
-               RowBox[{"Interpolation", "[", 
-                RowBox[{
-                 RowBox[{
-                  RowBox[{
-                   RowBox[{"{", 
-                    RowBox[{
-                    RowBox[{"Log10", "[", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
-                    RowBox[{"Log10", "[", 
-                    RowBox[{
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "2", "]"}], "]"}], "+", 
-                    SuperscriptBox["10", 
-                    RowBox[{"-", "90"}]]}], "]"}]}], "}"}], "&"}], "/@", 
-                  "dat"}], ",", 
-                 RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
-               RowBox[{"Log10", "[", "ma", "]"}], "]"}], ")"}]}], "]"}], ",", 
-           "0"}], "]"}]}], ";", "\[IndentingNewLine]", 
-        RowBox[{
-         RowBox[{"PmotherToLLP", "[", 
-          RowBox[{
-          "mLLP_", ",", "\[Epsilon]2_", ",", "\"\<DrellYan\>\"", ",", 
-           "Facility"}], "]"}], "=", 
-         RowBox[{
-          RowBox[{"If", "[", 
-           RowBox[{
-            RowBox[{"Facility", "==", "\"\<SPS\>\""}], ",", "kfactorNLO", ",",
-             "1"}], "]"}], "*", "\[Epsilon]2", "*", 
-          FractionBox[
-           RowBox[{"int", "[", "mLLP", "]"}], 
-           RowBox[{"\[Sigma]pNucleonInpb", "[", "Atarget", "]"}]]}]}]}]}], 
-      "\[IndentingNewLine]", "]"}]}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"\[Sigma]DrellYanData", "[", "Facility_", "]"}], ":=", 
-    RowBox[{"Block", "[", 
-     RowBox[{
-      RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"dat", "=", 
-        RowBox[{"Import", "[", 
-         RowBox[{
-          RowBox[{"FileNameJoin", "[", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"directory", "[", "\"\<Production weights\>\"", "]"}], 
-             ",", 
-             RowBox[{
-             "\"\<sigmaDrellYan_\>\"", "<>", "LLPdirName", "<>", "\"\<_\>\"", 
-              "<>", "Facility", "<>", "\"\<.txt\>\""}]}], "}"}], "]"}], ",", 
-          "\"\<Table\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "=", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"Min", "[", 
-           RowBox[{"dat", "[", 
-            RowBox[{"[", 
-             RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], ",", 
-          RowBox[{"Max", "[", 
-           RowBox[{"dat", "[", 
-            RowBox[{"[", 
-             RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], "}"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"int", "[", 
-           RowBox[{"ma_", ",", "\"\<Central\>\""}], "]"}], ",", 
-          RowBox[{"int", "[", 
-           RowBox[{"ma_", ",", "\"\<Upper\>\""}], "]"}], ",", 
-          RowBox[{"int", "[", 
-           RowBox[{"ma_", ",", "\"\<Lower\>\""}], "]"}]}], "}"}], "=", 
-        RowBox[{"Table", "[", 
-         RowBox[{
-          RowBox[{"If", "[", 
-           RowBox[{
-            RowBox[{
-             RowBox[{
-              RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "[", 
-              RowBox[{"[", "1", "]"}], "]"}], "\[LessEqual]", " ", "ma", 
-             "\[LessEqual]", 
-             RowBox[{
-              RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "[", 
-              RowBox[{"[", "2", "]"}], "]"}]}], ",", 
-            RowBox[{"Evaluate", "[", 
-             RowBox[{"10", "^", 
-              RowBox[{"(", 
-               RowBox[{
-                RowBox[{"Interpolation", "[", 
-                 RowBox[{
-                  RowBox[{
-                   RowBox[{
-                    RowBox[{"{", 
-                    RowBox[{
-                    RowBox[{"Log10", "[", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
-                    RowBox[{"Log10", "[", 
-                    RowBox[{
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "+", 
-                    SuperscriptBox["10", 
-                    RowBox[{"-", "90"}]]}], "]"}]}], "}"}], "&"}], "/@", 
-                   "dat"}], ",", 
-                  RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], 
-                "[", 
-                RowBox[{"Log10", "[", "ma", "]"}], "]"}], ")"}]}], "]"}], ",",
-             "0."}], "]"}], ",", 
-          RowBox[{"{", 
-           RowBox[{"i", ",", "2", ",", "4"}], "}"}]}], "]"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"(*", 
-        RowBox[{"k", " ", "factor", " ", "from"}], " ", "*)"}], 
-       "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"PmotherToLLP", "[", 
-           RowBox[{
-           "mLLP_", ",", "\[Epsilon]2_", ",", "\"\<DrellYan-Central\>\"", ",",
-             "Facility"}], "]"}], ",", 
-          RowBox[{"PmotherToLLP", "[", 
-           RowBox[{
-           "mLLP_", ",", "\[Epsilon]2_", ",", "\"\<DrellYan-Upper\>\"", ",", 
-            "Facility"}], "]"}], ",", 
-          RowBox[{"PmotherToLLP", "[", 
-           RowBox[{
-           "mLLP_", ",", "\[Epsilon]2_", ",", "\"\<DrellYan-Lower\>\"", ",", 
-            "Facility"}], "]"}]}], "}"}], "=", 
-        RowBox[{
-         RowBox[{"If", "[", 
-          RowBox[{
-           RowBox[{"Facility", "==", "\"\<SPS\>\""}], ",", "kfactorNLO", ",", 
-           "1"}], "]"}], "*", "\[Epsilon]2", "*", 
-         FractionBox[
-          RowBox[{
-           RowBox[{
-            RowBox[{"int", "[", 
-             RowBox[{"mLLP", ",", "#"}], "]"}], "&"}], "/@", 
-           RowBox[{"{", 
-            RowBox[{
-            "\"\<Central\>\"", ",", "\"\<Upper\>\"", ",", "\"\<Lower\>\""}], 
-            "}"}]}], 
-          RowBox[{"\[Sigma]pNucleonInpb", "[", "Atarget", "]"}]]}]}]}]}], 
-     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
-   RowBox[{"Do", "[", 
-    RowBox[{
-     RowBox[{"\[Sigma]DrellYanData", "[", "Facility", "]"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Facility", ",", 
-       RowBox[{"{", 
-        RowBox[{
-        "\"\<SPS\>\"", ",", "\"\<FermilabBD\>\"", ",", "\"\<LHC\>\""}], 
-        "}"}]}], "}"}]}], "]"}]}]}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"(*", RowBox[{"___", "___", "___", "___", "___", "___", "___", "___", "___", "__"}], "*)"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{RowBox[{"Production", " ", "from", " ", "Drell"}], "-", RowBox[{"Yan", " ", "process"}]}], "*)"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"___", "___", "___", "___", "___", "___", "___", "___", "___", "__"}], "*)"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{RowBox[{"Average", " ", "enhancement", " ", "LO", " ", "vs", " ", "LO"}], "+", RowBox[{"NLO", " ", "obtained", " ", "for", " ", "SPS", " ", "energies", " ", "in", " ", "2011.05115"}]}], "*)"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"kfactorNLO", "=", "1.7"}], ";"}], "\[IndentingNewLine]", RowBox[{"(*", "\[IndentingNewLine]", RowBox[{RowBox[{"\:03c3DrellYanData", "[", "Facility_", "]"}], ":=", RowBox[{"Block", "[", RowBox[{RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{"dat", "=", RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Production weights\"", "]"}], ",", RowBox[{"\"sigmaDrellYan_DP_\"", "<>", "Facility", "<>", "\".txt\""}]}], "}"}], "]"}], ",", "\"Table\""}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "=", RowBox[{"{", RowBox[{RowBox[{"Min", "[", RowBox[{"dat", "[", RowBox[{"[", RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], ",", RowBox[{"Max", "[", RowBox[{"dat", "[", RowBox[{"[", RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"int", "[", "ma_", "]"}], "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "[", RowBox[{"[", "1", "]"}], "]"}], "\:2264", " ", "ma", "\:2264", RowBox[{RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "[", RowBox[{"[", "2", "]"}], "]"}]}], ",", RowBox[{"Evaluate", "[", RowBox[{"10", "^", RowBox[{"(", RowBox[{RowBox[{"Interpolation", "[", RowBox[{RowBox[{RowBox[{RowBox[{"{", RowBox[{RowBox[{"Log10", "[", RowBox[{"#", "[", RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", RowBox[{"Log10", "[", RowBox[{RowBox[{"#", "[", RowBox[{"[", "2", "]"}], "]"}], "+", SuperscriptBox["10", RowBox[{"-", "90"}]]}], "]"}]}], "}"}], "&"}], "/@", "dat"}], ",", RowBox[{"InterpolationOrder", "\:f522", "1"}]}], "]"}], "[", RowBox[{"Log10", "[", "ma", "]"}], "]"}], ")"}]}], "]"}], ",", "0"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"PmotherToLLP", "[", RowBox[{"mLLP_", ",", "\:03f52_", ",", "\"DrellYan\"", ",", "Facility"}], "]"}], "=", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"Facility", "==", "\"SPS\""}], ",", "kfactorNLO", ",", "1"}], "]"}], "*", "\:03f52", "*", FractionBox[RowBox[{"int", "[", "mLLP", "]"}], RowBox[{"\:03c3pNucleonInpb", "[", "Atarget", "]"}]]}]}]}]}], "\[IndentingNewLine]", "]"}]}], "*)"}], "\[IndentingNewLine]", RowBox[{RowBox[{"\:03c3DrellYanData", "[", "Facility_", "]"}], ":=", RowBox[{"Block", "[", RowBox[{RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{"dat", "=", RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"phenomenology\"", ",", "\"DP\"", ",", "\"Production probabilities\"", ",", RowBox[{"\"sigmaDrellYan_DP_\"", "<>", "Facility", "<>", "\".txt\""}]}], "}"}], "]"}], ",", "\"Table\""}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "=", RowBox[{"{", RowBox[{RowBox[{"Min", "[", RowBox[{"dat", "[", RowBox[{"[", RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}], ",", RowBox[{"Max", "[", RowBox[{"dat", "[", RowBox[{"[", RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"{", RowBox[{RowBox[{"int", "[", RowBox[{"ma_", ",", "\"Central\""}], "]"}], ",", RowBox[{"int", "[", RowBox[{"ma_", ",", "\"Upper\""}], "]"}], ",", RowBox[{"int", "[", RowBox[{"ma_", ",", "\"Lower\""}], "]"}]}], "}"}], "=", RowBox[{"Table", "[", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "[", RowBox[{"[", "1", "]"}], "]"}], "\:2264", " ", "ma", "\:2264", RowBox[{RowBox[{"MinMaxMassesDrellYan", "[", "Facility", "]"}], "[", RowBox[{"[", "2", "]"}], "]"}]}], ",", RowBox[{"Evaluate", "[", RowBox[{"10", "^", RowBox[{"(", RowBox[{RowBox[{"Interpolation", "[", RowBox[{RowBox[{RowBox[{RowBox[{"{", RowBox[{RowBox[{"Log10", "[", RowBox[{"#", "[", RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", RowBox[{"Log10", "[", RowBox[{RowBox[{"#", "[", RowBox[{"[", "i", "]"}], "]"}], "+", SuperscriptBox["10", RowBox[{"-", "90"}]]}], "]"}]}], "}"}], "&"}], "/@", "dat"}], ",", RowBox[{"InterpolationOrder", "\:f522", "1"}]}], "]"}], "[", RowBox[{"Log10", "[", "ma", "]"}], "]"}], ")"}]}], "]"}], ",", "0."}], "]"}], ",", RowBox[{"{", RowBox[{"i", ",", "2", ",", "4"}], "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"k", " ", "factor", " ", "from"}], " ", "*)"}], "\[IndentingNewLine]", RowBox[{RowBox[{"{", RowBox[{RowBox[{"PmotherToLLP", "[", RowBox[{"mLLP_", ",", "\:03f52_", ",", "\"DrellYan-Central\"", ",", "Facility"}], "]"}], ",", RowBox[{"PmotherToLLP", "[", RowBox[{"mLLP_", ",", "\:03f52_", ",", "\"DrellYan-Upper\"", ",", "Facility"}], "]"}], ",", RowBox[{"PmotherToLLP", "[", RowBox[{"mLLP_", ",", "\:03f52_", ",", "\"DrellYan-Lower\"", ",", "Facility"}], "]"}]}], "}"}], "=", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"Facility", "==", "\"SPS\""}], ",", "kfactorNLO", ",", "1"}], "]"}], "*", "\:03f52", "*", FractionBox[RowBox[{RowBox[{RowBox[{"int", "[", RowBox[{"mLLP", ",", "#"}], "]"}], "&"}], "/@", RowBox[{"{", RowBox[{"\"Central\"", ",", "\"Upper\"", ",", "\"Lower\""}], "}"}]}], RowBox[{"\:03c3pNucleonInpb", "[", "Atarget", "]"}]]}]}]}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", RowBox[{"Do", "[", RowBox[{RowBox[{"\:03c3DrellYanData", "[", "Facility", "]"}], ",", RowBox[{"{", RowBox[{"Facility", ",", RowBox[{"{", RowBox[{"\"SPS\"", ",", "\"FermilabBD\"", ",", "\"LHC\""}], "}"}]}], "}"}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{{3.934178591179254*^9, 3.934178591401297*^9}, {
    3.9341803422559166`*^9, 3.934180342695938*^9}, {3.9344730407257247`*^9, 
    3.9344730412754993`*^9}, {3.941857880812441*^9, 3.941857903406212*^9}, {
@@ -1248,150 +1022,7 @@ Via fragmentation or via old description of the production via mixing\
    "Number-of-events+sensitivity"},ExpressionUUID->"4d0f3b6e-f4cb-1442-8068-\
 c3f1613700a9"],
 
-Cell[BoxData[
- RowBox[{"\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{
-   "Print", "[", 
-    "\"\<Description of the production via mixing/fragmentation:\>\"", "]"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{"SelectedMixingChoice", "=", 
-    RowBox[{"selectionDialogExplanationOneOption", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-       "\"\<Revised (2504.06828)\>\"", ",", "\"\<Old (1810.01879)\>\""}], 
-       "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{
-       "\"\<Production incorporated directly in the fragmentation chain in \
-PYTHIA8 (2504.06828)\>\"", ",", 
-        RowBox[{
-        "LLPdirName", "<>", 
-         "\"\< flux = meson flux \[Times] squared mixing angle (aka \
-1810.01879 and refs. therein)\>\""}]}], "}"}], ",", 
-      RowBox[{
-      "\"\<Select the description of the \>\"", "<>", "LLPdirName", "<>", 
-       "\"\< production via fragmentation:\>\""}], ",", "200"}], "]"}]}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"condrev", "=", 
-     RowBox[{"SelectedMixingChoice", "==", "\"\<Revised (2504.06828)\>\""}]}],
-     ";"}], "\[IndentingNewLine]", 
-   RowBox[{"If", "[", 
-    RowBox[{"condrev", ",", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"YieldsFragmentation", "[", "mLLP_", "]"}], "=", 
-       RowBox[{"Import", "[", 
-        RowBox[{
-         RowBox[{"FileNameJoin", "[", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"directory", "[", "\"\<Production weights\>\"", "]"}], 
-            ",", 
-            RowBox[{
-            "\"\<Yield-Fragmentation_\>\"", "<>", "LLPdirName", "<>", 
-             "\"\<.mx\>\""}]}], "}"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}], 
-      ";", "\[IndentingNewLine]", 
-      RowBox[{"Do", "[", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"PmotherToLLP", "[", 
-          RowBox[{
-          "mLLP_", ",", "\[Epsilon]2_", ",", "\"\<Fragmentation\>\"", ",", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"YieldsFragmentation", "[", "mLLP", "]"}], "[", 
-             RowBox[{"[", "i", "]"}], "]"}], "[", 
-            RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "=", 
-         RowBox[{"\[Epsilon]2", "*", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"YieldsFragmentation", "[", "mLLP", "]"}], "[", 
-            RowBox[{"[", "i", "]"}], "]"}], "[", 
-           RowBox[{"[", "2", "]"}], "]"}]}]}], "\[IndentingNewLine]", ",", 
-        RowBox[{"{", 
-         RowBox[{"i", ",", "1", ",", 
-          RowBox[{"Length", "[", 
-           RowBox[{"YieldsFragmentation", "[", "mLLP", "]"}], "]"}], ",", 
-          "1"}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-       RowBox[{"Old", " ", "description", " ", "a"}], "-", 
-       RowBox[{"la", " ", "2201.05170"}]}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"Mixing", " ", "angle", " ", 
-         SuperscriptBox["\[Rho]", "0"]}], "-", 
-        RowBox[{
-         RowBox[{"DP", ".", " ", "Following"}], " ", 
-         RowBox[{"https", ":"}]}]}], "//", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"arxiv", ".", "org"}], "/", "pdf"}], "/", 
-        RowBox[{"1810.01879", ".", "pdf"}]}]}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"g\[Rho]0", "=", "5"}], ";", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"\[Theta]DP\[Rho]02", "[", 
-        RowBox[{"mLLP_", ",", "\[Epsilon]2_"}], "]"}], "=", 
-       RowBox[{"\[Epsilon]2", "*", 
-        FractionBox[
-         RowBox[{"4", "Pi", "*", "\[Alpha]EM"}], 
-         SuperscriptBox["g\[Rho]0", "2"]], 
-        FractionBox[
-         SuperscriptBox[
-          RowBox[{"mSM", "[", "\"\<Rho0\>\"", "]"}], "4"], 
-         RowBox[{
-          SuperscriptBox[
-           RowBox[{"(", 
-            RowBox[{
-             SuperscriptBox["mLLP", "2"], "-", 
-             SuperscriptBox[
-              RowBox[{"mSM", "[", "\"\<Rho0\>\"", "]"}], "2"]}], ")"}], "2"], 
-          "+", 
-          RowBox[{
-           SuperscriptBox[
-            RowBox[{"\[CapitalGamma]SM", "[", "\"\<\[Rho]780\>\"", "]"}], 
-            "2"], "*", 
-           SuperscriptBox[
-            RowBox[{"mSM", "[", "\"\<Rho0\>\"", "]"}], "2"]}]}]]}]}], ";", 
-      "\[IndentingNewLine]", 
-      RowBox[{"Do", "[", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"PmotherToLLP", "[", 
-          RowBox[{
-          "mLLP_", ",", "\[Epsilon]2_", ",", "\"\<Old-Mixing\>\"", ",", 
-           "facility"}], "]"}], "=", 
-         RowBox[{"Yield\[Rho]0", "*", 
-          RowBox[{"\[Theta]DP\[Rho]02", "[", 
-           RowBox[{"mLLP", ",", "\[Epsilon]2"}], "]"}]}]}], 
-        "\[IndentingNewLine]", ",", 
-        RowBox[{"{", 
-         RowBox[{"facility", ",", 
-          RowBox[{"{", 
-           RowBox[{
-           "\"\<SPS\>\"", ",", "\"\<Serpukhov\>\"", ",", "\"\<FermilabBD\>\"",
-             ",", "\"\<LHC\>\"", ",", "\"\<FCC-hh\>\""}], "}"}]}], "}"}]}], 
-       "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"WeightsCombinations", "=", 
-     RowBox[{
-      RowBox[{
-       RowBox[{
-        RowBox[{
-         RowBox[{
-          RowBox[{"Keys", "[", 
-           RowBox[{"DownValues", "@", "PmotherToLLP"}], "]"}], "[", 
-          RowBox[{"[", 
-           RowBox[{"All", ",", "1", ",", "#"}], "]"}], "]"}], "&"}], "/@", 
-        RowBox[{"{", 
-         RowBox[{"3", ",", "4"}], "}"}]}], "//", "Transpose"}], "//", 
-      "Sort"}]}], ";"}]}]}]], "Input",
+Cell[BoxData[RowBox[{"\[IndentingNewLine]", RowBox[{RowBox[{"Print", "[", "\"Description of the production via mixing/fragmentation:\"", "]"}], "\[IndentingNewLine]", RowBox[{"SelectedMixingChoice", "=", RowBox[{"selectionDialogExplanationOneOption", "[", RowBox[{RowBox[{"{", RowBox[{"\"Revised (2504.06828)\"", ",", "\"Old (1810.01879)\""}], "}"}], ",", RowBox[{"{", RowBox[{"\"Production incorporated directly in the fragmentation chain in PYTHIA8 (2504.06828)\"", ",", RowBox[{"LLPdirName", "<>", "\" flux = meson flux \:00d7 squared mixing angle (aka 1810.01879 and refs. therein)\""}]}], "}"}], ",", RowBox[{"\"Select the description of the \"", "<>", "LLPdirName", "<>", "\" production via fragmentation:\""}], ",", "200"}], "]"}]}], "\[IndentingNewLine]", RowBox[{RowBox[{"condrev", "=", RowBox[{"SelectedMixingChoice", "==", "\"Revised (2504.06828)\""}]}], ";"}], "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{"condrev", ",", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"YieldsFragmentation", "[", "mLLP_", "]"}], "=", RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"phenomenology\"", ",", "\"DP\"", ",", "\"Production probabilities\"", ",", "\"Yield-Fragmentation_DP.mx\""}], "}"}], "]"}], ",", "\"MX\""}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"Do", "[", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"PmotherToLLP", "[", RowBox[{"mLLP_", ",", "\:03f52_", ",", "\"Fragmentation\"", ",", RowBox[{RowBox[{RowBox[{"YieldsFragmentation", "[", "mLLP", "]"}], "[", RowBox[{"[", "i", "]"}], "]"}], "[", RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "=", RowBox[{"\:03f52", "*", RowBox[{RowBox[{RowBox[{"YieldsFragmentation", "[", "mLLP", "]"}], "[", RowBox[{"[", "i", "]"}], "]"}], "[", RowBox[{"[", "2", "]"}], "]"}]}]}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", RowBox[{"YieldsFragmentation", "[", "mLLP", "]"}], "]"}], ",", "1"}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", RowBox[{"(*", RowBox[{RowBox[{"Old", " ", "description", " ", "a"}], "-", RowBox[{"la", " ", "2201.05170"}]}], "*)"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{RowBox[{RowBox[{"Mixing", " ", "angle", " ", SuperscriptBox["\:03c1", "0"]}], "-", RowBox[{RowBox[{"DP", ".", " ", "Following"}], " ", RowBox[{"https", ":"}]}]}], "//", RowBox[{RowBox[{RowBox[{"arxiv", ".", "org"}], "/", "pdf"}], "/", RowBox[{"1810.01879", ".", "pdf"}]}]}], "*)"}], "\[IndentingNewLine]", RowBox[{RowBox[{"g\:03c10", "=", "5"}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"\:03b8DP\:03c102", "[", RowBox[{"mLLP_", ",", "\:03f52_"}], "]"}], "=", RowBox[{"\:03f52", "*", FractionBox[RowBox[{"4", "Pi", "*", "\:03b1EM"}], SuperscriptBox["g\:03c10", "2"]], FractionBox[SuperscriptBox[RowBox[{"mSM", "[", "\"Rho0\"", "]"}], "4"], RowBox[{SuperscriptBox[RowBox[{"(", RowBox[{SuperscriptBox["mLLP", "2"], "-", SuperscriptBox[RowBox[{"mSM", "[", "\"Rho0\"", "]"}], "2"]}], ")"}], "2"], "+", RowBox[{SuperscriptBox[RowBox[{"\:0393SM", "[", "\"\:03c1780\"", "]"}], "2"], "*", SuperscriptBox[RowBox[{"mSM", "[", "\"Rho0\"", "]"}], "2"]}]}]]}]}], ";", "\[IndentingNewLine]", RowBox[{"Do", "[", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"PmotherToLLP", "[", RowBox[{"mLLP_", ",", "\:03f52_", ",", "\"Old-Mixing\"", ",", "facility"}], "]"}], "=", RowBox[{"Yield\:03c10", "*", RowBox[{"\:03b8DP\:03c102", "[", RowBox[{"mLLP", ",", "\:03f52"}], "]"}]}]}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"facility", ",", RowBox[{"{", RowBox[{"\"SPS\"", ",", "\"Serpukhov\"", ",", "\"FermilabBD\"", ",", "\"LHC\"", ",", "\"FCC-hh\""}], "}"}]}], "}"}]}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", RowBox[{RowBox[{"WeightsCombinations", "=", RowBox[{RowBox[{RowBox[{RowBox[{RowBox[{RowBox[{"Keys", "[", RowBox[{"DownValues", "@", "PmotherToLLP"}], "]"}], "[", RowBox[{"[", RowBox[{"All", ",", "1", ",", "#"}], "]"}], "]"}], "&"}], "/@", RowBox[{"{", RowBox[{"3", ",", "4"}], "}"}]}], "//", "Transpose"}], "//", "Sort"}]}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.934470944210307*^9, 3.9344710692350903`*^9}, {
    3.934471113166834*^9, 3.9344711469034414`*^9}, {3.934472982269247*^9, 
    3.9344730114614*^9}, {3.934473322827702*^9, 3.934473351939787*^9}, {
@@ -1559,91 +1190,7 @@ Cell["Scanning for tabulated distributions", "Section",
    "Number-of-events+sensitivity"},ExpressionUUID->"c7196214-865c-b14f-93b7-\
 a9e453a2846c"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"(*", 
-   RowBox[{"Define", " ", "the", " ", "file", " ", "pattern"}], "*)"}], "\n", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"pattern", "=", "\"\<DoubleDistr_*_*_*.m\>\""}], ";"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Search", " ", "for", " ", "files", " ", "matching", " ", "the", " ", 
-     "pattern", " ", "in", " ", "the", " ", "directory", " ", "and", " ", 
-     "its", " ", "subdirectories"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"matchingFiles", "=", 
-     RowBox[{"FileNames", "[", 
-      RowBox[{"pattern", ",", 
-       RowBox[{"{", 
-        RowBox[{"directory", "[", "\"\<Distribution\>\"", "]"}], "}"}], ",", 
-       "Infinity"}], "]"}]}], ";"}], "\n", 
-   RowBox[{"(*", 
-    RowBox[{
-     RowBox[{"List", " ", "of", " ", "LLPs"}], ",", " ", 
-     RowBox[{"production", " ", "modes"}], ",", " ", 
-     RowBox[{
-     "and", " ", "facilities", " ", "for", " ", "which", " ", "the", " ", 
-      "tabulated", " ", "distributions", " ", "have", " ", "been", " ", 
-      "computed", " ", "at", " ", "the", " ", "previous", " ", "stage", " ", 
-      "of", " ", "using", " ", "SensCalc"}]}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"ExtractedProductionParameters", "=", 
-     RowBox[{"Function", "[", 
-      RowBox[{"filename", ",", 
-       RowBox[{
-        RowBox[{"parts", "=", 
-         RowBox[{"StringSplit", "[", 
-          RowBox[{
-           RowBox[{"FileNameTake", "[", "filename", "]"}], ",", "\"\<_\>\""}],
-           "]"}]}], ";", "\[IndentingNewLine]", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"parts", "[", 
-           RowBox[{"[", "2", "]"}], "]"}], ",", 
-          RowBox[{"parts", "[", 
-           RowBox[{"[", "3", "]"}], "]"}], ",", 
-          RowBox[{"StringDrop", "[", 
-           RowBox[{
-            RowBox[{"parts", "[", 
-             RowBox[{"[", "4", "]"}], "]"}], ",", 
-            RowBox[{"-", "2"}]}], "]"}]}], "}"}]}]}], " ", "]"}]}], ";"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{
-     RowBox[{"combinations", " ", "selected", " ", "LLP"}], ",", " ", 
-     RowBox[{"production", " ", "channel"}], ",", " ", 
-     RowBox[{
-     "facility", " ", "for", " ", "which", " ", "the", " ", "tabulated", " ", 
-      "distributions", " ", "are", " ", "present"}]}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"DistrCombinations", "=", 
-     RowBox[{
-      RowBox[{"(", 
-       RowBox[{"ExtractedProductionParameters", "/@", "matchingFiles"}], 
-       ")"}], "//", "Sort"}]}], ";"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"If", "[", 
-     RowBox[{"condrev", ",", "\[IndentingNewLine]", 
-      RowBox[{"DistrCombinations", "=", 
-       RowBox[{"Select", "[", 
-        RowBox[{"DistrCombinations", ",", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"#", "[", 
-            RowBox[{"[", "2", "]"}], "]"}], "!=", "\"\<Old-Mixing\>\""}], 
-          "&"}]}], "]"}]}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-      RowBox[{"DistrCombinations", "=", 
-       RowBox[{"Select", "[", 
-        RowBox[{"DistrCombinations", ",", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"#", "[", 
-            RowBox[{"[", "2", "]"}], "]"}], "!=", "\"\<Fragmentation\>\""}], 
-          "&"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
-    ";"}]}]}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"(*", RowBox[{"Define", " ", "the", " ", "file", " ", "pattern"}], "*)"}], "\n", RowBox[{RowBox[{RowBox[{"pattern", "=", "\"DoubleDistr_*_*_*.m\""}], ";"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"Search", " ", "for", " ", "files", " ", "matching", " ", "the", " ", "pattern", " ", "in", " ", "the", " ", "directory", " ", "and", " ", "its", " ", "subdirectories"}], "*)"}], "\[IndentingNewLine]", RowBox[{RowBox[{"matchingFiles", "=", RowBox[{"Join", "[", RowBox[{RowBox[{"Select", "[", RowBox[{RowBox[{"FileNames", "[", RowBox[{"pattern", ",", RowBox[{"{", RowBox[{"directory", "[", "\"Distribution\"", "]"}], "}"}], ",", "\:221e"}], "]"}], ",", RowBox[{RowBox[{"!", RowBox[{"StringContainsQ", "[", RowBox[{RowBox[{"FileNameTake", "[", "#1", "]"}], ",", RowBox[{"{", RowBox[{"\"_Fragmentation_\"", ",", "\"_DrellYan_\""}], "}"}]}], "]"}]}], "&"}]}], "]"}], ",", RowBox[{"FileNames", "[", RowBox[{RowBox[{"{", RowBox[{"\"DoubleDistr_DP_Fragmentation_*.m\"", ",", "\"DoubleDistr_DP_DrellYan_*.m\""}], "}"}], ",", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"spectra\"", ",", "\"New physics particles spectra\"", ",", "\"DP\"", ",", "\"Pregenerated\""}], "}"}], "]"}]}], "]"}]}], "]"}]}], ";"}], "\n", RowBox[{"(*", RowBox[{RowBox[{"List", " ", "of", " ", "LLPs"}], ",", " ", RowBox[{"production", " ", "modes"}], ",", " ", RowBox[{"and", " ", "facilities", " ", "for", " ", "which", " ", "the", " ", "tabulated", " ", "distributions", " ", "have", " ", "been", " ", "computed", " ", "at", " ", "the", " ", "previous", " ", "stage", " ", "of", " ", "using", " ", "SensCalc"}]}], "*)"}], "\[IndentingNewLine]", RowBox[{RowBox[{"ExtractedProductionParameters", "=", RowBox[{"Function", "[", RowBox[{"filename", ",", RowBox[{RowBox[{"parts", "=", RowBox[{"StringSplit", "[", RowBox[{RowBox[{"FileNameTake", "[", "filename", "]"}], ",", "\"_\""}], "]"}]}], ";", RowBox[{"{", RowBox[{"LLPdirName", ",", RowBox[{"parts", "\:301a", "3", "\:301b"}], ",", RowBox[{"StringDrop", "[", RowBox[{RowBox[{"parts", "\:301a", "4", "\:301b"}], ",", RowBox[{"-", "2"}]}], "]"}]}], "}"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{RowBox[{"combinations", " ", "selected", " ", "LLP"}], ",", " ", RowBox[{"production", " ", "channel"}], ",", " ", RowBox[{"facility", " ", "for", " ", "which", " ", "the", " ", "tabulated", " ", "distributions", " ", "are", " ", "present"}]}], "*)"}], "\[IndentingNewLine]", RowBox[{RowBox[{"DistrCombinations", "=", RowBox[{RowBox[{"(", RowBox[{"ExtractedProductionParameters", "/@", "matchingFiles"}], ")"}], "//", "Sort"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{"If", "[", RowBox[{"condrev", ",", "\[IndentingNewLine]", RowBox[{"DistrCombinations", "=", RowBox[{"Select", "[", RowBox[{"DistrCombinations", ",", RowBox[{RowBox[{RowBox[{"#", "[", RowBox[{"[", "2", "]"}], "]"}], "!=", "\"Old-Mixing\""}], "&"}]}], "]"}]}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", RowBox[{"DistrCombinations", "=", RowBox[{"Select", "[", RowBox[{"DistrCombinations", ",", RowBox[{RowBox[{RowBox[{"#", "[", RowBox[{"[", "2", "]"}], "]"}], "!=", "\"Fragmentation\""}], "&"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], ";"}]}]}]], "Input",
  CellChangeTimes->{{3.9137151636915593`*^9, 3.9137152465178137`*^9}, {
    3.9137153053586187`*^9, 3.913715399589816*^9}, {3.913718678447782*^9, 
    3.913718708673525*^9}, {3.913719203960288*^9, 3.9137192388759937`*^9}, {
@@ -1689,231 +1236,7 @@ Cell["Specifying the experiment", "Chapter",
    "Number-of-events+sensitivity"},ExpressionUUID->"72dc9434-3bf4-874a-9cc2-\
 ebe1e1d82d68"],
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{
-   RowBox[{"SetDirectory", "[", 
-    RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{"Parent", " ", "directory"}], "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"ExperimentDirectoriesList", "=", 
-    RowBox[{"Select", "[", 
-     RowBox[{
-      RowBox[{"FileNames", "[", 
-       RowBox[{"\"\<*\>\"", ",", 
-        RowBox[{"directory", "[", "\"\<Acceptances\>\"", "]"}], ",", "1"}], 
-       "]"}], ",", "DirectoryQ"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{"List", " ", "of", " ", "available", " ", "experiments", " ", 
-    RowBox[{"(", 
-     RowBox[{
-     "for", " ", "which", " ", "the", " ", "geometry", " ", "has", " ", 
-      "been", " ", "implemented"}], ")"}]}], "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"ExperimentsListTemp", "=", 
-   RowBox[{"Table", "[", 
-    RowBox[{
-     RowBox[{"FileNameTake", "[", 
-      RowBox[{
-       RowBox[{"ExperimentDirectoriesList", "[", 
-        RowBox[{"[", "i", "]"}], "]"}], ",", 
-       RowBox[{"-", "1"}]}], "]"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", "1", ",", 
-       RowBox[{"Length", "[", "ExperimentDirectoriesList", "]"}], ",", "1"}], 
-      "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"ExperimentsListTemp2", "=", 
-   RowBox[{"Join", "[", 
-    RowBox[{
-     RowBox[{"Partition", "[", 
-      RowBox[{"ExperimentsListTemp", ",", "1"}], "]"}], ",", 
-     RowBox[{"(*", 
-      RowBox[{"Table", "[", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{"TrueQ", "@", 
-          RowBox[{"FileExistsQ", "@", 
-           RowBox[{"FileNameJoin", "[", 
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"directory", "[", "\"\<Acceptances\>\"", "]"}], ",", 
-              RowBox[{"ExperimentsListTemp", "[", 
-               RowBox[{"[", "i", "]"}], "]"}], ",", 
-              RowBox[{"ToString", "@", 
-               RowBox[{"StringForm", "[", 
-                RowBox[{"\"\<Acceptance_``_for_``.m\>\"", ",", 
-                 RowBox[{"ExperimentsListTemp", "[", 
-                  RowBox[{"[", "i", "]"}], "]"}], ",", "LLPdirName"}], 
-                "]"}]}]}], "}"}], "]"}]}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"i", ",", "1", ",", 
-          RowBox[{"Length", "[", "ExperimentsListTemp", "]"}]}], "}"}]}], 
-       "]"}], "*)"}], 
-     RowBox[{"Table", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"Length", "[", 
-          RowBox[{"FileNames", "[", 
-           RowBox[{"FileNameJoin", "[", 
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"directory", "[", "\"\<Acceptances\>\"", "]"}], ",", 
-              RowBox[{"ExperimentsListTemp", "[", 
-               RowBox[{"[", "i", "]"}], "]"}], ",", 
-              RowBox[{"ToString", "@", 
-               RowBox[{"StringForm", "[", 
-                RowBox[{"\"\<Acceptance_``_for_``*.m\>\"", ",", 
-                 RowBox[{"ExperimentsListTemp", "[", 
-                  RowBox[{"[", "i", "]"}], "]"}], ",", "LLPdirName"}], 
-                "]"}]}]}], "}"}], "]"}], "]"}], "]"}], ">", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", 
-         RowBox[{"Length", "[", "ExperimentsListTemp", "]"}]}], "}"}]}], 
-      "]"}], ",", "2"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"Print", "[", "\"\<List of available experiments:\>\"", 
-  "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"ExperimentsListTemp2", "=", 
-   RowBox[{"Select", "[", 
-    RowBox[{"ExperimentsListTemp2", ",", 
-     RowBox[{
-      RowBox[{"FileExistsQ", "[", 
-       RowBox[{"FileNameJoin", "[", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"directory", "[", "\"\<Acceptances\>\"", "]"}], ",", 
-          RowBox[{"#", "[", 
-           RowBox[{"[", "1", "]"}], "]"}], ",", 
-          RowBox[{
-          "\"\<AvailableDescriptions-\>\"", "<>", "LLPdirName", "<>", 
-           "\"\<.mx\>\""}]}], "}"}], "]"}], "]"}], "&"}]}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"ExperimentsList", "=", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"Select", "[", 
-     RowBox[{"ExperimentsListTemp2", ",", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"#", "[", 
-         RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", "True"}], "&"}]}], "]"}],
-     "[", 
-    RowBox[{"[", 
-     RowBox[{"All", ",", "1"}], "]"}], "]"}], "//", 
-   "Sort"}]}], "\[IndentingNewLine]", 
- RowBox[{"If", "[", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"Length", "[", "ExperimentsList", "]"}], "\[Equal]", "0"}], ",", 
-   RowBox[{
-   "Print", "[", 
-    "\"\<No experiment is available, generate first the acceptance for the \
-given experiment using module 1\>\"", "]"}]}], "]"}], "\[IndentingNewLine]", 
- RowBox[{"Print", "[", "\"\<Selected experiments:\>\"", 
-  "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"availablePhenoDescriptions", "[", "exp_", "]"}], ":=", 
-  RowBox[{"Block", "[", 
-   RowBox[{
-    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", "\t", 
-    RowBox[{"descrFile", "=", 
-     RowBox[{"Import", "[", 
-      RowBox[{
-       RowBox[{"FileNameJoin", "[", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"directory", "[", "\"\<Acceptances\>\"", "]"}], ",", "exp", 
-          ",", 
-          RowBox[{
-          "\"\<AvailableDescriptions-\>\"", "<>", "LLPdirName", "<>", 
-           "\"\<.mx\>\""}]}], "}"}], "]"}], ",", "\"\<MX\>\""}], "]"}]}]}], 
-   "\[IndentingNewLine]", "\t", "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"SelectedExperimentListTemp2", "=", 
-  RowBox[{"If", "[", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"Length", "[", "ExperimentsList", "]"}], "\[NotEqual]", "0"}], 
-    ",", 
-    RowBox[{"selectionDialog", "[", 
-     RowBox[{"ExperimentsList", ",", "\"\<Select the experiments:\>\""}], 
-     "]"}]}], "]"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"IfAllPheno", "=", "True"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"SelectedExperimentList", "=", 
-   RowBox[{"{", 
-    RowBox[{"{", "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"If", "[", 
-  RowBox[{"IfAllPheno", ",", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"Do", "[", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{"Module", "[", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{"descriptions", "=", 
-          RowBox[{"availablePhenoDescriptions", "[", "exp", "]"}]}], "}"}], 
-        ",", "\[IndentingNewLine]", 
-        RowBox[{"SelectedExperimentList", "=", 
-         RowBox[{"Join", "[", 
-          RowBox[{"SelectedExperimentList", ",", 
-           RowBox[{"Table", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"exp", ",", 
-               RowBox[{
-                RowBox[{"descriptions", "[", 
-                 RowBox[{"[", "i", "]"}], "]"}], "[", 
-                RowBox[{"[", "1", "]"}], "]"}], ",", 
-               RowBox[{
-                RowBox[{"descriptions", "[", 
-                 RowBox[{"[", "i", "]"}], "]"}], "[", 
-                RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", 
-             RowBox[{"{", 
-              RowBox[{"i", ",", "1", ",", 
-               RowBox[{"Length", "[", "descriptions", "]"}], ",", "1"}], 
-              "}"}]}], "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
-      "\[IndentingNewLine]", ",", 
-      RowBox[{"{", 
-       RowBox[{"exp", ",", "SelectedExperimentListTemp2"}], "}"}]}], "]"}], 
-    ";", "\[IndentingNewLine]", 
-    RowBox[{"SelectedExperimentList", "=", 
-     RowBox[{"Drop", "[", 
-      RowBox[{"SelectedExperimentList", ",", "1"}], "]"}]}], ";"}], 
-   "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"SelectedExperimentList", "=", 
-     RowBox[{"Table", "[", 
-      RowBox[{
-       RowBox[{"Join", "[", 
-        RowBox[{
-         RowBox[{"{", "exp", "}"}], ",", 
-         RowBox[{
-          RowBox[{"Select", "[", 
-           RowBox[{
-            RowBox[{"availablePhenoDescriptions", "[", "exp", "]"}], ",", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"#", "[", 
-               RowBox[{"[", "1", "]"}], "]"}], "==", "\"\<Default\>\""}], 
-             "&"}]}], "]"}], "[", 
-          RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"exp", ",", "SelectedExperimentListTemp2"}], "}"}]}], "]"}]}],
-     ";"}]}], "\[IndentingNewLine]", 
-  "]"}], "\[IndentingNewLine]", "SelectedExperimentList", \
-"\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"icounter", "=", "1"}], ";"}]}], "Input",
+Cell[BoxData[{RowBox[{RowBox[{RowBox[{"SetDirectory", "[", RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"Parent", " ", "directory"}], "*)"}]}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], "//", "ParentDirectory"}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"ExperimentDirectoriesList", "=", RowBox[{"Select", "[", RowBox[{RowBox[{"FileNames", "[", RowBox[{"\"*\"", ",", RowBox[{"directory", "[", "\"Acceptances\"", "]"}], ",", "1"}], "]"}], ",", "DirectoryQ"}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"List", " ", "of", " ", "available", " ", "experiments", " ", RowBox[{"(", RowBox[{"for", " ", "which", " ", "the", " ", "geometry", " ", "has", " ", "been", " ", "implemented"}], ")"}]}], "*)"}]}], "\[IndentingNewLine]", RowBox[{RowBox[{"ExperimentsListTemp", "=", RowBox[{"Table", "[", RowBox[{RowBox[{"FileNameTake", "[", RowBox[{RowBox[{"ExperimentDirectoriesList", "[", RowBox[{"[", "i", "]"}], "]"}], ",", RowBox[{"-", "1"}]}], "]"}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", "ExperimentDirectoriesList", "]"}], ",", "1"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{"ExperimentsListTemp2", "=", RowBox[{"Join", "[", RowBox[{RowBox[{"Partition", "[", RowBox[{"ExperimentsListTemp", ",", "1"}], "]"}], ",", RowBox[{"(*", RowBox[{"Table", "[", RowBox[{RowBox[{"{", RowBox[{"TrueQ", "@", RowBox[{"FileExistsQ", "@", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Acceptances\"", "]"}], ",", RowBox[{"ExperimentsListTemp", "[", RowBox[{"[", "i", "]"}], "]"}], ",", RowBox[{"ToString", "@", RowBox[{"StringForm", "[", RowBox[{"\"Acceptance_``_for_``.m\"", ",", RowBox[{"ExperimentsListTemp", "[", RowBox[{"[", "i", "]"}], "]"}], ",", "LLPdirName"}], "]"}]}]}], "}"}], "]"}]}]}], "}"}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", "ExperimentsListTemp", "]"}]}], "}"}]}], "]"}], "*)"}], RowBox[{"Table", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"Length", "[", RowBox[{"FileNames", "[", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Acceptances\"", "]"}], ",", RowBox[{"ExperimentsListTemp", "[", RowBox[{"[", "i", "]"}], "]"}], ",", RowBox[{"ToString", "@", RowBox[{"StringForm", "[", RowBox[{"\"Acceptance_``_for_``_decayDescription_2311.17157.m*\"", ",", RowBox[{"ExperimentsListTemp", "[", RowBox[{"[", "i", "]"}], "]"}], ",", "LLPdirName"}], "]"}]}]}], "}"}], "]"}], "]"}], "]"}], ">", "0"}], "}"}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", "ExperimentsListTemp", "]"}]}], "}"}]}], "]"}], ",", "2"}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"Print", "[", "\"List of available experiments:\"", "]"}], "\[IndentingNewLine]", RowBox[{RowBox[{"ExperimentsListTemp2", "=", RowBox[{"Select", "[", RowBox[{"ExperimentsListTemp2", ",", RowBox[{RowBox[{"FileExistsQ", "[", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Acceptances\"", "]"}], ",", RowBox[{"#", "[", RowBox[{"[", "1", "]"}], "]"}], ",", RowBox[{"\"AvailableDescriptions-\"", "<>", "LLPdirName", "<>", "\".mx\""}]}], "}"}], "]"}], "]"}], "&"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"ExperimentsList", "=", RowBox[{RowBox[{RowBox[{"Select", "[", RowBox[{"ExperimentsListTemp2", ",", RowBox[{RowBox[{RowBox[{"#", "[", RowBox[{"[", "2", "]"}], "]"}], "\:f431", "True"}], "&"}]}], "]"}], "[", RowBox[{"[", RowBox[{"All", ",", "1"}], "]"}], "]"}], "//", "Sort"}]}], "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", "ExperimentsList", "]"}], "\:f431", "0"}], ",", RowBox[{"Print", "[", "\"No experiment is available, generate first the acceptance for the given experiment using module 1\"", "]"}]}], "]"}], "\[IndentingNewLine]", RowBox[{"Print", "[", "\"Selected experiments:\"", "]"}], "\[IndentingNewLine]", RowBox[{RowBox[{"availablePhenoDescriptions", "[", "exp_", "]"}], ":=", RowBox[{"Block", "[", RowBox[{RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", "\t", RowBox[{"descrFile", "=", RowBox[{"Select", "[", RowBox[{RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Acceptances\"", "]"}], ",", "exp", ",", RowBox[{"\"AvailableDescriptions-\"", "<>", "LLPdirName", "<>", "\".mx\""}]}], "}"}], "]"}], ",", "\"MX\""}], "]"}], ",", RowBox[{RowBox[{RowBox[{"First", "[", "#1", "]"}], "===", "\"2311.17157\""}], "&"}]}], "]"}]}]}], "\[IndentingNewLine]", "\t", "]"}]}], "\[IndentingNewLine]", RowBox[{"SelectedExperimentListTemp2", "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", "ExperimentsList", "]"}], "\:2260", "0"}], ",", RowBox[{"selectionDialog", "[", RowBox[{"ExperimentsList", ",", "\"Select the experiments:\""}], "]"}]}], "]"}]}], "\[IndentingNewLine]", RowBox[{RowBox[{"IfAllPheno", "=", "True"}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{"SelectedExperimentList", "=", RowBox[{"{", RowBox[{"{", "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{"IfAllPheno", ",", "\[IndentingNewLine]", RowBox[{RowBox[{"Do", "[", "\[IndentingNewLine]", RowBox[{RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"descriptions", "=", RowBox[{"availablePhenoDescriptions", "[", "exp", "]"}]}], "}"}], ",", "\[IndentingNewLine]", RowBox[{"SelectedExperimentList", "=", RowBox[{"Join", "[", RowBox[{"SelectedExperimentList", ",", RowBox[{"Table", "[", RowBox[{RowBox[{"{", RowBox[{"exp", ",", RowBox[{RowBox[{"descriptions", "[", RowBox[{"[", "i", "]"}], "]"}], "[", RowBox[{"[", "1", "]"}], "]"}], ",", RowBox[{RowBox[{"descriptions", "[", RowBox[{"[", "i", "]"}], "]"}], "[", RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", "descriptions", "]"}], ",", "1"}], "}"}]}], "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"exp", ",", "SelectedExperimentListTemp2"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"SelectedExperimentList", "=", RowBox[{"Drop", "[", RowBox[{"SelectedExperimentList", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", RowBox[{RowBox[{"SelectedExperimentList", "=", RowBox[{"Table", "[", RowBox[{RowBox[{"Join", "[", RowBox[{RowBox[{"{", "exp", "}"}], ",", RowBox[{RowBox[{"Select", "[", RowBox[{RowBox[{"availablePhenoDescriptions", "[", "exp", "]"}], ",", RowBox[{RowBox[{RowBox[{"#", "[", RowBox[{"[", "1", "]"}], "]"}], "==", "\"2311.17157\""}], "&"}]}], "]"}], "[", RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", RowBox[{"{", RowBox[{"exp", ",", "SelectedExperimentListTemp2"}], "}"}]}], "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "SelectedExperimentList", "\[IndentingNewLine]", RowBox[{RowBox[{"icounter", "=", "1"}], ";"}]}], "Input",
  CellChangeTimes->{{3.8851403254718485`*^9, 3.8851403429411273`*^9}, {
    3.8854395484478483`*^9, 3.885439559226637*^9}, {3.8854397351242537`*^9, 
    3.885439739219259*^9}, {3.8858794196350574`*^9, 3.885879423032172*^9}, 
@@ -2012,35 +1335,7 @@ Cell["Particular experiment", "Chapter",
    "Number-of-events-computation+sensitivity"},ExpressionUUID->"a696daaf-f067-\
 ec4d-ac7c-4568c7a89d15"],
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"{", 
-   RowBox[{
-   "SelectedExperiment", ",", "SelectedDescr", ",", 
-    "ExplanationSelectedDescr"}], "}"}], "=", 
-  RowBox[{"SelectedExperimentList", "[", 
-   RowBox[{"[", 
-    RowBox[{"icounter", "++"}], "]"}], "]"}]}], "\[IndentingNewLine]", 
- RowBox[{"Print", "[", 
-  RowBox[{"Row", "[", 
-   RowBox[{"{", 
-    RowBox[{"\"\<Experiment \>\"", ",", 
-     RowBox[{"icounter", "-", "1"}], ",", "\"\</\>\"", ",", 
-     RowBox[{"Length", "[", "SelectedExperimentList", "]"}]}], "}"}], "]"}], 
-  "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"gval", "=", 
-   RowBox[{"If", "[", 
-    RowBox[{
-     RowBox[{"SelectedDescr", "==", "\"\<2311.17157\>\""}], ",", "5.7", ",", 
-     "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"\[Epsilon]2Val", "[", 
-    RowBox[{"mLLP_", ",", "\[CapitalLambda]2inv_"}], "]"}], "=", 
-   RowBox[{"\[Epsilon]2Eff", "[", 
-    RowBox[{"\[CapitalLambda]2inv", ",", "mLLP", ",", "gval"}], "]"}]}], 
-  ";"}]}], "Input",
+Cell[BoxData[{RowBox[{RowBox[{"{", RowBox[{"SelectedExperiment", ",", "SelectedDescr", ",", "ExplanationSelectedDescr"}], "}"}], "=", RowBox[{"SelectedExperimentList", "[", RowBox[{"[", RowBox[{"icounter", "++"}], "]"}], "]"}]}], "\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{"Row", "[", RowBox[{"{", RowBox[{"\"Experiment \"", ",", RowBox[{"icounter", "-", "1"}], ",", "\"/\"", ",", RowBox[{"Length", "[", "SelectedExperimentList", "]"}]}], "}"}], "]"}], "]"}], "\[IndentingNewLine]", RowBox[{RowBox[{"gval", "=", "5.7"}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"\:03f52Val", "[", RowBox[{"mLLP_", ",", "\:039b2inv_"}], "]"}], "=", RowBox[{"\:03f52Eff", "[", RowBox[{"\:039b2inv", ",", "mLLP", ",", "gval"}], "]"}]}], ";"}]}], "Input",
  CellChangeTimes->{{3.916672448691073*^9, 3.9166724492284126`*^9}, {
    3.934821787503186*^9, 3.9348218246688805`*^9}, {3.9348220753648005`*^9, 
    3.934822075373316*^9}, 3.9482684609661293`*^9, {3.960901517635668*^9, 
@@ -2149,9 +1444,7 @@ Cell[BoxData[{
       RowBox[{"mLLP", ",", "0.05", ",", "4"}], "}"}], ",", 
      RowBox[{"Frame", "->", "True"}], ",", 
      RowBox[{"ImageSize", "->", "Large"}], ",", " ", 
-     RowBox[{"FrameStyle", "\[Rule]", 
-      RowBox[{"Directive", "[", 
-       RowBox[{"Black", ",", " ", "22"}], "]"}]}], ",", 
+     RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "22", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
      RowBox[{"PlotRange", "\[Rule]", 
       RowBox[{"{", 
        RowBox[{
@@ -2208,9 +1501,7 @@ Cell[BoxData[{
       RowBox[{"mLLP", ",", "0.02", ",", "10"}], "}"}], ",", 
      RowBox[{"Frame", "->", "True"}], ",", 
      RowBox[{"ImageSize", "->", "Large"}], ",", 
-     RowBox[{"FrameStyle", "\[Rule]", 
-      RowBox[{"Directive", "[", 
-       RowBox[{"Black", ",", " ", "22"}], "]"}]}], ",", 
+     RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "22", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
      RowBox[{"PlotStyle", "\[Rule]", 
       RowBox[{"{", 
        RowBox[{
@@ -3312,344 +2603,7 @@ Cell["Importing distributions", "Subsection",
    "Number-of-events-computation+sensitivity"},ExpressionUUID->"b7e32310-839e-\
 b44f-a62a-63b2526b1271"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"If", "[", 
-   RowBox[{"condcontinue", ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"Do", "[", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"Module", "[", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"prod", ",", "prodbrem"}], "}"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{"prod", "=", 
-           RowBox[{
-            RowBox[{"ProductionPatternSelectedDistr", "[", 
-             RowBox[{"[", "i", "]"}], "]"}], "[", 
-            RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"dirimp", "=", 
-           RowBox[{"If", "[", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"StringContainsQ", "[", 
-               RowBox[{"prod", ",", 
-                RowBox[{"{", 
-                 RowBox[{
-                 "\"\<DrellYan\>\"", ",", "\"\<Fragmentation\>\"", ",", 
-                  "\"\<Showerings\>\""}], "}"}]}], "]"}], "&&", 
-              RowBox[{"!", 
-               RowBox[{"StringContainsQ", "[", 
-                RowBox[{"prod", ",", "\"\<Old-Mixing\>\""}], "]"}]}]}], ",", 
-             RowBox[{"FileNameJoin", "[", 
-              RowBox[{"{", 
-               RowBox[{
-                RowBox[{"directory", "[", "\"\<Distribution\>\"", "]"}], ",", 
-                "\"\<Pregenerated\>\""}], "}"}], "]"}], ",", 
-             RowBox[{"directory", "[", "\"\<Distribution\>\"", "]"}]}], 
-            "]"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"(*", 
-           RowBox[{
-           "Importing", " ", "the", " ", "data", " ", "with", " ", 
-            "distribution"}], "*)"}], "\[IndentingNewLine]", 
-          RowBox[{"If", "[", 
-           RowBox[{
-            RowBox[{"!", 
-             RowBox[{"StringContainsQ", "[", 
-              RowBox[{"prod", ",", 
-               RowBox[{"{", 
-                RowBox[{"\"\<AP\>\"", ",", "\"\<FR\>\""}], "}"}]}], "]"}]}], 
-            ",", "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"DistrDataImport", "[", "prod", "]"}], "=", 
-              RowBox[{"Abs", "[", 
-               RowBox[{"Import", "[", 
-                RowBox[{
-                 RowBox[{"FileNameJoin", "[", 
-                  RowBox[{"{", 
-                   RowBox[{"dirimp", ",", 
-                    RowBox[{
-                    "\"\<DoubleDistr_\>\"", "<>", "LLPdirName", "<>", 
-                    "\"\<_\>\"", "<>", "prod", "<>", "\"\<_\>\"", "<>", 
-                    "FacilityGivenExperiment", "<>", "\"\<.m\>\""}]}], "}"}], 
-                  "]"}], ",", "\"\<MX\>\""}], "]"}], "]"}]}], ";", 
-             "\[IndentingNewLine]", 
-             RowBox[{"If", "[", 
-              RowBox[{
-               RowBox[{"prod", "==", "\"\<DrellYan\>\""}], ",", 
-               "\[IndentingNewLine]", 
-               RowBox[{"Do", "[", 
-                RowBox[{
-                 RowBox[{
-                  RowBox[{
-                   RowBox[{"DistrDataImport", "[", 
-                    RowBox[{"prod", "<>", "\"\<-\>\"", "<>", "vals"}], "]"}], 
-                   "=", 
-                   RowBox[{"Select", "[", 
-                    RowBox[{
-                    RowBox[{"DistrDataImport", "[", "prod", "]"}], ",", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{
-                    "MinMaxMassesDrellYan", "[", "FacilityGivenExperiment", 
-                    "]"}], "[", 
-                    RowBox[{"[", "1", "]"}], "]"}], "<=", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "1", "]"}], "]"}], "<=", 
-                    RowBox[{
-                    RowBox[{
-                    "MinMaxMassesDrellYan", "[", "FacilityGivenExperiment", 
-                    "]"}], "[", 
-                    RowBox[{"[", "2", "]"}], "]"}]}], "&"}]}], "]"}]}], ";"}],
-                  "\[IndentingNewLine]", ",", 
-                 RowBox[{"{", 
-                  RowBox[{"vals", ",", 
-                   RowBox[{"{", 
-                    RowBox[{
-                    "\"\<Lower\>\"", ",", "\"\<Central\>\"", ",", 
-                    "\"\<Upper\>\""}], "}"}]}], "}"}]}], "]"}]}], 
-              "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", ",",
-             "\[IndentingNewLine]", 
-            RowBox[{"(*", 
-             RowBox[{
-              RowBox[{
-              "If", " ", "the", " ", "selected", " ", "channel", " ", "is", 
-               " ", "Bremsstrahlung", " ", "under", " ", "the", " ", 
-               "description", " ", "of", " ", "AP", " ", "or", " ", "FR"}], 
-              ",", " ", 
-              RowBox[{
-              "then", " ", "there", " ", "are", " ", "variants", " ", "for", 
-               " ", "the", " ", "description", " ", "parametrizing", " ", 
-               "the", " ", "theoretical", " ", "uncertainty"}]}], "*)"}], 
-            "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"DistrDataImportTemp", "[", "prod", "]"}], "=", 
-              RowBox[{"Import", "[", 
-               RowBox[{
-                RowBox[{"FileNameJoin", "[", 
-                 RowBox[{"{", 
-                  RowBox[{"dirimp", ",", 
-                   RowBox[{
-                   "\"\<DoubleDistr_\>\"", "<>", "LLPdirName", "<>", 
-                    "\"\<_\>\"", "<>", "prod", "<>", "\"\<_\>\"", "<>", 
-                    "FacilityGivenExperiment", "<>", "\"\<.m\>\""}]}], "}"}], 
-                 "]"}], ",", "\"\<MX\>\""}], "]"}]}], ";", 
-             "\[IndentingNewLine]", 
-             RowBox[{"Do", "[", "\[IndentingNewLine]", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"prodbrem", "=", 
-                 RowBox[{"prod", "<>", "\"\<-\>\"", "<>", 
-                  RowBox[{
-                   RowBox[{
-                    RowBox[{"DistrDataImportTemp", "[", "prod", "]"}], "[", 
-                    RowBox[{"[", "j", "]"}], "]"}], "[", 
-                   RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
-                "\[IndentingNewLine]", 
-                RowBox[{
-                 RowBox[{"DistrDataImport", "[", "prodbrem", "]"}], "=", 
-                 RowBox[{
-                  RowBox[{
-                   RowBox[{"DistrDataImportTemp", "[", "prod", "]"}], "[", 
-                   RowBox[{"[", "j", "]"}], "]"}], "[", 
-                  RowBox[{"[", "2", "]"}], "]"}]}], ";", 
-                "\[IndentingNewLine]", 
-                RowBox[{
-                 RowBox[{"mlistDistr", "[", "prodbrem", "]"}], "=", 
-                 RowBox[{"DeleteDuplicates", "[", 
-                  RowBox[{
-                   RowBox[{"DistrDataImport", "[", "prodbrem", "]"}], "[", 
-                   RowBox[{"[", 
-                    RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], ";", 
-                "\[IndentingNewLine]", 
-                RowBox[{
-                 RowBox[{"{", 
-                  RowBox[{
-                   RowBox[{"mLLPmin", "[", "prodbrem", "]"}], ",", 
-                   RowBox[{"mLLPmax", "[", "prodbrem", "]"}]}], "}"}], "=", 
-                 RowBox[{"MinMax", "[", 
-                  RowBox[{"mlistDistr", "[", "prodbrem", "]"}], "]"}]}], 
-                ";"}], "\[IndentingNewLine]", ",", 
-               RowBox[{"{", 
-                RowBox[{"j", ",", "1", ",", 
-                 RowBox[{"Length", "[", 
-                  RowBox[{"DistrDataImportTemp", "[", "prod", "]"}], "]"}], 
-                 ",", "1"}], "}"}]}], "]"}], ";"}]}], "\[IndentingNewLine]", 
-           "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
-       "\[IndentingNewLine]", ",", 
-       RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", 
-         RowBox[{"Length", "[", "ProductionPatternSelectedDistr", "]"}], ",", 
-         "1"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"Do", "[", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"Module", "[", 
-        RowBox[{
-         RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"mlistDistr", "[", "prod", "]"}], "=", 
-           RowBox[{"DeleteDuplicates", "[", 
-            RowBox[{
-             RowBox[{"DistrDataImport", "[", "prod", "]"}], "[", 
-             RowBox[{"[", 
-              RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"mLLPmin", "[", "prod", "]"}], ",", 
-             RowBox[{"mLLPmax", "[", "prod", "]"}]}], "}"}], "=", 
-           RowBox[{"MinMax", "[", 
-            RowBox[{"mlistDistr", "[", "prod", "]"}], "]"}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{"DoubleDistrLLPint", "[", 
-            RowBox[{"mLLP_", ",", "\[Theta]LLP_", ",", "ELLP_", ",", "prod"}],
-             "]"}], "=", 
-           RowBox[{"10", "^", 
-            RowBox[{"(", 
-             RowBox[{
-              RowBox[{"Interpolation", "[", 
-               RowBox[{
-                RowBox[{"distrlogComp", "[", 
-                 RowBox[{"DistrDataImport", "[", "prod", "]"}], "]"}], ",", 
-                RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
-              RowBox[{
-               RowBox[{"Log10", "[", "mLLP", "]"}], ",", 
-               RowBox[{"Log10", "[", "\[Theta]LLP", "]"}], ",", 
-               RowBox[{"Log10", "[", "ELLP", "]"}]}], "]"}], ")"}]}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"If", "[", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"StringContainsQ", "[", 
-              RowBox[{"prod", ",", "\"\<Bremsstrahlung\>\""}], "]"}], "&&", 
-             RowBox[{"prod", "!=", "\"\<Bremsstrahlung-e\>\""}]}], ",", 
-            "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{"DoubleDistrLLPint", "[", 
-              RowBox[{
-              "mLLP_", ",", "\[Theta]LLP_", ",", "ELLP_", ",", "prod"}], 
-              "]"}], "=", 
-             RowBox[{"If", "[", 
-              RowBox[{
-               RowBox[{"ELLP", "<=", 
-                RowBox[{"ELLPmax", "[", 
-                 RowBox[{"mLLP", ",", "\[Theta]LLP", ",", "prod"}], "]"}]}], 
-               ",", 
-               RowBox[{"Evaluate", "[", 
-                RowBox[{"DoubleDistrLLPint", "[", 
-                 RowBox[{
-                 "mLLP", ",", "\[Theta]LLP", ",", "ELLP", ",", "prod"}], 
-                 "]"}], "]"}], ",", "0."}], "]"}]}]}], "]"}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"(*", 
-           RowBox[{"Probability", " ", "to", " ", "produce", " ", "LLP"}], 
-           "*)"}], "\[IndentingNewLine]", 
-          RowBox[{"If", "[", 
-           RowBox[{
-            RowBox[{"prod", "!=", "\"\<Showerings\>\""}], ",", 
-            "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"ProbLLP", "[", 
-               RowBox[{"mLLP_", ",", "\[CapitalLambda]2inv_", ",", "prod"}], 
-               "]"}], "=", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"ProbMother", "[", "prod", "]"}], "*", 
-                RowBox[{"PmotherToLLP", "[", 
-                 RowBox[{
-                 "mLLP", ",", "\[Epsilon]2", ",", "prod", ",", 
-                  "FacilityGivenExperiment"}], "]"}]}], "/.", 
-               RowBox[{"{", 
-                RowBox[{
-                 RowBox[{"Atarget", "->", "AtargetVal"}], ",", 
-                 RowBox[{"Yield\[Rho]0", "->", 
-                  RowBox[{"ProbMother", "[", "\"\<Rho0\>\"", "]"}]}], ",", 
-                 RowBox[{"\[Epsilon]2", "->", 
-                  RowBox[{"\[Epsilon]2Val", "[", 
-                   RowBox[{"mLLP", ",", "\[CapitalLambda]2inv"}], "]"}]}]}], 
-                "}"}]}]}], ";"}], "\[IndentingNewLine]", ",", 
-            "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"ProbLLP", "[", 
-               RowBox[{"mLLP_", ",", "\[CapitalLambda]2inv_", ",", "prod"}], 
-               "]"}], "=", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"ProbMother", "[", "prod", "]"}], "*", 
-                RowBox[{"PmotherToLLP", "[", 
-                 RowBox[{
-                 "mLLP", ",", "\[CapitalLambda]2inv", ",", "prod", ",", 
-                  "FacilityGivenExperiment"}], "]"}]}], "/.", 
-               RowBox[{"{", 
-                RowBox[{
-                 RowBox[{"Atarget", "->", "AtargetVal"}], ",", 
-                 RowBox[{"Yield\[Rho]0", "->", 
-                  RowBox[{"ProbMother", "[", "\"\<Rho0\>\"", "]"}]}]}], 
-                "}"}]}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
-        "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
-       RowBox[{"{", 
-        RowBox[{"prod", ",", "ProductionList"}], "}"}]}], "]"}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"Do", "[", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"GridInFinal", "[", "prod", "]"}], ",", 
-          RowBox[{"DistrVals", "[", "prod", "]"}]}], "}"}], "=", 
-        RowBox[{"BlockGridsValsDistr", "[", 
-         RowBox[{"prod", ",", "DistrDataImport"}], "]"}]}], ",", 
-       RowBox[{"{", 
-        RowBox[{"prod", ",", "ProductionList"}], "}"}]}], "]"}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-      "___", "___", "___", "___", "___", "___", "___", "___", "___", "_"}], 
-      "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{"Finding", " ", 
-       SubscriptBox["E", "max"], 
-       RowBox[{"(", 
-        RowBox[{
-         SubscriptBox["m", "LLP"], ",", 
-         SubscriptBox["\[Theta]", "LLP"]}], ")"}], " ", "for", " ", "the", 
-       " ", "angular", " ", "range", " ", "at", " ", "the", " ", "given", " ",
-        "experiment"}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-      "___", "___", "___", "___", "___", "___", "___", "___", "___", "_"}], 
-      "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"Do", "[", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"ELLPmax", "[", 
-         RowBox[{"mfip_", ",", "\[Theta]fip_", ",", "prod"}], "]"}], "=", 
-        RowBox[{"EmaxBlock", "[", 
-         RowBox[{
-         "prod", ",", "8", ",", "DistrDataImport", ",", 
-          "FacilityGivenExperiment"}], "]"}]}], "\[IndentingNewLine]", ",", 
-       RowBox[{"{", 
-        RowBox[{"prod", ",", 
-         RowBox[{"Select", "[", 
-          RowBox[{"ProductionList", ",", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"!", 
-              RowBox[{"StringContainsQ", "[", 
-               RowBox[{"#", ",", "\"\<Bremsstrahlung\>\""}], "]"}]}], "||", 
-             RowBox[{"#", "==", "\"\<Bremsstrahlung-e\>\""}]}], "&"}]}], 
-          "]"}]}], "}"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], "//", 
-  "AbsoluteTiming"}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"If", "[", RowBox[{"condcontinue", ",", "\[IndentingNewLine]", RowBox[{RowBox[{"Do", "[", "\[IndentingNewLine]", RowBox[{RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"prod", ",", "prodbrem"}], "}"}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{"prod", "=", RowBox[{RowBox[{"ProductionPatternSelectedDistr", "[", RowBox[{"[", "i", "]"}], "]"}], "[", RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"dirimp", "=", RowBox[{"If", "[", RowBox[{RowBox[{"MemberQ", "[", RowBox[{RowBox[{"{", RowBox[{"\"Fragmentation\"", ",", "\"DrellYan\""}], "}"}], ",", "prod"}], "]"}], ",", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"spectra\"", ",", "\"New physics particles spectra\"", ",", "\"DP\"", ",", "\"Pregenerated\""}], "}"}], "]"}], ",", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"StringContainsQ", "[", RowBox[{"prod", ",", RowBox[{"{", RowBox[{"\"DrellYan\"", ",", "\"Fragmentation\"", ",", "\"Showerings\""}], "}"}]}], "]"}], "&&", RowBox[{"!", RowBox[{"StringContainsQ", "[", RowBox[{"prod", ",", "\"Old-Mixing\""}], "]"}]}]}], ",", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Distribution\"", "]"}], ",", "\"Pregenerated\""}], "}"}], "]"}], ",", RowBox[{"directory", "[", "\"Distribution\"", "]"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"Importing", " ", "the", " ", "data", " ", "with", " ", "distribution"}], "*)"}], "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"!", RowBox[{"StringContainsQ", "[", RowBox[{"prod", ",", RowBox[{"{", RowBox[{"\"AP\"", ",", "\"FR\""}], "}"}]}], "]"}]}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"DistrDataImport", "[", "prod", "]"}], "=", RowBox[{"Abs", "[", RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{"dirimp", ",", RowBox[{"\"DoubleDistr_\"", "<>", RowBox[{"If", "[", RowBox[{RowBox[{"MemberQ", "[", RowBox[{RowBox[{"{", RowBox[{"\"Fragmentation\"", ",", "\"DrellYan\""}], "}"}], ",", "prod"}], "]"}], ",", "\"DP\"", ",", "LLPdirName"}], "]"}], "<>", "\"_\"", "<>", "prod", "<>", "\"_\"", "<>", "FacilityGivenExperiment", "<>", "\".m\""}]}], "}"}], "]"}], ",", "\"MX\""}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"prod", "==", "\"DrellYan\""}], ",", "\[IndentingNewLine]", RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{RowBox[{"DistrDataImport", "[", RowBox[{"prod", "<>", "\"-\"", "<>", "vals"}], "]"}], "=", RowBox[{"Select", "[", RowBox[{RowBox[{"DistrDataImport", "[", "prod", "]"}], ",", RowBox[{RowBox[{RowBox[{RowBox[{"MinMaxMassesDrellYan", "[", "FacilityGivenExperiment", "]"}], "[", RowBox[{"[", "1", "]"}], "]"}], "<=", RowBox[{"#", "[", RowBox[{"[", "1", "]"}], "]"}], "<=", RowBox[{RowBox[{"MinMaxMassesDrellYan", "[", "FacilityGivenExperiment", "]"}], "[", RowBox[{"[", "2", "]"}], "]"}]}], "&"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"vals", ",", RowBox[{"{", RowBox[{"\"Lower\"", ",", "\"Central\"", ",", "\"Upper\""}], "}"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", RowBox[{"(*", RowBox[{RowBox[{"If", " ", "the", " ", "selected", " ", "channel", " ", "is", " ", "Bremsstrahlung", " ", "under", " ", "the", " ", "description", " ", "of", " ", "AP", " ", "or", " ", "FR"}], ",", " ", RowBox[{"then", " ", "there", " ", "are", " ", "variants", " ", "for", " ", "the", " ", "description", " ", "parametrizing", " ", "the", " ", "theoretical", " ", "uncertainty"}]}], "*)"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"DistrDataImportTemp", "[", "prod", "]"}], "=", RowBox[{"Import", "[", RowBox[{RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{"dirimp", ",", RowBox[{"\"DoubleDistr_\"", "<>", RowBox[{"If", "[", RowBox[{RowBox[{"MemberQ", "[", RowBox[{RowBox[{"{", RowBox[{"\"Fragmentation\"", ",", "\"DrellYan\""}], "}"}], ",", "prod"}], "]"}], ",", "\"DP\"", ",", "LLPdirName"}], "]"}], "<>", "\"_\"", "<>", "prod", "<>", "\"_\"", "<>", "FacilityGivenExperiment", "<>", "\".m\""}]}], "}"}], "]"}], ",", "\"MX\""}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"Do", "[", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"prodbrem", "=", RowBox[{"prod", "<>", "\"-\"", "<>", RowBox[{RowBox[{RowBox[{"DistrDataImportTemp", "[", "prod", "]"}], "[", RowBox[{"[", "j", "]"}], "]"}], "[", RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"DistrDataImport", "[", "prodbrem", "]"}], "=", RowBox[{RowBox[{RowBox[{"DistrDataImportTemp", "[", "prod", "]"}], "[", RowBox[{"[", "j", "]"}], "]"}], "[", RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"mlistDistr", "[", "prodbrem", "]"}], "=", RowBox[{"DeleteDuplicates", "[", RowBox[{RowBox[{"DistrDataImport", "[", "prodbrem", "]"}], "[", RowBox[{"[", RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"{", RowBox[{RowBox[{"mLLPmin", "[", "prodbrem", "]"}], ",", RowBox[{"mLLPmax", "[", "prodbrem", "]"}]}], "}"}], "=", RowBox[{"MinMax", "[", RowBox[{"mlistDistr", "[", "prodbrem", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"j", ",", "1", ",", RowBox[{"Length", "[", RowBox[{"DistrDataImportTemp", "[", "prod", "]"}], "]"}], ",", "1"}], "}"}]}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", "ProductionPatternSelectedDistr", "]"}], ",", "1"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"Do", "[", "\[IndentingNewLine]", RowBox[{RowBox[{"Module", "[", RowBox[{RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"mlistDistr", "[", "prod", "]"}], "=", RowBox[{"DeleteDuplicates", "[", RowBox[{RowBox[{"DistrDataImport", "[", "prod", "]"}], "[", RowBox[{"[", RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"{", RowBox[{RowBox[{"mLLPmin", "[", "prod", "]"}], ",", RowBox[{"mLLPmax", "[", "prod", "]"}]}], "}"}], "=", RowBox[{"MinMax", "[", RowBox[{"mlistDistr", "[", "prod", "]"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{RowBox[{"DoubleDistrLLPint", "[", RowBox[{"mLLP_", ",", "\:03b8LLP_", ",", "ELLP_", ",", "prod"}], "]"}], "=", RowBox[{"10", "^", RowBox[{"(", RowBox[{RowBox[{"Interpolation", "[", RowBox[{RowBox[{"distrlogComp", "[", RowBox[{"DistrDataImport", "[", "prod", "]"}], "]"}], ",", RowBox[{"InterpolationOrder", "\:f522", "1"}]}], "]"}], "[", RowBox[{RowBox[{"Log10", "[", "mLLP", "]"}], ",", RowBox[{"Log10", "[", "\:03b8LLP", "]"}], ",", RowBox[{"Log10", "[", "ELLP", "]"}]}], "]"}], ")"}]}]}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"StringContainsQ", "[", RowBox[{"prod", ",", "\"Bremsstrahlung\""}], "]"}], "&&", RowBox[{"prod", "!=", "\"Bremsstrahlung-e\""}]}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{"DoubleDistrLLPint", "[", RowBox[{"mLLP_", ",", "\:03b8LLP_", ",", "ELLP_", ",", "prod"}], "]"}], "=", RowBox[{"If", "[", RowBox[{RowBox[{"ELLP", "<=", RowBox[{"ELLPmax", "[", RowBox[{"mLLP", ",", "\:03b8LLP", ",", "prod"}], "]"}]}], ",", RowBox[{"Evaluate", "[", RowBox[{"DoubleDistrLLPint", "[", RowBox[{"mLLP", ",", "\:03b8LLP", ",", "ELLP", ",", "prod"}], "]"}], "]"}], ",", "0."}], "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"Probability", " ", "to", " ", "produce", " ", "LLP"}], "*)"}], "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"prod", "!=", "\"Showerings\""}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"ProbLLP", "[", RowBox[{"mLLP_", ",", "\:039b2inv_", ",", "prod"}], "]"}], "=", RowBox[{RowBox[{RowBox[{"ProbMother", "[", "prod", "]"}], "*", RowBox[{"PmotherToLLP", "[", RowBox[{"mLLP", ",", "\:03f52", ",", "prod", ",", "FacilityGivenExperiment"}], "]"}]}], "/.", RowBox[{"{", RowBox[{RowBox[{"Atarget", "->", "AtargetVal"}], ",", RowBox[{"Yield\:03c10", "->", RowBox[{"ProbMother", "[", "\"Rho0\"", "]"}]}], ",", RowBox[{"\:03f52", "->", RowBox[{"\:03f52Val", "[", RowBox[{"mLLP", ",", "\:039b2inv"}], "]"}]}]}], "}"}]}]}], ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"ProbLLP", "[", RowBox[{"mLLP_", ",", "\:039b2inv_", ",", "prod"}], "]"}], "=", RowBox[{RowBox[{RowBox[{"ProbMother", "[", "prod", "]"}], "*", RowBox[{"PmotherToLLP", "[", RowBox[{"mLLP", ",", "\:039b2inv", ",", "prod", ",", "FacilityGivenExperiment"}], "]"}]}], "/.", RowBox[{"{", RowBox[{RowBox[{"Atarget", "->", "AtargetVal"}], ",", RowBox[{"Yield\:03c10", "->", RowBox[{"ProbMother", "[", "\"Rho0\"", "]"}]}]}], "}"}]}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"prod", ",", "ProductionList"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"Do", "[", RowBox[{RowBox[{RowBox[{"{", RowBox[{RowBox[{"GridInFinal", "[", "prod", "]"}], ",", RowBox[{"DistrVals", "[", "prod", "]"}]}], "}"}], "=", RowBox[{"BlockGridsValsDistr", "[", RowBox[{"prod", ",", "DistrDataImport"}], "]"}]}], ",", RowBox[{"{", RowBox[{"prod", ",", "ProductionList"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"___", "___", "___", "___", "___", "___", "___", "___", "___", "_"}], "*)"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"Finding", " ", SubscriptBox["E", "max"], RowBox[{"(", RowBox[{SubscriptBox["m", "LLP"], ",", SubscriptBox["\:03b8", "LLP"]}], ")"}], " ", "for", " ", "the", " ", "angular", " ", "range", " ", "at", " ", "the", " ", "given", " ", "experiment"}], "*)"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"___", "___", "___", "___", "___", "___", "___", "___", "___", "_"}], "*)"}], "\[IndentingNewLine]", RowBox[{"Do", "[", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"ELLPmax", "[", RowBox[{"mfip_", ",", "\:03b8fip_", ",", "prod"}], "]"}], "=", RowBox[{"EmaxBlock", "[", RowBox[{"prod", ",", "8", ",", "DistrDataImport", ",", "FacilityGivenExperiment"}], "]"}]}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"prod", ",", RowBox[{"Select", "[", RowBox[{"ProductionList", ",", RowBox[{RowBox[{RowBox[{"!", RowBox[{"StringContainsQ", "[", RowBox[{"#", ",", "\"Bremsstrahlung\""}], "]"}]}], "||", RowBox[{"#", "==", "\"Bremsstrahlung-e\""}]}], "&"}]}], "]"}]}], "}"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}], "//", "AbsoluteTiming"}]], "Input",
  CellChangeTimes->{
   3.9341807845806675`*^9, 3.934214307032079*^9, {3.9342155410828047`*^9, 
    3.9342155846964006`*^9}, {3.934215620725315*^9, 3.934215703880828*^9}, {
@@ -4002,9 +2956,7 @@ Cell[BoxData[
                 "}"}]}], ")"}]}], ",", 
             RowBox[{"{", 
              RowBox[{"0.2", ",", "0.74"}], "}"}]}], "]"}]}], ",", " ", 
-         RowBox[{"FrameStyle", "\[Rule]", 
-          RowBox[{"Directive", "[", 
-           RowBox[{"Black", ",", " ", "25", ",", "Thick"}], "]"}]}], ",", 
+         RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "25", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
          RowBox[{"PlotRange", "\[Rule]", "ptrange"}], ",", 
          RowBox[{"PlotStyle", "\[Rule]", "colors"}], ",", 
          RowBox[{"AspectRatio", "\[Rule]", "0.66"}], ",", 
@@ -4120,9 +3072,7 @@ Cell[BoxData[
              "}"}], ",", 
             RowBox[{"Frame", "->", "True"}], ",", 
             RowBox[{"ImageSize", "->", "Large"}], ",", 
-            RowBox[{"FrameStyle", "\[Rule]", 
-             RowBox[{"Directive", "[", 
-              RowBox[{"Black", ",", " ", "25"}], "]"}]}], ",", 
+            RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "25", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
             RowBox[{"PlotRange", "\[Rule]", "ptrange"}], ",", 
             RowBox[{"PlotStyle", "\[Rule]", 
              RowBox[{"{", 
@@ -4189,9 +3139,7 @@ Cell[BoxData[
              "}"}], ",", 
             RowBox[{"Frame", "->", "True"}], ",", 
             RowBox[{"ImageSize", "->", "Large"}], ",", 
-            RowBox[{"FrameStyle", "\[Rule]", 
-             RowBox[{"Directive", "[", 
-              RowBox[{"Black", ",", " ", "25"}], "]"}]}], ",", 
+            RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "25", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
             RowBox[{"PlotRange", "\[Rule]", "ptrange"}], ",", 
             RowBox[{"PlotStyle", "\[Rule]", 
              RowBox[{"{", 
@@ -4875,9 +3823,7 @@ Cell[BoxData[
               RowBox[{"{", 
                RowBox[{"1", ",", "5"}], "}"}]}], "]"}], "]"}]}], "}"}], "]"}],
          ",", 
-        RowBox[{"FrameStyle", "\[Rule]", 
-         RowBox[{"Directive", "[", 
-          RowBox[{"Black", ",", " ", "22"}], "]"}]}], ",", 
+        RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "22", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
         RowBox[{"PlotStyle", "\[Rule]", 
          RowBox[{"{", 
           RowBox[{
@@ -6460,9 +5406,7 @@ Cell[BoxData[
           RowBox[{
            RowBox[{"LegendX", "[", "quantity", "]"}], " ", ",", 
            RowBox[{"LegendY", "[", "quantity", "]"}]}], "}"}]}], ",", 
-        RowBox[{"FrameStyle", "\[Rule]", 
-         RowBox[{"Directive", "[", 
-          RowBox[{"Black", ",", " ", "18"}], "]"}]}], ",", 
+        RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "18", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
         RowBox[{"PlotLabel", "\[Rule]", 
          RowBox[{"Style", "[", 
           RowBox[{
@@ -6860,130 +5804,7 @@ Cell["Basic definitions", "Chapter",
  CellTags->
   "Sensitivity",ExpressionUUID->"7c8adff8-b368-7941-b98b-f31faf6bf32d"],
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"LLPdirName", "=", "\"\<Dark-QCD-rho\>\""}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"massLabel", ",", "couplingLabel"}], "}"}], "=", 
-   RowBox[{"{", 
-    RowBox[{
-    "\"\<\!\(\*SubscriptBox[\(m\), SubscriptBox[\(\[Rho]\), \(d\)]]\) [GeV]\>\
-\"", ",", 
-     "\"\<\!\(\*SuperscriptBox[\(\[CapitalLambda]\), \(-2\)]\) \
-[\!\(\*SuperscriptBox[\(GeV\), \(-2\)]\)]\>\""}], "}"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"directory", "[", "\"\<Sensitivity\>\"", "]"}], "=", 
-   RowBox[{"FileNameJoin", "[", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
-      "\"\<Sensitivity domains\>\""}], "}"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"directory", "[", "\"\<Sensitivity-LLP\>\"", "]"}], "=", 
-   RowBox[{"FileNameJoin", "[", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"directory", "[", "\"\<Sensitivity\>\"", "]"}], ",", 
-      "LLPdirName"}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{
-    RowBox[{"If", "[", 
-     RowBox[{
-      RowBox[{"!", 
-       RowBox[{"DirectoryQ", "[", 
-        RowBox[{"directory", "[", "#", "]"}], "]"}]}], ",", 
-      RowBox[{"CreateDirectory", "[", 
-       RowBox[{"directory", "[", "#", "]"}], "]"}]}], "]"}], "&"}], "/@", 
-   RowBox[{"{", 
-    RowBox[{"\"\<Sensitivity\>\"", ",", "\"\<Sensitivity-LLP\>\""}], "}"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"directory", "[", "\"\<Nevents-LLP\>\"", "]"}], "=", 
-   RowBox[{"FileNameJoin", "[", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
-      "\"\<Tabulated Nevents\>\"", ",", "LLPdirName"}], "}"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"NotebookEvaluate", "[", 
-   RowBox[{"FileNameJoin", "[", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
-      "\"\<codes/dialog-windows.nb\>\""}], "}"}], "]"}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"ExperimentDirectoriesListNevents", "=", 
-   RowBox[{"Select", "[", 
-    RowBox[{
-     RowBox[{"FileNames", "[", 
-      RowBox[{"\"\<*\>\"", ",", 
-       RowBox[{"directory", "[", "\"\<Nevents-LLP\>\"", "]"}], ",", "1"}], 
-      "]"}], ",", "DirectoryQ"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"Print", "[", 
-  RowBox[{
-  "\"\<List of available experiments with tabulated \!\(\*SubscriptBox[\(N\), \
-\(events\)]\) for \>\"", " ", "<>", "LLPdirName", "<>", "\"\<:\>\""}], 
-  "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"ExperimentsListNevents", "=", 
-   RowBox[{
-    RowBox[{"Table", "[", 
-     RowBox[{
-      RowBox[{"FileNameTake", "[", 
-       RowBox[{
-        RowBox[{"ExperimentDirectoriesListNevents", "[", 
-         RowBox[{"[", "i", "]"}], "]"}], ",", 
-        RowBox[{"-", "1"}]}], "]"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"i", ",", "1", ",", 
-        RowBox[{"Length", "[", "ExperimentDirectoriesListNevents", "]"}], ",",
-         "1"}], "}"}]}], "]"}], "//", "Sort"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"ExperimentsListNevents", "//", "TableForm"}], "\[IndentingNewLine]", 
- RowBox[{"If", "[", 
-  RowBox[{
-   RowBox[{
-    RowBox[{"Length", "[", "ExperimentsListNevents", "]"}], "\[Equal]", "0"}],
-    ",", "\[IndentingNewLine]", 
-   RowBox[{
-   "infoDialog", "[", 
-    "\"\<No experiment is available, generate first the acceptance for the \
-given experiment using module 1\>\"", "]"}], "\[IndentingNewLine]", ",", 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"ifUncCalc", "=", 
-     RowBox[{"dropdownDialog", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"True", ",", "False"}], "}"}], ",", 
-       "\"\<Calculate uncertainties of the sensitivity region?\>\""}], 
-      "]"}]}], ";", "\[IndentingNewLine]", 
-    RowBox[{"SelectedExperimentList", "=", 
-     RowBox[{"If", "[", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"Length", "[", "ExperimentsListNevents", "]"}], "\[NotEqual]",
-         "0"}], ",", 
-       RowBox[{"selectionDialog", "[", 
-        RowBox[{
-        "ExperimentsListNevents", ",", 
-         "\"\<Select the experiments for which the sensitivity will be \
-computed:\>\""}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
-    RowBox[{"icounter", "=", "1"}], ";"}], "\[IndentingNewLine]", ",", 
-   "\[IndentingNewLine]", 
-   RowBox[{"SelectedExperimentList", "=", 
-    RowBox[{"{", "}"}]}]}], "\[IndentingNewLine]", "]"}]}], "Input",
+Cell[BoxData[{RowBox[{RowBox[{"LLPdirName", "=", "\"Dark-QCD-rho\""}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"{", RowBox[{"massLabel", ",", "couplingLabel"}], "}"}], "=", RowBox[{"{", RowBox[{"\"\!\(\*SubscriptBox[\(m\), SubscriptBox[\(\:03c1\), \(d\)]]\) [GeV]\"", ",", "\"\!\(\*SuperscriptBox[\(\:039b\), \(-2\)]\) [\!\(\*SuperscriptBox[\(GeV\), \(-2\)]\)]\""}], "}"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"directory", "[", "\"Sensitivity\"", "]"}], "=", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"Sensitivity domains\""}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"directory", "[", "\"Sensitivity-LLP\"", "]"}], "=", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Sensitivity\"", "]"}], ",", "LLPdirName"}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"!", RowBox[{"DirectoryQ", "[", RowBox[{"directory", "[", "#", "]"}], "]"}]}], ",", RowBox[{"CreateDirectory", "[", RowBox[{"directory", "[", "#", "]"}], "]"}]}], "]"}], "&"}], "/@", RowBox[{"{", RowBox[{"\"Sensitivity\"", ",", "\"Sensitivity-LLP\""}], "}"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"directory", "[", "\"Nevents-LLP\"", "]"}], "=", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"Tabulated Nevents\"", ",", "LLPdirName"}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{"NotebookEvaluate", "[", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"codes/dialog-windows.nb\""}], "}"}], "]"}], "]"}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{"ExperimentDirectoriesListNevents", "=", RowBox[{"Select", "[", RowBox[{RowBox[{"FileNames", "[", RowBox[{"\"*\"", ",", RowBox[{"directory", "[", "\"Nevents-LLP\"", "]"}], ",", "1"}], "]"}], ",", RowBox[{RowBox[{RowBox[{"DirectoryQ", "[", "#1", "]"}], "&&", RowBox[{RowBox[{"FileNames", "[", RowBox[{"\"*_decayDescr=2311.17157.dat\"", ",", "#1"}], "]"}], "\:2260", RowBox[{"{", "}"}]}]}], "&"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{"\"List of available experiments with tabulated \!\(\*SubscriptBox[\(N\), \(events\)]\) for \"", " ", "<>", "LLPdirName", "<>", "\":\""}], "]"}], "\[IndentingNewLine]", RowBox[{RowBox[{"ExperimentsListNevents", "=", RowBox[{RowBox[{"Table", "[", RowBox[{RowBox[{"FileNameTake", "[", RowBox[{RowBox[{"ExperimentDirectoriesListNevents", "[", RowBox[{"[", "i", "]"}], "]"}], ",", RowBox[{"-", "1"}]}], "]"}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", "ExperimentDirectoriesListNevents", "]"}], ",", "1"}], "}"}]}], "]"}], "//", "Sort"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"ExperimentsListNevents", "//", "TableForm"}], "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", "ExperimentsListNevents", "]"}], "\:f431", "0"}], ",", "\[IndentingNewLine]", RowBox[{"infoDialog", "[", "\"No experiment is available, generate first the acceptance for the given experiment using module 1\"", "]"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", RowBox[{RowBox[{"ifUncCalc", "=", RowBox[{"dropdownDialog", "[", RowBox[{RowBox[{"{", RowBox[{"True", ",", "False"}], "}"}], ",", "\"Calculate uncertainties of the sensitivity region?\""}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"SelectedExperimentList", "=", RowBox[{"If", "[", RowBox[{RowBox[{RowBox[{"Length", "[", "ExperimentsListNevents", "]"}], "\:2260", "0"}], ",", RowBox[{"selectionDialog", "[", RowBox[{"ExperimentsListNevents", ",", "\"Select the experiments for which the sensitivity will be computed:\""}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"icounter", "=", "1"}], ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", RowBox[{"SelectedExperimentList", "=", RowBox[{"{", "}"}]}]}], "\[IndentingNewLine]", "]"}]}], "Input",
  CellChangeTimes->{{3.9138315400875525`*^9, 3.91383154039198*^9}, {
    3.913891670421169*^9, 3.913891673276001*^9}, {3.913955090567734*^9, 
    3.9139550906928043`*^9}, 3.914667466503278*^9, 3.915262345075774*^9, {
@@ -7010,43 +5831,16 @@ Cell["Importing constraints", "Section",
  CellTags->
   "Sensitivity",ExpressionUUID->"ab8e8b6c-4504-9e49-93a9-24288b5e18f4"],
 
+Cell["Laboratory exclusions include BaBar, CHARM, BEBC, and NA62. The NA62 contour includes showering production only at 1.4*10^17 protons on target. CHARM and BEBC use the central production calculation and decay description 2311.17157.", "Text"],
+
 Cell[BoxData[
- RowBox[{"If", "[", 
-  RowBox[{
-   RowBox[{"SelectedExperimentList", "!=", 
-    RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"ConstraintsDPtemp", "=", 
-     RowBox[{"Import", "[", 
-      RowBox[{
-       RowBox[{"FileNameJoin", "[", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"NotebookDirectory", "[", "]"}], ",", 
-          "\"\<contours/DP/constraints-DP.mx\>\""}], "}"}], "]"}], ",", 
-       "\"\<MX\>\""}], "]"}]}], ";", "\[IndentingNewLine]", 
-    RowBox[{"ConstraintsTypeDP", "=", 
-     RowBox[{"ConstraintsDPtemp", "[", 
-      RowBox[{"[", 
-       RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
-    RowBox[{"Do", "[", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{
-       RowBox[{
-        RowBox[{"ExcludedRegions", "[", 
-         RowBox[{"\"\<DP\>\"", ",", 
-          RowBox[{
-           RowBox[{"ConstraintsDPtemp", "[", 
-            RowBox[{"[", "i", "]"}], "]"}], "[", 
-           RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "=", 
-        RowBox[{
-         RowBox[{"ConstraintsDPtemp", "[", 
-          RowBox[{"[", "i", "]"}], "]"}], "[", 
-         RowBox[{"[", "2", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", ",", 
-      RowBox[{"{", 
-       RowBox[{"i", ",", "1", ",", 
-        RowBox[{"Length", "[", "ConstraintsDPtemp", "]"}], ",", "1"}], 
-       "}"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"SelectedExperimentList", "\[NotEqual]", 
+         RowBox[{"{", "}"}]}], ",", 
+       RowBox[{RowBox[{RowBox[{"ExcludedRegions", "[", "\"Dark-QCD-rho\"", "]"}], "=", 
+           RowBox[{"Get", "[", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[
+                  {RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"contours\"", ",", 
+                   "\"Dark-QCD-rho\"", ",", "\"Laboratory-exclusions-r1.5.wl\""}], "}"}], "]"}], 
+             "]"}]}], ";"}]}], "]"}], ";"}]], "Input",
  CellChangeTimes->{{3.913954473848921*^9, 3.9139545020914497`*^9}, {
    3.913954538781415*^9, 3.9139547566326075`*^9}, {3.9139551197291293`*^9, 
    3.913955119731121*^9}, {3.913955157942445*^9, 3.913955157944439*^9}, {
@@ -7121,93 +5915,7 @@ Cell["Selecting the experiment", "Section",
   "Sensitivity-computation",ExpressionUUID->"15de82f0-3e2a-ce40-bb65-\
 904b4dd44d9c"],
 
-Cell[BoxData[{
- RowBox[{"Print", "[", "\"\<Selected experiment:\>\"", 
-  "]"}], "\[IndentingNewLine]", 
- RowBox[{"GivenExperimentForSensitivityComputation", "=", 
-  RowBox[{"SelectedExperimentList", "[", 
-   RowBox[{"[", 
-    RowBox[{"icounter", "++"}], "]"}], "]"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"CondANUBIS", "=", 
-   RowBox[{"MemberQ", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-      "\"\<ANUBIS-shaft-volume-1\>\"", ",", "\"\<ANUBIS-shaft-volume-2\>\"", 
-       ",", "\"\<ANUBIS-shaft-volume-3\>\""}], "}"}], ",", 
-     "GivenExperimentForSensitivityComputation"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"If", "[", 
-  RowBox[{
-   RowBox[{"CondANUBIS", "\[Equal]", "True"}], ",", 
-   RowBox[{"infoDialog", "[", 
-    RowBox[{"Row", "[", 
-     RowBox[{
-     "{", "\"\<One of the modules of ANUBIS-shaft is chosen. The full \
-sensitivity includes three modules. The importing will be over all modules, \
-so for all ot the the sensitivity has to be computed\>\"", "}"}], "]"}], 
-    "]"}]}], "]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"If", "[", 
-   RowBox[{
-    RowBox[{"CondANUBIS", "\[Equal]", "False"}], ",", 
-    RowBox[{"GivenExperimentForSensitivityComputationList", "=", 
-     RowBox[{"{", "GivenExperimentForSensitivityComputation", "}"}]}], ",", 
-    RowBox[{"GivenExperimentForSensitivityComputationList", "=", 
-     RowBox[{"{", 
-      RowBox[{
-      "\"\<ANUBIS-shaft-volume-1\>\"", ",", "\"\<ANUBIS-shaft-volume-2\>\"", 
-       ",", "\"\<ANUBIS-shaft-volume-3\>\""}], "}"}]}]}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"PathsNeventsSelected", "=", 
-   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"Do", "[", 
-    RowBox[{
-     RowBox[{"PathsNeventsSelected", "=", 
-      RowBox[{"Join", "[", 
-       RowBox[{"PathsNeventsSelected", ",", 
-        RowBox[{"FileNames", "[", 
-         RowBox[{"\"\<*.dat\>\"", ",", 
-          RowBox[{"FileNameJoin", "[", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"directory", "[", "\"\<Nevents-LLP\>\"", "]"}], ",", 
-             "exp"}], "}"}], "]"}]}], "]"}]}], "]"}]}], ",", 
-     RowBox[{"{", 
-      RowBox[{"exp", ",", "GivenExperimentForSensitivityComputationList"}], 
-      "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{
-   "Creating", " ", "the", " ", "directory", " ", "for", " ", "exporting", 
-    " ", "sensitivity", " ", "curves"}], "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"ExperimentFolder", "=", 
-   RowBox[{"If", "[", 
-    RowBox[{
-     RowBox[{"CondANUBIS", "\[Equal]", "True"}], ",", "\"\<ANUBIS\>\"", ",", 
-     "GivenExperimentForSensitivityComputation"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"directory", "[", "\"\<Sensitivity-LLP-exp\>\"", "]"}], "=", 
-   RowBox[{"FileNameJoin", "[", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"directory", "[", "\"\<Sensitivity-LLP\>\"", "]"}], ",", 
-      "ExperimentFolder"}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"If", "[", 
-  RowBox[{
-   RowBox[{"!", 
-    RowBox[{"DirectoryQ", "[", 
-     RowBox[{"directory", "[", "\"\<Sensitivity-LLP-exp\>\"", "]"}], "]"}]}], 
-   ",", 
-   RowBox[{"CreateDirectory", "[", 
-    RowBox[{"directory", "[", "\"\<Sensitivity-LLP-exp\>\"", "]"}], "]"}]}], 
-  "]"}]}], "Input",
+Cell[BoxData[{RowBox[{"Print", "[", "\"Selected experiment:\"", "]"}], "\[IndentingNewLine]", RowBox[{"GivenExperimentForSensitivityComputation", "=", RowBox[{"SelectedExperimentList", "[", RowBox[{"[", RowBox[{"icounter", "++"}], "]"}], "]"}]}], "\[IndentingNewLine]", RowBox[{RowBox[{"CondANUBIS", "=", RowBox[{"MemberQ", "[", RowBox[{RowBox[{"{", RowBox[{"\"ANUBIS-shaft-volume-1\"", ",", "\"ANUBIS-shaft-volume-2\"", ",", "\"ANUBIS-shaft-volume-3\""}], "}"}], ",", "GivenExperimentForSensitivityComputation"}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"CondANUBIS", "\:f431", "True"}], ",", RowBox[{"infoDialog", "[", RowBox[{"Row", "[", RowBox[{"{", "\"One of the modules of ANUBIS-shaft is chosen. The full sensitivity includes three modules. The importing will be over all modules, so for all ot the the sensitivity has to be computed\"", "}"}], "]"}], "]"}]}], "]"}], "\[IndentingNewLine]", RowBox[{RowBox[{"If", "[", RowBox[{RowBox[{"CondANUBIS", "\:f431", "False"}], ",", RowBox[{"GivenExperimentForSensitivityComputationList", "=", RowBox[{"{", "GivenExperimentForSensitivityComputation", "}"}]}], ",", RowBox[{"GivenExperimentForSensitivityComputationList", "=", RowBox[{"{", RowBox[{"\"ANUBIS-shaft-volume-1\"", ",", "\"ANUBIS-shaft-volume-2\"", ",", "\"ANUBIS-shaft-volume-3\""}], "}"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{"PathsNeventsSelected", "=", RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"Do", "[", RowBox[{RowBox[{"PathsNeventsSelected", "=", RowBox[{"Join", "[", RowBox[{"PathsNeventsSelected", ",", RowBox[{"FileNames", "[", RowBox[{"\"*_decayDescr=2311.17157.dat\"", ",", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Nevents-LLP\"", "]"}], ",", "exp"}], "}"}], "]"}]}], "]"}]}], "]"}]}], ",", RowBox[{"{", RowBox[{"exp", ",", "GivenExperimentForSensitivityComputationList"}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", RowBox[{"(*", RowBox[{"Creating", " ", "the", " ", "directory", " ", "for", " ", "exporting", " ", "sensitivity", " ", "curves"}], "*)"}]}], "\[IndentingNewLine]", RowBox[{RowBox[{"ExperimentFolder", "=", RowBox[{"If", "[", RowBox[{RowBox[{"CondANUBIS", "\:f431", "True"}], ",", "\"ANUBIS\"", ",", "GivenExperimentForSensitivityComputation"}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"directory", "[", "\"Sensitivity-LLP-exp\"", "]"}], "=", RowBox[{"FileNameJoin", "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Sensitivity-LLP\"", "]"}], ",", "ExperimentFolder"}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"!", RowBox[{"DirectoryQ", "[", RowBox[{"directory", "[", "\"Sensitivity-LLP-exp\"", "]"}], "]"}]}], ",", RowBox[{"CreateDirectory", "[", RowBox[{"directory", "[", "\"Sensitivity-LLP-exp\"", "]"}], "]"}]}], "]"}]}], "Input",
  CellChangeTimes->{{3.886840860661646*^9, 3.886840860664637*^9}, 
    3.8890817880618696`*^9, {3.8891547447151575`*^9, 3.8891549444728413`*^9}, {
    3.8891555762544374`*^9, 3.8891555856760416`*^9}, {3.8932345510125337`*^9, 
@@ -7917,9 +6625,7 @@ Cell[BoxData[{
       "couplingLabel", " ", ",", " ", 
        "\"\<\!\(\*SubscriptBox[\(N\), \(events\)]\)[\!\(\*SubscriptBox[\(m\), \
 \(V\)]\),\[CapitalLambda]]\>\""}], "}"}]}], ",", 
-    RowBox[{"FrameStyle", "\[Rule]", 
-     RowBox[{"Directive", "[", 
-      RowBox[{"Black", ",", " ", "23", ",", "Thick"}], "]"}]}], ",", 
+    RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "23", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
     RowBox[{"PlotStyle", "\[Rule]", 
      RowBox[{"{", 
       RowBox[{
@@ -8025,9 +6731,7 @@ Cell[BoxData[{
      RowBox[{"{", 
       RowBox[{"massLabel", ",", "couplingLabel"}], "}"}]}], ",", " ", 
     RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", " ", 
-    RowBox[{"FrameStyle", "\[Rule]", 
-     RowBox[{"Directive", "[", 
-      RowBox[{"Black", ",", " ", "25", ",", "Thick"}], "]"}]}], ",", 
+    RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", " ", "25", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
     RowBox[{"PlotPoints", "\[Rule]", "100"}], ",", 
     RowBox[{"PlotLegends", "\[Rule]", 
      RowBox[{"Placed", "[", 
@@ -8054,7 +6758,7 @@ Cell[BoxData[{
          RowBox[{"Method", "\[Rule]", 
           RowBox[{"{", 
            RowBox[{
-            RowBox[{"FrameStyle", "\[Rule]", "Black"}], ",", 
+            RowBox[{"FrameStyle", "\:f522", RowBox[{"Directive", "[", RowBox[{"Black", ",", "Thick", ",", RowBox[{"FontFamily", "\:f522", "\"Palatino\""}]}], "]"}]}], ",", 
             RowBox[{"AxesStyle", "\[Rule]", "None"}], ",", 
             RowBox[{"TicksStyle", "\[Rule]", "Black"}]}], "}"}]}]}], "]"}], 
        ",", "Right"}], "]"}]}], ",", 
@@ -8602,441 +7306,192 @@ Cell["Sensitivity evaluation and plot", "Section",
   "Sensitivity-computation",ExpressionUUID->"0826a67c-29ab-9a40-bfab-\
 b8095ca85001"],
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"sens", "=", 
-   RowBox[{"SensitivityBlock", "[", 
-    RowBox[{"NevMinVal", ",", "NpotVal", ",", "SelectedProduction"}], "]"}]}],
-   ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"legends", "=", 
-   RowBox[{"sens", "[", 
-    RowBox[{"[", 
-     RowBox[{"All", ",", 
-      RowBox[{"-", "2"}]}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"sensregions", "=", 
-   RowBox[{"sens", "[", 
-    RowBox[{"[", 
-     RowBox[{"All", ",", 
-      RowBox[{"-", "1"}]}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"descriptors", "=", 
-   RowBox[{"sens", "[", 
-    RowBox[{"[", 
-     RowBox[{"All", ",", 
-      RowBox[{"{", 
-       RowBox[{"2", ",", "3", ",", "4"}], "}"}]}], "]"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"sensToPlotWithConstraints", "=", 
-   RowBox[{
-    RowBox[{"Select", "[", 
-     RowBox[{"sens", ",", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"MemberQ", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"\"\<FR-Central\>\"", ",", "\"\<None\>\""}], "}"}], ",", 
-          RowBox[{"#", "[", 
-           RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "&&", 
-        RowBox[{"MemberQ", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"\"\<None\>\"", ",", "\"\<Central\>\""}], "}"}], ",", 
-          RowBox[{"#", "[", 
-           RowBox[{"[", "3", "]"}], "]"}]}], "]"}]}], "&"}]}], "]"}], "[", 
-    RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"ColorsForPlot", "=", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", "Blue"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Darker", "@", "Red"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Darker", "@", 
-        RowBox[{"Darker", "@", "Green"}]}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Darker", "@", "Cyan"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", "Magenta"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", " ", "Black"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Lighter", "@", "Brown"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Lighter", "@", "Blue"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Lighter", "@", "Red"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Lighter", "@", "Green"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", "Orange"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", "Blue", ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Darker", "@", "Red"}], ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Darker", "@", 
-        RowBox[{"Darker", "@", "Green"}]}], ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Darker", "@", "Cyan"}], ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", "Magenta", ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", "Black", ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Lighter", "@", "Brown"}], ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Lighter", "@", "Blue"}], ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Lighter", "@", "Red"}], ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", 
-       RowBox[{"Lighter", "@", "Green"}], ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"Thick", ",", "Orange", ",", 
-       RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}]}], "}"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"plotstylelist", "=", 
-   RowBox[{"Flatten", "[", 
-    RowBox[{
-     RowBox[{"Table", "[", 
-      RowBox[{
-       RowBox[{"ConstantArray", "[", 
-        RowBox[{
-         RowBox[{"ColorsForPlot", "[", 
-          RowBox[{"[", "i", "]"}], "]"}], ",", 
-         RowBox[{"If", "[", 
-          RowBox[{
-           RowBox[{"MatrixQ", "[", 
-            RowBox[{"sensregions", "[", 
-             RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", "1", ",", 
-           RowBox[{"Length", "@", 
-            RowBox[{"sensregions", "[", 
-             RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "]"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", 
-         RowBox[{"Length", "[", "sensregions", "]"}], ",", "1"}], "}"}]}], 
-      "]"}], ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"pt2", "=", 
-   RowBox[{"Show", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"ListLogLogPlot", "[", 
-      RowBox[{
-       RowBox[{"Cases", "[", 
-        RowBox[{"sensregions", ",", 
-         RowBox[{"_", "?", "MatrixQ"}], ",", "All"}], "]"}], ",", 
-       RowBox[{"Joined", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{"True", ",", "True", ",", "True", ",", "True"}], "}"}]}], 
-       ",", 
-       RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", 
-       RowBox[{"FrameLabel", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{"massLabel", ",", "couplingLabel"}], "}"}]}], ",", 
-       RowBox[{"FrameStyle", "\[Rule]", 
-        RowBox[{"Directive", "[", 
-         RowBox[{"Black", ",", " ", "23", ",", "Thick"}], "]"}]}], ",", 
-       RowBox[{"PlotStyle", "\[Rule]", "plotstylelist"}], ",", 
-       RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
-       RowBox[{"PlotRange", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"1.01", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "1", "]"}], "]"}]}], ",", 
-            RowBox[{"1.1", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"couplingminmaxOverall", "[", 
-             RowBox[{"[", "1", "]"}], "]"}], ",", 
-            RowBox[{"Max", "[", 
-             RowBox[{"0.99", 
-              RowBox[{"couplingminmaxOverall", "[", 
-               RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "}"}]}], "}"}]}], 
-       ",", 
-       RowBox[{"PlotLabel", "\[Rule]", 
-        RowBox[{"Style", "[", 
-         RowBox[{
-          RowBox[{"Row", "[", 
-           RowBox[{
-           "{", "\"\<Visualization of uncertainties: bremsstrahlung, \
-Drell-Yan, decays\>\"", "}"}], "]"}], ",", "18", ",", "Black"}], "]"}]}]}], 
-      "]"}], ",", 
-     RowBox[{"LogLogPlot", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1"}], 
-        "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"x", ",", "1", ",", "10"}], "}"}], ",", 
-       RowBox[{"PlotStyle", "\[Rule]", 
-        RowBox[{"DeleteDuplicates", "[", "plotstylelist", "]"}]}], ",", 
-       RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
-       RowBox[{"PlotRange", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"1.01", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "1", "]"}], "]"}]}], ",", 
-            RowBox[{"1.1", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"couplingminmaxOverall", "[", 
-             RowBox[{"[", "1", "]"}], "]"}], ",", 
-            RowBox[{"Max", "[", 
-             RowBox[{"0.2", ",", 
-              RowBox[{"0.99", 
-               RowBox[{"couplingminmaxOverall", "[", 
-                RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}]}], "}"}]}], "}"}]}],
-        ",", 
-       RowBox[{"PlotLabel", "\[Rule]", 
-        RowBox[{"Style", "[", 
-         RowBox[{
-          RowBox[{"Row", "[", 
-           RowBox[{"{", 
-            RowBox[{
-            "GivenExperimentForSensitivityComputation", ",", 
-             "\"\<, \!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] \
-\>\"", ",", "NevMinVal"}], "}"}], "]"}], ",", "18", ",", "Black"}], "]"}]}], 
-       ",", 
-       RowBox[{"PlotLegends", "\[Rule]", 
-        RowBox[{"Placed", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{
-            RowBox[{"Style", "[", 
-             RowBox[{
-              RowBox[{"Row", "[", 
-               RowBox[{"{", 
-                RowBox[{
-                 RowBox[{"#", "[", 
-                  RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<,\>\"", ",", 
-                 RowBox[{"#", "[", 
-                  RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<,\>\"", ",", 
-                 RowBox[{"#", "[", 
-                  RowBox[{"[", "3", "]"}], "]"}]}], "}"}], "]"}], ",", "15"}],
-              "]"}], "&"}], "/@", "descriptors"}], ",", 
-          RowBox[{"{", 
-           RowBox[{"0.75", ",", "0.75"}], "}"}]}], "]"}]}]}], "]"}]}], 
-    "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"pt1", "=", 
-   RowBox[{"Show", "[", 
-    RowBox[{
-     RowBox[{"ListLogLogPlot", "[", 
-      RowBox[{
-       RowBox[{"Cases", "[", 
-        RowBox[{
-         RowBox[{"ExcludedRegions", "[", 
-          RowBox[{"LLPdirName", ",", "\"\<FR-Central\>\""}], "]"}], ",", 
-         RowBox[{"_", "?", "MatrixQ"}], ",", "All"}], "]"}], ",", 
-       RowBox[{"Joined", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{"True", ",", "True", ",", "True", ",", "True"}], "}"}]}], 
-       ",", 
-       RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", 
-       RowBox[{"FrameLabel", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{"massLabel", ",", "couplingLabel"}], "}"}]}], ",", 
-       RowBox[{"FrameStyle", "\[Rule]", 
-        RowBox[{"Directive", "[", 
-         RowBox[{"Black", ",", " ", "23", ",", "Thick"}], "]"}]}], ",", 
-       RowBox[{"PlotStyle", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{"{", 
-          RowBox[{"Thick", ",", "Gray"}], "}"}], "}"}]}], ",", 
-       RowBox[{"Filling", "\[Rule]", 
-        RowBox[{"Table", "[", 
-         RowBox[{
-          RowBox[{"i", "\[Rule]", 
-           RowBox[{"{", 
-            RowBox[{"True", ",", 
-             RowBox[{"Directive", "[", 
-              RowBox[{"Gray", ",", 
-               RowBox[{"Opacity", "[", "0.3", "]"}]}], "]"}]}], "}"}]}], ",", 
-          RowBox[{"{", 
-           RowBox[{"i", ",", "1", ",", "10", ",", "1"}], "}"}]}], "]"}]}], 
-       ",", 
-       RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
-       RowBox[{"PlotRange", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"1.01", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "1", "]"}], "]"}]}], ",", 
-            RowBox[{"1.1", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"0.3", 
-             RowBox[{"Min", "[", 
-              RowBox[{"Flatten", "[", "sensregions", "]"}], "]"}]}], ",", 
-            RowBox[{"0.99", 
-             RowBox[{"couplingminmaxOverall", "[", 
-              RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}]}], "}"}]}], ",", 
-       RowBox[{"PlotLabel", "\[Rule]", 
-        RowBox[{"Style", "[", 
-         RowBox[{
-          RowBox[{"Row", "[", 
-           RowBox[{"{", 
-            RowBox[{
-            "GivenExperimentForSensitivityComputation", ",", 
-             "\"\<, \!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] \
-\>\"", ",", "NevMinVal"}], "}"}], "]"}], ",", "18", ",", "Black"}], "]"}]}]}],
-       "]"}], ",", "\[IndentingNewLine]", 
-     RowBox[{"ListLogLogPlot", "[", 
-      RowBox[{
-       RowBox[{"Cases", "[", 
-        RowBox[{
-         RowBox[{"sensToPlotWithConstraints", "[", 
-          RowBox[{"[", 
-           RowBox[{"-", "1"}], "]"}], "]"}], ",", 
-         RowBox[{"_", "?", "MatrixQ"}], ",", "All"}], "]"}], ",", 
-       RowBox[{"Joined", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{"True", ",", "True", ",", "True", ",", "True"}], "}"}]}], 
-       ",", 
-       RowBox[{"PlotStyle", "\[Rule]", "plotstylelist"}], ",", 
-       RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
-       RowBox[{"PlotRange", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"1.01", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "1", "]"}], "]"}]}], ",", 
-            RowBox[{"1.1", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"couplingminmaxOverall", "[", 
-             RowBox[{"[", "1", "]"}], "]"}], ",", 
-            RowBox[{"Max", "[", 
-             RowBox[{"0.2", ",", 
-              RowBox[{"0.99", 
-               RowBox[{"couplingminmaxOverall", "[", 
-                RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}]}], "}"}]}], 
-         "}"}]}]}], "]"}], ",", 
-     RowBox[{"Graphics", "[", 
-      RowBox[{"{", 
-       RowBox[{"Text", "[", 
-        RowBox[{
-         RowBox[{"Style", "[", 
-          RowBox[{"\"\<Excluded\>\"", ",", "24", ",", "Black"}], "]"}], ",", 
-         RowBox[{"Scaled", "[", 
-          RowBox[{"{", 
-           RowBox[{"0.2", ",", "0.5"}], "}"}], "]"}]}], "]"}], "}"}], "]"}], 
-     ",", 
-     RowBox[{"LogLogPlot", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1"}], 
-        "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"x", ",", "1", ",", "10"}], "}"}], ",", 
-       RowBox[{"PlotStyle", "\[Rule]", 
-        RowBox[{"DeleteDuplicates", "[", "plotstylelist", "]"}]}], ",", 
-       RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
-       RowBox[{"PlotRange", "\[Rule]", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"1.01", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "1", "]"}], "]"}]}], ",", 
-            RowBox[{"1.1", 
-             RowBox[{"mminmaxOverall", "[", 
-              RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"couplingminmaxOverall", "[", 
-             RowBox[{"[", "1", "]"}], "]"}], ",", 
-            RowBox[{"Max", "[", 
-             RowBox[{"0.2", ",", 
-              RowBox[{"0.99", 
-               RowBox[{"couplingminmaxOverall", "[", 
-                RowBox[{"[", "2", "]"}], "]"}]}]}], "]"}]}], "}"}]}], "}"}]}],
-        ",", 
-       RowBox[{"PlotLabel", "\[Rule]", 
-        RowBox[{"Style", "[", 
-         RowBox[{
-          RowBox[{"Row", "[", 
-           RowBox[{"{", 
-            RowBox[{
-            "GivenExperimentForSensitivityComputation", ",", 
-             "\"\<, \!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] \
-\>\"", ",", "NevMinVal"}], "}"}], "]"}], ",", "18", ",", "Black"}], "]"}]}], 
-       ",", 
-       RowBox[{"PlotLegends", "\[Rule]", 
-        RowBox[{"Placed", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{
-            RowBox[{"Style", "[", 
-             RowBox[{
-              RowBox[{"Row", "[", 
-               RowBox[{"{", 
-                RowBox[{
-                 RowBox[{"#", "[", 
-                  RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<,\>\"", ",", 
-                 RowBox[{"#", "[", 
-                  RowBox[{"[", "3", "]"}], "]"}], ",", "\"\<,\>\"", ",", 
-                 RowBox[{"#", "[", 
-                  RowBox[{"[", "4", "]"}], "]"}]}], "}"}], "]"}], ",", "15"}],
-              "]"}], "&"}], "/@", 
-           RowBox[{"(", 
-            RowBox[{"{", "sensToPlotWithConstraints", "}"}], ")"}]}], ",", 
-          RowBox[{"{", 
-           RowBox[{"0.2", ",", "0.15"}], "}"}]}], "]"}]}]}], "]"}]}], "]"}]}],
-   ";"}], "\[IndentingNewLine]", 
- RowBox[{"Style", "[", 
-  RowBox[{"Row", "[", 
-   RowBox[{"{", 
-    RowBox[{"pt1", ",", "pt2"}], "}"}], "]"}], "]"}]}], "Input",
+Cell[BoxData[
+ {RowBox[{RowBox[{"sens", "=", RowBox[{"SensitivityBlock", "[", 
+        RowBox[{"NevMinVal", ",", "NpotVal", ",", "SelectedProduction"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{RowBox[{"legends", "=", RowBox[{"sens", "[", 
+        RowBox[{"[", RowBox[{"All", ",", RowBox[{"-", "2"}]}], "]"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{RowBox[{"sensregions", "=", RowBox[{"sens", "[", 
+        RowBox[{"[", RowBox[{"All", ",", RowBox[{"-", "1"}]}], "]"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{RowBox[{"descriptors", "=", RowBox[{"sens", "[", 
+        RowBox[{"[", RowBox[{"All", ",", RowBox[{"{", RowBox[{"2", ",", "3", ",", "4"}], "}"}]}], 
+          "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{RowBox[{"sensToPlotWithConstraints", "=", 
+      RowBox[{RowBox[{"Select", "[", RowBox[{"sens", ",", 
+            RowBox[{RowBox[{RowBox[{"MemberQ", "[", RowBox[{RowBox[{"{", RowBox[{"\"FR-Central\"", 
+                        ",", "\"None\""}], "}"}], ",", RowBox[{"#", "[", RowBox[{"[", "2", "]"}], 
+                      "]"}]}], "]"}], "&&", RowBox[{"MemberQ", "[", RowBox[
+                   {RowBox[{"{", RowBox[{"\"None\"", ",", "\"Central\""}], "}"}], ",", 
+                    RowBox[{"#", "[", RowBox[{"[", "3", "]"}], "]"}]}], "]"}]}], "&"}]}], "]"}], 
+        "[", RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{RowBox[{"ColorsForPlot", "=", 
+      RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"Thick", ",", "Blue"}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Darker", "@", "Red"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Darker", "@", RowBox[{"Darker", "@", 
+                  "Green"}]}]}], "}"}], ",", RowBox[{"{", RowBox[{"Thick", ",", 
+              RowBox[{"Darker", "@", "Cyan"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", "Magenta"}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", " ", "Black"}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Lighter", "@", "Brown"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Lighter", "@", "Blue"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Lighter", "@", "Red"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Lighter", "@", "Green"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", "Orange"}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", "Blue", ",", RowBox[{"Dashing", "[", "0.02", "]"}]}], 
+            "}"}], ",", RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Darker", "@", "Red"}], ",", 
+              RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Darker", "@", RowBox[{"Darker", "@", 
+                  "Green"}]}], ",", RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Darker", "@", "Cyan"}], ",", 
+              RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", "Magenta", ",", RowBox[{"Dashing", "[", "0.02", 
+                "]"}]}], "}"}], ",", RowBox[{"{", RowBox[{"Thick", ",", "Black", ",", 
+              RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Lighter", "@", "Brown"}], ",", 
+              RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Lighter", "@", "Blue"}], ",", 
+              RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Lighter", "@", "Red"}], ",", 
+              RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", RowBox[{"Lighter", "@", "Green"}], ",", 
+              RowBox[{"Dashing", "[", "0.02", "]"}]}], "}"}], ",", 
+          RowBox[{"{", RowBox[{"Thick", ",", "Orange", ",", RowBox[{"Dashing", "[", "0.02", 
+                "]"}]}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{RowBox[{"plotstylelist", "=", RowBox[{"Flatten", "[", 
+        RowBox[{RowBox[{"Table", "[", RowBox[{RowBox[{"ConstantArray", "[", RowBox[
+                 {RowBox[{"ColorsForPlot", "[", RowBox[{"[", "i", "]"}], "]"}], ",", 
+                  RowBox[{"If", "[", RowBox[{RowBox[{"MatrixQ", "[", RowBox[{"sensregions", "[", 
+                          RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", "1", ",", RowBox[{"Length", 
+                        "@", RowBox[{"sensregions", "[", RowBox[{"[", "i", "]"}], "]"}]}]}], 
+                    "]"}]}], "]"}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", 
+                  RowBox[{"Length", "[", "sensregions", "]"}], ",", "1"}], "}"}]}], "]"}], ",", 
+          "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{RowBox[{"pt2", "=", RowBox[{"Show", "[", "\[IndentingNewLine]", 
+        RowBox[{RowBox[{"ListLogLogPlot", "[", RowBox[{RowBox[{"Cases", "[", 
+                RowBox[{"sensregions", ",", RowBox[{"_", "?", "MatrixQ"}], ",", "All"}], "]"}], 
+              ",", RowBox[{"Joined", "\[Rule]", RowBox[{"{", RowBox[{"True", ",", "True", ",", 
+                    "True", ",", "True"}], "}"}]}], ",", RowBox[{"Frame", "\[Rule]", " ", "True"}], 
+              ",", RowBox[{"FrameLabel", "\[Rule]", RowBox[{"{", RowBox[{"massLabel", ",", 
+                    "couplingLabel"}], "}"}]}], ",", RowBox[{"FrameStyle", "\[Rule]", 
+                RowBox[{"Directive", "[", RowBox[{"Black", ",", "23", ",", "Thick", ",", 
+                    RowBox[{"FontFamily", "\[Rule]", "\"Palatino\""}]}], "]"}]}], ",", 
+              RowBox[{"PlotStyle", "\[Rule]", "plotstylelist"}], ",", RowBox[{"ImageSize", 
+                "\[Rule]", "Large"}], ",", RowBox[{"PlotRange", "\[Rule]", RowBox[
+                 {"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"1.01", RowBox[{"mminmaxOverall", "[", 
+                            RowBox[{"[", "1", "]"}], "]"}]}], ",", RowBox[{"1.1", RowBox[
+                           {"mminmaxOverall", "[", RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
+                    RowBox[{"{", RowBox[{RowBox[{"couplingminmaxOverall", "[", RowBox[{"[", "1", 
+                            "]"}], "]"}], ",", RowBox[{"Max", "[", RowBox[{"0.99", RowBox[
+                             {"couplingminmaxOverall", "[", RowBox[{"[", "2", "]"}], "]"}]}], 
+                          "]"}]}], "}"}]}], "}"}]}], ",", RowBox[{"PlotLabel", "\[Rule]", 
+                RowBox[{"Style", "[", RowBox[{RowBox[{"Row", "[", RowBox[{"{", 
+                        "\"Visualization of uncertainties: bremsstrahlung, Drell-Yan, decays\"", 
+                        "}"}], "]"}], ",", "18", ",", "Black"}], "]"}]}]}], "]"}], ",", 
+          RowBox[{"LogLogPlot", "[", RowBox[{RowBox[{"{", RowBox[{"1", ",", "1", ",", "1", ",", 
+                  "1", ",", "1", ",", "1"}], "}"}], ",", RowBox[{"{", RowBox[{"x", ",", "1", ",", 
+                  "10"}], "}"}], ",", RowBox[{"PlotStyle", "\[Rule]", RowBox[{"DeleteDuplicates", 
+                  "[", "plotstylelist", "]"}]}], ",", RowBox[{"ImageSize", "\[Rule]", "Large"}], 
+              ",", RowBox[{"PlotRange", "\[Rule]", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                       {RowBox[{"1.01", RowBox[{"mminmaxOverall", "[", RowBox[{"[", "1", "]"}], 
+                            "]"}]}], ",", RowBox[{"1.1", RowBox[{"mminmaxOverall", "[", RowBox[
+                             {"[", "2", "]"}], "]"}]}]}], "}"}], ",", RowBox[{"{", RowBox[
+                       {RowBox[{"couplingminmaxOverall", "[", RowBox[{"[", "1", "]"}], "]"}], ",", 
+                        RowBox[{"Max", "[", RowBox[{"0.2", ",", RowBox[{"0.99", RowBox[
+                               {"couplingminmaxOverall", "[", RowBox[{"[", "2", "]"}], "]"}]}]}], 
+                          "]"}]}], "}"}]}], "}"}]}], ",", RowBox[{"PlotLabel", "\[Rule]", 
+                RowBox[{"Style", "[", RowBox[{RowBox[{"Row", "[", RowBox[{"{", RowBox[
+                         {"GivenExperimentForSensitivityComputation", ",", 
+                          "\", \!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] \"", ",", 
+                          "NevMinVal"}], "}"}], "]"}], ",", "18", ",", "Black"}], "]"}]}], ",", 
+              RowBox[{"PlotLegends", "\[Rule]", RowBox[{"Placed", "[", RowBox[
+                   {RowBox[{RowBox[{RowBox[{"Style", "[", RowBox[{RowBox[{"Row", "[", RowBox[
+                               {"{", RowBox[{RowBox[{"#", "[", RowBox[{"[", "1", "]"}], "]"}], ",", 
+                                 "\",\"", ",", RowBox[{"#", "[", RowBox[{"[", "2", "]"}], "]"}], 
+                                 ",", "\",\"", ",", RowBox[{"#", "[", RowBox[{"[", "3", "]"}], 
+                                 "]"}]}], "}"}], "]"}], ",", "15"}], "]"}], "&"}], "/@", 
+                      "descriptors"}], ",", RowBox[{"{", RowBox[{"0.75", ",", "0.75"}], "}"}]}], 
+                  "]"}]}]}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{RowBox[{RowBox[{"ptbounds", "=", RowBox[{"ListLogLogPlot", "[", 
+          RowBox[{RowBox[{"Cases", "[", RowBox[{RowBox[{"ExcludedRegions", "[", "LLPdirName", 
+                  "]"}], ",", RowBox[{"_", "?", "MatrixQ"}], ",", "All"}], "]"}], ",", 
+            RowBox[{"Joined", "\[Rule]", RowBox[{"{", RowBox[{"True", ",", "True", ",", "True", 
+                  ",", "True"}], "}"}]}], ",", RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", 
+            RowBox[{"FrameLabel", "\[Rule]", RowBox[{"{", RowBox[{"massLabel", ",", 
+                  "couplingLabel"}], "}"}]}], ",", RowBox[{"FrameStyle", "\[Rule]", 
+              RowBox[{"Directive", "[", RowBox[{"Black", ",", "23", ",", "Thick", ",", 
+                  RowBox[{"FontFamily", "\[Rule]", "\"Palatino\""}]}], "]"}]}], ",", 
+            RowBox[{"PlotStyle", "\[Rule]", RowBox[{"{", RowBox[{"{", RowBox[{"Thick", ",", 
+                    "Gray"}], "}"}], "}"}]}], ",", RowBox[{"Filling", "\[Rule]", 
+              RowBox[{"{", RowBox[{RowBox[{"1", "\[Rule]", RowBox[{"{", RowBox[{"True", ",", 
+                        RowBox[{"Directive", "[", RowBox[{"Gray", ",", RowBox[{"Opacity", "[", 
+                              "0.1`", "]"}]}], "]"}]}], "}"}]}], ",", RowBox[{"2", "\[Rule]", 
+                    RowBox[{"{", RowBox[{"True", ",", RowBox[{"Directive", "[", RowBox[{"Gray", 
+                            ",", RowBox[{"Opacity", "[", "0.2`", "]"}]}], "]"}]}], "}"}]}], ",", 
+                  RowBox[{"3", "\[Rule]", RowBox[{"{", RowBox[{"True", ",", RowBox[{"Directive", 
+                          "[", RowBox[{"Gray", ",", RowBox[{"Opacity", "[", "0.2`", "]"}]}], 
+                          "]"}]}], "}"}]}]}], "}"}]}], ",", RowBox[{"ImageSize", "\[Rule]", 
+              "Large"}], ",", RowBox[{"PlotRange", "\[Rule]", RowBox[{"{", RowBox[
+                 {RowBox[{"{", RowBox[{RowBox[{"1.01", RowBox[{"mminmaxOverall", "[", RowBox[
+                           {"[", "1", "]"}], "]"}]}], ",", RowBox[{"1.1", RowBox[{"mminmaxOverall", 
+                          "[", RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", RowBox[
+                   {"{", RowBox[{RowBox[{"0.3", RowBox[{"Min", "[", RowBox[{"Flatten", "[", 
+                            "sensregions", "]"}], "]"}]}], ",", RowBox[{"0.99", RowBox[
+                         {"couplingminmaxOverall", "[", RowBox[{"[", "2", "]"}], "]"}]}]}], 
+                    "}"}]}], "}"}]}], ",", RowBox[{"PlotLabel", "\[Rule]", RowBox[{"Style", "[", 
+                RowBox[{RowBox[{"Row", "[", RowBox[{"{", RowBox[
+                       {"GivenExperimentForSensitivityComputation", ",", 
+                        "\", \!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] \"", ",", 
+                        "NevMinVal"}], "}"}], "]"}], ",", "18", ",", "Black"}], "]"}]}]}], "]"}]}], 
+      ";", "\[IndentingNewLine]", RowBox[{"ptsens", "=", RowBox[{"ListLogLogPlot", "[", 
+          RowBox[{RowBox[{"Cases", "[", RowBox[{RowBox[{"sensToPlotWithConstraints", "[", 
+                  RowBox[{"[", RowBox[{"-", "1"}], "]"}], "]"}], ",", RowBox[{"_", "?", 
+                  "MatrixQ"}], ",", "All"}], "]"}], ",", RowBox[{"Joined", "\[Rule]", 
+              RowBox[{"{", RowBox[{"True", ",", "True", ",", "True", ",", "True"}], "}"}]}], ",", 
+            RowBox[{"PlotStyle", "\[Rule]", "plotstylelist"}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", RowBox[{"PlotRange", "\[Rule]", 
+              RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"1.01", RowBox[{"mminmaxOverall", 
+                          "[", RowBox[{"[", "1", "]"}], "]"}]}], ",", RowBox[{"1.1", RowBox[
+                         {"mminmaxOverall", "[", RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
+                  RowBox[{"{", RowBox[{RowBox[{"couplingminmaxOverall", "[", RowBox[{"[", "1", 
+                          "]"}], "]"}], ",", RowBox[{"Max", "[", RowBox[{"0.2", ",", RowBox[
+                           {"0.99", RowBox[{"couplingminmaxOverall", "[", RowBox[{"[", "2", "]"}], 
+                              "]"}]}]}], "]"}]}], "}"}]}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", RowBox[{"pt1", "=", RowBox[{"Show", "[", 
+          RowBox[{"ptbounds", ",", "ptsens", ",", RowBox[{"Graphics", "[", RowBox[{"{", 
+                RowBox[{"Text", "[", RowBox[{RowBox[{"Style", "[", RowBox[
+                       {"\"Laboratory exclusions (r = 1.5)\"", ",", "24", ",", "Black"}], "]"}], 
+                    ",", RowBox[{"Scaled", "[", RowBox[{"{", RowBox[{"0.2", ",", "0.5"}], "}"}], 
+                      "]"}]}], "]"}], "}"}], "]"}], ",", RowBox[{"LogLogPlot", "[", 
+              RowBox[{RowBox[{"{", RowBox[{"1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1"}], 
+                  "}"}], ",", RowBox[{"{", RowBox[{"x", ",", "1", ",", "10"}], "}"}], ",", 
+                RowBox[{"PlotStyle", "\[Rule]", RowBox[{"DeleteDuplicates", "[", "plotstylelist", 
+                    "]"}]}], ",", RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+                RowBox[{"PlotRange", "\[Rule]", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                         {RowBox[{"1.01", RowBox[{"mminmaxOverall", "[", RowBox[{"[", "1", "]"}], 
+                              "]"}]}], ",", RowBox[{"1.1", RowBox[{"mminmaxOverall", "[", RowBox[
+                               {"[", "2", "]"}], "]"}]}]}], "}"}], ",", RowBox[{"{", RowBox[
+                         {RowBox[{"couplingminmaxOverall", "[", RowBox[{"[", "1", "]"}], "]"}], 
+                          ",", RowBox[{"Max", "[", RowBox[{"0.2", ",", RowBox[{"0.99", RowBox[
+                                 {"couplingminmaxOverall", "[", RowBox[{"[", "2", "]"}], "]"}]}]}], 
+                            "]"}]}], "}"}]}], "}"}]}], ",", RowBox[{"PlotLabel", "\[Rule]", 
+                  RowBox[{"Style", "[", RowBox[{RowBox[{"Row", "[", RowBox[{"{", RowBox[
+                           {"GivenExperimentForSensitivityComputation", ",", 
+                            "\", \!\(\*SubscriptBox[\(N\), \(events\)]\) \[GreaterEqual] \"", ",", 
+                            "NevMinVal"}], "}"}], "]"}], ",", "18", ",", "Black"}], "]"}]}], ",", 
+                RowBox[{"PlotLegends", "\[Rule]", RowBox[{"Placed", "[", RowBox[
+                     {RowBox[{RowBox[{RowBox[{"Style", "[", RowBox[{RowBox[{"Row", "[", RowBox[
+                                 {"{", RowBox[{RowBox[{"#", "[", RowBox[{"[", "2", "]"}], "]"}], 
+                                 ",", "\",\"", ",", RowBox[{"#", "[", RowBox[{"[", "3", "]"}], 
+                                 "]"}], ",", "\",\"", ",", RowBox[{"#", "[", RowBox[{"[", "4", 
+                                 "]"}], "]"}]}], "}"}], "]"}], ",", "15"}], "]"}], "&"}], "/@", 
+                        RowBox[{"(", RowBox[{"{", "sensToPlotWithConstraints", "}"}], ")"}]}], ",", 
+                      RowBox[{"{", RowBox[{"0.2", ",", "0.15"}], "}"}]}], "]"}]}]}], "]"}]}], 
+          "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"Style", "[", RowBox[{"Row", "[", RowBox[{"{", RowBox[{"pt1", ",", "pt2"}], "}"}], "]"}], 
+    "]"}]}], "Input",
  CellChangeTimes->{{3.8891549915062704`*^9, 3.889154993345764*^9}, {
    3.8891550726092916`*^9, 3.8891550770006027`*^9}, {3.889155121639572*^9, 
    3.8891551652523565`*^9}, {3.8891552062371397`*^9, 3.889155265897581*^9}, {
@@ -9125,312 +7580,86 @@ Cell["Computing the uncertainty", "Section",
   "Sensitivity-computation",ExpressionUUID->"ca34d843-c362-7748-b4ca-\
 27f7d7eb0e5d"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"If", "[", 
-   RowBox[{"ifUncCalc", ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"If", "[", 
-      RowBox[{
-       RowBox[{"signaturesAvailable", "!=", 
-        RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"UncertaintyExtractor", "[", 
-          RowBox[{"signature_", ",", "Npot_", ",", "NevMin_"}], "]"}], ":=", 
-         RowBox[{"Module", "[", 
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{"RegSens", ",", "SensTemp"}], "}"}], ",", 
-           "\[IndentingNewLine]", 
-           RowBox[{
-            RowBox[{"Do", "[", "\[IndentingNewLine]", 
-             RowBox[{
-              RowBox[{
-               RowBox[{
-                RowBox[{"NevTot", "[", 
-                 RowBox[{"mLLP_", ",", "coupling_", ",", "t"}], "]"}], "=", 
-                RowBox[{"NevIntUnc", "[", 
-                 RowBox[{
-                 "signature", ",", "t", ",", "mLLP", ",", "coupling"}], 
-                 "]"}]}], ";"}], "\[IndentingNewLine]", ",", 
-              RowBox[{"{", 
-               RowBox[{"t", ",", "uncchoices"}], "}"}]}], "]"}], ";", 
-            "\[IndentingNewLine]", 
-            RowBox[{"RegUnc", "=", 
-             RowBox[{"RegionPlot", "[", 
-              RowBox[{
-               RowBox[{
-                RowBox[{
-                 RowBox[{
-                  FractionBox["Npot", "NpotDefault"], 
-                  RowBox[{"NevTot", "[", 
-                   RowBox[{
-                    SuperscriptBox["10", "mLLP"], ",", 
-                    SuperscriptBox["10", "\[CapitalLambda]2"], ",", 
-                    "\"\<Lower\>\""}], "]"}]}], "<=", "NevMin"}], "&&", 
-                RowBox[{
-                 RowBox[{
-                  FractionBox["Npot", "NpotDefault"], 
-                  RowBox[{"NevTot", "[", 
-                   RowBox[{
-                    SuperscriptBox["10", "mLLP"], ",", 
-                    SuperscriptBox["10", "\[CapitalLambda]2"], ",", 
-                    "\"\<Upper\>\""}], "]"}]}], ">=", "NevMin"}], "&&", 
-                RowBox[{
-                 FractionBox[
-                  RowBox[{"(", 
-                   RowBox[{
-                    RowBox[{"NevTot", "[", 
-                    RowBox[{
-                    SuperscriptBox["10", "mLLP"], ",", 
-                    SuperscriptBox["10", "\[CapitalLambda]2"], ",", 
-                    "\"\<Upper\>\""}], "]"}], "-", 
-                    RowBox[{"NevTot", "[", 
-                    RowBox[{
-                    SuperscriptBox["10", "mLLP"], ",", 
-                    SuperscriptBox["10", "\[CapitalLambda]2"], ",", 
-                    "\"\<Lower\>\""}], "]"}]}], ")"}], 
-                  RowBox[{"Max", "[", 
-                   RowBox[{
-                    RowBox[{"NevTot", "[", 
-                    RowBox[{
-                    SuperscriptBox["10", "mLLP"], ",", 
-                    SuperscriptBox["10", "\[CapitalLambda]2"], ",", 
-                    "\"\<Upper\>\""}], "]"}], ",", 
-                    SuperscriptBox["10", 
-                    RowBox[{"-", "90."}]]}], "]"}]], ">", "0.1"}]}], ",", 
-               RowBox[{"{", 
-                RowBox[{"mLLP", ",", 
-                 RowBox[{"Log10", "[", 
-                  RowBox[{"mminmaxOverall", "[", 
-                   RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
-                 RowBox[{"Log10", "[", 
-                  RowBox[{"mminmaxOverall", "[", 
-                   RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}], ",", 
-               RowBox[{"{", 
-                RowBox[{"\[CapitalLambda]2inv", ",", 
-                 RowBox[{"Log10", "[", 
-                  RowBox[{"couplingminmaxOverall", "[", 
-                   RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
-                 RowBox[{"Log10", "[", 
-                  RowBox[{"couplingminmaxOverall", "[", 
-                   RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}], ",", 
-               RowBox[{"PlotPoints", "->", "500"}]}], "]"}]}], ";", 
-            "\[IndentingNewLine]", 
-            RowBox[{"RegCentral", "=", 
-             RowBox[{"RegionPlot", "[", 
-              RowBox[{
-               RowBox[{
-                RowBox[{
-                 FractionBox["Npot", "NpotDefault"], 
-                 RowBox[{"NevTot", "[", 
-                  RowBox[{
-                   SuperscriptBox["10", "mLLP"], ",", 
-                   SuperscriptBox["10", "\[CapitalLambda]2"], ",", 
-                   "\"\<Central\>\""}], "]"}]}], ">=", "NevMin"}], ",", 
-               RowBox[{"{", 
-                RowBox[{"mLLP", ",", 
-                 RowBox[{"Log10", "[", 
-                  RowBox[{"mminmaxOverall", "[", 
-                   RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
-                 RowBox[{"Log10", "[", 
-                  RowBox[{"mminmaxOverall", "[", 
-                   RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}], ",", 
-               RowBox[{"{", 
-                RowBox[{"\[CapitalLambda]2inv", ",", 
-                 RowBox[{"Log10", "[", 
-                  RowBox[{"couplingminmaxOverall", "[", 
-                   RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
-                 RowBox[{"Log10", "[", 
-                  RowBox[{"couplingminmaxOverall", "[", 
-                   RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}], ",", 
-               RowBox[{"PlotPoints", "->", "300"}]}], "]"}]}], ";", 
-            "\[IndentingNewLine]", 
-            RowBox[{"UncTemp", "=", 
-             RowBox[{"Cases", "[", 
-              RowBox[{
-               RowBox[{"Normal", "@", "RegUnc"}], ",", 
-               RowBox[{
-                RowBox[{"Line", "[", "x_", "]"}], "\[RuleDelayed]", "x"}], 
-               ",", "Infinity"}], "]"}]}], ";", "\[IndentingNewLine]", 
-            RowBox[{"CentrTemp", "=", 
-             RowBox[{"Cases", "[", 
-              RowBox[{
-               RowBox[{"Normal", "@", "RegCentral"}], ",", 
-               RowBox[{
-                RowBox[{"Line", "[", "x_", "]"}], "\[RuleDelayed]", "x"}], 
-               ",", "Infinity"}], "]"}]}], ";", "\[IndentingNewLine]", 
-            RowBox[{"Table", "[", 
-             RowBox[{
-              RowBox[{"Table", "[", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{
-                  RowBox[{"{", 
-                   RowBox[{
-                    RowBox[{"10", "^", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "1", "]"}], "]"}]}], ",", 
-                    RowBox[{"10", "^", 
-                    RowBox[{"#", "[", 
-                    RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], "&"}], "/@", 
-                 RowBox[{"s", "[", 
-                  RowBox[{"[", "i", "]"}], "]"}]}], ",", 
-                RowBox[{"{", 
-                 RowBox[{"i", ",", "1", ",", 
-                  RowBox[{"Length", "[", "s", "]"}], ",", "1"}], "}"}]}], 
-               "]"}], ",", 
-              RowBox[{"{", 
-               RowBox[{"s", ",", 
-                RowBox[{"{", 
-                 RowBox[{"CentrTemp", ",", "UncTemp"}], "}"}]}], "}"}]}], 
-             "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"Print", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"{", 
-             RowBox[{
-             "\"\<\!\(\*SubscriptBox[\(N\), \(PoT\)]\) for computation\>\"", 
-              ",", "\"\<\!\(\*SubscriptBox[\(N\), \(ev, min\)]\)\>\""}], 
-             "}"}], ",", 
-            RowBox[{"{", 
-             RowBox[{"NpotVal", ",", "NevMinVal"}], "}"}]}], "}"}], "//", 
-          "TableForm"}], "]"}], ";", "\[IndentingNewLine]", 
-        RowBox[{"Do", "[", "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"sensitivityCenter", "[", "type", "]"}], ",", 
-             RowBox[{"sensitivityUncertainty", "[", "type", "]"}]}], "}"}], 
-           "=", 
-           RowBox[{"UncertaintyExtractor", "[", 
-            RowBox[{"type", ",", "NpotVal", ",", "NevMinVal"}], "]"}]}], 
-          "\[IndentingNewLine]", ",", 
-          RowBox[{"{", 
-           RowBox[{"type", ",", "signaturesAvailable"}], "}"}]}], "]"}], ";", 
-        "\[IndentingNewLine]", 
-        RowBox[{"TabSens", "=", 
-         RowBox[{"Table", "[", 
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{"type", ",", 
-             RowBox[{"sensitivityCenter", "[", "type", "]"}], ",", 
-             RowBox[{"sensitivityUncertainty", "[", "type", "]"}]}], "}"}], 
-           ",", 
-           RowBox[{"{", 
-            RowBox[{"type", ",", "signaturesAvailable"}], "}"}]}], "]"}]}], 
-        ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-       RowBox[{"TabSens", "=", 
-        RowBox[{"{", 
-         RowBox[{"{", 
-          RowBox[{"\"\<None\>\"", ",", 
-           RowBox[{
-            RowBox[{"sens", "[", 
-             RowBox[{"[", "1", "]"}], "]"}], "[", 
-            RowBox[{"[", 
-             RowBox[{"-", "1"}], "]"}], "]"}], ",", 
-           RowBox[{"{", "}"}]}], "}"}], "}"}]}]}], "\[IndentingNewLine]", 
-      "]"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"assocData", "=", 
-      RowBox[{"Map", "[", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"Association", "[", 
-          RowBox[{
-           RowBox[{"\"\<Uncertainty source\>\"", "->", 
-            RowBox[{"#", "[", 
-             RowBox[{"[", "1", "]"}], "]"}]}], ",", 
-           RowBox[{"\"\<Central sensitivity\>\"", "->", 
-            RowBox[{"#", "[", 
-             RowBox[{"[", "2", "]"}], "]"}]}], ",", 
-           RowBox[{"\"\<Uncertainty\>\"", "->", 
-            RowBox[{"#", "[", 
-             RowBox[{"[", "3", "]"}], "]"}]}]}], "]"}], "&"}], ",", 
-        "TabSens"}], "]"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"filenameexport", "=", 
-      RowBox[{"FileNameJoin", "[", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"directory", "[", "\"\<Sensitivity-LLP-exp\>\"", "]"}], ",", 
-         RowBox[{"ToString", "@", 
-          RowBox[{"StringForm", "[", 
-           RowBox[{"\"\<Uncertainties_``_at_``_Nev=``_Npot=``.\>\"", ",", 
-            RowBox[{"Sequence", "@@", 
-             RowBox[{"{", 
-              RowBox[{"LLPdirName", ",", "ExperimentFolder", ",", 
-               RowBox[{"NevMinVal", "//", "ToString"}], ",", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"SetPrecision", "[", 
-                  RowBox[{
-                   RowBox[{"NpotVal", "//", "N"}], ",", "3"}], "]"}], "//", 
-                 "CForm"}], "//", "ToString"}]}], "}"}]}]}], "]"}]}]}], "}"}],
-        "]"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"Export", "[", 
-      RowBox[{
-       RowBox[{"filenameexport", "<>", "\"\<mx\>\""}], ",", "TabSens", ",", 
-       "\"\<MX\>\""}], "]"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"Export", "[", 
-      RowBox[{
-       RowBox[{"filenameexport", "<>", "\"\<json\>\""}], ",", "assocData", 
-       ",", "\"\<JSON\>\""}], "]"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"If", "[", 
-      RowBox[{
-       RowBox[{"signaturesAvailable", "!=", 
-        RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
-       RowBox[{"Show", "[", 
-        RowBox[{
-         RowBox[{"ListLogLogPlot", "[", 
-          RowBox[{
-           RowBox[{"sensitivityUncertainty", "[", "\"\<Production\>\"", "]"}],
-            ",", 
-           RowBox[{"Joined", "->", "True"}], ",", 
-           RowBox[{"Filling", "->", 
-            RowBox[{"Table", "[", 
-             RowBox[{
-              RowBox[{"i", "->", 
-               RowBox[{"{", 
-                RowBox[{"True", ",", 
-                 RowBox[{"Directive", "[", 
-                  RowBox[{"Blue", ",", 
-                   RowBox[{"Opacity", "[", "0.1", "]"}]}], "]"}]}], "}"}]}], 
-              ",", 
-              RowBox[{"{", 
-               RowBox[{"i", ",", "1", ",", 
-                RowBox[{"Length", "[", 
-                 RowBox[{
-                 "sensitivityUncertainty", "[", "\"\<Production\>\"", "]"}], 
-                 "]"}], ",", "1"}], "}"}]}], "]"}]}], ",", 
-           RowBox[{"ImageSize", "->", "Large"}], ",", 
-           RowBox[{"Frame", "->", "True"}], ",", 
-           RowBox[{"PlotStyle", "->", 
-            RowBox[{"{", 
-             RowBox[{"{", 
-              RowBox[{"Thick", ",", "Blue", ",", 
-               RowBox[{"Opacity", "[", "0.1", "]"}]}], "}"}], "}"}]}], ",", 
-           RowBox[{"FrameStyle", "->", 
-            RowBox[{"Directive", "[", 
-             RowBox[{"Thick", ",", "Black", ",", "23"}], "]"}]}], ",", 
-           RowBox[{"FrameLabel", "->", 
-            RowBox[{"{", 
-             RowBox[{"massLabel", ",", "couplingLabel"}], "}"}]}]}], "]"}], 
-         ",", 
-         RowBox[{"ListLogLogPlot", "[", 
-          RowBox[{
-           RowBox[{"sensitivityCenter", "[", "\"\<Production\>\"", "]"}], ",", 
-           RowBox[{"Joined", "->", "True"}], ",", 
-           RowBox[{"ImageSize", "->", "Large"}], ",", 
-           RowBox[{"Frame", "->", "True"}], ",", 
-           RowBox[{"PlotStyle", "->", 
-            RowBox[{"{", 
-             RowBox[{"{", 
-              RowBox[{"Thick", ",", "Blue"}], "}"}], "}"}]}]}], "]"}]}], 
-        "]"}]}], "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
-   "]"}], "\[IndentingNewLine]"}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"If", "[", RowBox[{"ifUncCalc", ",", "\[IndentingNewLine]", RowBox[{RowBox[{"If", "[",
+  RowBox[{RowBox[{"signaturesAvailable", "!=", RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"UncertaintyExtractor",
+  "[", RowBox[{"signature_", ",", "Npot_", ",", "NevMin_"}], "]"}], ":=", RowBox[{"Module", "[", RowBox[{RowBox[{"{",
+  RowBox[{"RegSens", ",", "SensTemp"}], "}"}], ",", "\[IndentingNewLine]", RowBox[{RowBox[{"Do", "[",
+  "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{RowBox[{"NevTot", "[", RowBox[{"mLLP_", ",", "coupling_",
+  ",", "t"}], "]"}], "=", RowBox[{"NevIntUnc", "[", RowBox[{"signature", ",", "t", ",", "mLLP", ",",
+  "coupling"}], "]"}]}], ";"}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"t", ",", "uncchoices"}],
+  "}"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"RegUnc", "=", RowBox[{"RegionPlot", "[", RowBox[{RowBox[{RowBox[{RowBox[{FractionBox["Npot",
+  "NpotDefault"], RowBox[{"NevTot", "[", RowBox[{SuperscriptBox["10", "mLLP"], ",", SuperscriptBox["10",
+  "\:039b2"], ",", "\"Lower\""}], "]"}]}], "<=", "NevMin"}], "&&", RowBox[{RowBox[{FractionBox["Npot",
+  "NpotDefault"], RowBox[{"NevTot", "[", RowBox[{SuperscriptBox["10", "mLLP"], ",", SuperscriptBox["10",
+  "\:039b2"], ",", "\"Upper\""}], "]"}]}], ">=", "NevMin"}], "&&", RowBox[{FractionBox[RowBox[{"(", RowBox[{RowBox[{"NevTot",
+  "[", RowBox[{SuperscriptBox["10", "mLLP"], ",", SuperscriptBox["10", "\:039b2"], ",", "\"Upper\""}],
+  "]"}], "-", RowBox[{"NevTot", "[", RowBox[{SuperscriptBox["10", "mLLP"], ",", SuperscriptBox["10",
+  "\:039b2"], ",", "\"Lower\""}], "]"}]}], ")"}], RowBox[{"Max", "[", RowBox[{RowBox[{"NevTot", "[",
+  RowBox[{SuperscriptBox["10", "mLLP"], ",", SuperscriptBox["10", "\:039b2"], ",", "\"Upper\""}], "]"}],
+  ",", SuperscriptBox["10", RowBox[{"-", "90."}]]}], "]"}]], ">", "0.1"}]}], ",", RowBox[{"{", RowBox[{"mLLP",
+  ",", RowBox[{"Log10", "[", RowBox[{"mminmaxOverall", "[", RowBox[{"[", "1", "]"}], "]"}], "]"}], ",",
+  RowBox[{"Log10", "[", RowBox[{"mminmaxOverall", "[", RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}],
+  ",", RowBox[{"{", RowBox[{"\:039b2inv", ",", RowBox[{"Log10", "[", RowBox[{"couplingminmaxOverall",
+  "[", RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", RowBox[{"Log10", "[", RowBox[{"couplingminmaxOverall",
+  "[", RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}], ",", RowBox[{"PlotPoints", "->", "500"}]}], "]"}]}],
+  ";", "\[IndentingNewLine]", RowBox[{"RegCentral", "=", RowBox[{"RegionPlot", "[", RowBox[{RowBox[{RowBox[{FractionBox["Npot",
+  "NpotDefault"], RowBox[{"NevTot", "[", RowBox[{SuperscriptBox["10", "mLLP"], ",", SuperscriptBox["10",
+  "\:039b2"], ",", "\"Central\""}], "]"}]}], ">=", "NevMin"}], ",", RowBox[{"{", RowBox[{"mLLP", ",",
+  RowBox[{"Log10", "[", RowBox[{"mminmaxOverall", "[", RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", RowBox[{"Log10",
+  "[", RowBox[{"mminmaxOverall", "[", RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "}"}], ",", RowBox[{"{",
+  RowBox[{"\:039b2inv", ",", RowBox[{"Log10", "[", RowBox[{"couplingminmaxOverall", "[", RowBox[{"[",
+  "1", "]"}], "]"}], "]"}], ",", RowBox[{"Log10", "[", RowBox[{"couplingminmaxOverall", "[", RowBox[{"[",
+  "2", "]"}], "]"}], "]"}]}], "}"}], ",", RowBox[{"PlotPoints", "->", "300"}]}], "]"}]}], ";", "\[IndentingNewLine]",
+  RowBox[{"UncTemp", "=", RowBox[{"Cases", "[", RowBox[{RowBox[{"Normal", "@", "RegUnc"}], ",", RowBox[{RowBox[{"Line",
+  "[", "x_", "]"}], "\:f51f", "x"}], ",", "Infinity"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"CentrTemp",
+  "=", RowBox[{"Cases", "[", RowBox[{RowBox[{"Normal", "@", "RegCentral"}], ",", RowBox[{RowBox[{"Line",
+  "[", "x_", "]"}], "\:f51f", "x"}], ",", "Infinity"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"Table",
+  "[", RowBox[{RowBox[{"Table", "[", RowBox[{RowBox[{RowBox[{RowBox[{"{", RowBox[{RowBox[{"10", "^",
+  RowBox[{"#", "[", RowBox[{"[", "1", "]"}], "]"}]}], ",", RowBox[{"10", "^", RowBox[{"#", "[", RowBox[{"[",
+  "2", "]"}], "]"}]}]}], "}"}], "&"}], "/@", RowBox[{"s", "[", RowBox[{"[", "i", "]"}], "]"}]}], ",",
+  RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", "s", "]"}], ",", "1"}], "}"}]}], "]"}],
+  ",", RowBox[{"{", RowBox[{"s", ",", RowBox[{"{", RowBox[{"CentrTemp", ",", "UncTemp"}], "}"}]}], "}"}]}],
+  "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"Print", "[", RowBox[{RowBox[{"{",
+  RowBox[{RowBox[{"{", RowBox[{"\"\!\(\*SubscriptBox[\(N\), \(PoT\)]\) for computation\"", ",", "\"\!\(\*SubscriptBox[\(N\), \(ev, min\)]\)\""}],
+  "}"}], ",", RowBox[{"{", RowBox[{"NpotVal", ",", "NevMinVal"}], "}"}]}], "}"}], "//", "TableForm"}],
+  "]"}], ";", "\[IndentingNewLine]", RowBox[{"Do", "[", "\[IndentingNewLine]", RowBox[{RowBox[{RowBox[{"{",
+  RowBox[{RowBox[{"sensitivityCenter", "[", "type", "]"}], ",", RowBox[{"sensitivityUncertainty", "[",
+  "type", "]"}]}], "}"}], "=", RowBox[{"UncertaintyExtractor", "[", RowBox[{"type", ",", "NpotVal", ",",
+  "NevMinVal"}], "]"}]}], "\[IndentingNewLine]", ",", RowBox[{"{", RowBox[{"type", ",", "signaturesAvailable"}],
+  "}"}]}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"TabSens", "=", RowBox[{"Table", "[", RowBox[{RowBox[{"{",
+  RowBox[{"type", ",", RowBox[{"sensitivityCenter", "[", "type", "]"}], ",", RowBox[{"sensitivityUncertainty",
+  "[", "type", "]"}]}], "}"}], ",", RowBox[{"{", RowBox[{"type", ",", "signaturesAvailable"}], "}"}]}],
+  "]"}]}], ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", RowBox[{"TabSens", "=", RowBox[{"{",
+  RowBox[{"{", RowBox[{"\"None\"", ",", RowBox[{RowBox[{"sens", "[", RowBox[{"[", "1", "]"}], "]"}],
+  "[", RowBox[{"[", RowBox[{"-", "1"}], "]"}], "]"}], ",", RowBox[{"{", "}"}]}], "}"}], "}"}]}]}], "\[IndentingNewLine]",
+  "]"}], ";", "\[IndentingNewLine]", RowBox[{"assocData", "=", RowBox[{"Map", "[", RowBox[{RowBox[{RowBox[{"Association",
+  "[", RowBox[{RowBox[{"\"Uncertainty source\"", "->", RowBox[{"#", "[", RowBox[{"[", "1", "]"}], "]"}]}],
+  ",", RowBox[{"\"Central sensitivity\"", "->", RowBox[{"#", "[", RowBox[{"[", "2", "]"}], "]"}]}], ",",
+  RowBox[{"\"Uncertainty\"", "->", RowBox[{"#", "[", RowBox[{"[", "3", "]"}], "]"}]}]}], "]"}], "&"}],
+  ",", "TabSens"}], "]"}]}], ";", "\[IndentingNewLine]", RowBox[{"filenameexport", "=", RowBox[{"FileNameJoin",
+  "[", RowBox[{"{", RowBox[{RowBox[{"directory", "[", "\"Sensitivity-LLP-exp\"", "]"}], ",", RowBox[{"ToString",
+  "@", RowBox[{"StringForm", "[", RowBox[{"\"Uncertainties_``_at_``_Nev=``_Npot=``.\"", ",", RowBox[{"Sequence",
+  "@@", RowBox[{"{", RowBox[{"LLPdirName", ",", "ExperimentFolder", ",", RowBox[{"NevMinVal", "//", "ToString"}],
+  ",", RowBox[{RowBox[{RowBox[{"SetPrecision", "[", RowBox[{RowBox[{"NpotVal", "//", "N"}], ",", "3"}],
+  "]"}], "//", "CForm"}], "//", "ToString"}]}], "}"}]}]}], "]"}]}]}], "}"}], "]"}]}], ";", "\[IndentingNewLine]",
+  RowBox[{"Export", "[", RowBox[{RowBox[{"filenameexport", "<>", "\"mx\""}], ",", "TabSens", ",", "\"MX\""}],
+  "]"}], ";", "\[IndentingNewLine]", RowBox[{"Export", "[", RowBox[{RowBox[{"filenameexport", "<>", "\"json\""}],
+  ",", "assocData", ",", "\"JSON\""}], "]"}], ";", "\[IndentingNewLine]", RowBox[{"If", "[", RowBox[{RowBox[{"signaturesAvailable",
+  "!=", RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", RowBox[{"Show", "[", RowBox[{RowBox[{"ListLogLogPlot",
+  "[", RowBox[{RowBox[{"sensitivityUncertainty", "[", "\"Production\"", "]"}], ",", RowBox[{"Joined",
+  "->", "True"}], ",", RowBox[{"Filling", "->", RowBox[{"Table", "[", RowBox[{RowBox[{"i", "->", RowBox[{"{",
+  RowBox[{"True", ",", RowBox[{"Directive", "[", RowBox[{"Blue", ",", RowBox[{"Opacity", "[", "0.1",
+  "]"}]}], "]"}]}], "}"}]}], ",", RowBox[{"{", RowBox[{"i", ",", "1", ",", RowBox[{"Length", "[", RowBox[{"sensitivityUncertainty",
+  "[", "\"Production\"", "]"}], "]"}], ",", "1"}], "}"}]}], "]"}]}], ",", RowBox[{"ImageSize", "->",
+  "Large"}], ",", RowBox[{"Frame", "->", "True"}], ",", RowBox[{"PlotStyle", "->", RowBox[{"{", RowBox[{"{",
+  RowBox[{"Thick", ",", "Blue", ",", RowBox[{"Opacity", "[", "0.1", "]"}]}], "}"}], "}"}]}], ",", RowBox[{"FrameStyle",
+  "\[Rule]", RowBox[{"Directive", "[", RowBox[{"Black", ",", "23", ",", "Thick", ",", RowBox[{"FontFamily",
+  "\[Rule]", "\"Palatino\""}]}], "]"}]}], ",", RowBox[{"FrameLabel", "->", RowBox[{"{", RowBox[{"massLabel",
+  ",", "couplingLabel"}], "}"}]}]}], "]"}], ",", RowBox[{"ListLogLogPlot", "[", RowBox[{RowBox[{"sensitivityCenter",
+  "[", "\"Production\"", "]"}], ",", RowBox[{"Joined", "->", "True"}], ",", RowBox[{"ImageSize", "->",
+  "Large"}], ",", RowBox[{"Frame", "->", "True"}], ",", RowBox[{"PlotStyle", "->", RowBox[{"{", RowBox[{"{",
+  RowBox[{"Thick", ",", "Blue"}], "}"}], "}"}]}]}], "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}]}]}],
+  "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]"}]], "Input",
  CellChangeTimes->{{3.952674061380926*^9, 3.952674107844225*^9}, {
    3.9526741427261257`*^9, 3.9526742523037376`*^9}, {3.9526743682644386`*^9, 
    3.952674395488739*^9}, 3.952674502935869*^9, {3.9526746361466827`*^9, 

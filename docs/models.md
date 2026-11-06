@@ -22,6 +22,8 @@ The following model identifiers are used in filenames and notebook definitions. 
 
 Available mechanisms depend on the facility and its input spectra. Notebook 2 displays the implemented model/facility combinations before generation. The `Dark-QCD-rho` chapter defines the dark-vector-meson parameters and input tables.
 
+For `Dark-QCD-rho`, the dark-shower production contribution (`Showerings`) requires both a yield table and an angle-energy spectrum. SensCalc currently includes these inputs only for SPS experiments, including SHiP. For non-SPS experiments, they must be simulated separately or obtained and installed before this contribution can be included in the sensitivity calculation.
+
 ## Heavy neutral leptons
 
 For the heavy neutral lepton $`N`$, the charged-current interaction is
@@ -76,7 +78,7 @@ The dual of a field strength is $`\widetilde X^{\mu\nu}=\tfrac12\epsilon^{\mu\nu
 | `ALP-gluon` | $`\mathcal L\supset[\alpha_s/(4\pi f_a)]aG^A_{\mu\nu}\widetilde G^{A\mu\nu}`$ at 1 TeV | $`f_a^{-1}`$ in GeV$`^{-1}`$ |
 | `ALP-electroweak` | $`\mathcal L\supset[\alpha_2g_W/(4\pi)]aW^I_{\mu\nu}\widetilde W^{I\mu\nu}`$ | $`g_W`$ in GeV$`^{-1}`$ |
 
-Here $`a`$ is the axion-like field, $`f_a`$ is its interaction scale, $`v=246\,\mathrm{GeV}`$ is the electroweak vacuum expectation value, and $`\alpha_s`$ and $`\alpha_2`$ are the strong and weak fine-structure constants. The indices $`A`$ and $`I`$ label gluon and weak gauge fields. Evolution from 1 TeV induces other interactions in `ALP-fermion` and `ALP-gluon`; their decay tables include alternative hadronic descriptions.
+Here $`a`$ is the axion-like field, $`f_a`$ is its interaction scale, $`v=246\,\mathrm{GeV}`$ is the electroweak vacuum expectation value, and $`\alpha_s`$ and $`\alpha_2`$ are the strong and weak fine-structure constants. The indices $`A`$ and $`I`$ label gluon and weak gauge fields. Evolution from 1 TeV induces other interactions in `ALP-fermion` and `ALP-gluon`. For hadronic decays, `ALP-fermion` uses `Default`; the optional `PBC description` includes only electron, muon, and tau pairs. Alternative hadronic descriptions are available for `ALP-gluon`.
 
 For `ALP-fermion` at mass $`m_a`$, the partial width into channel $`i`$ is determined by the tabulated coefficient $`W_i(m_a)`$, in GeV$`^3`$:
 
